@@ -23,12 +23,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 3vw;
-  transition: padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.header.scroll .container {
-  padding: 0.8rem 3vw;
+  padding: 0.9rem 3vw;
 }
 
 .left-section {
