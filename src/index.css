@@ -1,132 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;700&display=swap');
-
-:root {
-  /* Premium Colors */
-  --bg: #ffffff;
-  --bg-offset: #f7f7f9;
-  --text: #0a0a0c;
-  --text-muted: #5a5a62;
-  --blue: #0070f3;
-  --blue-glow: rgba(0, 112, 243, 0.4);
-  --border: rgba(0, 0, 0, 0.06);
-  --space-bg: #000000;
-  --space-text: #ffffff;
-  
-  /* Typography Scale */
-  --font-main: 'Raleway', sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
-  
-  /* Precision Spacing */
-  --section-padding: 12rem;
-  --radius-lg: 40px;
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/Fonts/Coolvetica Rg.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+@font-face {
+  font-family: 'Coolvetica It';
+  src: url('/Fonts/Coolvetica Rg It.otf');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: var(--font-main);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+@font-face{
+  font-family: 'Raleway';
+  src: url('/Fonts/Raleway-Regular.ttf') format('truetype');
 }
 
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 4rem;
+@font-face{
+  font-family: 'Raleway Bold';
+  src: url('/Fonts/Raleway-ExtraBold.ttf') format('truetype');
 }
 
-/* Global Typography */
-h1 {
-  font-size: clamp(4rem, 12vw, 8rem);
-  font-weight: 900;
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-  text-transform: uppercase;
+@font-face{
+  font-family: 'Raleway Black';
+  src: url('/Fonts/Raleway-Black.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Old London';
+  src: url('/Fonts/OldLondon.ttf') format('truetype');
 }
 
-h2 {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: -0.02em;
+::selection{
+  background: #ff0000;
+  color: #fff;
 }
 
-p {
-  font-size: 1.15rem;
-  font-weight: 400;
-  color: var(--text-muted);
-}
-
-/* Space Portal Utilities */
-.glow-text {
-  background: linear-gradient(135deg, var(--text) 0%, var(--blue) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Button Elevation */
-.btn-primary {
-  background: var(--text);
-  color: white;
-  padding: 1.25rem 3rem;
-  border: none;
-  font-family: var(--font-main);
-  font-weight: 900;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  border-radius: 100px;
-  transition: all 0.6s var(--ease-out-expo);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.btn-primary:hover {
-  transform: translateY(-5px) scale(1.05);
-  background: var(--blue);
-  box-shadow: 0 20px 40px var(--blue-glow);
-}
-
-/* Scroll Reveal System */
-@keyframes drift {
-  from { transform: translateY(0); }
-  to { transform: translateY(-200px); }
-}
-
-@keyframes warp {
-  0% { transform: scale(1) translateY(0); opacity: 0.6; }
-  50% { transform: scale(1.5) translateY(-50px); opacity: 1; }
-  100% { transform: scale(1) translateY(0); opacity: 0.6; }
-}
-
-.starfield__layer--lg {
-  animation: warp 10s ease-in-out infinite;
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(60px) scale(0.95);
-  transition: all 1.2s var(--ease-out-expo);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Starfield Overlays */
-.starfield {
-  background: radial-gradient(circle at center, #0a0a0c 0%, #000000 100%);
-}
-
-.starfield__layer {
-  opacity: 0.6;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
 }

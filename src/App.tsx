@@ -1,39 +1,54 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
-import Home from "./pages/Home.tsx";
-import Services from "./pages/Services.tsx";
-import About from "./pages/About.tsx";
-import Contact from "./pages/Contact.tsx";
-import Header from "./components/Header.tsx";
-import Starfield from "./components/Starfield.tsx";
-import Footer from "./components/Footer.tsx";
-import { useReveal } from "./hooks/useReveal.ts";
+import { Routes, Route } from "react-router-dom";
 
-const AppContent: React.FC = () => {
-  useReveal();
-  
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import GrainEffect from "./components/GrainEffect";
+
+import Home from "./pages/Home";
+
+import "./App.css";
+import { useEffect } from "react";
+import Lenis from "@studio-freight/lenis";
+
+const App = () => {
+
+   useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      lerp: 0.1,
+    });
+
+    let animationFrameId = 0;
+
+    function raf(time: number) {
+      lenis.raf(time);
+      animationFrameId = requestAnimationFrame(raf);
+    }
+
+    animationFrameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <>
+    <GrainEffect />
       <Header />
+
       <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
       </main>
+
       <Footer />
     </>
-  );
-};
-
-const App: React.FC = () => {
-  return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
   );
 };
 
