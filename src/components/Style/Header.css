@@ -1,50 +1,75 @@
-.header {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;600&family=UnifrakturMaguntia&display=swap');
+
+:root {
+  --bg-header: #fff1d8;
+  --bg-menu: #0A0A0A;
+  --text-main: #fff1d8;
+  --gray-light: #7C7C7C;
+  --accent-red: #8B1E16;
+  --accent-gold: #C5A46D;
+  --border-gold: rgba(197, 164, 109, 0.15);
+  --old-london: 'UnifrakturMaguntia', cursive;
+  --sans: 'Inter', sans-serif;
+  --serif: 'Playfair Display', serif;
+  text-decoration: none;
+}
+
+/* ------------------------------------------------ HEADER BASE */
+.fm-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 10000;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: black;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   background: transparent;
   border-bottom: 1px solid transparent;
-  animation: fadeIn 4s ease forwards;
+  transition: all 1s ease;
+  animation: fadeIn 2s ease forwards;
 }
 
-.header.scroll {
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+.fm-header.scroll {
+  background: rgba(255, 255, 255, 0.85);
+  color: white;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-gold);
 }
 
-.container {
+.fm-container {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.9rem 3vw;
+  padding: 0.4rem 3vw;
 }
 
+/* ------------------------------------------------ LOGO */
 .left-section {
   display: flex;
   align-items: center;
 }
 
 .logo {
-  height: 20px;
-  width: auto;
-  transition: opacity 0.3s ease;
+  font-family: var(--old-london);
+  color: black;
+  font-size: 1.3vw;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  opacity: 1;
 }
 
-.logo-link:hover .logo {
-  opacity: 0.7;
+.logo:hover {
+  opacity: 0.5;
 }
 
+/* ------------------------------------------------ NAV MENU */
 .center-section {
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 1.5rem;
 }
 
 .nav-item {
@@ -53,40 +78,42 @@
 
 .nav-link {
   padding: 8px 16px;
-  color: #a1a1aa;
+  color: black;
   text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  cursor: crosshair;
 }
 
 .nav-item:hover .nav-link {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--accent-gold);
 }
 
+/* ------------------------------------------------ MEGA MENU */
 .mega-menu {
   position: absolute;
-  margin-top: -0.7vh;
+  margin-top: -0.8vh;
   top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(12px) scale(0.98);
-  border-radius: 12px;
-  background: #000;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(0, 0, 0, 1);
+  border-radius: 4px;
+  background: var(--bg-menu);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(0, 0, 0, 1);
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
-  filter: blur(4px);
+  filter: blur(8px);
 }
 
+/* Ponte invisível para não perder o hover */
 .mega-menu::before {
   content: '';
   position: absolute;
@@ -104,13 +131,8 @@
   filter: blur(0);
 }
 
-.w-large {
-  width: 780px;
-}
-
-.w-medium {
-  width: 550px;
-}
+.w-large { width: 850px; }
+.w-medium { width: 650px; }
 
 .menu-wrapper {
   display: flex;
@@ -119,96 +141,129 @@
 
 .menu-grid {
   display: flex;
-  background: #0a0a0a;
+  background: var(--bg-menu);
 }
 
 .menu-col {
   flex: 1;
-  padding: 1.8rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2.5rem;
+  border-right: 1px dashed var(--border-gold);
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 2.5rem;
 }
 
 .menu-col:last-child {
   border-right: none;
 }
 
+/* ------------------------------------------------ CARDS DO MENU */
 .menu-card {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
+  cursor: crosshair;
 }
 
 .menu-card:hover {
-  transform: translateX(4px);
+  transform: translateX(6px);
 }
 
 .card-label {
-  color: #71717a;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-bottom: 0.4rem;
-  transition: color 0.2s ease;
+  color: var(--accent-red);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
 }
 
 .menu-card:hover .card-label {
-  color: #a1a1aa;
+  color: var(--accent-gold);
 }
 
-.card-title {
-  color: #e4e4e7;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.4;
-  transition: color 0.2s ease;
+.card-title.OldLondon {
+  color: var(--text-main);
+  font-family: var(--old-london);
+  font-size: 1.8rem;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
-.menu-card:hover .card-title {
-  color: #fff;
+.menu-card:hover .card-title.OldLondon {
+  color: var(--accent-gold);
 }
 
+.card-desc {
+  color: var(--gray-light);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.menu-card:hover .card-desc {
+  color: var(--text-main);
+}
+
+/* ------------------------------------------------ MENU FOOTER */
 .menu-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 1.8rem;
-  background: #000;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.5rem 2.5rem;
+  background: #050505;
+  border-top: 1px solid var(--border-gold);
 }
 
 .footer-text {
-  color: #fff;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
+  color: var(--gray-light);
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  font-weight: 500;
 }
 
 .footer-link {
-  color: #818cf8;
-  font-family: 'Inter', sans-serif;
+  color: var(--accent-gold);
+  font-family: var(--old-london);
   text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  transition: color 0.2s;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+  cursor: crosshair;
 }
 
 .footer-link:hover {
-  color: #a5b4fc;
+  color: #fff;
+  transform: translateX(4px);
 }
 
+/* ------------------------------------------------ CTA RIGHT SECTION */
 .right-section {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
 }
 
-.divider {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.2);
+.btn-premium {
+  padding: 0.8rem 2.2rem;
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  border-radius: 2px;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: crosshair;
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+
+.btn-premium:hover {
+  background: var(--accent-gold);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(197, 164, 109, 0.2);
 }

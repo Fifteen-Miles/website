@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, type JSX } from "react";
+import "./style/StartJourney.css";
 import { Link } from "react-router-dom";
 import ProductModal from "../components/ProductModal";
 import type { ProductData } from "../components/ProductModal";
-import "./style/Home.css";
+
+/* --------------------------------------------------------- Scroll reveal hook */
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -18,7 +20,7 @@ function useReveal<T extends HTMLElement>() {
           obs.unobserve(el);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.25 }
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -27,23 +29,29 @@ function useReveal<T extends HTMLElement>() {
   return { ref, visible };
 }
 
-function Reveal({ 
-  children, 
-  className = "", 
-  tag = "div" 
-}: { 
-  children: React.ReactNode; 
-  className?: string; 
-  tag?: React.ElementType 
-}) {
+function Reveal({ children, className = "", tag = "div" }: { children: React.ReactNode; className?: string; tag?: keyof JSX.IntrinsicElements }) {
   const { ref, visible } = useReveal<HTMLElement>();
-  const Tag = tag;
+  const Tag = tag as any;
   return (
-    <Tag ref={ref} className={`fm-reveal ${visible ? "is-visible" : ""} ${className}`}>
+    <Tag ref={ref} className={`tj-reveal ${visible ? "is-visible" : ""} ${className}`}>
       {children}
     </Tag>
   );
 }
+
+/* --------------------------------------------------------- Data */
+
+const PILLARS = [
+  { n: "01", t: "Visão", d: "Veja o que os outros não conseguem." },
+  { n: "02", t: "Ofício", d: "Construa com precisão." },
+  { n: "03", t: "Legado", d: "Deixe algo atemporal." },
+];
+
+const TIMELINE = [
+  { y: "1077", t: "O Início" },
+  { y: "2026", t: "O Primeiro Sistema" },
+  { y: "Futuro", t: "O Império" },
+];
 
 const productsData: ProductData[] = [
   {
@@ -53,7 +61,7 @@ const productsData: ProductData[] = [
     shortDesc: "Converse com os dados da sua empresa.",
     overview: "Athena é uma plataforma de inteligência artificial desenvolvida para transformar informações empresariais em conhecimento acionável. Ela conecta documentos, bancos de dados, ERPs e CRMs para responder perguntas em linguagem natural e auxiliar decisões estratégicas.",
     mission: "Eliminar a distância entre dados e decisões.",
-    version: "v1.0 — In Development",
+    version: "v1.0 — Em Desenvolvimento",
     icon: "athena",
     capabilities: [
       "Chat com documentos",
@@ -96,7 +104,7 @@ const productsData: ProductData[] = [
     shortDesc: "Conectando tudo, sem fricção.",
     overview: "Hermes integra sistemas, aplicações e dispositivos em uma única plataforma de comunicação, permitindo fluxos de dados confiáveis entre diferentes tecnologias.",
     mission: "Eliminar silos de informação.",
-    version: "v1.0 — Prototype",
+    version: "v1.0 — Protótipo",
     icon: "hermes",
     capabilities: [
       "REST APIs",
@@ -138,7 +146,7 @@ const productsData: ProductData[] = [
     shortDesc: "Automações inteligentes para qualquer processo.",
     overview: "Hephaestus permite construir fluxos de automação visualmente, conectando IA, documentos, APIs e sistemas corporativos sem necessidade de reescrever processos.",
     mission: "Eliminar tarefas repetitivas.",
-    version: "Concept",
+    version: "Conceito",
     icon: "hephaestus",
     capabilities: [
       "Visual Workflow Builder",
@@ -179,7 +187,7 @@ const productsData: ProductData[] = [
     shortDesc: "Infraestrutura pronta para crescer.",
     overview: "Atlas centraliza servidores, aplicações, containers e ambientes cloud em uma única plataforma operacional.",
     mission: "Garantir estabilidade e escalabilidade.",
-    version: "Concept",
+    version: "Conceito",
     icon: "atlas",
     capabilities: [
       "Container Management",
@@ -218,7 +226,7 @@ const productsData: ProductData[] = [
     shortDesc: "Visualize e controle toda sua empresa em tempo real.",
     overview: "Orion é o centro de comando da plataforma Fifteen Miles. Ele monitora sistemas, integrações, infraestrutura, aplicações, automações e inteligência artificial em uma única interface operacional, oferecendo uma visão completa do estado da organização.",
     mission: "Transformar milhares de eventos distribuídos em uma única visão estratégica.",
-    version: "Concept",
+    version: "Conceito",
     icon: "orion",
     capabilities: [
       "Enterprise Monitoring",
@@ -269,9 +277,11 @@ const productsData: ProductData[] = [
   }
 ];
 
-const COORDS = ["SYS.XIV", "SYS.XV", "SYS.XVI", "SYS.XVII"];
+const COORDS = ["XIV", "XV", "XVI", "XVII"];
 
-export default function Home() {
+/* --------------------------------------------------------- Page Component */
+
+export default function StartJourney() {
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -285,28 +295,87 @@ export default function Home() {
   };
 
   return (
-    <main className="fm-page">
-      <div className="fm-grain" />
-      <div className="fm-grid-bg" />
+    <div className="tj-page">
+      <div className="tj-grain" />
+      <div className="tj-vignette" />
 
-      <div className="fm-bg-glows" aria-hidden="true">
-        <span className="fm-glow fm-glow-a" />
-        <span className="fm-glow fm-glow-b" />
+      {/* Círculos técnicos de fundo + coordenadas */}
+      <div className="tj-bg-circles" aria-hidden="true">
+        <span className="tj-circle tj-circle-a" />
+        <span className="tj-circle tj-circle-b" />
+        <span className="tj-circle tj-circle-c" />
       </div>
-      
-      <div className="fm-coords" aria-hidden="true">
+      <div className="tj-coords" aria-hidden="true">
         {COORDS.map((c) => (
           <span key={c}>{c}</span>
         ))}
       </div>
 
-      <section className="fm-hero">
-        <span className="fm-numeral">Fifteen Miles</span>
-        <span className="fm-hero-title">MMXXVI</span>
-        <p className="fm-hero-phrase">
-          Toda empresa possui um reino.<br/>Algumas ainda são governadas por planilhas.
+      {/* HERO */}
+      <section className="tj-hero">
+        <span className="tj-numeral">XV</span>
+        <span className="tj-hero-title">INICIE SUA JORNADA</span>
+        <p className="tj-hero-phrase">
+          Construímos ferramentas dignas daqueles que criam o futuro.
         </p>
-        <button className="fm-btn">Adentrar</button>
+        <Link to="/contact" className="btn-premium">Começar</Link>
+      </section>
+
+      {/* DIVISOR */}
+      <div className="tj-divider" aria-hidden="true">
+        <span className="tj-divider-line" />
+        {Array.from({ length: 6 }).map((_, i) => (
+          <span key={i} className="tj-divider-tick" style={{ top: `${(i + 1) * 14}%` }} />
+        ))}
+      </div>
+
+      {/* SEÇÃO 2 — PROPÓSITO */}
+      <section className="tj-section">
+        <Reveal tag="h2" className="tj-title">Toda jornada começa com um propósito.</Reveal>
+        <Reveal className="tj-subtitle">
+          Não construímos software.
+          <br />
+          Construímos instrumentos.
+        </Reveal>
+
+        <div className="tj-pillars">
+          {PILLARS.map((p) => (
+            <Reveal key={p.n} className="tj-pillar">
+              <span className="tj-pillar-num">{p.n}</span>
+              <span className="tj-pillar-rule" />
+              <span className="tj-pillar-title">{p.t}</span>
+              <p className="tj-pillar-desc">{p.d}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* MANIFESTO */}
+      <section className="tj-manifesto">
+        <Reveal tag="p" className="tj-manifesto-line">Recusamos o comum.</Reveal>
+        <Reveal tag="p" className="tj-manifesto-line tj-manifesto-line--muted">O mundo já tem software suficiente.</Reveal>
+        <Reveal tag="p" className="tj-manifesto-line">Construímos sistemas.</Reveal>
+        <Reveal tag="p" className="tj-manifesto-line tj-manifesto-line--muted">O resto é consequência.</Reveal>
+      </section>
+
+      <section className="tj-section">
+        <Reveal tag="h2" className="tj-title tj-title--old"><span className="OldLondon2">A</span> Ordem</Reveal>
+        <div className="tj-timeline">
+          {TIMELINE.map((t) => (
+            <Reveal key={t.y} className="tj-timeline-item">
+              <span className="tj-timeline-year">{t.y}</span>
+              <span className="tj-timeline-rule" />
+              <span className="tj-timeline-title">{t.t}</span>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* APPLE-STYLE — INFINIDADE */}
+      <section className="tj-infinity">
+        <Reveal tag="h2" className="tj-title">Projetado para durar décadas.</Reveal>
+        <Reveal tag="span" className="tj-infinity-symbol">∞</Reveal>
+        <Reveal tag="p" className="tj-infinity-caption">Não perseguimos tendências.</Reveal>
       </section>
 
       <section className="fm-product-showcase">
@@ -336,7 +405,7 @@ export default function Home() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-hermes" onClick={() => handleOpenModal(productsData[1])}>
-            <img src="/mockup-placeholder.png" alt="Athena Mockup" id="img-athena" className="fm-mockup-img" />
+            <img src="/mockup-placeholder.png" alt="Hermes Mockup" id="img-hermes" className="fm-mockup-img" />
           </div>
         </Reveal>
 
@@ -351,54 +420,59 @@ export default function Home() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
-            <img src="/mockup-placeholder.png" alt="Athena Mockup" id="img-athena" className="fm-mockup-img" />
+            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
+          </div>
+        </Reveal>
+        <Reveal className="fm-product-banner reverse">
+          <div className="fm-banner-content">
+            <span className="fm-banner-tag">SYS. 004 // Automation Engine</span>
+            <h2 className="fm-banner-title OldLondon"><span className="OldLondon2">A</span>tlas</h2>
+            <p className="fm-banner-desc">Hephaestus permite o monitoramento de infraestrutura e visibilidade operacional.</p>
+            <div className="fm-banner-actions">
+              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[2])}>Saiba mais</button>
+              <Link to="/hephaestus" className="fm-btn-secondary">Inspecionar</Link>
+            </div>
+          </div>
+          <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
+            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
+          </div>
+        </Reveal>
+        <Reveal className="fm-product-banner">
+          <div className="fm-banner-content">
+            <span className="fm-banner-tag">SYS. 005 // Automation Engine</span>
+            <h2 className="fm-banner-title OldLondon">Orion</h2>
+            <p className="fm-banner-desc">Orion permite que você visualize, monitore e controle toda sua operação em tempo real.</p>
+            <div className="fm-banner-actions">
+              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[2])}>Saiba mais</button>
+              <Link to="/hephaestus" className="fm-btn-secondary">Inspecionar</Link>
+            </div>
+          </div>
+          <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
+            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
           </div>
         </Reveal>
       </section>
 
-      <section className="fm-history-section">
-        <Reveal className="fm-history-card">
-          <span className="fm-history-tag">A GÊNESE DA ORDEM</span>
-          <h2 className="OldLondon">Conheça a nossa história</h2>
-          <p>
-            Fundada sob os princípios rigorosos da engenharia clássica combinada com a vanguarda tecnológica, a Fifteen Miles nasceu para erradicar a ineficiência corporativa.
-          </p>
-          <Link to="/manifesto" className="fm-btn">Explorar os Manuscritos</Link>
-        </Reveal>
-      </section>
-
-      <section className="fm-section">
-        <Reveal tag="h2" className="fm-title fm-title--old">O Arsenal Completo</Reveal>
-        <div className="fm-products-grid">
-          {productsData.map((prod) => (
-            <Reveal key={prod.id} className="fm-product-card">
-              <div onClick={() => handleOpenModal(prod)} className="fm-product-inner">
-                <span className="fm-product-id">{prod.id}</span>
-                <h3 className="fm-product-name OldLondon">{prod.name}</h3>
-                <p className="fm-product-desc">{prod.shortDesc}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      
-
-      <section className="fm-final">
-        <Reveal tag="h2" className="fm-title fm-title--old">O Fim da Idade das Trevas</Reveal>
-        <Reveal tag="p" className="fm-final-caption">
-          O futuro começa quando o trabalho manual termina.
+      {/* FINAL — CTA */}
+      <section className="tj-final">
+        <Reveal tag="h2" className="tj-title">O primeiro passo muda tudo.</Reveal>
+        <Reveal tag="p" className="tj-final-caption">
+          A jornada começa com uma única decisão.
         </Reveal>
         <Reveal>
-          <Link to="/contact" className="fm-btn">Iniciar a Renascença</Link>
+          <Link to="/pricing" className="tj-btn btn-premium">Iniciar a Jornada</Link>
         </Reveal>
       </section>
+
+      <footer className="tj-footer">
+        <span className="tj-footer-signature">XV</span>
+      </footer>
 
       <ProductModal 
         product={selectedProduct} 
         isOpen={isModalOpen} 
         onClose={handleCloseModal} 
       />
-    </main>
+    </div>
   );
 }

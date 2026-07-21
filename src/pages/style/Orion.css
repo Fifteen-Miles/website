@@ -19,7 +19,6 @@
   font-weight: 200;
   overflow: hidden;
   isolation: isolate;
-  animation: fadeIn 3s;
 }
 
 .orion-page * {

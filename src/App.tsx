@@ -11,6 +11,13 @@ import Hephaestus from "./pages/Hephaestus";
 import Hermes from "./pages/Hermes";
 import Atlas from "./pages/Atlas"; 
 import Orion from "./pages/Orion"; 
+import StartJourney from "./pages/StartJourney"; 
+import Philosophy from "./pages/Philosophy"; 
+import Manifesto from "./pages/Manifesto"; 
+import Process from "./pages/Process"; 
+import Careers from "./pages/Careers"; 
+import Contact from "./pages/Contact"; 
+import Pricing from "./pages/Pricing"; 
 
 import "./App.css";
 import { useEffect } from "react";
@@ -50,12 +57,18 @@ const App = () => {
 
       <main className="app-main">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<StartJourney />} />
           <Route path="/athena" element={<Athena />} />
           <Route path="/hephaestus" element={<Hephaestus />} />
           <Route path="/hermes" element={<Hermes />} />
           <Route path="/atlas" element={<Atlas />} />
           <Route path="/orion" element={<Orion />} />
+          <Route path="/philosophy" element={<Philosophy />} />
+          <Route path="/manifesto" element={<Manifesto />} />
+          <Route path="/process" element={<Process />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
       </main>
 

@@ -522,21 +522,6 @@ export default function OrionPage() {
     <div className="orion-page">
       <Starfield />
 
-      <header className="orion-header">
-        <div className="orion-header-left">
-          <span className="orion-brand-sub">FIFTEEN MILES</span>
-          <span className="orion-brand-main">ORION</span>
-        </div>
-        <div className="orion-header-right">
-          <span className="orion-status">
-            <span className="orion-dot is-live" /> ONLINE
-          </span>
-          <span className="orion-metric">Connected Systems <b>127</b></span>
-          <span className="orion-metric">Latency <b>34ms</b></span>
-          <span className="orion-metric">AI <b>ACTIVE</b></span>
-        </div>
-      </header>
-
       {/* HERO */}
       <section className="orion-hero">
         <div
