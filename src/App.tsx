@@ -3,8 +3,14 @@ import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import GrainEffect from "./components/GrainEffect";
+import ScrollToTop from "./components/ScrollToTop";
 
 import Home from "./pages/Home";
+import Athena from "./pages/Athena";
+import Hephaestus from "./pages/Hephaestus";
+import Hermes from "./pages/Hermes";
+import Atlas from "./pages/Atlas"; 
+import Orion from "./pages/Orion"; 
 
 import "./App.css";
 import { useEffect } from "react";
@@ -40,10 +46,16 @@ const App = () => {
     <>
     <GrainEffect />
       <Header />
+      <ScrollToTop />
 
       <main className="app-main">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/athena" element={<Athena />} />
+          <Route path="/hephaestus" element={<Hephaestus />} />
+          <Route path="/hermes" element={<Hermes />} />
+          <Route path="/atlas" element={<Atlas />} />
+          <Route path="/orion" element={<Orion />} />
         </Routes>
       </main>
 

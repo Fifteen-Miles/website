@@ -27,41 +27,45 @@ const Header = () => {
         <div className="center-section">
           
           <div className="nav-item">
-            <span className="nav-link">Ecosystem</span>
+            <span className="nav-link">Produtos</span>
             <div className="mega-menu w-large">
               <div className="menu-wrapper">
                 <div className="menu-grid">
                   <div className="menu-col">
                     <Link to="/athena" className="menu-card">
                       <span className="card-label">Athena</span>
-                      <span className="card-title">Business intelligence powered by AI and language</span>
+                      <span className="card-title">Business intelligence impulsionada por IA e linguagem</span>
                     </Link>
                     <Link to="/atlas" className="menu-card">
                       <span className="card-label">Atlas</span>
-                      <span className="card-title">Infrastructure monitoring and operational visibility</span>
+                      <span className="card-title">Monitoramento de infraestrutura e visibilidade operacional</span>
                     </Link>
                   </div>
                   
                   <div className="menu-col">
                     <Link to="/hephaestus" className="menu-card">
                       <span className="card-label">Hephaestus</span>
-                      <span className="card-title">Build intelligent workflows connecting systems</span>
+                      <span className="card-title">Crie fluxos de trabalho inteligentes conectando sistemas</span>
                     </Link>
-                    <Link to="/chronos" className="menu-card">
+                    <Link to="/orion" className="menu-card">
+                      <span className="card-label">ORION</span>
+                      <span className="card-title">Visualize, monitore e controle toda sua operação em tempo real</span>
+                    </Link>
+                    {/* <Link to="/chronos" className="menu-card">
                       <span className="card-label">Chronos</span>
                       <span className="card-title">Advanced management and time-saving engines</span>
-                    </Link>
+                    </Link> */}
                   </div>
 
                   <div className="menu-col">
                     <Link to="/hermes" className="menu-card">
                       <span className="card-label">Hermes</span>
-                      <span className="card-title">Seamless data integrations for your entire operation</span>
+                      <span className="card-title">Integrações de dados fluidas para toda a sua operação</span>
                     </Link>
-                    <Link to="/apollo" className="menu-card">
+                    {/*<Link to="/apollo" className="menu-card">
                       <span className="card-label">Apollo</span>
                       <span className="card-title">Ultimate clarity and analytics for strategic decisions</span>
-                    </Link>
+                    </Link>*/}
                   </div>
                 </div>
                 <div className="menu-footer">
@@ -107,23 +111,23 @@ const Header = () => {
           </div>
           
           <div className="nav-item">
-            <span className="nav-link">Company</span>
+            <span className="nav-link">Empresa</span>
             <div className="mega-menu w-medium">
               <div className="menu-wrapper">
                 <div className="menu-grid">
                   <div className="menu-col">
                     <Link to="/philosophy" className="menu-card">
-                      <span className="card-label">Philosophy</span>
+                      <span className="card-label">Filosofia</span>
                       <span className="card-title">Engineering beyond traditional software</span>
                     </Link>
                     <Link to="/careers" className="menu-card">
-                      <span className="card-label">Careers</span>
+                      <span className="card-label">Carreiras</span>
                       <span className="card-title">Join the team building the next era of tech</span>
                     </Link>
                   </div>
                   <div className="menu-col">
                     <Link to="/process" className="menu-card">
-                      <span className="card-label">Process</span>
+                      <span className="card-label">Processo</span>
                       <span className="card-title">How we design, build and scale systems</span>
                     </Link>
                     <Link to="/manifesto" className="menu-card">
@@ -143,7 +147,7 @@ const Header = () => {
         </div>
 
         <div className="right-section">
-          <Link to="/contact" className="contact-btn">Start Journey</Link>
+          <Link to="/contact" className="btn-premium">Start Journey</Link>
         </div>
 
       </nav>

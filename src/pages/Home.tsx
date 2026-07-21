@@ -7,85 +7,222 @@ const productsData: ProductData[] = [
   {
     id: "SYS. 001",
     name: "Athena",
-    shortDesc: "IA empresarial.",
-    overview: "Business intelligence powered by artificial intelligence and natural language.",
+    tagline: "Enterprise Intelligence",
+    shortDesc: "Converse com os dados da sua empresa.",
+    overview: "Athena é uma plataforma de inteligência artificial desenvolvida para transformar informações empresariais em conhecimento acionável. Ela conecta documentos, bancos de dados, ERPs e CRMs para responder perguntas em linguagem natural e auxiliar decisões estratégicas.",
+    mission: "Eliminar a distância entre dados e decisões.",
+    version: "v1.0 — In Development",
+    icon: "athena",
+    capabilities: [
+      "Chat com documentos",
+      "Consultas SQL em linguagem natural",
+      "Análise de indicadores",
+      "Geração automática de relatórios",
+      "Assistente para tomada de decisão",
+      "Resumos inteligentes",
+      "Busca semântica",
+      "Predições com IA"
+    ],
+    integrations: [
+      "SAP",
+      "TOTVS",
+      "Microsoft SQL Server",
+      "PostgreSQL",
+      "MySQL",
+      "Firebase",
+      "Excel",
+      "Power BI"
+    ],
+    useCases: [
+      "Análise financeira",
+      "Controle operacional",
+      "Indicadores de produção",
+      "Relatórios executivos"
+    ],
     properties: [
-      { property: "Architecture", details: "Transformer-based custom LLM pipeline" },
-      { property: "Integration", details: "REST APIs, GraphQL, and direct database connectors" },
-      { property: "Security", details: "End-to-end encryption with local model fallback" },
-      { property: "Latency", details: "Sub-100ms response time for standard queries" }
+      { property: "AI Engine", details: "Large Language Models with Retrieval-Augmented Generation (RAG)" },
+      { property: "Architecture", details: "Microservices with FastAPI and Redis" },
+      { property: "Context Window", details: "Up to 2M tokens" },
+      { property: "Latency", details: "<150 ms average response" },
+      { property: "Deployment", details: "Cloud or On-Premise" }
     ]
   },
   {
     id: "SYS. 002",
     name: "Hermes",
-    shortDesc: "Integrações.",
-    overview: "Build intelligent workflows connecting APIs, documents, systems and AI.",
+    tagline: "Universal Integration Layer",
+    shortDesc: "Conectando tudo, sem fricção.",
+    overview: "Hermes integra sistemas, aplicações e dispositivos em uma única plataforma de comunicação, permitindo fluxos de dados confiáveis entre diferentes tecnologias.",
+    mission: "Eliminar silos de informação.",
+    version: "v1.0 — Prototype",
+    icon: "hermes",
+    capabilities: [
+      "REST APIs",
+      "GraphQL",
+      "MQTT",
+      "WebSockets",
+      "Webhook Engine",
+      "Event Streaming",
+      "Queue Processing",
+      "IoT Integration"
+    ],
+    integrations: [
+      "SAP",
+      "Salesforce",
+      "Slack",
+      "WhatsApp",
+      "Azure",
+      "AWS",
+      "Google Workspace"
+    ],
+    useCases: [
+      "Integração ERP",
+      "Integração CRM",
+      "Sincronização entre sistemas",
+      "Integração IoT"
+    ],
     properties: [
-      { property: "Protocol", details: "Event-driven asynchronous messaging" },
-      { property: "Throughput", details: "Up to 50,000 transactions per second" },
-      { property: "Reliability", details: "Automated retry queues and failover protocols" },
-      { property: "Monitoring", details: "Real-time packet inspection and tracing" }
+      { property: "Architecture", details: "Event-Driven Microservices" },
+      { property: "Throughput", details: "50,000+ events/sec" },
+      { property: "Protocol Support", details: "REST, GraphQL, MQTT, AMQP" },
+      { property: "Availability", details: "99.999%" },
+      { property: "Monitoring", details: "Real-time distributed tracing" }
     ]
   },
   {
     id: "SYS. 003",
     name: "Hephaestus",
-    shortDesc: "Automações.",
-    overview: "Build intelligent workflows connecting APIs, documents, systems and AI.",
+    tagline: "Automation Engine",
+    shortDesc: "Automações inteligentes para qualquer processo.",
+    overview: "Hephaestus permite construir fluxos de automação visualmente, conectando IA, documentos, APIs e sistemas corporativos sem necessidade de reescrever processos.",
+    mission: "Eliminar tarefas repetitivas.",
+    version: "Concept",
+    icon: "hephaestus",
+    capabilities: [
+      "Visual Workflow Builder",
+      "OCR",
+      "PDF Processing",
+      "Email Automation",
+      "Document Approval",
+      "AI Agents",
+      "Background Jobs",
+      "Data Validation"
+    ],
+    integrations: [
+      "Microsoft 365",
+      "Google Workspace",
+      "OpenAI",
+      "Anthropic",
+      "AWS S3",
+      "Dropbox"
+    ],
+    useCases: [
+      "Processamento de documentos",
+      "Automação financeira",
+      "RH",
+      "Compras"
+    ],
     properties: [
-      { property: "Execution", details: "Sandboxed containerized task runners" },
-      { property: "Trigger types", details: "Webhook, cron schedule, and event-based" },
-      { property: "Error handling", details: "Automated rollback and human-in-the-loop escalation" },
-      { property: "Audit trail", details: "Immutable logs for compliance and governance" }
+      { property: "Workflow Engine", details: "Visual Low-Code Builder" },
+      { property: "Execution", details: "Containerized Runtime" },
+      { property: "Triggers", details: "Webhook, Schedule, Database, API" },
+      { property: "Rollback", details: "Automatic" },
+      { property: "Audit", details: "Immutable execution logs" }
     ]
   },
   {
     id: "SYS. 004",
     name: "Atlas",
-    shortDesc: "Infraestrutura.",
-    overview: "Infrastructure monitoring and operational visibility for critical environments.",
+    tagline: "Cloud Infrastructure",
+    shortDesc: "Infraestrutura pronta para crescer.",
+    overview: "Atlas centraliza servidores, aplicações, containers e ambientes cloud em uma única plataforma operacional.",
+    mission: "Garantir estabilidade e escalabilidade.",
+    version: "Concept",
+    icon: "atlas",
+    capabilities: [
+      "Container Management",
+      "Cloud Monitoring",
+      "CI/CD",
+      "Infrastructure as Code",
+      "Server Provisioning",
+      "Backup",
+      "Disaster Recovery"
+    ],
+    integrations: [
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Docker",
+      "Kubernetes"
+    ],
+    useCases: [
+      "Gestão Multi-Cloud",
+      "Deployments Automatizados",
+      "Recuperação de Desastres",
+      "Monitoramento de Clusters"
+    ],
     properties: [
-      { property: "Cloud Provider", details: "Multi-region AWS orchestration" },
-      { property: "Scaling", details: "Automatic horizontal scaling based on load metrics" },
-      { property: "Uptime SLA", details: "99.999% guaranteed availability" },
-      { property: "Backup", details: "Continuous snapshot replication" }
+      { property: "Infrastructure", details: "Kubernetes Cluster" },
+      { property: "Scaling", details: "Horizontal Auto Scaling" },
+      { property: "Availability", details: "99.999%" },
+      { property: "Backup", details: "Continuous replication" },
+      { property: "Observability", details: "Prometheus + Grafana" }
     ]
   },
   {
     id: "SYS. 005",
-    name: "Chronos",
-    shortDesc: "Gestão.",
-    overview: "Advanced management and time-saving engines for corporate efficiency.",
+    name: "Orion",
+    tagline: "Enterprise Mission Control",
+    shortDesc: "Visualize e controle toda sua empresa em tempo real.",
+    overview: "Orion é o centro de comando da plataforma Fifteen Miles. Ele monitora sistemas, integrações, infraestrutura, aplicações, automações e inteligência artificial em uma única interface operacional, oferecendo uma visão completa do estado da organização.",
+    mission: "Transformar milhares de eventos distribuídos em uma única visão estratégica.",
+    version: "Concept",
+    icon: "orion",
+    capabilities: [
+      "Enterprise Monitoring",
+      "Mission Control Dashboard",
+      "Real-Time Telemetry",
+      "System Health Monitoring",
+      "Enterprise Topology",
+      "Live Event Timeline",
+      "AI Operational Insights",
+      "Global Infrastructure View",
+      "Cross-System Correlation",
+      "Executive Command Center"
+    ],
+    integrations: [
+      "Athena",
+      "Hermes",
+      "Hephaestus",
+      "Atlas",
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Docker",
+      "Kubernetes",
+      "Prometheus",
+      "Grafana",
+      "PostgreSQL",
+      "Redis"
+    ],
+    useCases: [
+      "Monitoramento Corporativo",
+      "Observabilidade em Tempo Real",
+      "Centro de Operações Empresarial",
+      "Gestão de Eventos",
+      "Análise de Incidentes",
+      "Visão Global da Empresa",
+      "Monitoramento Multi-Cloud",
+      "Acompanhamento Executivo"
+    ],
     properties: [
-      { property: "Scheduling", details: "Algorithmic resource allocation" },
-      { property: "Analytics", details: "Predictive workload forecasting" },
-      { property: "Interface", details: "Minimalist high-density command dashboards" },
-      { property: "Sync", details: "Cross-departmental calendar alignment" }
-    ]
-  },
-  {
-    id: "SYS. 006",
-    name: "Argos",
-    shortDesc: "Monitoramento.",
-    overview: "Complete operational visibility through real-time telemetry and active anomaly detection.",
-    properties: [
-      { property: "Observability", details: "Metrics, logs, and distributed traces" },
-      { property: "Alerting", details: "Custom webhook and high-priority triggers" },
-      { property: "Retention", details: "90-day hot storage with cold tier archiving" },
-      { property: "Dashboard", details: "Zero-latency vector rendering" }
-    ]
-  },
-  {
-    id: "SYS. 007",
-    name: "Apollo",
-    shortDesc: "Business Intelligence.",
-    overview: "Transform unstructured organizational data into pristine strategic intelligence.",
-    properties: [
-      { property: "Data Sources", details: "SQL, NoSQL, data lakes, and flat files" },
-      { property: "Processing", details: "In-memory columnar aggregation" },
-      { property: "Export", details: "Automated executive report generation" },
-      { property: "Security", details: "Role-based row-level access control" }
+      { property: "Monitoring", details: "Real-Time Enterprise Telemetry" },
+      { property: "Infrastructure", details: "Unified Mission Control" },
+      { property: "Latency", details: "< 50ms Event Processing" },
+      { property: "Availability", details: "99.999% Operational" },
+      { property: "Intelligence", details: "AI Event Correlation" },
+      { property: "Topology", details: "Dynamic Enterprise Mapping" },
+      { property: "Observability", details: "Infrastructure + Business + AI" }
     ]
   }
 ];
@@ -132,9 +269,7 @@ const Home = () => {
       <section className="engineering-section scroll-element">
         <h2>Engineering Philosophy</h2>
         <p className="main-text">
-          Toda empresa possui um reino. Algumas ainda são governadas por
-          planilhas. Nenhuma empresa evolui sem atravessar sua própria
-          Renascença.
+          Toda empresa possui um <span className="OldLondon">reino</span>. Algumas ainda são governadas por <span className="OldLondon">Planilhas</span>
         </p>
 
         <div className="engineering">
@@ -188,7 +323,7 @@ const Home = () => {
 
       <section className="products-section scroll-element">
         <div className="products-header">
-          <h2>Products</h2>
+          <h2>Produtos</h2>
           <p>
             Não vendemos software. Apresentamos um ecossistema. Ferramentas
             projetadas para eliminar o trabalho medieval.
@@ -211,7 +346,7 @@ const Home = () => {
       </section>
 
       <section className="process scroll-element">
-        <h2>Engineering Process</h2>
+        <h2>Processo de Engenharia</h2>
 
         <div className="process-grid">
           <div className="process-step">
