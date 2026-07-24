@@ -286,13 +286,144 @@ h1, h2, h3, .tj-cross-cursor { cursor: crosshair; }
   padding: 5vw;
 }
 
-.tj-infinity-symbol {
-  font-size: clamp(4rem, 10vw, 8rem);
-  font-weight: 100;
-  color: var(--text);
+.tj-title-infinity{
+  font-family: Raleway, sans-serif;
+  font-weight: 500;
+  font-size: 3vw;
+}
+
+.tj-infinity-symbol img {
+  width: 15vw;
+  margin: 3vh 0;
 }
 
 .tj-infinity-caption { font-size: 1rem; color: var(--gray); margin: 0; }
+
+/* --- Product Showcase --- */
+.fm-product-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding: 100px 5vw;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.fm-product-banner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  justify-content: space-between;
+}
+
+.fm-product-banner.reverse {
+  flex-direction: row-reverse;
+}
+
+.fm-banner-content {
+  flex: 1;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fm-banner-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.fm-banner-title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin: 0;
+  color: var(--text);
+  line-height: 1;
+}
+
+.fm-banner-desc {
+  font-size: 1rem;
+  color: var(--gray);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.fm-banner-actions {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.fm-btn-primary, .fm-btn-secondary {
+  padding: 0.9rem 2.2rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.fm-btn-primary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+}
+
+.fm-btn-primary:hover {
+  background: var(--text);
+  color: var(--bg);
+  transform: translateY(-2px);
+}
+
+.fm-btn-secondary {
+  background: transparent;
+  color: var(--gray);
+  border: 1px solid transparent;
+}
+
+.fm-btn-secondary:hover {
+  color: var(--hover);
+}
+
+.fm-banner-mockup {
+  flex: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.fm-banner-mockup:hover {
+  transform: scale(1.02);
+}
+
+.fm-mockup-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 900px) {
+  .fm-product-banner, .fm-product-banner.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  .fm-banner-content {
+    align-items: center;
+  }
+  .fm-banner-mockup {
+    width: 100%;
+    margin-top: 2rem;
+  }
+}
 
 /* FINAL */
 .tj-final {

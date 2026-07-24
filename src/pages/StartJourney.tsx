@@ -357,8 +357,8 @@ export default function StartJourney() {
       </section>
 
       <section className="tj-infinity">
-        <Reveal tag="h2" className="tj-title">Projetado para durar décadas.</Reveal>
-        <Reveal tag="span" className="tj-infinity-symbol">∞</Reveal>
+        <Reveal tag="h2" className="tj-title-infinity">Projetado para durar décadas.</Reveal>
+        <Reveal tag="span" className="tj-infinity-symbol"><img src="/∞.png" alt="" /></Reveal>
         <Reveal tag="p" className="tj-infinity-caption">Não perseguimos tendências.</Reveal>
       </section>
 

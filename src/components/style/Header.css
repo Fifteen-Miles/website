@@ -261,9 +261,3 @@
   text-decoration: none;
 }
 
-.btn-premium:hover {
-  background: var(--accent-gold);
-  color: #000;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(197, 164, 109, 0.2);
-}
