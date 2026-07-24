@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import "./style/ProductModal.css";
 
@@ -26,6 +27,17 @@ interface ProductModalProps {
 const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose }) => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   if (!isOpen || !product) return null;
 
   const handleExplore = () => {
@@ -33,7 +45,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
     navigate(`/${product.name.toLowerCase()}`);
   };
 
-  return (
+  return createPortal(
     <div className="fm-modal-backdrop" onClick={onClose} data-lenis-prevent>
       <div className="fm-modal-container" onClick={(e) => e.stopPropagation()}>
         
@@ -110,7 +122,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, isOpen, onClose })
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

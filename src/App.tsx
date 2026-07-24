@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import GrainEffect from "./components/GrainEffect";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Home from "./pages/Home";
 import Athena from "./pages/Athena";
 import Hephaestus from "./pages/Hephaestus";
 import Hermes from "./pages/Hermes";
@@ -17,7 +16,6 @@ import Manifesto from "./pages/Manifesto";
 import Process from "./pages/Process"; 
 import Careers from "./pages/Careers"; 
 import Contact from "./pages/Contact"; 
-import Pricing from "./pages/Pricing"; 
 
 import "./App.css";
 import { useEffect } from "react";
@@ -68,7 +66,6 @@ const App = () => {
           <Route path="/process" element={<Process />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/pricing" element={<Pricing />} />
         </Routes>
       </main>
 

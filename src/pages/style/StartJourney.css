@@ -21,6 +21,12 @@
   overflow-x: hidden;
 }
 
+.logohome{
+  width: 50vw;
+  margin-bottom: 5vh;
+  pointer-events: none;
+}
+
 /* texture layers */
 .tj-grain {
   position: fixed;

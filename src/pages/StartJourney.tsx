@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import ProductModal from "../components/ProductModal";
 import type { ProductData } from "../components/ProductModal";
 
-/* --------------------------------------------------------- Scroll reveal hook */
-
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
   const [visible, setVisible] = useState(false);
@@ -31,15 +29,13 @@ function useReveal<T extends HTMLElement>() {
 
 function Reveal({ children, className = "", tag = "div" }: { children: React.ReactNode; className?: string; tag?: keyof JSX.IntrinsicElements }) {
   const { ref, visible } = useReveal<HTMLElement>();
-  const Tag = tag as any;
+  const Tag = tag as React.ElementType;
   return (
     <Tag ref={ref} className={`tj-reveal ${visible ? "is-visible" : ""} ${className}`}>
       {children}
     </Tag>
   );
 }
-
-/* --------------------------------------------------------- Data */
 
 const PILLARS = [
   { n: "01", t: "Visão", d: "Veja o que os outros não conseguem." },
@@ -279,8 +275,6 @@ const productsData: ProductData[] = [
 
 const COORDS = ["XIV", "XV", "XVI", "XVII"];
 
-/* --------------------------------------------------------- Page Component */
-
 export default function StartJourney() {
   const [selectedProduct, setSelectedProduct] = useState<ProductData | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -299,7 +293,6 @@ export default function StartJourney() {
       <div className="tj-grain" />
       <div className="tj-vignette" />
 
-      {/* Círculos técnicos de fundo + coordenadas */}
       <div className="tj-bg-circles" aria-hidden="true">
         <span className="tj-circle tj-circle-a" />
         <span className="tj-circle tj-circle-b" />
@@ -311,17 +304,11 @@ export default function StartJourney() {
         ))}
       </div>
 
-      {/* HERO */}
       <section className="tj-hero">
-        <span className="tj-numeral">XV</span>
-        <span className="tj-hero-title">INICIE SUA JORNADA</span>
-        <p className="tj-hero-phrase">
-          Construímos ferramentas dignas daqueles que criam o futuro.
-        </p>
-        <Link to="/contact" className="btn-premium">Começar</Link>
+        <img src="/homesymbol.png" alt="Home" className="logohome" />
+        <Link to="/contact" className="btn-premium tj-btn">Começar</Link>
       </section>
 
-      {/* DIVISOR */}
       <div className="tj-divider" aria-hidden="true">
         <span className="tj-divider-line" />
         {Array.from({ length: 6 }).map((_, i) => (
@@ -329,7 +316,6 @@ export default function StartJourney() {
         ))}
       </div>
 
-      {/* SEÇÃO 2 — PROPÓSITO */}
       <section className="tj-section">
         <Reveal tag="h2" className="tj-title">Toda jornada começa com um propósito.</Reveal>
         <Reveal className="tj-subtitle">
@@ -350,7 +336,6 @@ export default function StartJourney() {
         </div>
       </section>
 
-      {/* MANIFESTO */}
       <section className="tj-manifesto">
         <Reveal tag="p" className="tj-manifesto-line">Recusamos o comum.</Reveal>
         <Reveal tag="p" className="tj-manifesto-line tj-manifesto-line--muted">O mundo já tem software suficiente.</Reveal>
@@ -371,7 +356,6 @@ export default function StartJourney() {
         </div>
       </section>
 
-      {/* APPLE-STYLE — INFINIDADE */}
       <section className="tj-infinity">
         <Reveal tag="h2" className="tj-title">Projetado para durar décadas.</Reveal>
         <Reveal tag="span" className="tj-infinity-symbol">∞</Reveal>
@@ -423,37 +407,38 @@ export default function StartJourney() {
             <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
           </div>
         </Reveal>
+
         <Reveal className="fm-product-banner reverse">
           <div className="fm-banner-content">
-            <span className="fm-banner-tag">SYS. 004 // Automation Engine</span>
+            <span className="fm-banner-tag">SYS. 004 // Cloud Infrastructure</span>
             <h2 className="fm-banner-title OldLondon"><span className="OldLondon2">A</span>tlas</h2>
-            <p className="fm-banner-desc">Hephaestus permite o monitoramento de infraestrutura e visibilidade operacional.</p>
+            <p className="fm-banner-desc">Atlas centraliza servidores, aplicações, containers e ambientes cloud em uma única plataforma operacional.</p>
             <div className="fm-banner-actions">
-              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[2])}>Saiba mais</button>
-              <Link to="/hephaestus" className="fm-btn-secondary">Inspecionar</Link>
+              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[3])}>Saiba mais</button>
+              <Link to="/atlas" className="fm-btn-secondary">Inspecionar</Link>
             </div>
           </div>
-          <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
-            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
+          <div className="fm-banner-mockup" id="mockup-banner-atlas" onClick={() => handleOpenModal(productsData[3])}>
+            <img src="/mockup-placeholder.png" alt="Atlas Mockup" id="img-atlas" className="fm-mockup-img" />
           </div>
         </Reveal>
+
         <Reveal className="fm-product-banner">
           <div className="fm-banner-content">
-            <span className="fm-banner-tag">SYS. 005 // Automation Engine</span>
+            <span className="fm-banner-tag">SYS. 005 // Enterprise Mission Control</span>
             <h2 className="fm-banner-title OldLondon">Orion</h2>
-            <p className="fm-banner-desc">Orion permite que você visualize, monitore e controle toda sua operação em tempo real.</p>
+            <p className="fm-banner-desc">Orion é o centro de comando da plataforma. Ele monitora sistemas, integrações, infraestrutura, aplicações, automações e IA em uma única interface operacional.</p>
             <div className="fm-banner-actions">
-              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[2])}>Saiba mais</button>
-              <Link to="/hephaestus" className="fm-btn-secondary">Inspecionar</Link>
+              <button className="fm-btn-primary" onClick={() => handleOpenModal(productsData[4])}>Saiba mais</button>
+              <Link to="/orion" className="fm-btn-secondary">Inspecionar</Link>
             </div>
           </div>
-          <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
-            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
+          <div className="fm-banner-mockup" id="mockup-banner-orion" onClick={() => handleOpenModal(productsData[4])}>
+            <img src="/mockup-placeholder.png" alt="Orion Mockup" id="img-orion" className="fm-mockup-img" />
           </div>
         </Reveal>
       </section>
 
-      {/* FINAL — CTA */}
       <section className="tj-final">
         <Reveal tag="h2" className="tj-title">O primeiro passo muda tudo.</Reveal>
         <Reveal tag="p" className="tj-final-caption">
