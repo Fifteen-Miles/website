@@ -20,7 +20,6 @@ const Header = () => {
         
         <div className="left-section">
           <Link to="/" className="logo">
-            {/* O logo ganha um sutil glow dourado no hover pelo CSS */}
             Fifteen Miles
           </Link>
         </div>
