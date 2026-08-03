@@ -1,28 +1,30 @@
-# Roadmap: 15Miles Interstellar Redesign
+# Roadmap: Fifteen Miles & Atlas
 
-## Phase 1: Foundation & Global Identity
-- [x] Establish Design System (index.css)
-- [x] Create Advanced Starfield (Starfield.tsx)
-- [x] Set up Routing (App.tsx)
-- [x] Create shared Layout components (Footer, Section wrapper)
+## Phase 1: Design System Foundation & Global Navigation
+- **Goal**: Establish TailwindCSS, shadcn/ui components, centralized `global.css` variables, and responsive floating navbar.
+- **Requirements**: CORE-01, CORE-02
+- **Plans**: 1 plan
 
-## Phase 2: Page Development
-- [x] **Home Page**: Hero section with interactive tech elements.
-- [x] **Services Page**: Nebula-themed service grid.
-- [x] **About Page**: Floating narrative on tech-driven mission.
-- [x] **Contact Page**: Futuristic lead capture form.
+## Phase 2: Home Page & Core Sections
+- **Goal**: Build Home page featuring Hero, Mission, Vision, The Problem, The Future, Products, Why Fifteen Miles, Engineering, Company Philosophy, Technology, Roadmap, CTA, and Footer.
+- **Requirements**: CORE-03
+- **Plans**: 1 plan
 
-## Phase 3: Polish & "Award-Winning" Effects
-- [x] Add SVG-based tech borders and HUD elements.
-- [x] Implement advanced scroll reveal animations.
-- [x] Visual audit and performance optimization.
+## Phase 3: Products Directory & Atlas Enterprise Operating System
+- **Goal**: Build Products directory and comprehensive Atlas product presentation landing page.
+- **Requirements**: PROD-01, ATLAS-01
+- **Plans**: 1 plan
 
-## Phase 4: Launch Readiness
-- [x] SEO Meta tags and Social preview images.
-- [x] Final browser testing.
+## Phase 4: Company, Engineering, Content & Legal Pages
+- **Goal**: Build Company, Manifesto, Solutions, Contact, Engineering, Blog, Careers, Privacy, and Terms pages.
+- **Requirements**: COMP-01, ENG-01, BLOG-01, POL-01
+- **Plans**: 1 plan
 
-## Phase 5: Space Portal Redesign (v2)
-- [ ] Implement White & Raleway Design System (index.css)
-- [ ] Create `Portal` component for space-themed content sections
-- [ ] Refactor pages to "Spaceship Interior" concept
-- [ ] Final visual polish and transitions
+## Phase 5: Performance, SEO, Accessibility & Polish
+- **Goal**: Implement SEO metadata, code splitting, lazy loading, accessibility ARIA attributes, mobile responsive design audit, and final production polish.
+- **Requirements**: PERF-01
+- **Plans**: 1 plan
+
+---
+*Roadmap defined: 2026-08-03*
+*Last updated: 2026-08-03 after initialization*
