@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./style/Philosophy.css";
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);

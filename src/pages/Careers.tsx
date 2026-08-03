@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./style/Careers.css";
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);

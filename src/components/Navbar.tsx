@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, ArrowRight, ChevronDown, Layers, Cpu, Building2, BookOpen, Mail } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ArrowRight, ChevronDown, Component } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
-  const [companyDropdownOpen, setCompanyDropdownOpen] = useState(false);
+  const [productsOpen, setProductsOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,221 +20,250 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-border/40 py-3 shadow-sm"
-          : "bg-transparent py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
+        scrolled ? "pt-4" : "pt-6"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div
+        className={`w-full max-w-5xl mx-4 transition-all duration-500 rounded-full border backdrop-blur-2xl ${
+          scrolled
+            ? "bg-[#1D1D1F]/70 border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2.5 px-6"
+            : "bg-transparent border-transparent py-3 px-4"
+        }`}
+      >
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-foreground text-background flex items-center justify-center font-bold tracking-tighter text-lg transition-transform group-hover:scale-105">
-              15
-            </div>
-            <span className="font-semibold text-lg tracking-tight text-foreground">
-              Fifteen Miles
-            </span>
+            <img src="/TopLogo.png" alt="" className="h-5 hover:opacity-50 transition-all duration-500 ease"/>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1 bg-muted/50 border border-border/50 rounded-full px-4 py-1.5 backdrop-blur-sm">
-            {/* Products Dropdown */}
-            <div className="relative group">
+          <nav className="hidden md:flex items-center gap-8">
+            <div
+              className="relative"
+              onMouseEnter={() => setProductsOpen(true)}
+              onMouseLeave={() => setProductsOpen(false)}
+            >
               <button
-                onClick={() => setProductsDropdownOpen(!productsDropdownOpen)}
-                onMouseEnter={() => setProductsDropdownOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+                onClick={() => setProductsOpen(!productsOpen)}
+                className={`flex items-center gap-1 text-[12px] font-medium tracking-wide transition-colors cursor-pointer ${
+                  location.pathname.startsWith("/atlas") ||
+                  location.pathname.startsWith("/products")
+                    ? "text-white"
+                    : "text-[#86868B] hover:text-white"
+                }`}
               >
-                <Layers className="w-4 h-4" />
-                <span>Products</span>
-                <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+                Plataforma
+                <ChevronDown className="w-3 h-3 opacity-70" />
               </button>
 
-              {productsDropdownOpen && (
-                <div
-                  onMouseLeave={() => setProductsDropdownOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-72 rounded-2xl bg-card border border-border shadow-2xl p-2 z-50 animate-in fade-in-50 zoom-in-95"
-                >
-                  <Link
-                    to="/atlas"
-                    onClick={() => setProductsDropdownOpen(false)}
-                    className="flex items-start gap-3 p-3 rounded-xl hover:bg-muted/50 transition-colors group/item"
+              <AnimatePresence>
+                {productsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 rounded-2xl bg-[#1D1D1F]/90 border border-white/10 backdrop-blur-3xl shadow-2xl p-2 z-50"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover/item:bg-primary group-hover/item:text-primary-foreground transition-colors">
-                      <Layers className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm text-foreground flex items-center gap-1">
-                        Atlas <span className="text-xs px-1.5 py-0.5 rounded-full bg-primary/10 text-primary font-normal">Active</span>
+                    <Link
+                      to="/atlas"
+                      onClick={() => setProductsOpen(false)}
+                      className="block p-3 rounded-xl hover:bg-white/10 transition-colors group"
+                    >
+                      <div className="font-medium text-[13px] text-white group-hover:text-[#D4AF37] transition-colors">
+                        Atlas OS
                       </div>
-                      <p className="text-xs text-muted-foreground mt-0.5">Enterprise Operating System</p>
-                    </div>
-                  </Link>
-
-                  <div className="my-1 border-t border-border/40" />
-
-                  <Link
-                    to="/products"
-                    onClick={() => setProductsDropdownOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-xl hover:bg-muted/50 transition-colors text-xs font-medium text-muted-foreground hover:text-foreground"
-                  >
-                    <span>View all products & directory</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              )}
+                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
+                        Sistema Operacional Empresarial
+                      </p>
+                    </Link>
+                    <div className="my-1 border-t border-white/5" />
+                    <Link
+                      to="/products"
+                      onClick={() => setProductsOpen(false)}
+                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] text-[#86868B] hover:text-white transition-colors"
+                    >
+                      Módulos de Infraestrutura &rarr;
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <Link
               to="/engineering"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+              className={`text-[12px] font-medium tracking-wide transition-colors ${
+                location.pathname === "/engineering"
+                  ? "text-white"
+                  : "text-[#86868B] hover:text-white"
+              }`}
             >
-              <Cpu className="w-4 h-4" />
-              <span>Engineering</span>
+              Engenharia
             </Link>
 
-            {/* Company Dropdown */}
-            <div className="relative group">
+            <div
+              className="relative"
+              onMouseEnter={() => setCompanyOpen(true)}
+              onMouseLeave={() => setCompanyOpen(false)}
+            >
               <button
-                onClick={() => setCompanyDropdownOpen(!companyDropdownOpen)}
-                onMouseEnter={() => setCompanyDropdownOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+                onClick={() => setCompanyOpen(!companyOpen)}
+                className={`flex items-center gap-1 text-[12px] font-medium tracking-wide transition-colors cursor-pointer ${
+                  location.pathname === "/company" ||
+                  location.pathname === "/manifesto"
+                    ? "text-white"
+                    : "text-[#86868B] hover:text-white"
+                }`}
               >
-                <Building2 className="w-4 h-4" />
-                <span>Company</span>
-                <ChevronDown className="w-3.5 h-3.5 opacity-70" />
+                Instituição
+                <ChevronDown className="w-3 h-3 opacity-70" />
               </button>
 
-              {companyDropdownOpen && (
-                <div
-                  onMouseLeave={() => setCompanyDropdownOpen(false)}
-                  className="absolute top-full left-0 mt-2 w-60 rounded-2xl bg-card border border-border shadow-2xl p-2 z-50 animate-in fade-in-50 zoom-in-95"
-                >
-                  <Link
-                    to="/company"
-                    onClick={() => setCompanyDropdownOpen(false)}
-                    className="block p-2.5 rounded-xl hover:bg-muted/50 transition-colors text-sm font-medium text-foreground"
+              <AnimatePresence>
+                {companyOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-52 rounded-2xl bg-[#1D1D1F]/90 border border-white/10 backdrop-blur-3xl shadow-2xl p-2 z-50"
                   >
-                    About Fifteen Miles
-                  </Link>
-                  <Link
-                    to="/manifesto"
-                    onClick={() => setCompanyDropdownOpen(false)}
-                    className="block p-2.5 rounded-xl hover:bg-muted/50 transition-colors text-sm font-medium text-foreground"
-                  >
-                    Manifesto
-                  </Link>
-                </div>
-              )}
+                    <Link
+                      to="/company"
+                      onClick={() => setCompanyOpen(false)}
+                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] tracking-wide text-white transition-colors"
+                    >
+                      Nossa Instituição
+                    </Link>
+                    <Link
+                      to="/manifesto"
+                      onClick={() => setCompanyOpen(false)}
+                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] tracking-wide text-white transition-colors"
+                    >
+                      O Manifesto
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <Link
               to="/blog"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+              className={`text-[12px] font-medium tracking-wide transition-colors ${
+                location.pathname === "/blog"
+                  ? "text-white"
+                  : "text-[#86868B] hover:text-white"
+              }`}
             >
-              <BookOpen className="w-4 h-4" />
-              <span>Blog</span>
+              Discursos
             </Link>
 
             <Link
               to="/contact"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors rounded-full"
+              className={`text-[12px] font-medium tracking-wide transition-colors ${
+                location.pathname === "/contact"
+                  ? "text-white"
+                  : "text-[#86868B] hover:text-white"
+              }`}
             >
-              <Mail className="w-4 h-4" />
-              <span>Contact</span>
+              Contato
             </Link>
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:flex items-center gap-3">
-            <Link
-              to="/atlas"
-              className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-foreground text-background font-medium text-sm hover:opacity-90 transition-all shadow-sm hover:shadow group"
+          <div className="hidden md:flex items-center">
+            <a
+              href="https://atlas.fifteenmiles.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
             >
-              <span>Explore Atlas</span>
-              <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5" />
-            </Link>
+              <span className="text-[12px] font-semibold tracking-widest uppercase">
+                Explore Atlas
+              </span>
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 group-hover:bg-black/10 transition-colors duration-300">
+                <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-1 transition-transform duration-300" />
+              </div>
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-xl text-foreground hover:bg-muted/50 transition-colors"
+            className="md:hidden p-1.5 text-[#F5F5F7] transition-colors"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border p-6 shadow-2xl md:hidden animate-in slide-in-from-top-4">
-          <div className="flex flex-col gap-4">
-            <div className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Products</div>
-            <Link
-              to="/atlas"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 text-foreground font-medium"
-            >
-              <Layers className="w-5 h-5 text-primary" />
-              <div>
-                <div>Atlas</div>
-                <div className="text-xs text-muted-foreground">Enterprise Operating System</div>
-              </div>
-            </Link>
-
-            <div className="text-xs font-semibold text-muted-foreground tracking-wider uppercase mt-2">Navigation</div>
-            <Link
-              to="/engineering"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-            >
-              Engineering
-            </Link>
-            <Link
-              to="/company"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-            >
-              Company
-            </Link>
-            <Link
-              to="/manifesto"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-            >
-              Manifesto
-            </Link>
-            <Link
-              to="/blog"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-            >
-              Blog
-            </Link>
-            <Link
-              to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-            >
-              Contact
-            </Link>
-
-            <div className="pt-4 border-t border-border">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-full left-0 right-0 mx-4 mt-2 p-6 rounded-3xl bg-[#1D1D1F]/90 border border-white/10 shadow-2xl backdrop-blur-3xl md:hidden"
+          >
+            <div className="flex flex-col gap-2">
               <Link
                 to="/atlas"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-foreground text-background font-medium text-sm"
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
               >
-                <span>Explore Atlas</span>
-                <ArrowRight className="w-4 h-4" />
+                Atlas OS
               </Link>
+              <Link
+                to="/engineering"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
+              >
+                Engenharia
+              </Link>
+              <Link
+                to="/company"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
+              >
+                Instituição
+              </Link>
+              <Link
+                to="/manifesto"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
+              >
+                Manifesto
+              </Link>
+              <Link
+                to="/blog"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
+              >
+                Discursos
+              </Link>
+              <Link
+                to="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
+              >
+                Contato
+              </Link>
+
+              <div className="pt-4 mt-2 border-t border-white/10">
+                <a
+                  href="https://atlas.fifteenmiles.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="group w-full flex items-center justify-center gap-2 py-3 rounded-full bg-white text-black text-[12px] font-semibold tracking-wide transition-transform hover:scale-[1.02]"
+                >
+                  Explore Atlas
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

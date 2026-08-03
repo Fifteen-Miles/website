@@ -8,7 +8,7 @@
 ### Core Foundation
 - [x] **CORE-01**: Implement design system foundation using TailwindCSS, shadcn/ui, and centralized CSS variables in `global.css` (Dark mode first, minimal, elegant, Apple/Stripe/Linear aesthetic).
 - [x] **CORE-02**: Build responsive floating navbar with glass blur effect, navigation links, and explore CTA.
-- [ ] **CORE-03**: Build Home page with Hero, Mission, Vision, The Problem, The Future, Products, Why Fifteen Miles, Engineering, Company Philosophy, Technology, Roadmap, CTA, and Footer sections.
+- [x] **CORE-03**: Build Home page with Hero, Mission, Vision, The Problem, The Future, Products, Why Fifteen Miles, Engineering, Company Philosophy, Technology, Roadmap, CTA, and Footer sections.
 
 ### Products & Atlas
 - [ ] **PROD-01**: Build Products directory page showcasing Atlas (Enterprise Operating System) and future products ("Coming Soon").
@@ -43,7 +43,7 @@
 |-------------|-------|--------|
 | CORE-01 | Phase 1 | Complete ✓ |
 | CORE-02 | Phase 1 | Complete ✓ |
-| CORE-03 | Phase 2 | Pending |
+| CORE-03 | Phase 2 | Complete ✓ |
 | PROD-01 | Phase 3 | Pending |
 | ATLAS-01 | Phase 3 | Pending |
 | COMP-01 | Phase 4 | Pending |
