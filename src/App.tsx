@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import Header from "./components/Header";
+import { Navbar } from "./components/Navbar";
 import Footer from "./components/Footer";
 import GrainEffect from "./components/GrainEffect";
 import ScrollToTop from "./components/ScrollToTop";
@@ -19,7 +19,7 @@ import Contact from "./pages/Contact";
 
 import "./App.css";
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 
 const App = () => {
 
@@ -49,11 +49,11 @@ const App = () => {
 
   return (
     <>
-    <GrainEffect />
-      <Header />
+      <GrainEffect />
+      <Navbar />
       <ScrollToTop />
 
-      <main className="app-main">
+      <main className="app-main pt-20">
         <Routes>
           <Route path="/" element={<StartJourney />} />
           <Route path="/athena" element={<Athena />} />
