@@ -1,29 +1,26 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import Lenis from "lenis";
 
 import { Navbar } from "./components/Navbar";
 import Footer from "./components/Footer";
 import GrainEffect from "./components/GrainEffect";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Athena from "./pages/Athena";
-import Hephaestus from "./pages/Hephaestus";
-import Hermes from "./pages/Hermes";
-import Atlas from "./pages/Atlas"; 
-import Orion from "./pages/Orion"; 
-import StartJourney from "./pages/StartJourney"; 
-import Philosophy from "./pages/Philosophy"; 
-import Manifesto from "./pages/Manifesto"; 
-import Process from "./pages/Process"; 
-import Careers from "./pages/Careers"; 
-import Contact from "./pages/Contact"; 
+import Home from "./pages/Home";
+import Atlas from "./pages/Atlas";
+import Company from "./pages/Company";
+import Products from "./pages/Products";
+import Engineering from "./pages/Engineering";
+import Blog from "./pages/Blog";
+import Contact from "./pages/Contact";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 import "./App.css";
-import { useEffect } from "react";
-import Lenis from "lenis";
 
 const App = () => {
-
-   useEffect(() => {
+  useEffect(() => {
     const lenis = new Lenis({
       duration: 1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -53,19 +50,19 @@ const App = () => {
       <Navbar />
       <ScrollToTop />
 
-      <main className="app-main pt-20">
+      <main className="app-main">
         <Routes>
-          <Route path="/" element={<StartJourney />} />
-          <Route path="/athena" element={<Athena />} />
-          <Route path="/hephaestus" element={<Hephaestus />} />
-          <Route path="/hermes" element={<Hermes />} />
-          <Route path="/atlas" element={<Atlas />} />
-          <Route path="/orion" element={<Orion />} />
-          <Route path="/philosophy" element={<Philosophy />} />
-          <Route path="/manifesto" element={<Manifesto />} />
-          <Route path="/process" element={<Process />} />
-          <Route path="/careers" element={<Careers />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/company" element={<Company />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/engineering" element={<Engineering />} />
+          <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/atlas" element={<Atlas />} />
+          <Route path="/manifesto" element={<Company />} />
+          <Route path="/philosophy" element={<Company />} />
         </Routes>
       </main>
 

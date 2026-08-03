@@ -1,24 +1,8 @@
 export default function GrainEffect() {
   return (
-    <div className="fixed inset-0 pointer-events-none z-[9990] overflow-hidden opacity-45 mix-blend-normal">
-      <div className="absolute inset-[-200%] bg-[url('https://img.freepik.com/fotos-gratis/textura-de-papelao_1194-5419.jpg?semt=ais_hybrid&w=740&q=80')] animate-grain" />
-      <style>{`
-        @keyframes grain {
-          0%, 100% { transform: translate(0, 0); }
-          10% { transform: translate(-5%, -10%); }
-          20% { transform: translate(-15%, 5%); }
-          30% { transform: translate(7%, -25%); }
-          40% { transform: translate(-5%, 25%); }
-          50% { transform: translate(-15%, 10%); }
-          60% { transform: translate(15%, 0%); }
-          70% { transform: translate(0%, 15%); }
-          80% { transform: translate(3%, 35%); }
-          90% { transform: translate(-10%, 10%); }
-        }
-        .animate-grain {
-          animation: grain 8s steps(10) infinite;
-        }
-      `}</style>
+    <div className="pointer-events-none fixed inset-0 z-[9990] overflow-hidden opacity-30">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(197,160,89,0.04),transparent_50%),radial-gradient(circle_at_bottom_right,rgba(140,115,85,0.03),transparent_50%)]" />
+      <div className="absolute inset-0 [background-image:linear-gradient(rgba(140,115,85,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(140,115,85,0.02)_1px,transparent_1px)] [background-size:120px_120px] opacity-40" />
     </div>
   );
 }
