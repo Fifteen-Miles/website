@@ -3,12 +3,19 @@ import { MuseumGallerySection } from "../components/MuseumGallerySection";
 import { AtlasInfrastructureRoom } from "../components/AtlasInfrastructureRoom";
 import { ChamberOfPhilosophy } from "../components/ChamberOfPhilosophy";
 import { HorizonThirtyYearsRoom } from "../components/HorizonThirtyYearsRoom";
+import { TrustedBy } from "../components/CompaniesBanner";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] overflow-x-hidden selection:bg-[#8C7355] selection:text-[#FAF8F5]">
       {/* 1. Room I: Cinematic Landscape & Pure Headline */}
       <Hero />
+
+      <TrustedBy />
+
+      <section className="h-100 flex justify-center items-center bg-black">
+        <h2 className="text-4xl font-semibold max-w-400 text-white p-25 font-[Fraunces]">Uma nova geração de plataformas empresariais. <span className="opacity-50 font-light">Desenvolvido para organizações que desejam centralizar toda a sua operação em um único ambiente, com flexibilidade, governança e inteligência desde a base.</span></h2>
+      </section>
 
       {/* 2 & 3. Room II, III: Museum Gallery of Software Fragmentation & Monolith */}
       <MuseumGallerySection />

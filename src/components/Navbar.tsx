@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown, Component } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Navbar = () => {
@@ -27,13 +28,13 @@ export const Navbar = () => {
       <div
         className={`w-full max-w-5xl mx-4 transition-all duration-500 rounded-full border backdrop-blur-2xl ${
           scrolled
-            ? "bg-[#1D1D1F]/70 border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2.5 px-6"
+            ? "bg-black border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2.5 px-6"
             : "bg-transparent border-transparent py-3 px-4"
         }`}
       >
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <img src="/TopLogo.png" alt="" className="h-5 hover:opacity-50 transition-all duration-500 ease"/>
+            <img src="/TopLogo.png" alt="" className="h-4 hover:opacity-50 transition-all duration-500 ease"/>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -170,20 +171,20 @@ export const Navbar = () => {
           </nav>
 
           <div className="hidden md:flex items-center">
-            <a
-              href="https://atlas.fifteenmiles.tech"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Button
               onClick={() => setMobileMenuOpen(false)}
-              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black rounded-full overflow-hidden transition-all duration-300 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black rounded-full overflow-hidden transition-all duration-300"
             >
-              <span className="text-[12px] font-semibold tracking-widest uppercase">
-                Explore Atlas
-              </span>
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-black/5 group-hover:bg-black/10 transition-colors duration-300">
-                <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </a>
+              <a
+                href="https://atlas.fifteenmiles.tech"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="text-[12px] font-semibold tracking-widest uppercase">
+                  Explore Atlas
+                </span>
+              </a>
+            </Button>
           </div>
 
           <button
