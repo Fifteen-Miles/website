@@ -1,74 +1,93 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
-    <section className="relative h-screen w-full bg-black overflow-hidden flex flex-col items-center justify-center selection:bg-white/20">
-      <motion.div
-        initial={{ scale: 1.15, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.4 }}
-        transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('/forest.jpg')` }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/80" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(212,175,55,0.06)_0%,_transparent_110%)]" />
+    <section className="relative min-h-screen w-full bg-black overflow-hidden flex flex-col items-center justify-start pt-40 pb-24 selection:bg-white/20">
+      {/* Subtle radial gradient at the top, similar to Linear's lighting */}
+      <div className="absolute inset-x-0 top-0 h-[60rem] bg-[radial-gradient(circle_35rem_at_50%_0%,#1a1a1a,transparent)] opacity-70" />
+      {/* Subtle grid pattern, less dense than in the previous iteration */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f1f1f_1px,transparent_1px),linear-gradient(to_bottom,#1f1f1f_1px,transparent_1px)] bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_0%,#000_50%,transparent_100%)] opacity-30" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-6xl px-6">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-7xl px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-8"
         >
+          <Link
+            to="/update"
+            className="group inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm transition-colors hover:bg-white/5"
+          >
+            <span className="text-[#A1A1A6]">Novo</span>
+            <span className="text-white">Coding Sessions</span>
+            <ArrowRight className="h-4 w-4 text-[#A1A1A6] transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 1.2, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center text-5xl md:text-7xl lg:text-[7rem] leading-[0.9] font-medium text-white tracking-tighter"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-4xl md:text-5xl lg:text-6xl font-[Raleway] font-medium tracking-tighter text-white max-w-5xl leading-[0.95]"
         >
-          Projetado para durar
-          <br />
-          <span className="font-serif italic font-light text-transparent bg-clip-text bg-gradient-to-br from-[#E5C07B] via-[#D4AF37] to-[#8A6D3B] pr-4">
-            décadas.
-          </span>
+          O sistema de desenvolvimento de produtos para equipes e agentes
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 text-lg md:text-xl text-[#A1A1A6] max-w-2xl text-center font-light tracking-wide leading-relaxed"
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-8 text-xl text-[#A1A1A6] max-w-3xl font-normal tracking-wide leading-normal"
         >
-          Arquitetura institucional de alto calibre. Construímos plataformas corporativas desenhadas para resistir ao tempo e à evolução tecnológica.
+          Projetado especificamente para planejamento e construção de produtos.
+          Otimizado para a era da IA.
         </motion.p>
-      </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 40, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 1.2, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute bottom-12 z-20"
-      >
-        <div className="flex items-center gap-1 p-1.5 rounded-full bg-[#1D1D1F]/40 border border-white/10 backdrop-blur-2xl shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 flex items-center justify-center gap-4"
+        >
           <Link
-            to="/atlas"
-            className="group flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-white text-black text-[13px] font-semibold tracking-wide transition-transform hover:scale-[1.02]"
+            to="/contact"
+            className="group inline-flex h-10 items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-black text-base font-medium tracking-tight transition-all hover:bg-neutral-200 shadow-sm"
           >
-            Explorar Atlas
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            Solicitar Demonstração
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
-          <Link
-            to="/company"
-            className="flex items-center justify-center px-8 py-3.5 rounded-full bg-transparent text-[#F5F5F7] text-[13px] font-medium tracking-wide hover:bg-white/10 transition-colors"
+          <a
+            href="https://atlas.fifteenmiles.tech/register"
+            className="inline-flex h-10 items-center justify-center px-8 py-4 rounded-full bg-white/[0.06] text-white text-base font-medium tracking-tight border border-white/10 hover:bg-white/[0.1] transition-all backdrop-blur-sm"
           >
-            A Instituição
-          </Link>
-        </div>
-      </motion.div>
+            Criar conta
+          </a>
+        </motion.div>
+
+        {/* Screenshot container with adjusted perspective and shadow for Linear look */}
+        <motion.div
+          initial={{ opacity: 0, y: 80, rotateX: 15 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{
+            duration: 1.5,
+            delay: 0.5,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="relative mt-24 perspective items-center justify-center"
+        >          
+          <div className="relative overflow-hidden rounded-md border border-white/10 shadow-2xl w-400 shadow-black/40">
+            <img
+              src="/Aplicativo.png"
+              alt="Interface do Aplicativo Linear"
+              className="pointer-events-none"
+            />
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };

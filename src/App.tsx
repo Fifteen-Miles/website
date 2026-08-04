@@ -10,6 +10,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import Atlas from "./pages/Atlas";
 import Company from "./pages/Company";
+import Manifesto from "./pages/Manifesto";
 import Products from "./pages/Products";
 import Engineering from "./pages/Engineering";
 import Blog from "./pages/Blog";
@@ -22,7 +23,7 @@ import "./App.css";
 const App = () => {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1,
+      duration: 0.6,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 1,
@@ -61,7 +62,7 @@ const App = () => {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/atlas" element={<Atlas />} />
-          <Route path="/manifesto" element={<Company />} />
+          <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/philosophy" element={<Company />} />
         </Routes>
       </main>
