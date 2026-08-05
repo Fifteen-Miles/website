@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
+import Seo from "../components/Seo"
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50, filter: "blur(8px)" },
@@ -46,6 +47,7 @@ export default function AtlasLanding() {
       ref={containerRef}
       className="relative min-h-screen bg-[#FAF8F5] text-[#0F0E0C] font-[Raleway] overflow-hidden selection:bg-[#8C7355]/20 selection:text-[#0F0E0C]"
     >
+      <Seo title="Atlas — Fifteen Miles" description="Atlas: plataforma operacional para centralizar pessoas, processos e dados em uma única interface" path="/atlas" />
       <div className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.03] mix-blend-overlay" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}></div>
 
       <div className="fixed left-6 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[#8C7355]/10 to-transparent mix-blend-multiply z-40 hidden md:block" />

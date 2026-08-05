@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./style/Process.css";
+import Seo from "../components/Seo"
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -40,6 +41,7 @@ const TECH_STACK = ["React", "Next.js", "FastAPI", "Docker", "AWS", "Python", "P
 export default function Process() {
   return (
     <main className="fm-page fm-process-page-light">
+      <Seo title="Processo — Fifteen Miles" description="Metodologia de engenharia: identificação, projeto, construção e observabilidade." path="/process" />
       <div className="fm-blueprint-grid" />
       
       <section className="fm-hero-light">

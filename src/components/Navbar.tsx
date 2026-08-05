@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown, Component } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import LazyImage from "../components/LazyImage";
 
 export const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,7 +35,7 @@ export const Navbar = () => {
       >
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <img src="/TopLogo.png" alt="" className="h-4 hover:opacity-50 transition-all duration-500 ease"/>
+            <LazyImage src="/TopLogo.png" alt="" className="h-4 hover:opacity-50 transition-all duration-500 ease" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">

@@ -1,3 +1,5 @@
+import LazyImage from './LazyImage'
+
 export const TrustedBy = () => {
   return (
     <section className="relative w-full bg-black py-10 overflow-hidden">
@@ -8,10 +10,10 @@ export const TrustedBy = () => {
 
         <div className="w-full flex justify-center items-center gap-30  items-center justify-items-center opacity-7าม">
           <span className="text-white font-semibold tracking-tight text-lg flex items-center gap-2">
-            <img src="/eletra.png" alt="" className="grayscale w-25"/>
+            <LazyImage src="/eletra.png" alt="" className="grayscale w-25" />
           </span>
           {/*<span className="text-white font-semibold tracking-tight text-lg flex items-center gap-2">
-            <img src="/acocearense.png" alt="" className="grayscale w-30"/>
+            <img src="/acocearense.png" alt="" className="grayscale w-30" loading="lazy" decoding="async" />
           </span>*/}
         </div>
       </div>

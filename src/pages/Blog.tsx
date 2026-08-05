@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { BookOpen, ArrowRight } from "lucide-react";
+import Seo from "../components/Seo"
 
 const posts = [
   {
@@ -25,6 +26,7 @@ const posts = [
 export default function Blog() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] font-sans selection:bg-[#8C7355] selection:text-[#FAF8F5] pt-24 pb-20">
+      <Seo title="Blog — Fifteen Miles" description="Ensaios técnicos e reflexões sobre arquitetura, governança e plataformas empresariais." path="/blog" />
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-20">
         
         {/* Header */}

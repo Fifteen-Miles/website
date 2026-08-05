@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Layers, Cpu } from "lucide-react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo"
 
 export default function Products() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] font-sans selection:bg-[#8C7355] selection:text-[#FAF8F5] pt-24 pb-20">
+      <Seo title="Produtos — Fifteen Miles" description="Mapa de produtos e módulos: Atlas OS, orquestração, inteligência e camadas futuras." path="/products" />
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-20">
         
         {/* Header */}

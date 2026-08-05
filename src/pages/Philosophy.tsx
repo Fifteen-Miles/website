@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Seo from "../components/Seo"
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -36,6 +37,7 @@ function Reveal({ children, className = "", tag = "div" }: { children: React.Rea
 export default function Philosophy() {
   return (
     <main className="fm-page fm-philosophy-page">
+      <Seo title="Filosofia — Fifteen Miles" description="Nossa filosofia: arquitetura, engenharia e permanência como princípios centrais." path="/philosophy" />
       <div className="fm-grain" />
       <div className="fm-grid-bg" />
 

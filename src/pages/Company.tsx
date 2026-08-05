@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo"
+import LazyImage from "../components/LazyImage"
 
 /* ─── ANIMAÇÕES SUAVES E ELEGANTES ─── */
 const fadeUp: Variants = {
@@ -25,6 +27,7 @@ const staggerContainer = {
 export default function Company() {
   return (
     <div className="min-h-screen bg-[#FCFBFA] text-[#0F0E0C] font-[Raleway] selection:bg-[#D4AF37]/20 selection:text-[#0F0E0C] overflow-x-hidden">
+      <Seo title="Sobre — Fifteen Miles" description="Quem somos: visão, origem e propósito da Fifteen Miles — plataformas empresariais duradouras." path="/company" />
       
       {/* ═══════════════════════════════════════════════════
           01. HERO SECTION
@@ -76,16 +79,17 @@ export default function Company() {
         </motion.div>
 
         {/* Hero Image */}
-        <motion.div 
+          <motion.div 
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-7xl mx-auto mt-32 h-[50vh] md:h-[75vh] rounded-2xl overflow-hidden relative shadow-2xl"
         >
-          <img 
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2500&auto=format&fit=crop" 
-            alt="Arquitetura e Concreto Minimalista" 
+          <LazyImage
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2500&auto=format&fit=crop"
+            alt="Arquitetura e Concreto Minimalista"
             className="w-full h-full object-cover grayscale opacity-90"
+            style={{ width: '100%', height: '100%' }}
           />
         </motion.div>
       </section>

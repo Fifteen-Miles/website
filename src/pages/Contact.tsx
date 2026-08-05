@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Send, Compass } from "lucide-react";
+import Seo from "../components/Seo"
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -13,6 +14,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] font-sans selection:bg-[#8C7355] selection:text-[#FAF8F5] pt-24 pb-20">
+      <Seo title="Contato — Fifteen Miles" description="Fale com a Fifteen Miles: parcerias, demonstrações e consultas institucionais." path="/contact" />
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-20">
 
         {/* Header */}
