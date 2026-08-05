@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.fifteenmiles.tech/sitemap.xml
+Host: https://www.fifteenmiles.tech

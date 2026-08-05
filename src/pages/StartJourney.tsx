@@ -3,6 +3,8 @@ import "./style/StartJourney.css";
 import { Link } from "react-router-dom";
 import ProductModal from "../components/ProductModal";
 import type { ProductData } from "../components/ProductModal";
+import Seo from "../components/Seo"
+import LazyImage from "../components/LazyImage"
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -290,6 +292,7 @@ export default function StartJourney() {
 
   return (
     <div className="tj-page">
+      <Seo title="Iniciar Jornada — Fifteen Miles" description="Conheça nossos produtos e inicie a jornada com a Fifteen Miles." path="/start-journey" />
       <div className="tj-grain" />
       <div className="tj-vignette" />
 
@@ -304,8 +307,8 @@ export default function StartJourney() {
         ))}
       </div>
 
-      <section className="tj-hero">
-        <img src="/homesymbol.png" alt="Home" className="logohome" />
+        <section className="tj-hero">
+        <LazyImage src="/homesymbol.png" alt="Home" className="logohome" />
         <Link to="/contact" className="btn-premium tj-btn">Começar</Link>
       </section>
 
@@ -358,7 +361,7 @@ export default function StartJourney() {
 
       <section className="tj-infinity">
         <Reveal tag="h2" className="tj-title-infinity">Projetado para durar décadas.</Reveal>
-        <Reveal tag="span" className="tj-infinity-symbol"><img src="/∞.png" alt="" /></Reveal>
+        <Reveal tag="span" className="tj-infinity-symbol"><LazyImage src="/∞.png" alt="" /></Reveal>
         <Reveal tag="p" className="tj-infinity-caption">Não perseguimos tendências.</Reveal>
       </section>
 
@@ -374,7 +377,7 @@ export default function StartJourney() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-athena" onClick={() => handleOpenModal(productsData[0])}>
-            <img src="/mockup-placeholder.png" alt="Athena Mockup" id="img-athena" className="fm-mockup-img" />
+            <LazyImage src="/mockup-placeholder.png" alt="Athena Mockup" id="img-athena" className="fm-mockup-img" />
           </div>
         </Reveal>
 
@@ -389,7 +392,7 @@ export default function StartJourney() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-hermes" onClick={() => handleOpenModal(productsData[1])}>
-            <img src="/mockup-placeholder.png" alt="Hermes Mockup" id="img-hermes" className="fm-mockup-img" />
+            <LazyImage src="/mockup-placeholder.png" alt="Hermes Mockup" id="img-hermes" className="fm-mockup-img" />
           </div>
         </Reveal>
 
@@ -404,7 +407,7 @@ export default function StartJourney() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-hephaestus" onClick={() => handleOpenModal(productsData[2])}>
-            <img src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
+            <LazyImage src="/mockup-placeholder.png" alt="Hephaestus Mockup" id="img-hephaestus" className="fm-mockup-img" />
           </div>
         </Reveal>
 
@@ -419,7 +422,7 @@ export default function StartJourney() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-atlas" onClick={() => handleOpenModal(productsData[3])}>
-            <img src="/mockup-placeholder.png" alt="Atlas Mockup" id="img-atlas" className="fm-mockup-img" />
+            <LazyImage src="/mockup-placeholder.png" alt="Atlas Mockup" id="img-atlas" className="fm-mockup-img" />
           </div>
         </Reveal>
 
@@ -434,7 +437,7 @@ export default function StartJourney() {
             </div>
           </div>
           <div className="fm-banner-mockup" id="mockup-banner-orion" onClick={() => handleOpenModal(productsData[4])}>
-            <img src="/mockup-placeholder.png" alt="Orion Mockup" id="img-orion" className="fm-mockup-img" />
+            <LazyImage src="/mockup-placeholder.png" alt="Orion Mockup" id="img-orion" className="fm-mockup-img" />
           </div>
         </Reveal>
       </section>

@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Seo from "../components/Seo"
+import LazyImage from "../components/LazyImage"
 
 /* ─── ANIMAÇÕES SUAVES E ELEGANTES ─── */
 const fadeUp: Variants = {
@@ -25,6 +27,7 @@ const staggerContainer = {
 export default function Manifesto() {
   return (
     <div className="min-h-screen bg-[#FCFBFA] text-[#0F0E0C] font-[Raleway] selection:bg-[#D4AF37]/20 selection:text-[#0F0E0C] overflow-x-hidden">
+      <Seo title="Manifesto — Fifteen Miles" description="Manifesto da Fifteen Miles: princípios, crenças e visão sobre construção de software duradouro." path="/manifesto" />
       
       {/* ═══════════════════════════════════════════════════
           01. HERO / ABERTURA DO MANIFESTO
@@ -74,10 +77,11 @@ export default function Manifesto() {
           transition={{ duration: 1.4 }}
           className="w-full h-[50vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-2xl"
         >
-          <img 
-            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop" 
-            alt="Arquitetura Monumental" 
+          <LazyImage
+            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop"
+            alt="Arquitetura Monumental"
             className="w-full h-full object-cover grayscale opacity-90"
+            style={{ width: '100%', height: '100%' }}
           />
         </motion.div>
       </section>
@@ -157,19 +161,20 @@ export default function Manifesto() {
 
       {/* Imagem Editorial 2 (Biblioteca/Concreto) */}
       <section className="px-6 max-w-7xl mx-auto py-20">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.4 }}
-          className="w-full h-[50vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-2xl"
-        >
-          <img 
-            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop" 
-            alt="Biblioteca e Estruturas Sólidas" 
-            className="w-full h-full object-cover grayscale opacity-90"
-          />
-        </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1.4 }}
+            className="w-full h-[50vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-2xl"
+          >
+            <LazyImage
+              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop"
+              alt="Biblioteca e Estruturas Sólidas"
+              className="w-full h-full object-cover grayscale opacity-90"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════════

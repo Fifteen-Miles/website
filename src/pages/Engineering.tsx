@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { useRef } from "react";
 import { ArrowRight, ArrowDown } from "lucide-react";
+import Seo from "../components/Seo"
+import LazyImage from "../components/LazyImage"
 
 /* ─── ANIMAÇÕES SUAVES E ELEGANTES ─── */
 const fadeUp: Variants = {
@@ -42,6 +44,7 @@ export default function Engineering() {
 
   return (
     <div className="min-h-screen bg-[#FCFBFA] text-[#0F0E0C] font-[Raleway] selection:bg-[#D4AF37]/20 selection:text-[#0F0E0C] overflow-x-hidden">
+      <Seo title="Engenharia — Fifteen Miles" description="Princípios e práticas de engenharia da Fifteen Miles — software projetado para durar décadas." path="/engineering" />
       
       {/* ═══════════════════════════════════════════════════
           01. HERO SECTION
@@ -85,15 +88,16 @@ export default function Engineering() {
         </motion.div>
 
         {/* Hero Image (Classical Architecture / Technical Blueprint feel) */}
-        <motion.div 
+          <motion.div 
           style={{ y: parallaxY, opacity: parallaxOpacity }}
           className="w-full max-w-7xl mx-auto mt-32 h-[50vh] md:h-[70vh] rounded-2xl overflow-hidden relative"
         >
           <div className="absolute inset-0 bg-[#0F0E0C]/5 mix-blend-overlay z-10" />
-          <img 
-            src="https://images.unsplash.com/photo-1541888087617-64c8c7ad4372?q=80&w=2500&auto=format&fit=crop" 
-            alt="Arquitetura Clássica e Concreto" 
+          <LazyImage
+            src="https://images.unsplash.com/photo-1541888087617-64c8c7ad4372?q=80&w=2500&auto=format&fit=crop"
+            alt="Arquitetura Clássica e Concreto"
             className="w-full h-full object-cover grayscale opacity-90"
+            style={{ width: '100%', height: '100%' }}
           />
         </motion.div>
       </section>

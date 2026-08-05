@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { Shield } from "lucide-react";
+import Seo from "../components/Seo"
 
 export default function Terms() {
   return (
     <div className="min-h-screen bg-[#0A0A0C] text-[#FAF8F5] font-sans selection:bg-[#8C7355] selection:text-[#FAF8F5] pt-24 pb-20">
+      <Seo title="Termos — Fifteen Miles" description="Termos de serviço e compromissos da Fifteen Miles com continuidade e disponibilidade." path="/terms" />
       <main className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10 py-20">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8C7355]/30 bg-[#161412] text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] mb-6">
           <Shield className="w-3.5 h-3.5" />

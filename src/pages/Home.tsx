@@ -4,10 +4,12 @@ import { AtlasInfrastructureRoom } from "../components/AtlasInfrastructureRoom";
 import { ChamberOfPhilosophy } from "../components/ChamberOfPhilosophy";
 import { HorizonThirtyYearsRoom } from "../components/HorizonThirtyYearsRoom";
 import { TrustedBy } from "../components/CompaniesBanner";
+import Seo from "../components/Seo"
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] overflow-x-hidden selection:bg-[#8C7355] selection:text-[#FAF8F5]">
+      <Seo title="Fifteen Miles | Built for Decades" description="Fifteen Miles builds configurable enterprise platforms that centralize operations into a single, elegant environment." path="/" />
       {/* 1. Room I: Cinematic Landscape & Pure Headline */}
       <Hero />
 

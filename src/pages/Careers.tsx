@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Seo from "../components/Seo"
 
 function useReveal<T extends HTMLElement>() {
   const ref = useRef<T | null>(null);
@@ -36,6 +37,7 @@ function Reveal({ children, className = "", tag = "div" }: { children: React.Rea
 export default function Careers() {
   return (
     <main className="fm-page fm-careers-page">
+      <Seo title="Carreiras — Fifteen Miles" description="Vagas e oportunidades na Fifteen Miles. Junte-se à nossa ordem de engenheiros." path="/careers" />
       <div className="fm-grain" />
       <div className="fm-grid-bg" />
 
