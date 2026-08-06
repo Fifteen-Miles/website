@@ -32,9 +32,7 @@ export default function LazyImage({ src = '', alt = '', width, height, style, cl
         cachedManifest = m
         setManifest(m)
       })
-      .catch(() => {
-        // ignore — manifest may not exist in dev
-      })
+      .catch(() => {})
     return () => { cancelled = true }
   }, [])
 
@@ -43,7 +41,6 @@ export default function LazyImage({ src = '', alt = '', width, height, style, cl
     computedStyle.aspectRatio = `${width}/${height}`
   }
 
-  // derive manifest key from src path
   const srcBasename = src.split('/').pop() || src
   const entry = manifest && manifest[srcBasename]
 
@@ -63,6 +60,7 @@ export default function LazyImage({ src = '', alt = '', width, height, style, cl
           width={width as any}
           height={height as any}
           style={computedStyle}
+          className={className}
           {...rest}
         />
       </picture>

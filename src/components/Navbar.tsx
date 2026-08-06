@@ -22,20 +22,17 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
-        scrolled ? "pt-4" : "pt-6"
+      className={`fixed top-0 bg-black/70 backdrop-blur-md left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
+        scrolled ? "py-2" : "py-5"
       }`}
     >
       <div
-        className={`w-full max-w-5xl mx-4 transition-all duration-500 rounded-full border backdrop-blur-2xl ${
-          scrolled
-            ? "bg-black border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)] py-2.5 px-6"
-            : "bg-transparent border-transparent py-3 px-4"
-        }`}
+        className='w-full max-w-5xl mx-4 transition-all duration-500 rounded-full' 
+          
       >
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group">
-            <LazyImage src="/TopLogo.png" alt="" className="h-4 hover:opacity-50 transition-all duration-500 ease" />
+            <LazyImage src="/TopLogo.png" alt="" className="h-5 hover:opacity-80 transition-all duration-500 ease" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
