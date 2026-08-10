@@ -233,7 +233,7 @@ export default function Company() {
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { name: "Atlas", desc: "O sistema operacional empresarial unificado." },
-            { name: "Hermes", desc: "Camada de comunicação e fluxos em tempo real." },
+            { name: "Hephaestus", desc: "O sistema de automações feito para leigos e experientes." },
             { name: "Marketplace", desc: "Ecossistema aberto de extensões e módulos especializados." },
             { name: "IA", desc: "Automação cognitiva integrada diretamente aos processos." },
             { name: "Ecossistema", desc: "Uma visão unificada e perfeitamente integrada para o futuro." }
