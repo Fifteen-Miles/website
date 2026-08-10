@@ -123,7 +123,7 @@ export default function AtlasLanding() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
-              href="#"
+              href="/contact"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
             >
               Solicitar demonstração
@@ -538,7 +538,7 @@ export default function AtlasLanding() {
 
           <motion.div variants={fadeUp} className="mb-20">
             <a
-              href="#"
+              href="/contact"
               className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
               <span>Solicitar demonstração</span>
