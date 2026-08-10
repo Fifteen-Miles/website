@@ -1,89 +1,103 @@
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import Seo from "../components/Seo"
-import LazyImage from "../components/LazyImage"
+'use client';
 
-/* ─── ANIMAÇÕES SUAVES E ELEGANTES ─── */
+import { useEffect } from "react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowRight, Compass, Layers, ShieldCheck, Cpu, Users, Globe } from "lucide-react";
+import { Link } from "react-router-dom";
+import Seo from "../components/Seo";
+import LazyImage from "../components/LazyImage";
+
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 40, filter: "blur(4px)" },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
-const staggerContainer = {
+const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 },
+    transition: { staggerChildren: 0.12 },
   },
 };
 
+function useDisplayFonts() {
+  useEffect(() => {
+    if (document.getElementById("fm-type-system")) return;
+    const link = document.createElement("link");
+    link.id = "fm-type-system";
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap";
+    document.head.appendChild(link);
+  }, []);
+}
+
 export default function Company() {
+  useDisplayFonts();
+
   return (
-    <div className="min-h-screen bg-[#FCFBFA] text-[#0F0E0C] font-[Raleway] selection:bg-[#D4AF37]/20 selection:text-[#0F0E0C] overflow-x-hidden">
+    <div className="min-h-screen bg-white text-[#1D1D1F] font-[Inter] selection:bg-black/50 selection:text-white overflow-x-hidden">
       <Seo title="Sobre — Fifteen Miles" description="Quem somos: visão, origem e propósito da Fifteen Miles — plataformas empresariais duradouras." path="/company" />
       
-      {/* ═══════════════════════════════════════════════════
-          01. HERO SECTION
-      ═══════════════════════════════════════════════════ */}
-      <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center pt-32 pb-40 px-6">
+      <div className="fixed inset-0 bg-[radial-gradient(#1D1D1F_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.02] pointer-events-none z-0" />
+
+      <section className="relative min-h-[100svh] w-full flex flex-col items-center justify-center pt-32 pb-40 px-6 sm:px-12 z-10">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
           className="relative z-10 flex flex-col items-center text-center w-full max-w-5xl mx-auto"
         >
-          <motion.div variants={fadeUp} className="mb-8">
-            <span className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#8C7355] border border-[#8C7355]/20 px-6 py-2.5 rounded-full">
-              A Instituição · Carta Aberta
-            </span>
+          <motion.div
+            variants={fadeUp}
+            className="inline-flex items-center gap-2 px-4 py-1.5 text-[11px] font-[JetBrains_Mono] tracking-[0.2em] uppercase text-[#1D1D1F]/80 mb-8"
+          >
+            <span>Capítulo I · A Instituição</span>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
-            className="text-5xl md:text-7xl lg:text-[8rem] font-light tracking-tighter leading-[0.95] text-[#0F0E0C]"
+            className="font-[Inter] text-5xl sm:text-7xl lg:text-[7.5rem] tracking-[-0.03em] font-medium leading-[1.02] text-[#1D1D1F]"
           >
             Ainda estamos construindo <br />
-            <span className="italic text-[#8C7355]">a Fifteen Miles.</span>
+            <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">a Fifteen Miles.</span>
             <br />
             E isso é exatamente o que nos motiva.
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="mt-12 text-xl md:text-2xl font-light tracking-tight text-[#706C64] max-w-2xl leading-relaxed"
+            className="mt-10 text-xl sm:text-2xl text-[#86868B] font-light tracking-tight leading-relaxed max-w-2xl"
           >
             Acreditamos que grandes empresas não surgem de grandes ideias. Elas surgem da disciplina de construir todos os dias.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-16 flex flex-col sm:flex-row items-center gap-6">
+          <motion.div variants={fadeUp} className="mt-14 flex flex-col sm:flex-row items-center gap-5">
             <Link
               to="/atlas"
-              className="px-10 py-5 bg-[#0F0E0C] text-[#FAF8F5] rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-[#1A1815] transition-all hover:scale-[1.02] duration-500"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
-              Conheça o Atlas
+              <span>Conheça o Atlas</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
             <a
               href="#manifesto"
-              className="px-10 py-5 bg-transparent text-[#0F0E0C] border border-[#0F0E0C]/10 rounded-full text-xs font-medium tracking-[0.2em] uppercase hover:bg-[#0F0E0C]/5 transition-colors duration-500"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
             >
               Nosso Manifesto
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Hero Image */}
-          <motion.div 
+        <motion.div 
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-7xl mx-auto mt-32 h-[50vh] md:h-[75vh] rounded-2xl overflow-hidden relative shadow-2xl"
+          className="w-full max-w-7xl mx-auto mt-24 h-[50vh] md:h-[65vh] rounded-3xl overflow-hidden relative border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-xl"
         >
           <LazyImage
             src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2500&auto=format&fit=crop"
@@ -94,20 +108,21 @@ export default function Company() {
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          02. QUEM SOMOS
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-24 items-center">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10 border-t border-[#1D1D1F]/10">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
+            className="lg:col-span-6"
           >
-            <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C] leading-[1.1] mb-8">
+            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+              Capítulo II · Visão
+            </span>
+            <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F] leading-[1.08]">
               Uma empresa brasileira. <br />
-              <span className="italic text-[#8C7355]">Uma visão global.</span>
+              <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">Uma visão global.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -115,7 +130,7 @@ export default function Company() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="space-y-6 text-lg md:text-xl font-light tracking-wide text-[#706C64] leading-relaxed border-l border-[#0F0E0C]/10 pl-8 md:pl-12"
+            className="lg:col-span-6 space-y-6 text-lg sm:text-xl font-light text-[#86868B] leading-relaxed border-l border-[#1D1D1F]/10 pl-8 md:pl-12"
           >
             <p>
               A Fifteen Miles nasceu no Brasil, mas foi criada pensando em competir com empresas do mundo inteiro.
@@ -127,67 +142,40 @@ export default function Company() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          03. NOSSA ORIGEM
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 bg-[#FAF8F5]">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.span
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#8C7355] block mb-8"
-          >
-            A Origem Real
-          </motion.span>
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C] leading-tight mb-12"
-          >
+      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10 text-center">
+        <div className="max-w-4xl mx-auto">
+          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+            Capítulo III · A Origem Real
+          </span>
+          <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F] leading-[1.1] mb-8">
             O Atlas nasceu para resolver <br /> problemas reais.
-          </motion.h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-xl md:text-2xl font-light tracking-wide text-[#706C64] leading-relaxed max-w-3xl mx-auto mb-12"
-          >
+          </h2>
+          <p className="text-lg sm:text-xl font-light text-[#86868B] leading-relaxed mb-8">
             Foi inicialmente concebido e utilizado no dia a dia da Eletra. Conforme operávamos, percebemos rapidamente que o caos de sistemas fragmentados não era exclusividade de uma única empresa — era o fardo de milhares.
-          </motion.p>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-xl md:text-2xl font-light tracking-wide text-[#0F0E0C] italic"
-          >
+          </p>
+          <p className="font-[Fraunces] italic text-2xl text-[#1D1D1F] font-light">
             Então decidimos transformar aquela solução interna em um produto definitivo.
-          </motion.p>
+          </p>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          04. O QUE ACREDITAMOS
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-72 px-6 max-w-7xl mx-auto">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="mb-32 text-center"
+          className="mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C]">
+          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+            Capítulo IV · Premissas
+          </span>
+          <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F]">
             O que acreditamos
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+        <div className="grid md:grid-cols-2 gap-6">
           {[
             "Não acreditamos em software descartável.",
             "Não acreditamos em complexidade desnecessária.",
@@ -200,10 +188,10 @@ export default function Company() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
-              transition={{ delay: i * 0.1 }}
-              className="p-12 bg-[#FAF8F5] border border-[#0F0E0C]/5 rounded-3xl flex items-center justify-center min-h-[220px] text-center shadow-[0_10px_30px_rgb(0,0,0,0.02)]"
+              transition={{ delay: i * 0.08 }}
+              className="p-10 bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-3xl flex items-center justify-center min-h-[220px] text-center shadow-sm"
             >
-              <p className="text-2xl md:text-3xl font-light tracking-tight text-[#0F0E0C] leading-snug">
+              <p className="font-[Inter] text-2xl sm:text-3xl font-light tracking-tight text-[#1D1D1F] leading-snug">
                 {text}
               </p>
             </motion.div>
@@ -211,63 +199,41 @@ export default function Company() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          05. O NOME "FIFTEEN MILES"
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 w-full bg-[#0F0E0C] text-[#FAF8F5] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(140,115,85,0.15)_0%,_transparent_70%)]" />
+      <section className="py-32 sm:py-48 px-6 sm:px-12 w-full bg-[#1D1D1F] text-white relative overflow-hidden z-10">
+        <div className="absolute inset-0 bg-black" />
         <div className="max-w-4xl mx-auto relative z-10 text-center">
-          <motion.span
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#C5A059] block mb-8"
-          >
-            A Identidade
-          </motion.span>
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-5xl md:text-7xl font-light tracking-tighter text-white mb-12"
-          >
+          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+            Capítulo V · Identidade
+          </span>
+          <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-white mb-8">
             Por que Fifteen Miles?
-          </motion.h2>
-          <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeUp}
-            className="text-xl md:text-3xl font-light tracking-wide text-[#A8A399] leading-relaxed"
-          >
+          </h2>
+          <p className="text-lg sm:text-2xl font-light tracking-wide text-[#A8A399] leading-relaxed">
             O nome carrega a essência da jornada, da distância percorrida com perseverança e da ideia inegociável de progresso contínuo rumo ao longo prazo. Não é sobre velocidade explosiva; é sobre constância inabalável na construção.
-          </motion.p>
+          </p>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          06. O QUE ESTAMOS CONSTRUINDO
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-72 px-6 max-w-7xl mx-auto">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="mb-32 text-center"
+          className="mb-20 text-center"
         >
-          <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C]">
+          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+            Capítulo VI · Ecossistema
+          </span>
+          <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F]">
             O que estamos construindo
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {[
             { name: "Atlas", desc: "O sistema operacional empresarial unificado." },
             { name: "Hermes", desc: "Camada de comunicação e fluxos em tempo real." },
-            { name: "Athena", desc: "Inteligência contextual nativa para operações corporativas." },
             { name: "Marketplace", desc: "Ecossistema aberto de extensões e módulos especializados." },
             { name: "IA", desc: "Automação cognitiva integrada diretamente aos processos." },
             { name: "Ecossistema", desc: "Uma visão unificada e perfeitamente integrada para o futuro." }
@@ -278,36 +244,34 @@ export default function Company() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
-              transition={{ delay: i * 0.1 }}
-              className="p-12 bg-[#FAF8F5] border border-[#0F0E0C]/5 rounded-3xl flex flex-col justify-between min-h-[260px]"
+              transition={{ delay: i * 0.08 }}
+              className="p-8 bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-3xl flex flex-col justify-between min-h-[240px]"
             >
-              <span className="text-xs font-medium tracking-[0.3em] uppercase text-[#8C7355]">Módulo 0{i+1}</span>
+              <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B]">Módulo 0{i+1}</span>
               <div>
-                <h3 className="text-2xl font-light tracking-tight text-[#0F0E0C] mb-3">{item.name}</h3>
-                <p className="text-sm font-light tracking-wide text-[#706C64] leading-relaxed">{item.desc}</p>
+                <h3 className="font-[Inter] text-2xl font-medium tracking-tight text-[#1D1D1F] mb-2">{item.name}</h3>
+                <p className="text-sm font-light text-[#86868B] leading-relaxed">{item.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          07. NOSSA CULTURA & COMO TRABALHAMOS
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 bg-[#FAF8F5]">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-32 mb-40">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeUp}
             >
-              <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C] leading-[1.1] mb-8">
+              <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo VII · Cultura</span>
+              <h2 className="font-[Inter] text-4xl sm:text-5xl font-medium tracking-tight text-[#1D1D1F] leading-[1.1] mb-6">
                 Empresas são feitas <br />
-                <span className="italic text-[#8C7355]">de pessoas.</span>
+                <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">de pessoas.</span>
               </h2>
-              <p className="text-lg font-light tracking-wide text-[#706C64] leading-relaxed">
+              <p className="text-base sm:text-lg font-light text-[#86868B] leading-relaxed">
                 Toda decisão importante é discutida coletivamente. A melhor ideia sempre vence, independentemente de quem a propôs. Não existe ego individual; existe a obsessão compartilhada por construir algo extraordinário.
               </p>
             </motion.div>
@@ -316,15 +280,15 @@ export default function Company() {
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeUp}
-              className="flex flex-col justify-center border-l border-[#0F0E0C]/10 pl-8 md:pl-12"
+              className="border-l border-[#1D1D1F]/10 pl-8 md:pl-12 flex flex-col justify-center"
             >
-              <h3 className="text-2xl font-light tracking-tight text-[#0F0E0C] mb-4">Como trabalhamos</h3>
-              <p className="text-base font-light tracking-wide text-[#706C64] leading-relaxed mb-8">
+              <h3 className="font-[Inter] text-2xl font-medium tracking-tight text-[#1D1D1F] mb-3">Como trabalhamos</h3>
+              <p className="text-sm sm:text-base font-light text-[#86868B] leading-relaxed mb-6">
                 Da concepção à entrega, mantemos um fluxo estrito de rigor conceitual e validação contínua.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2.5">
                 {["Problema", "Pesquisa", "Discussão", "Arquitetura", "Produto", "Validação", "Evolução"].map((step, idx) => (
-                  <span key={step} className="px-5 py-2.5 bg-white border border-[#0F0E0C]/5 rounded-full text-xs font-light tracking-widest uppercase text-[#706C64]">
+                  <span key={step} className="px-4 py-2 bg-white border border-[#1D1D1F]/10 rounded-full font-[JetBrains_Mono] text-[10px] tracking-wider uppercase text-[#86868B]">
                     0{idx+1}. {step}
                   </span>
                 ))}
@@ -334,17 +298,14 @@ export default function Company() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          08. NOSSO COMPROMISSO & VALORES
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-72 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-32">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-20">
           <motion.h2
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C] mb-6"
+            className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F] mb-4"
           >
             Projetado para durar décadas.
           </motion.h2>
@@ -353,13 +314,13 @@ export default function Company() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="text-lg font-light tracking-wide text-[#706C64] max-w-2xl mx-auto"
+            className="text-base sm:text-lg font-light text-[#86868B] max-w-2xl mx-auto"
           >
             Construímos com a mesma paciência necessária para criar algo que continuará relevante daqui a vinte anos.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
             { title: "Pensamento de Longo Prazo", desc: "Decisões orientadas pelo impacto futuro e pela sustentabilidade duradoura da arquitetura." },
             { title: "Excelência Antes da Velocidade", desc: "Preferimos fazer certo uma única vez a ter que reconstruir apressadamente depois." },
@@ -373,37 +334,35 @@ export default function Company() {
               whileInView="visible"
               viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
-              transition={{ delay: i * 0.1 }}
-              className="p-10 bg-[#FAF8F5] border border-[#0F0E0C]/5 rounded-3xl flex flex-col justify-between"
+              transition={{ delay: i * 0.08 }}
+              className="p-8 bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-3xl flex flex-col justify-between"
             >
-              <span className="text-xs font-light tracking-widest text-[#8C7355] block mb-6">0{i+1}</span>
+              <span className="font-[JetBrains_Mono] text-xs text-[#86868B] tracking-widest block mb-6">0{i+1}</span>
               <div>
-                <h3 className="text-2xl font-light tracking-tight text-[#0F0E0C] mb-3">{val.title}</h3>
-                <p className="text-sm font-light tracking-wide text-[#706C64] leading-relaxed">{val.desc}</p>
+                <h3 className="font-[Inter] text-xl font-medium tracking-tight text-[#1D1D1F] mb-2">{val.title}</h3>
+                <p className="text-sm font-light text-[#86868B] leading-relaxed">{val.desc}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          09. HOJE & AMANHÃ
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 bg-[#FAF8F5]">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-32">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
+            className="p-8 sm:p-12 bg-white border border-[#1D1D1F]/10 rounded-3xl"
           >
-            <span className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#8C7355] block mb-6">O Presente</span>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-[#0F0E0C] mb-8">Hoje.</h2>
-            <ul className="space-y-6 text-lg font-light tracking-wide text-[#706C64]">
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Empresa fundada recentemente</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Primeiro produto em desenvolvimento contínuo</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Primeiros clientes corporativos e validações reais</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Estruturação de fundamentos e marca</li>
+            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">O Presente</span>
+            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-6">Hoje.</h2>
+            <ul className="space-y-4 text-base sm:text-lg font-light text-[#86868B]">
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Empresa fundada recentemente</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Primeiro produto em desenvolvimento contínuo</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Primeiros clientes corporativos e validações reais</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Estruturação de fundamentos e marca</li>
             </ul>
           </motion.div>
 
@@ -412,65 +371,61 @@ export default function Company() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
+            className="p-8 sm:p-12 bg-white border border-[#1D1D1F]/10 rounded-3xl"
           >
-            <span className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#8C7355] block mb-6">O Futuro</span>
-            <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-[#0F0E0C] mb-8">Amanhã.</h2>
-            <ul className="space-y-6 text-lg font-light tracking-wide text-[#706C64]">
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Empresas inteiras operando sobre o Atlas</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Lançamento do ecossistema e Marketplace</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> IA nativa integrada aos processos do dia a dia</li>
-              <li className="flex items-center gap-4"><div className="w-1.5 h-1.5 bg-[#8C7355] rounded-full" /> Expansão internacional estruturada</li>
+            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">O Futuro</span>
+            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-6">Amanhã.</h2>
+            <ul className="space-y-4 text-base sm:text-lg font-light text-[#86868B]">
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Empresas inteiras operando sobre o Atlas</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Lançamento do ecossistema e Marketplace</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> IA nativa integrada aos processos do dia a dia</li>
+              <li className="flex items-center gap-3"><div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full" /> Expansão internacional estruturada</li>
             </ul>
           </motion.div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          10. NOSSO MANIFESTO (EXCERTO)
-      ═══════════════════════════════════════════════════ */}
-      <section id="manifesto" className="py-40 md:py-72 px-6 max-w-5xl mx-auto text-center">
+      <section id="manifesto" className="py-32 sm:py-48 px-6 sm:px-12 max-w-5xl mx-auto text-center relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="space-y-16"
+          className="space-y-12"
         >
-          <motion.span variants={fadeUp} className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#8C7355] block">
+          <motion.span variants={fadeUp} className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block">
             Nosso Manifesto
           </motion.span>
-          <motion.p variants={fadeUp} className="text-3xl md:text-5xl font-light tracking-tight text-[#0F0E0C] leading-snug">
+          <motion.p variants={fadeUp} className="font-[Inter] text-3xl sm:text-5xl font-light tracking-tight text-[#1D1D1F] leading-snug">
             Não seguimos tendências. Construímos infraestrutura.
           </motion.p>
-          <motion.p variants={fadeUp} className="text-3xl md:text-5xl font-light tracking-tight text-[#0F0E0C] leading-snug">
+          <motion.p variants={fadeUp} className="font-[Inter] text-3xl sm:text-5xl font-light tracking-tight text-[#1D1D1F] leading-snug">
             Não perseguimos velocidade efêmera. Perseguimos excelência estrutural.
           </motion.p>
-          <motion.p variants={fadeUp} className="text-3xl md:text-5xl font-light tracking-tight text-[#0F0E0C] leading-snug">
+          <motion.p variants={fadeUp} className="font-[Inter] text-3xl sm:text-5xl font-light tracking-tight text-[#1D1D1F] leading-snug">
             Não queremos lançar dezenas de produtos. Queremos construir poucos produtos extraordinários.
           </motion.p>
         </motion.div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          11. TIME
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-64 px-6 bg-[#FAF8F5]">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="mb-32 text-center"
+            className="mb-20 text-center"
           >
-            <h2 className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C]">
+            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Liderança</span>
+            <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F]">
               Quem constrói.
             </h2>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { name: "Nathanael Secundo Cardoso", role: "Founder & CEO", desc: "Responsável por produto, arquitetura e visão geral da empresa." },
+              { name: "Nathanael", role: "Founder & CEO", desc: "Responsável por produto, arquitetura e visão geral da empresa." },
               { name: "Gabryel", role: "CFO & CBO", desc: "Estratégia financeira, operações e expansão de negócios." },
               { name: "Arthur", role: "Senior Software Engineer", desc: "Engenharia de sistemas, performance e robustez técnica." },
               { name: "Vinicius", role: "Senior Software Engineer", desc: "Arquitetura de componentes e experiência de interface." },
@@ -482,85 +437,73 @@ export default function Company() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
-                transition={{ delay: i * 0.1 }}
-                className="p-10 bg-white border border-[#0F0E0C]/5 rounded-3xl flex flex-col justify-between shadow-[0_10px_30px_rgb(0,0,0,0.02)]"
+                transition={{ delay: i * 0.08 }}
+                className="p-8 bg-white border border-[#1D1D1F]/10 rounded-3xl flex flex-col justify-between shadow-sm"
               >
                 <div>
-                  <span className="text-xs font-medium tracking-[0.2em] uppercase text-[#8C7355] block mb-4">{member.role}</span>
-                  <h3 className="text-2xl font-light tracking-tight text-[#0F0E0C] mb-3">{member.name}</h3>
+                  <span className="font-[JetBrains_Mono] text-xs tracking-[0.2em] uppercase text-[#86868B] block mb-3">{member.role}</span>
+                  <h3 className="font-[Inter] text-2xl font-medium tracking-tight text-[#1D1D1F] mb-2">{member.name}</h3>
                 </div>
-                <p className="text-sm font-light tracking-wide text-[#706C64] leading-relaxed mt-6 border-t border-[#0F0E0C]/5 pt-6">{member.desc}</p>
+                <p className="text-sm font-light text-[#86868B] leading-relaxed mt-6 border-t border-[#1D1D1F]/10 pt-4">{member.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          12. ESTAMOS APENAS COMEÇANDO & CTA FINAL
-      ═══════════════════════════════════════════════════ */}
-      <section className="py-40 md:py-72 px-6 flex flex-col items-center justify-center text-center relative">
+      <section className="py-32 sm:py-48 px-6 sm:px-12 flex flex-col items-center justify-center text-center relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="relative z-10 w-full max-w-5xl"
+          className="w-full max-w-4xl flex flex-col items-center"
         >
           <motion.h2
             variants={fadeUp}
-            className="text-4xl md:text-6xl font-light tracking-tighter text-[#0F0E0C] mb-8"
+            className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F] mb-6"
           >
-            Ainda estamos escrevendo <br /> <span className="italic text-[#8C7355]">os primeiros capítulos.</span>
+            Ainda estamos escrevendo <br /> <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">os primeiros capítulos.</span>
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
-            className="text-lg md:text-xl font-light tracking-wide text-[#706C64] max-w-2xl mx-auto leading-relaxed mb-24"
+            className="text-lg sm:text-xl font-light text-[#86868B] max-w-2xl leading-relaxed mb-16"
           >
             A Fifteen Miles ainda é jovem, mas todas as grandes instituições também foram um dia. Estamos construindo com calma, com disciplina e pensando em décadas, não em meses.
           </motion.p>
 
-          <motion.div
-            variants={fadeUp}
-            className="mb-32"
-          >
-            <h3 className="text-3xl md:text-5xl font-light tracking-tighter text-[#0F0E0C] mb-12">
+          <motion.div variants={fadeUp} className="mb-20">
+            <h3 className="font-[Inter] text-3xl sm:text-5xl font-medium tracking-tight text-[#1D1D1F] mb-10">
               Se você acredita que software pode ser melhor, <br />
-              <span className="italic text-[#8C7355]">vamos conversar.</span>
+              <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">vamos conversar.</span>
             </h3>
 
             <Link
               to="/atlas"
-              className="group inline-flex items-center gap-6 px-12 py-6 bg-[#0F0E0C] text-[#FAF8F5] rounded-full transition-all duration-700 hover:shadow-[0_20px_40px_rgba(15,14,12,0.2)] hover:scale-[1.02]"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
-              <span className="text-xs font-medium tracking-[0.2em] uppercase">
-                Conheça o Atlas
-              </span>
-              <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors duration-500">
-                <ArrowRight strokeWidth={1.5} className="w-4 h-4 text-[#FAF8F5] group-hover:translate-x-1 transition-transform duration-500" />
-              </div>
+              <span>Conheça o Atlas</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>
 
-        {/* Footer Minimalista */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5, delay: 0.8 }}
-          className="mt-20 pt-16 flex flex-col items-center gap-4 border-t border-[#0F0E0C]/10 w-full max-w-sm relative z-10"
+          transition={{ duration: 1.2, delay: 0.4 }}
+          className="mt-16 pt-12 flex flex-col items-center gap-2 border-t border-[#1D1D1F]/10 w-full max-w-xs"
         >
-          <span className="text-[10px] font-medium tracking-[0.4em] uppercase text-[#0F0E0C]">
+          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.2em] uppercase font-medium text-[#1D1D1F]">
             Fifteen Miles
           </span>
-          <span className="text-[9px] font-light tracking-[0.3em] uppercase text-[#8C7355]">
+          <span className="font-[JetBrains_Mono] text-[9px] tracking-[0.2em] uppercase text-[#86868B]">
             Institution
           </span>
         </motion.div>
       </section>
-
     </div>
   );
 }

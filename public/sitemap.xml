@@ -4,10 +4,27 @@
     <loc>https://www.fifteenmiles.tech/atlas</loc>
     <lastmod>2026-08-05T20:37:23.943Z</lastmod>
   </url>
+
   <url>
     <loc>https://www.fifteenmiles.tech/blog</loc>
     <lastmod>2026-08-05T20:37:23.944Z</lastmod>
   </url>
+  <url>
+    <loc>https://fifteenmiles.com/blog/construcao-de-software-como-catedrais</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fifteenmiles.com/blog/o-fim-da-era-dos-aplicativos-fragmentados</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fifteenmiles.com/blog/soberania-de-dados-e-memoria-institucional</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <url>
     <loc>https://www.fifteenmiles.tech/careers</loc>
     <lastmod>2026-08-05T20:37:23.944Z</lastmod>

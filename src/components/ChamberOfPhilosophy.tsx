@@ -1,16 +1,9 @@
+'use client';
+
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Terminal, ArrowRight } from "lucide-react";
-
-/** Four registration crop-marks — the same print-room detail used throughout the exhibit. */
-const PlateMarks = () => (
-  <>
-    <span className="absolute -top-px -left-px w-3 h-3 border-t border-l border-[#8C7355]/50" />
-    <span className="absolute -top-px -right-px w-3 h-3 border-t border-r border-[#8C7355]/50" />
-    <span className="absolute -bottom-px -left-px w-3 h-3 border-b border-l border-[#8C7355]/50" />
-    <span className="absolute -bottom-px -right-px w-3 h-3 border-b border-r border-[#8C7355]/50" />
-  </>
-);
 
 const pillars = [
   {
@@ -44,12 +37,11 @@ const commands = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 26, filter: "blur(8px)" },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 1, ease: "easeOut" as const },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -58,12 +50,27 @@ const stagger = {
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
-export const ChamberOfPhilosophy = () => {
-  return (
-    <section className="relative py-36 bg-black text-[#FAF8F5] border-t border-[#8C7355]/30  overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative z-10">
+function useDisplayFonts() {
+  useEffect(() => {
+    if (document.getElementById("fm-type-system")) return;
+    const link = document.createElement("link");
+    link.id = "fm-type-system";
+    link.rel = "stylesheet";
+    link.href =
+      "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap";
+    document.head.appendChild(link );
+  }, []);
+}
 
-        {/* Chapter V: Why Fifteen Miles Exists */}
+export const ChamberOfPhilosophy = () => {
+  useDisplayFonts();
+
+  return (
+    <section className="relative py-32 sm:py-48 bg-black text-white border-t border-white/10 overflow-hidden font-[Inter] selection:bg-white/50">
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.05)_1px,transparent_1px)] [background-size:32px_32px] pointer-events-none" />
+
+      <div className="max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -73,107 +80,103 @@ export const ChamberOfPhilosophy = () => {
         >
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#8C7355]/40 bg-[#1A1815] text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-[JetBrains_Mono] tracking-[0.2em] uppercase text-white/80 mb-8"
           >
             <span>Capítulo V · Por Que Existimos</span>
           </motion.div>
 
           <motion.h2
             variants={fadeUp}
-            className="font-[Raleway] text-5xl sm:text-7xl text-[#FAF8F5] leading-tight font-normal"
+            className="font-[Inter] text-5xl sm:text-7xl lg:text-[5.5rem] tracking-[-0.03em] font-medium leading-[1.05] text-white mb-8"
           >
-            A Filosofia da Permanência.
+            A Filosofia da   
+
+            <span className="font-[Fraunces] italic font-light text-white/40">Permanência.</span>
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
-            className="mt-6 text-lg sm:text-xl text-[#8C8880] font-sans font-light leading-relaxed"
+            className="text-xl sm:text-2xl text-white/60 font-light tracking-tight leading-relaxed"
           >
             A Fifteen Miles não foi criada para lançar um produto de passagem. Foi criada
             para edificar um legado na engenharia de software corporativo.
           </motion.p>
         </motion.div>
 
-        {/* Pillars — read as a colonnade, not a stat grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={stagger}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-32"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-28"
         >
           {pillars.map((item) => (
             <motion.div
               variants={fadeUp}
               key={item.numeral}
-              className="relative p-8 border border-[#8C7355]/25 bg-[#1A1815] engraved-border-dark flex flex-col justify-between"
+              className="relative p-8 border border-white/10 bg-white/[0.02] rounded-3xl flex flex-col justify-between hover:bg-white/[0.04] transition-colors"
             >
-              <PlateMarks />
               <div>
-                <div className="w-8 h-px bg-[#C5A059]/60 mb-6" />
-                <span className="font-serif text-3xl italic text-[#C5A059] block mb-6 font-light">
+                <span className="font-[Fraunces] italic text-4xl text-white/40 block mb-6 font-light">
                   {item.numeral}
                 </span>
-                <h3 className="font-serif text-2xl text-[#FAF8F5] mb-3 font-normal">
+                <h3 className="font-[Inter] text-2xl text-white mb-3 font-medium tracking-tight">
                   {item.title}
                 </h3>
-                <p className="text-xs text-[#8C8880] font-sans font-light leading-relaxed">
+                <p className="text-sm text-white/60 font-light leading-relaxed">
                   {item.desc}
                 </p>
               </div>
-              <div className="mt-8 pt-4 border-t border-[#8C7355]/20 flex items-center justify-between text-[10px] font-sans uppercase tracking-widest text-[#8C8880]">
-                <span>Princípio Fundacional</span>
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40">
+                <span>Princípio</span>
                 <span>Placa V.{item.numeral}</span>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Chapter VI: Engineering Philosophy */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="relative p-10 sm:p-14 border border-[#8C7355]/30 bg-[#161412] engraved-border-dark"
+          className="relative p-8 sm:p-14 border border-white/10 bg-white/[0.02] rounded-3xl"
         >
-          <PlateMarks />
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12">
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 text-[11px] font-sans tracking-[0.2em] uppercase text-[#C5A059] mb-4">
+              <div className="inline-flex items-center gap-2 text-[11px] font-[JetBrains_Mono] tracking-[0.2em] uppercase text-white/60 mb-4">
                 <Terminal className="w-3.5 h-3.5" />
                 <span>Capítulo VI · A Engenharia</span>
               </div>
-              <h3 className="font-serif text-3xl sm:text-4xl text-[#FAF8F5] font-normal mb-4">
+              <h3 className="font-[Inter] text-3xl sm:text-4xl text-white font-medium tracking-tight mb-4">
                 Filosofia de Engenharia Monumental
               </h3>
-              <p className="text-[#8C8880] text-sm leading-relaxed font-light mb-8">
+              <p className="text-white/60 text-lg font-light leading-relaxed mb-8">
                 Arquitetura em primeiro lugar. Tudo o resto é consequência.
               </p>
 
               <Link
                 to="/engineering"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-[#8C7355]/40 bg-[#1E1C18] text-[#FAF8F5] text-xs font-sans uppercase tracking-widest hover:border-[#C5A059] transition-all"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-medium text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-all group shadow-lg"
               >
                 <span>Ver Manifesto de Engenharia</span>
-                <ArrowRight className="w-4 h-4 text-[#C5A059]" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 
-            {/* Prose translated into instrument — a terminal, since this is the engineering chamber */}
-            <div className="w-full lg:w-[22rem] shrink-0 border border-[#8C7355]/20 bg-[#0F0D0B]">
-              <div className="flex items-center gap-1.5 px-4 py-3 border-b border-[#8C7355]/15">
-                <span className="w-2 h-2 rounded-full bg-[#8C7355]/40" />
-                <span className="w-2 h-2 rounded-full bg-[#8C7355]/40" />
-                <span className="w-2 h-2 rounded-full bg-[#8C7355]/40" />
-                <span className="ml-3 font-mono text-[10px] tracking-widest text-[#8C8880]/70 uppercase">
+            <div className="w-full lg:w-[24rem] shrink-0 border border-white/10 bg-[#121216] rounded-2xl overflow-hidden shadow-2xl">
+              <div className="flex items-center gap-1.5 px-4 py-3.5 border-b border-white/10 bg-white/[0.02]">
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <span className="w-2.5 h-2.5 rounded-full bg-white/20" />
+                <span className="ml-3 font-[JetBrains_Mono] text-[10px] tracking-widest text-white/40 uppercase">
                   fifteenmiles.eng
                 </span>
               </div>
-              <div className="p-5 font-mono text-[11.5px] leading-relaxed">
+              <div className="p-6 font-[JetBrains_Mono] text-xs leading-relaxed space-y-2">
                 {commands.map((cmd) => (
-                  <p key={cmd} className="text-[#8C8880]">
-                    <span className="text-[#C5A059]">$</span> {cmd}
+                  <p key={cmd} className="text-white/70">
+                    <span className="text-emerald-400">$</span> {cmd}
                   </p>
                 ))}
               </div>

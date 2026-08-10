@@ -8,15 +8,15 @@ import Seo from "../components/Seo"
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] overflow-x-hidden selection:bg-[#8C7355] selection:text-[#FAF8F5]">
+    <div className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] overflow-x-hidden">
       <Seo title="Fifteen Miles | Built for Decades" description="Fifteen Miles builds configurable enterprise platforms that centralize operations into a single, elegant environment." path="/" />
       {/* 1. Room I: Cinematic Landscape & Pure Headline */}
       <Hero />
 
       <TrustedBy />
 
-      <section className="h-100 flex justify-center items-center bg-black">
-        <h2 className="text-4xl font-semibold max-w-400 text-white p-25 font-[Fraunces]">Uma nova geração de plataformas empresariais. <span className="opacity-50 font-light">Desenvolvido para organizações que desejam centralizar toda a sua operação em um único ambiente, com flexibilidade, governança e inteligência desde a base.</span></h2>
+      <section className="h-100 flex justify-center items-center bg-black selection:bg-white/50">
+        <h2 className="text-3xl font-semibold max-w-400 text-white p-25 font-[Fraunces]">Uma nova geração de plataformas empresariais. <span className="opacity-50 font-light">Desenvolvido para organizações que desejam centralizar toda a sua operação em um único ambiente, com flexibilidade, governança e inteligência desde a base.</span></h2>
       </section>
 
       {/* 2 & 3. Room II, III: Museum Gallery of Software Fragmentation & Monolith */}

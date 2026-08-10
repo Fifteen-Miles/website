@@ -1,36 +1,25 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight, ChevronDown, Component } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import LazyImage from "../components/LazyImage";
 
 export const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <header
-      className={`fixed top-0 bg-black/70 backdrop-blur-md left-0 right-0 z-50 transition-all duration-500 flex justify-center ${
-        scrolled ? "py-2" : "py-5"
-      }`}
+      className='fixed top-0 bg-black left-0 right-0 z-50 flex justify-center py-3'
     >
       <div
-        className='w-full max-w-5xl mx-4 transition-all duration-500 rounded-full' 
+        className='w-full' 
           
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-around">
           <Link to="/" className="flex items-center gap-2 group">
             <LazyImage src="/TopLogo.png" alt="" className="h-5 hover:opacity-80 transition-all duration-500 ease" />
           </Link>
@@ -43,7 +32,7 @@ export const Navbar = () => {
             >
               <button
                 onClick={() => setProductsOpen(!productsOpen)}
-                className={`flex items-center gap-1 text-[12px] font-medium tracking-wide transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 text-[13px] font-medium tracking-wide transition-colors cursor-pointer ${
                   location.pathname.startsWith("/atlas") ||
                   location.pathname.startsWith("/products")
                     ? "text-white"
@@ -57,18 +46,18 @@ export const Navbar = () => {
               <AnimatePresence>
                 {productsOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-60 rounded-2xl bg-[#1D1D1F]/90 border border-white/10 backdrop-blur-3xl shadow-2xl p-2 z-50"
+                    className="absolute top-full flex flex-row py-5 items-center justify-center gap-15 left-1/2 -translate-x-[41%] w-[100vw] bg-black p-2 z-50"
                   >
                     <Link
                       to="/atlas"
                       onClick={() => setProductsOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/10 transition-colors group"
+                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
                     >
-                      <div className="font-medium text-[13px] text-white group-hover:text-[#D4AF37] transition-colors">
+                      <div className="font-medium text-[13px] text-white">
                         Atlas OS
                       </div>
                       <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
@@ -79,7 +68,7 @@ export const Navbar = () => {
                     <Link
                       to="/products"
                       onClick={() => setProductsOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] text-[#86868B] hover:text-white transition-colors"
+                      className="block p-3 rounded-xl hover:bg-white/5 text-[12px] text-[#86868B] hover:text-white transition-colors"
                     >
                       Módulos de Infraestrutura &rarr;
                     </Link>
@@ -90,7 +79,7 @@ export const Navbar = () => {
 
             <Link
               to="/engineering"
-              className={`text-[12px] font-medium tracking-wide transition-colors ${
+              className={`text-[14px] font-medium tracking-wide transition-colors ${
                 location.pathname === "/engineering"
                   ? "text-white"
                   : "text-[#86868B] hover:text-white"
@@ -106,7 +95,7 @@ export const Navbar = () => {
             >
               <button
                 onClick={() => setCompanyOpen(!companyOpen)}
-                className={`flex items-center gap-1 text-[12px] font-medium tracking-wide transition-colors cursor-pointer ${
+                className={`flex items-center gap-1 text-[14px] font-medium tracking-wide transition-colors cursor-pointer ${
                   location.pathname === "/company" ||
                   location.pathname === "/manifesto"
                     ? "text-white"
@@ -120,25 +109,36 @@ export const Navbar = () => {
               <AnimatePresence>
                 {companyOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-52 rounded-2xl bg-[#1D1D1F]/90 border border-white/10 backdrop-blur-3xl shadow-2xl p-2 z-50"
+                    className="absolute top-full flex flex-row py-5 items-center justify-center gap-15 left-1/2 -translate-x-[51.4%] w-[100vw] bg-black p-2 z-50"
                   >
+
                     <Link
                       to="/company"
                       onClick={() => setCompanyOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] tracking-wide text-white transition-colors"
+                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
                     >
-                      Nossa Instituição
+                      <div className="font-medium text-[13px] text-white">
+                        Nossa Instituição
+                      </div>
+                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
+                        Conheça mais sobre a Fifteen Miles.
+                      </p>
                     </Link>
                     <Link
                       to="/manifesto"
                       onClick={() => setCompanyOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/10 text-[12px] tracking-wide text-white transition-colors"
+                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
                     >
-                      O Manifesto
+                      <div className="font-medium text-[13px] text-white">
+                        Nosso Manifesto
+                      </div>
+                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
+                        Conheça mais sobre a Visão.
+                      </p>
                     </Link>
                   </motion.div>
                 )}
@@ -147,7 +147,7 @@ export const Navbar = () => {
 
             <Link
               to="/blog"
-              className={`text-[12px] font-medium tracking-wide transition-colors ${
+              className={`text-[14px] font-medium tracking-wide transition-colors ${
                 location.pathname === "/blog"
                   ? "text-white"
                   : "text-[#86868B] hover:text-white"
@@ -158,7 +158,7 @@ export const Navbar = () => {
 
             <Link
               to="/contact"
-              className={`text-[12px] font-medium tracking-wide transition-colors ${
+              className={`text-[14px] font-medium tracking-wide transition-colors ${
                 location.pathname === "/contact"
                   ? "text-white"
                   : "text-[#86868B] hover:text-white"
@@ -171,7 +171,7 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center">
             <Button
               onClick={() => setMobileMenuOpen(false)}
-              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black rounded-full overflow-hidden transition-all duration-300"
+              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black overflow-hidden transition-all duration-300"
             >
               <a
                 href="https://atlas.fifteenmiles.tech"

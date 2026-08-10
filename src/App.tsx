@@ -17,6 +17,9 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import AConstrucaoDeSoftwareComoCatedrais from "./pages/blog/ConstrucaoCatedral";
+import OFimDaEraDosAplicativosFragmentados from "./pages/blog/OFimDaEraDosAplicativosFragmentados";
+import SoberaniaDeDadosEMemoriaInstitucional from "./pages/blog/SoberaniaDeDadosEMemoriaInstitucional";
 
 import "./App.css";
 
@@ -58,6 +61,9 @@ const App = () => {
           <Route path="/products" element={<Products />} />
           <Route path="/engineering" element={<Engineering />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/construcao-de-software-como-catedrais" element={<AConstrucaoDeSoftwareComoCatedrais />} />
+          <Route path="/blog/o-fim-da-era-dos-aplicativos-fragmentados" element={<OFimDaEraDosAplicativosFragmentados />} />
+          <Route path="/blog/soberania-de-dados-e-memoria-institucional" element={<SoberaniaDeDadosEMemoriaInstitucional />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
