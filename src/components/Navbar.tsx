@@ -1,264 +1,124 @@
-import { useState } from "react";
+'use client';
+
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LazyImage from "../components/LazyImage";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
-  const [companyOpen, setCompanyOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const location = useLocation();
 
+  useEffect(() => {
+    setActiveMenu(null);
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
   return (
-    <header
-      className='fixed top-0 bg-black left-0 right-0 z-50 flex justify-center py-3'
-    >
-      <div
-        className='w-full' 
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        {/* Logo */}
+        <Link to="/" className="flex items-center">
+          <LazyImage src="/TopLogo.png" alt="Fifteen Miles" className="h-5 brightness-0 invert" />
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center h-full">
+          {[
+            { id: "platform", label: "Plataforma" },
+            { id: "company", label: "Instituição" }
+          ].map((item) => (
+            <button
+              key={item.id}
+              className="h-full px-6 flex items-center gap-1.5 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors"
+              onMouseEnter={() => setActiveMenu(item.id)}
+            >
+              {item.label}
+              <ChevronDown className={`w-3 h-3 transition-transform ${activeMenu === item.id ? "rotate-180" : ""}`} />
+            </button>
+          ))}
           
-      >
-        <div className="flex items-center justify-around">
-          <Link to="/" className="flex items-center gap-2 group">
-            <LazyImage src="/TopLogo.png" alt="" className="h-5 hover:opacity-80 transition-all duration-500 ease" />
-          </Link>
+          <Link to="/engineering" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Engenharia</Link>
+          <Link to="/blog" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Discursos</Link>
+          <Link to="/contact" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Contato</Link>
+        </nav>
 
-          <nav className="hidden md:flex items-center gap-8">
-            <div
-              className="relative"
-              onMouseEnter={() => setProductsOpen(true)}
-              onMouseLeave={() => setProductsOpen(false)}
-            >
-              <button
-                onClick={() => setProductsOpen(!productsOpen)}
-                className={`flex items-center gap-1 text-[13px] font-medium tracking-wide transition-colors cursor-pointer ${
-                  location.pathname.startsWith("/atlas") ||
-                  location.pathname.startsWith("/products")
-                    ? "text-white"
-                    : "text-[#86868B] hover:text-white"
-                }`}
-              >
-                Plataforma
-                <ChevronDown className="w-3 h-3 opacity-70" />
-              </button>
-
-              <AnimatePresence>
-                {productsOpen && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full flex flex-row py-5 items-center justify-center gap-15 left-1/2 -translate-x-[41%] w-[100vw] bg-black p-2 z-50"
-                  >
-                    <Link
-                      to="/atlas"
-                      onClick={() => setProductsOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
-                    >
-                      <div className="font-medium text-[13px] text-white">
-                        Atlas OS
-                      </div>
-                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
-                        Sistema Operacional Empresarial
-                      </p>
-                    </Link>
-                    <div className="my-1 border-t border-white/5" />
-                    <Link
-                      to="/products"
-                      onClick={() => setProductsOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/5 text-[12px] text-[#86868B] hover:text-white transition-colors"
-                    >
-                      Módulos de Infraestrutura &rarr;
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <Link
-              to="/engineering"
-              className={`text-[14px] font-medium tracking-wide transition-colors ${
-                location.pathname === "/engineering"
-                  ? "text-white"
-                  : "text-[#86868B] hover:text-white"
-              }`}
-            >
-              Engenharia
-            </Link>
-
-            <div
-              className="relative"
-              onMouseEnter={() => setCompanyOpen(true)}
-              onMouseLeave={() => setCompanyOpen(false)}
-            >
-              <button
-                onClick={() => setCompanyOpen(!companyOpen)}
-                className={`flex items-center gap-1 text-[14px] font-medium tracking-wide transition-colors cursor-pointer ${
-                  location.pathname === "/company" ||
-                  location.pathname === "/manifesto"
-                    ? "text-white"
-                    : "text-[#86868B] hover:text-white"
-                }`}
-              >
-                Instituição
-                <ChevronDown className="w-3 h-3 opacity-70" />
-              </button>
-
-              <AnimatePresence>
-                {companyOpen && (
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full flex flex-row py-5 items-center justify-center gap-15 left-1/2 -translate-x-[51.4%] w-[100vw] bg-black p-2 z-50"
-                  >
-
-                    <Link
-                      to="/company"
-                      onClick={() => setCompanyOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
-                    >
-                      <div className="font-medium text-[13px] text-white">
-                        Nossa Instituição
-                      </div>
-                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
-                        Conheça mais sobre a Fifteen Miles.
-                      </p>
-                    </Link>
-                    <Link
-                      to="/manifesto"
-                      onClick={() => setCompanyOpen(false)}
-                      className="block p-3 rounded-xl hover:bg-white/5 transition-colors group"
-                    >
-                      <div className="font-medium text-[13px] text-white">
-                        Nosso Manifesto
-                      </div>
-                      <p className="text-[11px] text-[#86868B] mt-1 font-light tracking-wide">
-                        Conheça mais sobre a Visão.
-                      </p>
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
-            <Link
-              to="/blog"
-              className={`text-[14px] font-medium tracking-wide transition-colors ${
-                location.pathname === "/blog"
-                  ? "text-white"
-                  : "text-[#86868B] hover:text-white"
-              }`}
-            >
-              Discursos
-            </Link>
-
-            <Link
-              to="/contact"
-              className={`text-[14px] font-medium tracking-wide transition-colors ${
-                location.pathname === "/contact"
-                  ? "text-white"
-                  : "text-[#86868B] hover:text-white"
-              }`}
-            >
-              Contato
-            </Link>
-          </nav>
-
-          <div className="hidden md:flex items-center">
-            <Button
-              onClick={() => setMobileMenuOpen(false)}
-              className="group relative w-full flex items-center justify-between px-6 py-2 bg-white text-black overflow-hidden transition-all duration-300"
-            >
-              <a
-                href="https://atlas.fifteenmiles.tech"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="text-[12px] font-semibold tracking-widest uppercase">
-                  Explore Atlas
-                </span>
-              </a>
-            </Button>
-          </div>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-1.5 text-[#F5F5F7] transition-colors"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+        {/* CTA */}
+        <div className="hidden lg:flex items-center">
+          <a href="https://atlas.fifteenmiles.tech" className="text-[12px] uppercase tracking-[0.1em] text-white hover:text-white/70 transition-colors">
+            Explore Atlas
+          </a>
         </div>
+
+        {/* Mobile Trigger */}
+        <button className="lg:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
 
+      {/* Mega Menu Overlay */}
+      <AnimatePresence>
+        {activeMenu && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            onMouseLeave={() => setActiveMenu(null)}
+            className="hidden lg:block absolute left-0 right-0 bg-black border-b border-white/10"
+          >
+            <div className="max-w-5xl mx-auto px-6 py-16 flex gap-16">
+              {/* Highlight Card */}
+              <div className="w-[320px] border border-white/10 rounded-2xl p-8 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-sm font-medium mb-2 uppercase tracking-widest text-white/50">
+                    {activeMenu === "platform" ? "Plataforma" : "Sobre Nós"}
+                  </h3>
+                  <p className="text-xl leading-tight">
+                    {activeMenu === "platform" 
+                      ? "Atlas OS: O sistema operacional corporativo."
+                      : "Fifteen Miles: Rigor, permanência e tecnologia."}
+                  </p>
+                </div>
+                <Link to={activeMenu === "platform" ? "/atlas" : "/company"} className="flex items-center gap-2 mt-8 text-sm text-white/70 hover:text-white">
+                  Saiba mais <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
+
+              {/* Links */}
+              <div className="flex-1 grid grid-cols-2 gap-8">
+                {activeMenu === "platform" ? (
+                  <>
+                    <MenuColumn title="Módulos" links={[{t: "Atlas OS", l: "/atlas"}, {t: "Catálogo", l: "/products"}]} />
+                    <MenuColumn title="Engenharia" links={[{t: "Arquitetura", l: "/engineering"}, {t: "Segurança", l: "/engineering"}]} />
+                  </>
+                ) : (
+                  <>
+                    <MenuColumn title="Empresa" links={[{t: "Nossa História", l: "/company"}, {t: "Manifesto", l: "/manifesto"}]} />
+                    <MenuColumn title="Comunicação" links={[{t: "Blog", l: "/blog"}, {t: "Contato", l: "/contact"}]} />
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-full left-0 right-0 mx-4 mt-2 p-6 rounded-3xl bg-[#1D1D1F]/90 border border-white/10 shadow-2xl backdrop-blur-3xl md:hidden"
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="lg:hidden absolute top-16 left-0 w-full bg-black h-screen p-8"
           >
-            <div className="flex flex-col gap-2">
-              <Link
-                to="/atlas"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Atlas OS
-              </Link>
-              <Link
-                to="/engineering"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Engenharia
-              </Link>
-              <Link
-                to="/company"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Instituição
-              </Link>
-              <Link
-                to="/manifesto"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Manifesto
-              </Link>
-              <Link
-                to="/blog"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Discursos
-              </Link>
-              <Link
-                to="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-3 rounded-xl hover:bg-white/10 text-[14px] font-medium text-white tracking-wide"
-              >
-                Contato
-              </Link>
-
-              <div className="pt-4 mt-2 border-t border-white/10">
-                <a
-                  href="https://atlas.fifteenmiles.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="group w-full flex items-center justify-center gap-2 py-3 rounded-full bg-white text-black text-[12px] font-semibold tracking-wide transition-transform hover:scale-[1.02]"
-                >
-                  Explore Atlas
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
+            <div className="flex flex-col gap-8 text-2xl font-light">
+              <Link to="/atlas" onClick={() => setMobileMenuOpen(false)}>Plataforma</Link>
+              <Link to="/engineering" onClick={() => setMobileMenuOpen(false)}>Engenharia</Link>
+              <Link to="/company" onClick={() => setMobileMenuOpen(false)}>Instituição</Link>
+              <Link to="/blog" onClick={() => setMobileMenuOpen(false)}>Discursos</Link>
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contato</Link>
             </div>
           </motion.div>
         )}
@@ -266,3 +126,16 @@ export const Navbar = () => {
     </header>
   );
 };
+
+const MenuColumn = ({ title, links }: { title: string, links: {t: string, l: string}[] }) => (
+  <div>
+    <h4 className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-6">{title}</h4>
+    <ul className="space-y-4">
+      {links.map((link) => (
+        <li key={link.l}>
+          <Link to={link.l} className="text-md hover:text-white/60 transition-colors">{link.t}</Link>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
