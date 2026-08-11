@@ -83,14 +83,14 @@ export default function Engineering() {
           <motion.div variants={fadeUp} className="mt-14 flex flex-col sm:flex-row items-center gap-5">
             <a
               href="/atlas"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+              className="inline-flex items-center gap-3 px-8 py-3 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
               <span>Conhecer o Atlas</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="#filosofia"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-md bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-md bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
             >
               Nossa filosofia
             </a>
@@ -491,7 +491,7 @@ export default function Engineering() {
           <motion.div variants={fadeUp}>
             <a
               href="/atlas"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+              className="inline-flex items-center gap-3 px-8 py-3 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
               <span>Conhecer o Atlas</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

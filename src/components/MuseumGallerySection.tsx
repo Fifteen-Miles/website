@@ -178,10 +178,10 @@ export const MuseumGallerySection = () => {
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(pillar.id)}
-                className={`px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-md text-xs sm:text-sm font-medium tracking-tight transition-all duration-300 flex items-center gap-2 ${
+                className={`px-4 sm:px-6 py-2 sm:py-2 rounded-md text-xs sm:text-sm font-medium tracking-tight transition-all duration-300 flex items-center gap-2 ${
                   isActive
                     ? "bg-[#1D1D1F] text-white/90 shadow-md"
-                    : "bg-[#F5F5F7] text-[#1D1D1F]/50 hover:bg-[#1D1D1F]/10 hover:text-[#1D1D1F]"
+                    : "bg-[#F5F5F7] text-[#1D1D1F]/50 hover:bg-[#1D1D1F]/10 hover:text-[#1D1D1F]/80"
                 }`}
               >
                 <span>{pillar.tag}</span>
@@ -229,7 +229,7 @@ export const MuseumGallerySection = () => {
                 <div className="flex items-center">
                   <a 
                     href="/company" 
-                    className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-[#1D1D1F] text-white font-medium text-xs sm:text-sm transition-transform hover:scale-105"
+                    className="inline-flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2 rounded-md bg-[#1D1D1F] text-white font-medium text-xs opacity-100 sm:text-sm hover:opacity-80 transition-background duration-200 ease"
                   >
                     <span>Conhecer a Empresa</span>
                     <ArrowRight className="w-4 h-4" />
