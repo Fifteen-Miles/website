@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
+import NotFound from "./pages/NotFound";
 import AConstrucaoDeSoftwareComoCatedrais from "./pages/blog/ConstrucaoCatedral";
 import OFimDaEraDosAplicativosFragmentados from "./pages/blog/OFimDaEraDosAplicativosFragmentados";
 import SoberaniaDeDadosEMemoriaInstitucional from "./pages/blog/SoberaniaDeDadosEMemoriaInstitucional";
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/atlas" element={<Atlas />} />
           <Route path="/manifesto" element={<Manifesto />} />
           <Route path="/philosophy" element={<Company />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
 
