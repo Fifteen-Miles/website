@@ -157,7 +157,7 @@ export const ChamberOfPhilosophy = () => {
 
               <Link
                 to="/engineering"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-medium text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-all group shadow-lg"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-white text-black font-medium text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-all group shadow-lg"
               >
                 <span>Ver Manifesto de Engenharia</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

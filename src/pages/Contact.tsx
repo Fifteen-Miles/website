@@ -225,7 +225,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className="inline-flex items-center justify-center gap-3 w-full py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all shadow-lg group disabled:opacity-50"
+                    className="inline-flex items-center justify-center gap-3 w-full py-4 rounded-xl bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all shadow-lg group disabled:opacity-50"
                   >
                     <span>{status === "submitting" ? "Enviando..." : "Enviar Comunicação"}</span>
                     <Send className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

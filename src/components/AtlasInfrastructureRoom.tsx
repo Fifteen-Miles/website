@@ -94,7 +94,7 @@ export const AtlasInfrastructureRoom = () => {
         >
           <motion.div
             variants={fadeUp}
-            className="relative lg:col-span-8 p-8 sm:p-14 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-3xl flex flex-col justify-between"
+            className="relative lg:col-span-8 p-8 sm:p-14 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-md flex flex-col justify-between"
           >
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -135,7 +135,7 @@ export const AtlasInfrastructureRoom = () => {
           <div className="lg:col-span-4 flex flex-col gap-6">
             <motion.div
               variants={fadeUp}
-              className="relative p-8 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-3xl"
+              className="relative p-8 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-md"
             >
               <div className="flex items-center justify-between mb-4">
                 <Server className="w-6 h-6 text-[#1D1D1F]" />
@@ -154,7 +154,7 @@ export const AtlasInfrastructureRoom = () => {
 
             <motion.div
               variants={fadeUp}
-              className="relative p-8 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-3xl"
+              className="relative p-8 border border-[#1D1D1F]/10 bg-[#F5F5F7] rounded-md"
             >
               <div className="flex items-center justify-between mb-4">
                 <Lock className="w-6 h-6 text-[#1D1D1F]" />
@@ -198,7 +198,7 @@ export const AtlasInfrastructureRoom = () => {
 
           <Link
             to="/atlas"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
           >
             <span>Especificações do Atlas OS</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

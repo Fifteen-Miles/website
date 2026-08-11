@@ -146,14 +146,14 @@ export const HorizonThirtyYearsRoom = () => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all shadow-lg"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all shadow-lg"
             >
               <span>Iniciar Diálogo Institucional</span>
             </Link>
 
             <Link
               to="/atlas"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#1D1D1F]/15 bg-white text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#1D1D1F]/5 transition-all shadow-sm group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-md border border-[#1D1D1F]/15 bg-white text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#1D1D1F]/5 transition-all shadow-sm group"
             >
               <span>Explorar Atlas OS</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

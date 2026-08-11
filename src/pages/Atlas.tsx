@@ -116,15 +116,16 @@ export default function AtlasLanding() {
             className="mt-12 flex flex-col sm:flex-row items-center gap-5"
           >
             <a
-              href="#"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+              href="https://atlas.fifteenmiles.tech/"
+              target="/blank"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
               <span>Conheça o Atlas</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-md bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[#1D1D1F] font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#E8E8ED] transition-colors"
             >
               Solicitar demonstração
             </a>
@@ -539,7 +540,7 @@ export default function AtlasLanding() {
           <motion.div variants={fadeUp} className="mb-20">
             <a
               href="/contact"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
             >
               <span>Solicitar demonstração</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

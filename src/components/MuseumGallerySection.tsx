@@ -108,19 +108,20 @@ export const MuseumGallerySection = () => {
   }, []);
 
   return (
-    <section className="relative w-full bg-white text-[#1D1D1F] py-32 sm:py-48 font-[Inter] selection:bg-black/50 selection:text-white">
-      <div className="relative z-10 max-w-[90rem] mx-auto px-6 sm:px-12 lg:px-20">
+    <section className="relative w-full bg-white text-[#1D1D1F] py-20 sm:py-32 lg:py-48 font-[Inter] selection:bg-black/50 selection:text-white overflow-hidden">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="text-center max-w-4xl mx-auto mb-24 lg:mb-36">
+        {/* Header Section */}
+        <div className="text-center max-w-4xl mx-auto mb-16 sm:mb-24 lg:mb-32">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 mb-6 sm:mb-8"
           >
             <span className="w-2 h-2 rounded-full bg-[#1D1D1F]" />
-            <span className="font-[JetBrains_Mono] text-[11px] tracking-[0.25em] uppercase text-[#1D1D1F]/80 font-medium">
+            <span className="font-[JetBrains_Mono] text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#1D1D1F]/80 font-medium">
               A INSTITUIÇÃO FIFTEEN MILES
             </span>
           </motion.div>
@@ -130,10 +131,10 @@ export const MuseumGallerySection = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="font-[Inter] text-5xl sm:text-7xl lg:text-[5.5rem] tracking-[-0.03em] font-medium leading-[1.05] text-[#1D1D1F] mb-8"
+            className="font-[Inter] text-3xl sm:text-5xl lg:text-7xl tracking-[-0.03em] font-medium leading-[1.1] text-[#1D1D1F] mb-6 sm:mb-8"
           >
             Construindo o futuro do software{" "}
-            <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">
+            <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40 block sm:inline">
               corporativo.
             </span>
           </motion.h2>
@@ -143,42 +144,44 @@ export const MuseumGallerySection = () => {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="text-xl sm:text-2xl text-[#86868B] font-light tracking-tight leading-relaxed max-w-2xl mx-auto"
+            className="text-base sm:text-xl lg:text-2xl text-[#86868B] font-light tracking-tight leading-relaxed max-w-2xl mx-auto px-4 sm:px-0"
           >
             Desenvolvemos infraestrutura digital rigorosa para empresas que buscam estabilidade, segurança e crescimento estruturado.
           </motion.p>
         </div>
 
+        {/* Stats Grid */}
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-8 py-12 border-y border-[#1D1D1F]/10 mb-28"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 py-8 sm:py-12 border-y border-[#1D1D1F]/10 mb-16 sm:mb-24"
         >
           {companyStats.map((stat, idx) => (
-            <div key={idx} className="text-center lg:text-left">
-              <div className="font-[JetBrains_Mono] text-xs tracking-widest text-[#86868B] uppercase mb-2">
+            <div key={idx} className="text-center md:text-left">
+              <div className="font-[JetBrains_Mono] text-[10px] sm:text-xs tracking-widest text-[#86868B] uppercase mb-1 sm:mb-2">
                 {stat.label}
               </div>
-              <div className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F]">
+              <div className="font-[Inter] text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-[#1D1D1F]">
                 {stat.value}
               </div>
             </div>
           ))}
         </motion.div>
 
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
+        {/* Tabs navigation */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 sm:mb-16">
           {pillars.map((pillar) => {
             const isActive = pillar.id === activeTab;
             return (
               <button
                 key={pillar.id}
                 onClick={() => setActiveTab(pillar.id)}
-                className={`px-6 py-3.5 rounded-full text-sm font-medium tracking-tight transition-all duration-300 flex items-center gap-2.5 ${
+                className={`px-4 sm:px-6 py-2.5 sm:py-3.5 rounded-md text-xs sm:text-sm font-medium tracking-tight transition-all duration-300 flex items-center gap-2 ${
                   isActive
-                    ? "bg-[#1D1D1F] text-white shadow-md scale-105"
-                    : "bg-[#F5F5F7] text-[#1D1D1F]/70 hover:bg-[#1D1D1F]/10 hover:text-[#1D1D1F]"
+                    ? "bg-[#1D1D1F] text-white/90 shadow-md"
+                    : "bg-[#F5F5F7] text-[#1D1D1F]/50 hover:bg-[#1D1D1F]/10 hover:text-[#1D1D1F]"
                 }`}
               >
                 <span>{pillar.tag}</span>
@@ -187,8 +190,9 @@ export const MuseumGallerySection = () => {
           })}
         </div>
 
-        <div className="bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-3xl p-8 sm:p-14 lg:p-20 relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#1D1D1F]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
+        {/* Content Box */}
+        <div className="bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-md p-6 sm:p-10 lg:p-16 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 sm:w-96 sm:h-96 bg-gradient-to-bl from-[#1D1D1F]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
           <AnimatePresence mode="wait">
             <motion.div
@@ -197,50 +201,53 @@ export const MuseumGallerySection = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center relative z-10"
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10"
             >
-              <div>
-                <div className="inline-flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-white border border-[#1D1D1F]/10 flex items-center justify-center shadow-sm">
-                    <IconComponent strokeWidth={1.5} className="w-5 h-5 text-[#1D1D1F]" />
+              {/* Text Info (Takes up ~7 cols on large screens) */}
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-3 mb-4 sm:mb-6">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white border border-[#1D1D1F]/10 flex items-center justify-center shadow-sm">
+                    <IconComponent strokeWidth={1.5} className="w-4 h-4 sm:w-5 sm:h-5 text-[#1D1D1F]" />
                   </div>
-                  <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] font-medium">
+                  <span className="font-[JetBrains_Mono] text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#86868B] font-medium">
                     {currentPillar.tag}
                   </span>
                 </div>
 
-                <h3 className="font-[Inter] text-3xl sm:text-5xl font-medium text-[#1D1D1F] tracking-tight mb-4 leading-[1.1]">
+                <h3 className="font-[Inter] text-2xl sm:text-3xl lg:text-4xl font-medium text-[#1D1D1F] tracking-tight mb-3 sm:mb-4 leading-snug">
                   {currentPillar.title}
                 </h3>
 
-                <h4 className="font-[Fraunces] italic font-light text-xl sm:text-2xl text-[#1D1D1F]/60 mb-6">
+                <h4 className="font-[Fraunces] italic font-light text-lg sm:text-xl text-[#1D1D1F]/60 mb-4 sm:mb-6">
                   {currentPillar.subtitle}
                 </h4>
 
-                <p className="text-[#86868B] text-lg font-light leading-relaxed mb-10 tracking-tight max-w-xl">
+                <p className="text-[#86868B] text-base sm:text-lg font-light leading-relaxed mb-8 tracking-tight">
                   {currentPillar.description}
                 </p>
 
-                <div className="flex items-center gap-4">
-                  <a href="/company" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#1D1D1F] text-white font-medium text-sm transition-transform hover:scale-105">
+                <div className="flex items-center">
+                  <a 
+                    href="/company" 
+                    className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-full bg-[#1D1D1F] text-white font-medium text-xs sm:text-sm transition-transform hover:scale-105"
+                  >
                     <span>Conhecer a Empresa</span>
                     <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-4">
+              {/* Metrics Grid (Takes up ~5 cols on large screens) */}
+              <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                 {currentPillar.metrics.map((m, idx) => (
                   <div
                     key={idx}
-                    className={`bg-white border border-[#1D1D1F]/10 p-6 sm:p-8 rounded-2xl shadow-sm flex flex-col justify-between ${
-                      idx === 2 ? "sm:col-span-2" : ""
-                    }`}
+                    className="bg-white border border-[#1D1D1F]/10 p-5 sm:p-6 rounded-xl sm:rounded-2xl shadow-sm flex flex-col justify-between"
                   >
-                    <div className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-[#86868B] mb-3">
+                    <div className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-[#86868B] mb-2">
                       {m.label}
                     </div>
-                    <div className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F]">
+                    <div className="font-[Inter] text-2xl sm:text-3xl font-medium tracking-tight text-[#1D1D1F]">
                       {m.value}
                     </div>
                   </div>
