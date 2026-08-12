@@ -90,11 +90,11 @@ export const Hero = () => {
           transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="font-[Inter] text-[2rem] sm:text-5xl md:text-6xl lg:text-[6rem] mt-10 font-medium tracking-[-0.045em] text-white max-w-[100%] sm:max-w-5xl leading-[1.02] sm:leading-[0.94]"
         >
-          O sistema de desenvolvimento de produtos
+          O sistema operacional de produtividade
           <br className="hidden sm:block" />
           {" "}para{" "}
           <span className="font-[Fraunces] italic font-light text-white/60">
-            equipes e agentes
+            empresas e equipes.
           </span>
           .
         </motion.h1>
