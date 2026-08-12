@@ -16,7 +16,7 @@ export default function Home() {
       <TrustedBy />
 
       <section className="h-100 flex justify-center items-center bg-black selection:bg-white/50">
-        <h2 className="text-3xl font-semibold max-w-400 text-white p-25 font-[Fraunces]">Uma nova geração de plataformas empresariais. <span className="opacity-50 font-light">Desenvolvido para organizações que desejam centralizar toda a sua operação em um único ambiente, com flexibilidade, governança e inteligência desde a base.</span></h2>
+        <h2 className="sm:text-[5vw] md:text-3xl font-semibold text-white p-[25vw] font-[Fraunces]">Uma nova geração de plataformas empresariais. <span className="opacity-50 font-light">Desenvolvido para organizações que desejam centralizar toda a sua operação em um único ambiente, com flexibilidade, governança e inteligência desde a base.</span></h2>
       </section>
 
       {/* 2 & 3. Room II, III: Museum Gallery of Software Fragmentation & Monolith */}
