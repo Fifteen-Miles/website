@@ -3,7 +3,7 @@ import LazyImage from "./LazyImage";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white border-t border-[#8C7355]/20 pt-24 pb-16 font-[Inter] text-xs relative overflow-hidden">
+    <footer className="bg-black text-white border-t border-[#8C7355]/20 pt-24 pb-16 font-[Inter] text-xs relative overflow-hidden selection:bg-white/50">
       <div className="absolute inset-0 bg-[radial-gradient(#8C7355_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.03] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 relative z-10">
@@ -21,7 +21,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="mt-10 pt-6 border-t border-[#8C7355]/20 font-[Fraunces] text-sm italic text-[#C5A059]">
+            <div className="mt-10 pt-6 border-t border-[#8C7355]/20 font-[Raleway] text-sm italic text-white">
               "Technology changes. Strong foundations remain."
             </div>
           </div>
@@ -58,7 +58,7 @@ const Footer = () => {
               <ul className="space-y-3 font-light text-[#A19D94]">
                 <li><Link to="/privacy" className="hover:text-[#FAF8F5] transition-colors">Política de Privacidade</Link></li>
                 <li><Link to="/terms" className="hover:text-[#FAF8F5] transition-colors">Termos Institucionais</Link></li>
-                <li className="text-[#C5A059] text-[10px] tracking-widest uppercase pt-3">ISO 27001 Aligned</li>
+                <li className="text-white text-[10px] tracking-widest uppercase pt-3">ISO 27001 Aligned</li>
               </ul>
             </div>
 
@@ -72,8 +72,8 @@ const Footer = () => {
 
           <div className="flex items-center gap-6 tracking-widest uppercase text-[10px]">
             <span>Est. MMXXVI</span>
-            <span className="w-1 h-1 rounded-full bg-[#C5A059]" />
-            <span className="font-[Fraunces] text-sm text-[#C5A059]">XV</span>
+            <span className="w-1 h-1 rounded-full bg-white/50" />
+            <span className="font-[Fraunces] italic text-sm text-white/50">XV</span>
           </div>
         </div>
 

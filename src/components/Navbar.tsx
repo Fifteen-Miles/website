@@ -17,7 +17,7 @@ export const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10 backdrop-blur-md selection:bg-white/50">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
         {/* Logo */}
