@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import LazyImage from "../components/LazyImage";
@@ -9,19 +10,19 @@ import LazyImage from "../components/LazyImage";
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     setActiveMenu(null);
     setMobileMenuOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10 backdrop-blur-md selection:bg-white/50">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link href="/" className="flex items-center">
           <LazyImage src="/TopLogo.png" alt="Fifteen Miles" className="h-5 brightness-0 invert" />
         </Link>
 
@@ -41,9 +42,9 @@ export const Navbar = () => {
             </button>
           ))}
           
-          <Link to="/engineering" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Engenharia</Link>
-          <Link to="/blog" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Discursos</Link>
-          <Link to="/contact" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Contato</Link>
+          <Link href="/engineering" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Engenharia</Link>
+          <Link href="/blog" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Discursos</Link>
+          <Link href="/contact" className="px-6 text-[12px] uppercase tracking-[0.1em] text-white/70 hover:text-white transition-colors">Contato</Link>
         </nav>
 
         {/* CTA */}
@@ -82,7 +83,7 @@ export const Navbar = () => {
                       : "Fifteen Miles: Rigor, permanência e tecnologia."}
                   </p>
                 </div>
-                <Link to={activeMenu === "platform" ? "/atlas" : "/company"} className="flex items-center gap-2 mt-8 text-sm text-white/70 hover:text-white">
+                <Link href={activeMenu === "platform" ? "/atlas" : "/company"} className="flex items-center gap-2 mt-8 text-sm text-white/70 hover:text-white">
                   Saiba mais <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -92,7 +93,7 @@ export const Navbar = () => {
                 {activeMenu === "platform" ? (
                   <>
                     <MenuColumn title="Módulos" links={[{t: "Atlas OS", l: "/atlas"}, {t: "Catálogo", l: "/products"}]} />
-                    <MenuColumn title="Engenharia" links={[{t: "Arquitetura", l: "/engineering"}, {t: "Segurança", l: "/engineering"}]} />
+                    <MenuColumn title="Engenharia" links={[{t: "Arquitetura", l: "/engineering"}, {t: "Segurança", l: "/engineering#security"}]} />
                   </>
                 ) : (
                   <>
@@ -114,11 +115,11 @@ export const Navbar = () => {
             className="lg:hidden absolute top-16 left-0 w-full bg-black h-screen p-8"
           >
             <div className="flex flex-col gap-8 text-2xl font-light">
-              <Link to="/atlas" onClick={() => setMobileMenuOpen(false)}>Plataforma</Link>
-              <Link to="/engineering" onClick={() => setMobileMenuOpen(false)}>Engenharia</Link>
-              <Link to="/company" onClick={() => setMobileMenuOpen(false)}>Instituição</Link>
-              <Link to="/blog" onClick={() => setMobileMenuOpen(false)}>Discursos</Link>
-              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contato</Link>
+              <Link href="/atlas" onClick={() => setMobileMenuOpen(false)}>Plataforma</Link>
+              <Link href="/engineering" onClick={() => setMobileMenuOpen(false)}>Engenharia</Link>
+              <Link href="/company" onClick={() => setMobileMenuOpen(false)}>Instituição</Link>
+              <Link href="/blog" onClick={() => setMobileMenuOpen(false)}>Discursos</Link>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Contato</Link>
             </div>
           </motion.div>
         )}
@@ -131,9 +132,9 @@ const MenuColumn = ({ title, links }: { title: string, links: {t: string, l: str
   <div>
     <h4 className="text-[10px] uppercase tracking-[0.2em] text-white/50 mb-6">{title}</h4>
     <ul className="space-y-4">
-      {links.map((link) => (
-        <li key={link.l}>
-          <Link to={link.l} className="text-md hover:text-white/60 transition-colors">{link.t}</Link>
+      {links.map((link, idx) => (
+        <li key={`${link.l}-${idx}`}>
+          <Link href={link.l} className="text-md hover:text-white/60 transition-colors">{link.t}</Link>
         </li>
       ))}
     </ul>

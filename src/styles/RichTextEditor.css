@@ -1,0 +1,103 @@
+.fm-editor {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 14, 12, 0.2);
+}
+
+.fm-editor .ql-toolbar.ql-snow {
+  background: #FAF8F5;
+  border: none;
+  border-bottom: 1px solid rgba(15, 14, 12, 0.12);
+  padding: 12px 16px;
+}
+
+.fm-editor .ql-container.ql-snow {
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  background: #FFFFFF;
+}
+
+.fm-editor .ql-editor {
+  min-height: 320px;
+  padding: 28px 32px;
+  color: #2A2824;
+  line-height: 1.75;
+}
+
+.fm-editor .ql-editor.ql-blank::before {
+  color: #706C64;
+  font-style: normal;
+  left: 32px;
+}
+
+.fm-editor .ql-editor h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 1.75rem;
+  color: #0F0E0C;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.fm-editor .ql-editor h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #0F0E0C;
+  margin-top: 1.25em;
+  margin-bottom: 0.5em;
+}
+
+.fm-editor .ql-editor blockquote {
+  border-left: 3px solid #8C7355;
+  padding-left: 20px;
+  margin: 1.5em 0;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: #0F0E0C;
+  font-size: 1.15rem;
+}
+
+.fm-editor .ql-editor a {
+  color: #8C7355;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.fm-editor .ql-editor img {
+  border-radius: 2px;
+  margin: 1.5em 0;
+}
+
+.fm-editor .ql-snow.ql-toolbar button:hover,
+.fm-editor .ql-snow.ql-toolbar button.ql-active {
+  color: #8C7355;
+}
+
+.fm-editor .ql-snow.ql-toolbar button:hover .ql-stroke,
+.fm-editor .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #8C7355;
+}
+
+.fm-editor .ql-snow.ql-toolbar button:hover .ql-fill,
+.fm-editor .ql-snow.ql-toolbar button.ql-active .ql-fill {
+  fill: #8C7355;
+}
+
+.fm-editor .ql-snow .ql-picker.ql-header .ql-picker-label:hover,
+.fm-editor .ql-snow .ql-picker.ql-header .ql-picker-item:hover {
+  color: #8C7355;
+}
+
+.fm-editor .ql-snow .ql-stroke {
+  stroke: #0F0E0C;
+}
+
+.fm-editor .ql-snow .ql-fill {
+  fill: #0F0E0C;
+}
+
+.fm-editor .ql-snow .ql-picker {
+  color: #0F0E0C;
+}

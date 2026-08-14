@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Layers, ArrowRight, Server, Lock, Compass } from "lucide-react";
 
 const legend = [
@@ -197,7 +197,7 @@ export const AtlasInfrastructureRoom = () => {
           </div>
 
           <Link
-            to="/atlas"
+            href="/atlas"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
           >
             <span>Especificações do Atlas OS</span>

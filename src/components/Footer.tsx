@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import LazyImage from "./LazyImage";
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
           
           <div className="md:col-span-5 flex flex-col justify-between">
             <div className="space-y-6">
-              <Link to="/" className="inline-block group">
+              <Link href="/" className="inline-block group">
                 <LazyImage src="/TopLogo.png" alt="Fifteen Miles" className="h-6 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
 
@@ -33,9 +33,9 @@ const Footer = () => {
                 Infraestrutura
               </h4>
               <ul className="space-y-3 font-light text-[#A19D94]">
-                <li><Link to="/atlas" className="hover:text-[#FAF8F5] transition-colors">Atlas OS</Link></li>
-                <li><Link to="/products" className="hover:text-[#FAF8F5] transition-colors">Diretório de Módulos</Link></li>
-                <li><Link to="/engineering" className="hover:text-[#FAF8F5] transition-colors">Arquitetura & Código</Link></li>
+                <li><Link href="/atlas" className="hover:text-[#FAF8F5] transition-colors">Atlas OS</Link></li>
+                <li><Link href="/products" className="hover:text-[#FAF8F5] transition-colors">Diretório de Módulos</Link></li>
+                <li><Link href="/engineering" className="hover:text-[#FAF8F5] transition-colors">Arquitetura & Código</Link></li>
               </ul>
             </div>
 
@@ -44,10 +44,10 @@ const Footer = () => {
                 Instituição
               </h4>
               <ul className="space-y-3 font-light text-[#A19D94]">
-                <li><Link to="/company" className="hover:text-[#FAF8F5] transition-colors">Sobre a Fifteen Miles</Link></li>
-                <li><Link to="/manifesto" className="hover:text-[#FAF8F5] transition-colors">O Manifesto</Link></li>
-                <li><Link to="/blog" className="hover:text-[#FAF8F5] transition-colors">Discursos & Ensaios</Link></li>
-                <li><Link to="/contact" className="hover:text-[#FAF8F5] transition-colors">Contato Direto</Link></li>
+                <li><Link href="/company" className="hover:text-[#FAF8F5] transition-colors">Sobre a Fifteen Miles</Link></li>
+                <li><Link href="/manifesto" className="hover:text-[#FAF8F5] transition-colors">O Manifesto</Link></li>
+                <li><Link href="/blog" className="hover:text-[#FAF8F5] transition-colors">Discursos & Ensaios</Link></li>
+                <li><Link href="/contact" className="hover:text-[#FAF8F5] transition-colors">Contato Direto</Link></li>
               </ul>
             </div>
 
@@ -56,8 +56,8 @@ const Footer = () => {
                 Diretrizes
               </h4>
               <ul className="space-y-3 font-light text-[#A19D94]">
-                <li><Link to="/privacy" className="hover:text-[#FAF8F5] transition-colors">Política de Privacidade</Link></li>
-                <li><Link to="/terms" className="hover:text-[#FAF8F5] transition-colors">Termos Institucionais</Link></li>
+                <li><Link href="/privacy" className="hover:text-[#FAF8F5] transition-colors">Política de Privacidade</Link></li>
+                <li><Link href="/terms" className="hover:text-[#FAF8F5] transition-colors">Termos Institucionais</Link></li>
                 <li className="text-white text-[10px] tracking-widest uppercase pt-3">ISO 27001 Aligned</li>
               </ul>
             </div>

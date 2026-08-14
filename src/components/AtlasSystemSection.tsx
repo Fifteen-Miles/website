@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Shield, Layers, ArrowRight, Cpu, Server, Lock, Compass, CheckCircle2 } from "lucide-react";
 
 export const AtlasSystemSection = () => {
@@ -86,7 +86,7 @@ export const AtlasSystemSection = () => {
         {/* Action Link */}
         <div className="flex justify-center">
           <Link
-            to="/atlas"
+            href="/atlas"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-[#8C7355]/40 bg-[#1A1815] text-[#FAF8F5] font-sans font-medium text-xs tracking-[0.15em] uppercase hover:border-[#C5A059] hover:bg-[#25221E] transition-all group"
           >
             <span>Examinar as Especificações do Atlas OS</span>

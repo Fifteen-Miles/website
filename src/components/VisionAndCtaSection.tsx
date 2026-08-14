@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Compass, ArrowRight, ShieldCheck, Mail } from "lucide-react";
 
 export const VisionAndCtaSection = () => {
@@ -58,7 +58,7 @@ export const VisionAndCtaSection = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
             <Link
-              to="/contact"
+              href="/contact"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-[#FAF8F5] text-[#0A0A0C] font-sans font-medium text-xs tracking-[0.15em] uppercase hover:bg-[#EBE5D8] transition-all shadow-[0_10px_30px_rgba(250,248,245,0.15)] group"
             >
               <Mail className="w-4 h-4 text-[#0A0A0C]" />
@@ -66,7 +66,7 @@ export const VisionAndCtaSection = () => {
             </Link>
 
             <Link
-              to="/atlas"
+              href="/atlas"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-[#8C7355]/40 bg-[#161412] text-[#FAF8F5] font-sans font-normal text-xs tracking-[0.15em] uppercase hover:border-[#C5A059] hover:bg-[#1F1C18] transition-all"
             >
               <span>Explorar Atlas</span>

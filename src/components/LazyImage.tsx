@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from 'react'
 
 type ManifestEntry = {
@@ -41,7 +43,8 @@ export default function LazyImage({ src = '', alt = '', width, height, style, cl
     computedStyle.aspectRatio = `${width}/${height}`
   }
 
-  const srcBasename = src.split('/').pop() || src
+  const imageUrl = typeof src === 'string' ? src : '';
+  const srcBasename = imageUrl.split('/').pop() || imageUrl;
   const entry = manifest && manifest[srcBasename]
 
   if (entry && (entry.avif?.length || entry.webp?.length)) {

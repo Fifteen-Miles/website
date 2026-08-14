@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Code2, GitBranch, Terminal, Shield, Layers, FileText, CheckCircle2, ArrowRight } from "lucide-react";
 
 const engineeringPillars = [
@@ -58,7 +58,7 @@ export const EngineeringPhilosophySection = () => {
           </div>
 
           <Link
-            to="/engineering"
+          href="/engineering"
             className="inline-flex items-center gap-2 text-xs font-sans tracking-[0.15em] uppercase text-[#C5A059] hover:text-[#FAF8F5] transition-colors shrink-0"
           >
             <span>Ver Manifesto de Engenharia</span>

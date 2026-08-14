@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Terminal, ArrowRight } from "lucide-react";
 
 const pillars = [
@@ -156,7 +156,7 @@ export const ChamberOfPhilosophy = () => {
               </p>
 
               <Link
-                to="/engineering"
+                href="/engineering"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-white text-black font-medium text-xs tracking-[0.15em] uppercase hover:bg-white/90 transition-all group shadow-lg"
               >
                 <span>Ver Manifesto de Engenharia</span>
