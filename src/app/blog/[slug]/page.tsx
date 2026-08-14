@@ -5,6 +5,9 @@ import Link from 'next/link';
 import { ArrowLeft, Clock } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -26,7 +29,7 @@ async function getPost(slug: string) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const post = await getPost(resolvedParams.slug);
-  
+
   if (!post) return {};
 
   const url = `https://www.fifteenmiles.tech/blog/${post.slug}`;
@@ -58,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPostPage({ params }: Props) {
   const resolvedParams = await params;
   const post = await getPost(resolvedParams.slug);
-  
+
   if (!post) {
     notFound();
   }
@@ -98,7 +101,7 @@ export default async function BlogPostPage({ params }: Props) {
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Retornar ao Índice</span>
           </Link>
-          
+
           <div className="border-y-2 border-[#0F0E0C] py-4 mb-12 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="flex items-center gap-6">
               <span className="font-[Inter] text-[10px] uppercase tracking-[0.25em] text-[#0F0E0C] font-medium">Edição Institucional</span>
@@ -140,11 +143,156 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
 
-        <article className="prose prose-lg max-w-none text-[#0F0E0C]/90 font-light leading-relaxed space-y-8 font-[Inter]">
-          <p className="text-xl italic font-[Fraunces] text-[#0F0E0C] border-l-2 border-[#8C7355] pl-6 py-2 my-8">
+        <article className="max-w-none text-[#0F0E0C]/90 font-light leading-relaxed font-[Inter]">
+          <style dangerouslySetInnerHTML={{__html: `
+            .blog-content,
+            .blog-content * {
+              white-space: normal !important;
+              overflow-wrap: break-word !important;
+              max-width: 100% !important;
+              background-color: transparent !important;
+              font-family: inherit !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+              text-indent: 0 !important;
+              word-spacing: normal !important;
+              letter-spacing: normal !important;
+            }
+
+            .blog-content {
+              width: 100%;
+              overflow-x: hidden;
+              hyphens: auto;
+              -webkit-hyphens: auto;
+              -ms-hyphens: auto;
+              word-break: normal;
+            }
+
+            .blog-content p,
+            .blog-content li,
+            .blog-content blockquote {
+              hyphens: auto;
+              -webkit-hyphens: auto;
+              -ms-hyphens: auto;
+              word-break: normal;
+              overflow-wrap: break-word;
+              text-align: justify !important;
+              line-height: 1.8 !important;
+            }
+
+            .blog-content p {
+              margin-bottom: 2rem !important;
+            }
+
+            .blog-content h1, .blog-content h2, .blog-content h3 {
+              font-family: var(--font-fraunces), serif !important;
+              color: #0F0E0C !important;
+              text-align: left !important;
+              font-weight: 400 !important;
+              margin-left: 0 !important;
+              padding-left: 0 !important;
+            }
+
+            h1 {
+              font-size: 4rem !important;
+              text-align: left;
+              margin-top: 4rem !important;
+              margin-bottom: 2rem !important;
+              border-top: 1px solid rgba(15, 14, 12, 0.1);
+              padding-top: 2rem !important;
+            }
+
+            .blog-content h2 {
+              font-size: 2.25rem !important;
+              margin-top: 4rem !important;
+              margin-bottom: 2rem !important;
+              border-top: 1px solid rgba(15, 14, 12, 0.1);
+              padding-top: 2rem !important;
+            }
+
+            .blog-content h3 {
+              font-size: 1.5rem !important;
+              margin-top: 3rem !important;
+              margin-bottom: 1.5rem !important;
+            }
+
+            .blog-content ul, .blog-content ol {
+              margin-bottom: 2rem !important;
+              padding-left: 1.5rem !important;
+            }
+
+            .blog-content ul {
+              list-style-type: disc !important;
+            }
+
+            .blog-content ol {
+              list-style-type: decimal !important;
+            }
+
+            .blog-content li {
+              margin-bottom: 0.5rem !important;
+              text-align: left !important;
+            }
+
+            .blog-content pre {
+              white-space: pre-wrap !important;
+              overflow-x: auto !important;
+              background: #F5F2EB !important;
+              padding: 1.25rem !important;
+              border-radius: 0.5rem !important;
+              font-family: 'JetBrains Mono', monospace !important;
+              font-size: 0.85rem !important;
+              margin: 2rem 0 !important;
+            }
+
+            .blog-content blockquote {
+              border-left: 2px solid #8C7355 !important;
+              padding-left: 1.5rem !important;
+              font-style: italic !important;
+              margin: 3rem 0 !important;
+              color: #706C64 !important;
+              font-family: var(--font-fraunces), serif !important;
+              font-size: 1.5rem !important;
+              text-align: left !important;
+            }
+
+            .blog-content a {
+              text-decoration: underline !important;
+              text-decoration-color: #8C7355 !important;
+              text-underline-offset: 4px !important;
+              transition: color 0.2s;
+            }
+
+            .blog-content a:hover {
+              color: #8C7355 !important;
+            }
+
+            .blog-content > p:first-of-type::first-letter {
+              font-family: var(--font-fraunces), serif !important;
+              font-size: 7rem !important;
+              float: left !important;
+              line-height: 0.8 !important;
+              margin-right: 1.5rem !important;
+              margin-top: 0.5rem !important;
+              color: #0F0E0C !important;
+            }
+          `}} />
+
+          <p
+            lang="pt-BR"
+            style={{ hyphens: 'auto', WebkitHyphens: 'auto' } as React.CSSProperties}
+            className="text-xl sm:text-2xl italic font-[Fraunces] text-[#0F0E0C] border-l-2 border-[#8C7355] pl-6 py-2 my-12"
+          >
             {post.summary || post.description}
           </p>
-          <div className="space-y-6 text-base sm:text-lg" dangerouslySetInnerHTML={{ __html: post.content || '' }} />
+
+          <div
+            lang="pt-BR"
+            className="blog-content text-lg sm:text-xl text-[#2A2824] tracking-tight"
+            dangerouslySetInnerHTML={{ __html: post.content || '' }}
+          />
         </article>
       </main>
     </div>

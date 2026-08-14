@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Blog from '@/views/Blog';
 import { supabase } from '@/lib/supabase';
 
+
+
 export const metadata: Metadata = {
   title: 'Blog — Fifteen Miles',
   description: 'Ensaios técnicos e reflexões sobre arquitetura, governança e plataformas empresariais.',

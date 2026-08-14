@@ -37,6 +37,19 @@ export function formatDisplayDate(isoDate: string): string {
   return `${day} de ${MONTHS_PT[month - 1]} de ${year}`;
 }
 
+export function stripInlineStyles(html: string): string {
+  if (typeof window === 'undefined') return html;
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.body.querySelectorAll('*').forEach((el) => {
+    el.removeAttribute('style');
+    el.removeAttribute('class');
+    if (el.tagName === 'SPAN' && el.attributes.length === 0) {
+      el.replaceWith(...Array.from(el.childNodes));
+    }
+  });
+  return doc.body.innerHTML;
+}
+
 export function calcReadTime(html: string): string {
   const plainText = html.replace(/<[^>]*>/g, ' ');
   const words = plainText.trim().split(/\s+/).filter(Boolean).length;

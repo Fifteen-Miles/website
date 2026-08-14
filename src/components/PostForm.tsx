@@ -5,7 +5,7 @@ import { supabase } from '@/lib/supabase';
 import { AlertCircle, PlusCircle, RefreshCcw } from 'lucide-react';
 import RichTextEditor from './RichTextEditor';
 import ImageUploader from './ImageUploader';
-import { TAGS, slugify, formatDisplayDate, calcReadTime, EMPTY_POST, type Post } from '@/lib/PostUtils';
+import { type Post, EMPTY_POST, TAGS, slugify, formatDisplayDate, calcReadTime, stripInlineStyles } from '@/lib/PostUtils';
 
 interface PostFormProps {
   initialPost: Post | null;
@@ -71,7 +71,7 @@ export default function PostForm({ initialPost, onCancel, onSaved }: PostFormPro
       slug: fields.slug,
       summary: fields.summary,
       description: fields.summary,
-      content: fields.content,
+      content: stripInlineStyles(fields.content),
       tag: fields.tag,
       image: fields.image,
       author: fields.author,
