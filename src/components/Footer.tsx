@@ -1,5 +1,6 @@
 import Link from "next/link";
-import LazyImage from "./LazyImage";
+import Image from "next/image";
+
 
 const Footer = () => {
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
           <div className="md:col-span-5 flex flex-col justify-between">
             <div className="space-y-6">
               <Link href="/" className="inline-block group">
-                <LazyImage src="/TopLogo.png" alt="Fifteen Miles" className="h-6 opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                <Image src="/TopLogo.png" alt="Fifteen Miles" width={180} height={25} className="h-6 w-auto opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
               </Link>
 
               <p className="text-[#A19D94] font-light leading-relaxed max-w-sm text-sm">

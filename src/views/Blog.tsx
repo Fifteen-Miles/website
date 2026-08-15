@@ -84,7 +84,7 @@ export default function Blog({ posts = [] }: { posts?: any[] }) {
 
           <motion.h1
             variants={fadeUp}
-            className="font-[Fraunces] text-6xl md:text-8xl lg:text-[7.5rem] font-normal tracking-tight leading-[0.95] text-[#0F0E0C] mb-8 text-center md:text-left"
+            className="font-[Fraunces] text-5xl md:text-7xl lg:text-[7.5rem] font-normal tracking-tight leading-[0.95] text-[#0F0E0C] mb-8 text-center md:text-left"
           >
             Discursos Institucionais.
           </motion.h1>

@@ -1,21 +1,24 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import LazyImage from "../components/LazyImage";
+import Image from "next/image";
+
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  useEffect(() => {
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setActiveMenu(null);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-black text-white border-b border-white/10 backdrop-blur-md selection:bg-white/50">
@@ -23,7 +26,7 @@ export const Navbar = () => {
         
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <LazyImage src="/TopLogo.png" alt="Fifteen Miles" className="h-5 brightness-0 invert" />
+          <Image src="/TopLogo.png" alt="Fifteen Miles" width={160} height={22} priority className="h-5 w-auto brightness-0 invert" />
         </Link>
 
         {/* Desktop Nav */}
@@ -55,7 +58,13 @@ export const Navbar = () => {
         </div>
 
         {/* Mobile Trigger */}
-        <button className="lg:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+        <button
+          className="lg:hidden p-2"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Menu Principal"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
+        >
           {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
@@ -111,6 +120,7 @@ export const Navbar = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             className="lg:hidden absolute top-16 left-0 w-full bg-black h-screen p-8"
           >
