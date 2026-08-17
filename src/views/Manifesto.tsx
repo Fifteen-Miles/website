@@ -8,11 +8,12 @@ import Seo from "../components/Seo";
 import LazyImage from "../components/LazyImage";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 36, filter: "blur(6px)" },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    filter: "blur(0px)",
+    transition: { duration: 1.1, ease: [0.16, 1, 0.3, 1] },
   },
 };
 
@@ -20,7 +21,7 @@ const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.12 },
+    transition: { staggerChildren: 0.16 },
   },
 };
 
@@ -36,16 +37,38 @@ function useDisplayFonts() {
   }, []);
 }
 
+function GridBackground() {
+  return (
+    <div className="absolute inset-0 pointer-events-none [perspective:1000px] overflow-hidden opacity-20 z-0">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303] z-10" />
+      <div 
+        className="absolute inset-x-0 bottom-0 h-[100vh] origin-bottom"
+        style={{
+          transform: "rotateX(75deg) translateY(120px) scale(2.2)",
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)
+          `,
+          backgroundSize: "64px 64px",
+          maskImage: "linear-gradient(to top, black 5%, transparent 80%)",
+          WebkitMaskImage: "linear-gradient(to top, black 5%, transparent 80%)"
+        }}
+      />
+    </div>
+  );
+}
+
 export default function Manifesto() {
   useDisplayFonts();
 
   return (
-    <div className="min-h-screen bg-white text-[#1D1D1F] font-[Inter] selection:bg-black/50 selection:text-white overflow-x-hidden">
-      <Seo title="Manifesto — Fifteen Miles" description="Manifesto da Fifteen Miles: princípios, crenças e visão sobre construção de software duradouro." path="/manifesto" />
+    <div className="relative min-h-screen bg-[#030303] text-white font-[Inter] overflow-hidden selection:bg-white/20">
+      <Seo title="Manifesto — Fifteen Miles" description="Manifesto oficial da Fifteen Miles: princípios, premissas imutáveis e visão sobre infraestruturas perenes." path="/manifesto" />
       
-      <div className="fixed inset-0 bg-[radial-gradient(#1D1D1F_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.02] pointer-events-none z-0" />
+      <GridBackground />
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.04)_0%,transparent_65%)] pointer-events-none z-0" />
 
-      <section className="relative min-h-[90svh] w-full flex flex-col items-center justify-center pt-32 pb-24 px-6 sm:px-12 text-center z-10">
+      <section className="relative min-h-[92vh] w-full flex flex-col items-center justify-center pt-44 pb-28 px-6 sm:px-12 text-center z-10">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -53,94 +76,107 @@ export default function Manifesto() {
           className="max-w-5xl mx-auto flex flex-col items-center"
         >
           <motion.div variants={fadeUp} className="mb-8">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[11px] font-[JetBrains_Mono] tracking-[0.2em] uppercase text-[#1D1D1F]/80">
-              <Compass className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-xl text-[10px] font-[JetBrains_Mono] tracking-[0.25em] uppercase text-white/80 shadow-[0_0_25px_rgba(255,255,255,0.03)]">
+              <Compass className="w-3.5 h-3.5 text-white/60" />
               <span>Capítulo I · Documento Fundador</span>
             </span>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
-            className="font-[Inter] text-5xl sm:text-7xl lg:text-[7.5rem] tracking-[-0.03em] font-medium leading-[1.02] text-[#1D1D1F] mb-8"
+            className="font-[Inter] text-5xl sm:text-7xl lg:text-[8rem] tracking-[-0.04em] font-medium leading-[1.02] text-white mb-8"
           >
-            Não estamos construindo <br />
-            <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">mais um software.</span>
+            <span className="block">Não estamos construindo</span>
+            <span className="block font-[Fraunces] italic font-light text-white/40 mt-1">mais um software.</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
-            className="text-xl sm:text-2xl text-[#86868B] font-light tracking-tight max-w-3xl leading-relaxed mb-16"
+            className="text-xl sm:text-2xl text-white/50 font-light tracking-tight max-w-3xl leading-relaxed mb-16"
           >
-            Estamos tentando mudar a forma como empresas operam.
+            Estamos redefinindo a forma como corporações de alta escala operam, centralizam inteligência e constroem perenidade digital.
           </motion.p>
 
           <motion.div variants={fadeUp} className="w-full">
-            <p className="font-[Fraunces] italic font-light text-5xl sm:text-7xl lg:text-8xl tracking-tight text-[#1D1D1F]">
+            <p className="font-[Fraunces] italic font-light text-4xl sm:text-6xl lg:text-7xl tracking-tight text-white/90">
               Projetado para durar décadas.
             </p>
           </motion.div>
         </motion.div>
       </section>
 
-      <section className="px-6 sm:px-12 max-w-7xl mx-auto py-20 relative z-10">
+      <section className="px-6 sm:px-12 max-w-7xl mx-auto py-24 relative z-10">
         <motion.div 
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.4 }}
-          className="w-full h-[50vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-xl border border-[#1D1D1F]/10 bg-[#F5F5F7]"
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full h-[50vh] md:h-[75vh] rounded-[36px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.8)] border border-white/[0.08] bg-[#050505] relative group"
         >
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030303] via-transparent to-transparent z-10 pointer-events-none" />
           <LazyImage
             src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop"
             alt="Arquitetura Monumental"
-            className="w-full h-full object-cover grayscale opacity-90"
+            className="w-full h-full object-cover grayscale contrast-125 opacity-60 scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out"
             style={{ width: '100%', height: '100%' }}
           />
+          <div className="absolute bottom-8 left-8 right-8 z-20 flex justify-between items-center pointer-events-none">
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/50 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 bg-black/40">
+              Monumental Architecture
+            </span>
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/30">
+              Fifteen Miles Lab
+            </span>
+          </div>
         </motion.div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-4xl mx-auto text-center relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-4xl mx-auto text-center relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="space-y-10 text-xl sm:text-3xl font-light tracking-tight text-[#1D1D1F] leading-snug"
+          className="space-y-12 text-2xl sm:text-4xl font-light tracking-tight text-white/90 leading-snug"
         >
           <motion.p variants={fadeUp}>
-            Toda empresa nasce acreditando que irá durar muitos anos.
+            Toda empresa nasce acreditando que irá perdurar por gerações.
           </motion.p>
-          <motion.p variants={fadeUp} className="text-[#86868B]">
-            Mas poucas escolhem ferramentas construídas para acompanhar essa jornada.
+          <motion.p variants={fadeUp} className="text-white/40">
+            Mas poucas escolhem ferramentas estruturadas para acompanhar o peso dessa ambição.
           </motion.p>
-          <motion.p variants={fadeUp} className="font-[Fraunces] italic text-[#1D1D1F] font-normal">
-            Nós acreditamos que isso precisa mudar.
+          <motion.p variants={fadeUp} className="font-[Fraunces] italic text-white font-normal text-3xl sm:text-5xl">
+            Nós acreditamos que isso precisa mudar absolutamente.
           </motion.p>
         </motion.div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-6xl mx-auto relative z-10 border-t border-[#1D1D1F]/10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10 border-t border-white/[0.05]">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="text-center mb-24"
+          className="text-center mb-28"
         >
-          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
+          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-4">
             Capítulo II · O Diagnóstico
           </span>
-          <h2 className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F]">
+          <h2 className="font-[Inter] text-4xl sm:text-6xl lg:text-[5rem] font-medium tracking-tight text-white">
             Por que existimos.
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 mb-24 text-base sm:text-lg font-light text-[#86868B] leading-relaxed">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="p-8 sm:p-10 rounded-3xl bg-[#F5F5F7] border border-[#1D1D1F]/10">
-            Existe um excesso de ferramentas no mercado. Existe um excesso de complexidade acumulada. Existe um excesso de sistemas desconectados que prometem clareza, mas entregam apenas ruído operacional.
+        <div className="grid md:grid-cols-2 gap-8 mb-24">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="p-10 sm:p-14 rounded-[36px] bg-[#050505] border border-white/[0.08] shadow-2xl">
+            <p className="text-base sm:text-lg font-light text-white/60 leading-relaxed">
+              Existe um excesso alarmante de ferramentas no mercado corporativo. Há complexidade desnecessária acumulada e silos desconectados que prometem clareza operacional, mas entregam apenas ruído e fragmentação.
+            </p>
           </motion.div>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="p-8 sm:p-10 rounded-3xl bg-[#F5F5F7] border border-[#1D1D1F]/10">
-            As empresas perderam o controle da própria operação. Foram divididas em silos efêmeros, reféns de fluxos fragmentados e plataformas passageiras.
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} className="p-10 sm:p-14 rounded-[36px] bg-[#050505] border border-white/[0.08] shadow-2xl">
+            <p className="text-base sm:text-lg font-light text-white/60 leading-relaxed">
+              As empresas perderam o controle de sua própria base de dados e fluxos vitais. Tornaram-se reféns de ecossistemas passageiros, assinaturas efêmeras e arquiteturas sem coesão.
+            </p>
           </motion.div>
         </div>
 
@@ -149,15 +185,15 @@ export default function Manifesto() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center py-16 border-y border-[#1D1D1F]/10"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center py-20 border-y border-white/[0.05]"
         >
           {[
             "Mais sistemas.", "Mais logins.", "Mais integrações.",
             "Mais planilhas.", "Mais retrabalho.", "Mais ruído.",
             "Menos contexto.", "Menos clareza."
           ].map((phrase, i) => (
-            <motion.div key={i} variants={fadeUp} className="p-6 rounded-2xl bg-[#F5F5F7] border border-[#1D1D1F]/10">
-              <span className={`font-[Inter] text-sm sm:text-base tracking-tight ${phrase.startsWith('Menos') ? 'text-[#1D1D1F] font-semibold' : 'text-[#86868B] font-light'}`}>
+            <motion.div key={i} variants={fadeUp} className="p-8 rounded-[24px] bg-[#050505] border border-white/[0.08] shadow-xl">
+              <span className={`font-[Inter] text-sm sm:text-base tracking-tight ${phrase.startsWith('Menos') ? 'text-white font-semibold' : 'text-white/40 font-light'}`}>
                 {phrase}
               </span>
             </motion.div>
@@ -165,34 +201,17 @@ export default function Manifesto() {
         </motion.div>
       </section>
 
-      <section className="px-6 sm:px-12 max-w-7xl mx-auto py-20 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.4 }}
-          className="w-full h-[50vh] md:h-[75vh] rounded-3xl overflow-hidden shadow-xl border border-[#1D1D1F]/10 bg-[#F5F5F7]"
-        >
-          <LazyImage
-            src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2500&auto=format&fit=crop"
-            alt="Biblioteca e Estruturas Sólidas"
-            className="w-full h-full object-cover grayscale opacity-90"
-            style={{ width: '100%', height: '100%' }}
-          />
-        </motion.div>
-      </section>
-
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-5xl mx-auto space-y-32 sm:space-y-48 text-center relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-5xl mx-auto space-y-36 sm:space-y-48 text-center relative z-10">
         <motion.div variants={fadeUp}>
-          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">
-            Capítulo III · Crenças
+          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-4">
+            Capítulo III · Crenças Imutáveis
           </span>
         </motion.div>
         {[
-          "Acreditamos que software é patrimônio.",
-          "Acreditamos que empresas merecem operar melhor.",
-          "Acreditamos que simplicidade exige engenharia.",
-          "Acreditamos que velocidade sem direção não constrói legado."
+          "Acreditamos que software é um patrimônio corporativo vital.",
+          "Acreditamos que empresas merecem operar com elegância absoluta.",
+          "Acreditamos que a verdadeira simplicidade exige alta engenharia.",
+          "Acreditamos que velocidade sem direção arquitetural destrói o futuro."
         ].map((belief, i) => (
           <motion.div
             key={i}
@@ -201,14 +220,14 @@ export default function Manifesto() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <p className="font-[Inter] text-3xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F] leading-snug">
+            <p className="font-[Inter] text-3xl sm:text-6xl font-medium tracking-tight text-white leading-snug">
               {belief}
             </p>
           </motion.div>
         ))}
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 bg-[#050505] border-y border-white/[0.05] relative z-10">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
           <motion.div
             initial="hidden"
@@ -217,10 +236,10 @@ export default function Manifesto() {
             variants={fadeUp}
             className="space-y-6"
           >
-            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block">Capítulo IV · Postura</span>
-            <h2 className="font-[Inter] text-3xl sm:text-5xl font-medium tracking-tight text-[#1D1D1F] leading-tight">
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block">Capítulo IV · Postura</span>
+            <h2 className="font-[Inter] text-3xl sm:text-5xl font-medium tracking-tight text-white leading-tight">
               O mercado mede quantidade. <br />
-              <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">Nós medimos qualidade.</span>
+              <span className="font-[Fraunces] italic font-light text-white/40">Nós medimos permanência.</span>
             </h2>
           </motion.div>
           <motion.div
@@ -228,37 +247,37 @@ export default function Manifesto() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="space-y-6 text-base sm:text-lg font-light text-[#86868B] leading-relaxed border-l border-[#1D1D1F]/10 pl-8 md:pl-12"
+            className="space-y-6 text-base sm:text-lg font-light text-white/60 leading-relaxed border-l border-white/10 pl-8 md:pl-12"
           >
-            <p>O mercado passou a valorizar a velocidade vazia. Lançar dezenas de produtos descartáveis a cada trimestre tornou-se o padrão da indústria.</p>
-            <p>Nós escolhemos o caminho oposto. Queremos construir poucos produtos, mas que permaneçam extraordinariamente relevantes durante décadas.</p>
+            <p>O ecossistema digital passou a glorificar a velocidade vazia. Lançar dezenas de utilitários descartáveis por trimestre tornou-se o padrão da indústria.</p>
+            <p>Nós escolhemos o caminho inverso. Construímos poucas plataformas, mas com um nível de rigor técnico que lhes permite operar impecavelmente ao longo de décadas.</p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-7xl mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="p-8 sm:p-12 bg-[#F5F5F7] border border-[#1D1D1F]/10 rounded-3xl"
+            className="p-10 sm:p-14 bg-[#050505] border border-white/[0.08] rounded-[36px] shadow-2xl"
           >
-            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo V</span>
-            <motion.h3 variants={fadeUp} className="font-[Inter] text-2xl sm:text-3xl font-medium tracking-tight text-[#1D1D1F] mb-8">
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-6">Capítulo V</span>
+            <motion.h3 variants={fadeUp} className="font-[Inter] text-2xl sm:text-3xl font-medium tracking-tight text-white mb-8">
               O que recusamos
             </motion.h3>
-            <ul className="space-y-4 text-base sm:text-lg font-light text-[#86868B]">
+            <ul className="space-y-5 text-base sm:text-lg font-light text-white/60">
               {[
-                "Não seguimos tendências passageiras.",
-                "Não perseguimos o hype do momento.",
-                "Não criamos funcionalidades sem propósito.",
-                "Não sacrificamos arquitetura em prol de atalhos.",
-                "Não construímos software descartável."
+                "Nunca seguimos modismos ou tendências passageiras.",
+                "Nunca perseguimos o hype tecnológico do trimestre.",
+                "Nunca criamos funcionalidades sem propósito operacional.",
+                "Nunca sacrificamos a integridade arquitetural por atalhos.",
+                "Nunca construímos software descartável."
               ].map((item, i) => (
-                <motion.div variants={fadeUp} key={i} className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full flex-shrink-0" />
+                <motion.div variants={fadeUp} key={i} className="flex items-center gap-4">
+                  <div className="w-1.5 h-1.5 bg-white/40 rounded-full flex-shrink-0" />
                   <li>{item}</li>
                 </motion.div>
               ))}
@@ -270,22 +289,23 @@ export default function Manifesto() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={staggerContainer}
-            className="p-8 sm:p-12 bg-[#1D1D1F] text-white rounded-3xl"
+            className="p-10 sm:p-14 bg-[#080808] border border-white/20 text-white rounded-[36px] shadow-2xl relative overflow-hidden"
           >
-            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo VI</span>
-            <motion.h3 variants={fadeUp} className="font-[Inter] text-2xl sm:text-3xl font-medium tracking-tight text-white mb-8">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-transparent to-transparent pointer-events-none" />
+            <span className="relative z-10 font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-6">Capítulo VI</span>
+            <motion.h3 variants={fadeUp} className="relative z-10 font-[Inter] text-2xl sm:text-3xl font-medium tracking-tight text-white mb-8">
               O que buscamos
             </motion.h3>
-            <ul className="space-y-4 text-base sm:text-lg font-light text-[#A8A399]">
+            <ul className="relative z-10 space-y-5 text-base sm:text-lg font-light text-white/70">
               {[
-                "Construir com paciência e disciplina.",
-                "Pensar em décadas, não em trimestres.",
-                "Projetar sistemas de clareza absoluta.",
-                "Eliminar a complexidade acidental.",
-                "Erguer infraestrutura perene."
+                "Construir com extrema paciência e rigor disciplinar.",
+                "Pensar em décadas de operação, não em trimestres financeiros.",
+                "Projetar sistemas de clareza conceitual absoluta.",
+                "Eliminar toda complexidade acidental do fluxo diário.",
+                "Erguer infraestrutura empresarial inabalável."
               ].map((item, i) => (
-                <motion.div variants={fadeUp} key={i} className="flex items-center gap-3">
-                  <div className="w-1.5 h-1.5 bg-[#C5A059] rounded-full flex-shrink-0" />
+                <motion.div variants={fadeUp} key={i} className="flex items-center gap-4">
+                  <div className="w-1.5 h-1.5 bg-white rounded-full flex-shrink-0 shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
                   <li>{item}</li>
                 </motion.div>
               ))}
@@ -294,7 +314,7 @@ export default function Manifesto() {
         </div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-4xl mx-auto text-center relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-4xl mx-auto text-center relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -302,19 +322,19 @@ export default function Manifesto() {
           variants={staggerContainer}
           className="space-y-8"
         >
-          <motion.span variants={fadeUp} className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block">
-            Capítulo VII · O Início
+          <motion.span variants={fadeUp} className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block">
+            Capítulo VII · O Marco Inicial
           </motion.span>
-          <motion.h2 variants={fadeUp} className="font-[Inter] text-3xl sm:text-5xl font-medium tracking-tight text-[#1D1D1F]">
-            O Atlas é apenas <br /> <span className="font-[Fraunces] italic font-light text-[#1D1D1F]/40">o primeiro passo.</span>
+          <motion.h2 variants={fadeUp} className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-white">
+            O Atlas OS é apenas <br /> <span className="font-[Fraunces] italic font-light text-white/40">o primeiro alicerce.</span>
           </motion.h2>
-          <motion.p variants={fadeUp} className="text-base sm:text-lg font-light text-[#86868B] leading-relaxed max-w-2xl mx-auto">
-            Não é o objetivo final. É a primeira pedra, a primeira fundação e a primeira grande construção de um ecossistema inteiro que virá a seguir.
+          <motion.p variants={fadeUp} className="text-lg sm:text-xl font-light text-white/50 leading-relaxed max-w-2xl mx-auto">
+            Não representa o objetivo final. É a primeira pedra de um ecossistema integrado inteiro que continuará expandindo as fronteiras da engenharia de software corporativa.
           </motion.p>
         </motion.div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 bg-[#F5F5F7] border-y border-[#1D1D1F]/10 relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 bg-[#050505] border-y border-white/[0.05] relative z-10">
         <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
           <motion.div
             initial="hidden"
@@ -322,12 +342,12 @@ export default function Manifesto() {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo VIII · Visão</span>
-            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
-              O futuro.
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-4">Capítulo VIII · Visão</span>
+            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
+              O horizonte tecnológico.
             </h2>
-            <p className="text-base sm:text-lg font-light text-[#86868B] leading-relaxed">
-              Atlas, Hermes, Athena, Marketplace, IA e ecossistema unificado. Uma visão integrada onde a tecnologia desaparece e a empresa simplesmente opera com perfeição.
+            <p className="text-base sm:text-lg font-light text-white/60 leading-relaxed">
+              Atlas, ecossistemas modulares, IA soberana e integração sem atritos. Uma visão unificada onde a complexidade da tecnologia desaparece e a empresa opera com perfeição silenciosa.
             </p>
           </motion.div>
 
@@ -336,30 +356,30 @@ export default function Manifesto() {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
-            className="border-l border-[#1D1D1F]/10 pl-8 md:pl-12 flex flex-col justify-center"
+            className="border-l border-white/10 pl-8 md:pl-12 flex flex-col justify-center"
           >
-            <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo IX · Compromisso</span>
-            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
-              Nossa responsabilidade.
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-4">Capítulo IX · Compromisso</span>
+            <h2 className="font-[Inter] text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
+              A responsabilidade institucional.
             </h2>
-            <p className="text-base sm:text-lg font-light text-[#86868B] leading-relaxed">
-              Empresas confiarão seus processos, suas pessoas, sua operação e seu conhecimento histórico ao nosso software. Isso exige uma responsabilidade inegociável que honraremos em cada linha de código.
+            <p className="text-base sm:text-lg font-light text-white/60 leading-relaxed">
+              Empresas confiarão seus processos críticos, suas equipes, suas operações e seus dados históricos ao nosso software. Isso exige um nível inegociável de honra e precisão técnica.
             </p>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 max-w-5xl mx-auto text-center space-y-32 relative z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 max-w-5xl mx-auto text-center space-y-36 relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
         >
-          <p className="font-[Fraunces] italic font-light text-4xl sm:text-7xl lg:text-8xl tracking-tight text-[#1D1D1F] mb-6">
+          <p className="font-[Fraunces] italic font-light text-5xl sm:text-7xl lg:text-8xl tracking-tight text-white mb-6">
             Não pensamos em cinco anos.
           </p>
-          <p className="font-[Inter] text-2xl sm:text-4xl font-medium tracking-tight text-[#86868B]">
+          <p className="font-[Inter] text-2xl sm:text-4xl font-medium tracking-tight text-white/50">
             Pensamos nas próximas décadas.
           </p>
         </motion.div>
@@ -369,41 +389,41 @@ export default function Manifesto() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={fadeUp}
-          className="max-w-3xl mx-auto p-10 rounded-3xl bg-[#F5F5F7] border border-[#1D1D1F]/10"
+          className="max-w-3xl mx-auto p-12 rounded-[36px] bg-[#050505] border border-white/[0.08] shadow-2xl"
         >
-          <span className="font-[JetBrains_Mono] text-xs tracking-[0.25em] uppercase text-[#86868B] block mb-4">Capítulo X · Origem</span>
-          <h3 className="font-[Inter] text-2xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
+          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 block mb-4">Capítulo X · Origem</span>
+          <h3 className="font-[Inter] text-2xl sm:text-4xl font-medium tracking-tight text-white mb-4">
             Feito no Brasil. Para o mundo.
           </h3>
-          <p className="text-base sm:text-lg font-light text-[#86868B] leading-relaxed">
-            Somos brasileiros. Construímos no Brasil, entendendo a nossa realidade corporativa, mas mantendo rigorosamente padrões de excelência de nível internacional.
+          <p className="text-base sm:text-lg font-light text-white/60 leading-relaxed">
+            Desenvolvido com profundo entendimento da realidade corporativa nacional, mas mantendo rigorosamente padrões arquiteturais de excelência global.
           </p>
         </motion.div>
       </section>
 
-      <section className="py-32 sm:py-48 px-6 sm:px-12 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#F5F5F7] border-t border-[#1D1D1F]/10 z-10">
+      <section className="py-36 sm:py-48 px-6 sm:px-12 flex flex-col items-center justify-center text-center relative overflow-hidden bg-[#050505] border-t border-white/[0.05] z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="max-w-4xl mx-auto space-y-8 mb-20"
+          className="max-w-4xl mx-auto space-y-6 mb-20"
         >
-          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-[#86868B]">
+          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-white/50">
             O software muda.
           </motion.p>
-          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-[#86868B]">
+          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-white/50">
             A engenharia evolui.
           </motion.p>
-          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-[#86868B]">
+          <motion.p variants={fadeUp} className="font-[Inter] text-2xl sm:text-4xl font-light text-white/50">
             As empresas crescem.
           </motion.p>
-          <motion.p variants={fadeUp} className="font-[Fraunces] italic font-light text-3xl sm:text-6xl text-[#1D1D1F]">
-            Os princípios permanecem.
+          <motion.p variants={fadeUp} className="font-[Fraunces] italic font-light text-4xl sm:text-6xl text-white">
+            Os princípios permanecem imutáveis.
           </motion.p>
 
           <div className="pt-12">
-            <p className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-[#1D1D1F]">
+            <p className="font-[Inter] text-4xl sm:text-6xl font-medium tracking-tight text-white">
               Essa é a Fifteen Miles.
             </p>
           </div>
@@ -416,19 +436,19 @@ export default function Manifesto() {
           variants={fadeUp}
           className="max-w-3xl mx-auto space-y-8 mb-24"
         >
-          <p className="text-base sm:text-xl font-light text-[#86868B] leading-relaxed">
-            Algumas empresas constroem aplicativos. Outras constroem plataformas. Nós queremos construir fundações.
+          <p className="text-lg sm:text-xl font-light text-white/60 leading-relaxed">
+            Algumas empresas constroem aplicativos efêmeros. Outras constroem sistemas. Nós escolhemos erguer fundações.
           </p>
-          <p className="text-base sm:text-xl font-light text-[#86868B] leading-relaxed mb-10">
-            Porque acreditamos que toda grande empresa merece uma infraestrutura à altura de sua ambição.
+          <p className="text-lg sm:text-xl font-light text-white/60 leading-relaxed mb-12">
+            Porque acreditamos que toda organização de alto nível merece uma infraestrutura à altura de sua ambição.
           </p>
 
           <Link
             href="/atlas"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-md bg-[#1D1D1F] text-white font-medium text-xs tracking-[0.15em] uppercase hover:bg-black transition-all group shadow-lg"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-black font-regular text-xs font-[JetBrains_Mono] tracking-[0.2em] hover:bg-white/90 transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)]"
           >
-            <span>Conheça o Atlas</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span>Conhecer o Atlas OS</span>
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
 
@@ -437,13 +457,13 @@ export default function Manifesto() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 0.4 }}
-          className="pt-12 flex flex-col items-center gap-2 border-t border-[#1D1D1F]/10 w-full max-w-xs relative z-10"
+          className="pt-12 flex flex-col items-center gap-2 border-t border-white/[0.08] w-full max-w-xs relative z-10"
         >
-          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.2em] uppercase font-medium text-[#1D1D1F]">
+          <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase font-medium text-white/80">
             Fifteen Miles
           </span>
-          <span className="font-[JetBrains_Mono] text-[9px] tracking-[0.2em] uppercase text-[#86868B]">
-            Manifesto
+          <span className="font-[JetBrains_Mono] text-[9px] tracking-[0.25em] uppercase text-white/40">
+            Manifesto Institucional
           </span>
         </motion.div>
       </section>

@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
-import { ArrowRight, Compass, Image as ImageIcon, Database, Sliders, Shield, Cpu, Sparkles, FolderTree } from "lucide-react";
-import Seo from "../components/Seo";
+import { ArrowRight, Compass, Image as ImageIcon, Sliders, Shield, FolderTree } from "lucide-react";
+import Seo from "@/components/Seo";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -184,14 +185,14 @@ export default function AtlasLanding() {
           </motion.div>
         </motion.div>
 
+        {/* Imagem aplicativo*/}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full max-w-[1200px] mt-24 relative z-20"
+          className="w-full mt-24"
         >
-          <div className="absolute -inset-10 bg-white/[0.02] blur-3xl rounded-full pointer-events-none" />
-          <MockupPlaceholder title="Dashboard Executivo e Operacional em Tempo Real" aspect="video" />
+
         </motion.div>
       </section>
 
@@ -209,7 +210,7 @@ export default function AtlasLanding() {
           </motion.h2>
 
           <div className="flex flex-col items-center w-full max-w-md mx-auto relative">
-            <div className="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-[#030303] to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 inset-x-0 h-48 bg-gradient-to-b from-[#060606] to-transparent z-10 pointer-events-none mix-blend-plus-darker  " />
             
             {[
               "Excel", "Google Drive", "WhatsApp", "ERP Legado", 
@@ -242,12 +243,10 @@ export default function AtlasLanding() {
               }}
               className="relative w-full mt-4 z-20"
             >
-              <div className="absolute inset-0 bg-white blur-[40px] opacity-15 rounded-full pointer-events-none" />
-              <div className="relative w-full bg-[#030303] border-t-2 border-x-2 border-white rounded-t-[24px] rounded-b-md shadow-[0_-20px_50px_rgba(255,255,255,0.15)] flex justify-center items-center py-6 px-10">
+              <div className="relative w-full bg-[#030303] border-1 border-white rounded-xl flex justify-center items-center py-6 px-10">
                 <span className="font-[Inter] text-base sm:text-lg tracking-[0.4em] uppercase font-bold text-white">
                   Atlas
                 </span>
-                <div className="absolute bottom-0 inset-x-0 h-1 bg-white rounded-full blur-[2px]" />
               </div>
             </motion.div>
           </div>
