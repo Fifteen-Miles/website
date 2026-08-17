@@ -18,8 +18,8 @@ varying vec2 vUv;
 
 uniform float uTime;
 uniform vec2 uRes;
-uniform vec2 uMouse;
-uniform float uMouseAmt;
+uniform vec2 uMouse;     // NDC, -1..1
+uniform float uMouseAmt; // 0..1 presence (eases in/out on hover)
 
 float hash(vec2 p) {
   p = fract(p * vec2(123.34, 456.21));
@@ -51,51 +51,87 @@ float fbm(vec2 p) {
 
 void main() {
   vec2 uv = vUv;
-  vec2 p = uv * vec2(1.0, uRes.y / uRes.x);
+  float aspect = uRes.x / uRes.y;
+  float t = uTime * 0.05;
 
-  float t = uTime * 0.035;
+  // --- Pseudo-perspective ground plane ---------------------------------
+  // uv.y = 0 -> near the camera (bottom of screen)
+  // uv.y = 1 -> horizon (top of screen)
+  // "persp" grows toward the bottom, so the world-space grid stretches
+  // near camera and compresses toward the horizon, exactly like flying
+  // low over terrain.
+  float persp = 1.0 / (uv.y * 1.35 + 0.22);
 
-  vec2 flow = vec2(
-    fbm(p * 1.4 + vec2(0.0, t)),
-    fbm(p * 1.4 + vec2(31.7, -t))
-  );
+  vec2 mouseParallax = uMouse * uMouseAmt;
+  float ndcX = (uv.x - 0.5) * aspect;
 
-  float elevation = fbm(p * 1.6 + flow * 0.7);
+  vec2 world = vec2(
+    ndcX * persp * 0.9 + mouseParallax.x * persp * 0.14,
+    persp * 1.15 - t * 6.0 + mouseParallax.y * persp * 0.08
+  ) * 0.55;
 
-  vec2 diff = (uv - vec2(uMouse.x * 0.5 + 0.5, uMouse.y * 0.5 + 0.5)) * vec2(1.0, uRes.y / uRes.x);
-  float dist = length(diff);
-  float ripple = sin(dist * 26.0 - uTime * 1.6) * exp(-dist * 4.5) * 0.035 * uMouseAmt;
-  elevation += ripple;
+  // --- Heightfield + relief normal (forward difference, cheap) ---------
+  float eps = clamp(0.9 / max(persp, 0.6), 0.015, 0.14);
+  float h0 = fbm(world);
+  float hR = fbm(world + vec2(eps, 0.0));
+  float hU = fbm(world + vec2(0.0, eps));
+  vec3 normal = normalize(vec3(h0 - hR, h0 - hU, eps * 1.6));
 
-  vec2 mOff = (uMouse - vec2(0.0, 0.15)) * 0.22 * uMouseAmt;
-  elevation += (mOff.x * 0.5 + mOff.y * 0.5) * fbm(p * 3.2);
+  vec3 lightDir = normalize(vec3(0.35, 0.55, 0.72));
+  float diffuse = max(dot(normal, lightDir), 0.0);
+  float hillshade = 0.22 + diffuse * 1.05;
 
-  float lines = 22.0;
-  float e = fract(elevation * lines);
+  // --- Contour bands, line width eased for distance (anti-moiré) -------
+  float linesFreq = 15.0;
+  float e = fract(h0 * linesFreq);
   float f = min(e, 1.0 - e);
-  float major = smoothstep(0.0, 0.012, f);
-  float e2 = fract(elevation * lines * 2.0);
+  float aa = mix(0.010, 0.05, smoothstep(0.15, 0.85, uv.y));
+  float major = 1.0 - smoothstep(0.0, aa, f);
+
+  float e2 = fract(h0 * linesFreq * 2.0);
   float f2 = min(e2, 1.0 - e2);
-  float minor = smoothstep(0.0, 0.008, f2);
-  float ink = max(major * 0.34, minor * 0.10);
+  float minor = 1.0 - smoothstep(0.0, aa * 0.7, f2);
 
-  float vign = smoothstep(1.8, 0.35, length((uv - 0.5) * vec2(1.0, uRes.y / uRes.x)));
-  ink *= 0.5 + 0.5 * vign;
+  float ink = max(major * 0.42, minor * 0.12);
+  ink *= clamp(hillshade, 0.18, 1.4);
 
-  float fadeT = smoothstep(0.0, 1.5, uTime);
-  ink *= fadeT;
-
+  // --- Palette -----------------------------------------------------------
   vec3 bg = vec3(0.016, 0.018, 0.022);
+  vec3 lineCol = vec3(0.93, 0.95, 0.98);
   vec3 brass = vec3(0.92, 0.82, 0.55);
-  vec3 lineCol = vec3(0.92, 0.94, 0.97);
-  vec3 col = bg * (1.0 - ink) + mix(lineCol, brass, major * 0.55) * ink;
-  col = mix(col, vec3(0.009, 0.010, 0.013), 0.45 * (1.0 - vign));
+
+  float ridge = smoothstep(0.5, 0.85, h0);
+  vec3 tone = mix(lineCol, brass, clamp(diffuse * 0.85 + ridge * 0.35, 0.0, 1.0));
+
+  vec3 col = mix(bg, tone, ink);
+
+  // Horizon fog: fades the relief into the background near the top
+  float fog = smoothstep(0.55, 1.0, uv.y);
+  col = mix(col, bg, fog * 0.85);
+
+  // Thin brass glow marking the horizon line
+  float horizonGlow = exp(-pow((uv.y - 0.6) * 15.0, 2.0)) * 0.05;
+  col += brass * horizonGlow;
+
+  // Soft interactive spotlight following the cursor
+  vec2 mUv = uMouse * 0.5 + 0.5;
+  float distScreen = length(uv - mUv);
+  float spotlight = exp(-distScreen * distScreen * 16.0) * uMouseAmt * 0.10;
+  col += brass * spotlight;
+
+  // Vignette + entrance fade
+  vec2 vp = (uv - 0.5) * vec2(aspect, 1.0);
+  float vign = smoothstep(1.7, 0.3, length(vp));
+  col = mix(bg, col, 0.55 + 0.45 * vign);
+  col *= smoothstep(0.0, 1.6, uTime);
 
   gl_FragColor = vec4(col, 1.0);
 }
 `;
 
-function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader {
+type GLContext = WebGLRenderingContext | WebGL2RenderingContext;
+
+function compile(gl: GLContext, type: number, src: string): WebGLShader {
   const sh = gl.createShader(type)!;
   gl.shaderSource(sh, src);
   gl.compileShader(sh);
@@ -113,8 +149,10 @@ export function ContourTerrain() {
   useEffect(() => {
     const canvas = ref.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl", { antialias: false, alpha: false }) ??
-               canvas.getContext("webgl2", { antialias: false, alpha: false });
+
+    const gl: GLContext | null =
+      canvas.getContext("webgl", { antialias: false, alpha: false }) ??
+      canvas.getContext("webgl2", { antialias: false, alpha: false });
     if (!gl) return;
 
     const prog = gl.createProgram()!;
@@ -130,9 +168,9 @@ export function ContourTerrain() {
     const buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-    const loc = gl.getAttribLocation(prog, "aPos");
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const posLoc = gl.getAttribLocation(prog, "aPos");
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
     const uTime = gl.getUniformLocation(prog, "uTime");
     const uRes = gl.getUniformLocation(prog, "uRes");
@@ -140,6 +178,7 @@ export function ContourTerrain() {
     const uMouseAmt = gl.getUniformLocation(prog, "uMouseAmt");
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const target = { x: 0, y: 0, amt: 0 };
     const cur = { x: 0, y: 0, amt: 0 };
@@ -156,8 +195,6 @@ export function ContourTerrain() {
     let raf = 0;
     let running = true;
     const start = performance.now();
-
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const render = () => {
       if (!running) return;
@@ -197,11 +234,5 @@ export function ContourTerrain() {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={ref}
-      aria-hidden
-      className="absolute inset-0 h-full w-full"
-    />
-  );
+  return <canvas ref={ref} aria-hidden className="absolute inset-0 h-full w-full" />;
 }

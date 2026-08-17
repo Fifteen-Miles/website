@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { Layers, ArrowRight, Server, Lock, Compass } from "lucide-react";
 

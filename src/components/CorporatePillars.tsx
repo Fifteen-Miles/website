@@ -80,19 +80,52 @@ const pillars: CorporatePillar[] = [
 
 const companyStats = [
   { label: "Origem", value: "Brasil" },
-  { label: "Modelo de Negócio", value: "B2B" },
-  { label: "Estágio atual", value: "Em Evolução" },
-  { label: "Infraestrutura", value: "Configurável" },
+  { label: "Modelo", value: "B2B" },
+  { label: "Estágio", value: "Evolutivo" },
+  { label: "Infra", value: "Configurável" },
 ];
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-const brass = "rgb(217 195 122)";
-const ink = "#1D1D1F";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: EASE } },
 };
+
+function MonochromeAurora() {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+      <div
+        className="absolute top-[20%] right-0 h-[600px] w-[800px] translate-x-1/3 rounded-full opacity-20"
+        style={{
+          background: "radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 80%)",
+          filter: "blur(60px)",
+        }}
+      />
+    </div>
+  );
+}
+
+function Grid3D() {
+  return (
+    <div className="absolute inset-0 pointer-events-none [perspective:1000px] overflow-hidden opacity-30">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303] z-10" />
+      <div 
+        className="absolute inset-x-0 bottom-0 h-[100vh] origin-bottom"
+        style={{
+          transform: "rotateX(75deg) translateY(150px) scale(2.5)",
+          backgroundImage: `
+            linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+          maskImage: "linear-gradient(to top, black 5%, transparent 60%)",
+          WebkitMaskImage: "linear-gradient(to top, black 5%, transparent 60%)"
+        }}
+      />
+    </div>
+  );
+}
 
 export function CorporatePillars() {
   const [activeTab, setActiveTab] = useState(pillars[0].id);
@@ -101,21 +134,27 @@ export function CorporatePillars() {
 
   return (
     <section
-      className="relative w-full py-24 sm:py-32 lg:py-44 font-[Inter] selection:bg-white/50 selection:text-white overflow-hidden"
-      style={{ background: "#000000" }}
+      className="relative w-full py-24 sm:py-32 lg:py-44 font-[Inter] selection:bg-white/20 selection:text-white overflow-hidden bg-[#030303]"
     >
-      <div className="pointer-events-none absolute inset-3 sm:inset-5 border border-white/[0.06]" />
+      <MonochromeAurora />
+      <Grid3D />
+      
+      <div className="pointer-events-none absolute inset-4 sm:inset-6 border border-white/[0.03] rounded-[32px] z-20" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-16 sm:mb-24">
+      <div className="relative z-30 w-full max-w-[1400px] mx-auto px-6 sm:px-10 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-20 sm:mb-28">
           <div className="lg:col-span-7">
             <motion.div
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
-              className="inline-flex items-center gap-3 mb-7 sm:mb-9"
+              className="inline-flex items-center gap-2.5 mb-8 font-[JetBrains_Mono] text-[10px] tracking-[0.2em] uppercase"
             >
+              <span className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] backdrop-blur-md text-white/80 shadow-[0_0_20px_rgba(255,255,255,0.02)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/70" />
+                Fundamentos
+              </span>
             </motion.div>
 
             <motion.h2
@@ -123,13 +162,12 @@ export function CorporatePillars() {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
-              className="font-[Raleway] font-light text-[2.2rem] sm:text-5xl lg:text-[4.4rem] tracking-[-0.035em] leading-[1.05] sm:leading-[1.0] text-white mb-7 sm:mb-9"
+              className="font-[Inter] font-medium text-[2.4rem] sm:text-5xl lg:text-[4.2rem] tracking-[-0.04em] leading-[1.05] text-white mb-8"
             >
               Construindo o futuro do software{" "}
-              <span className="font-[Fraunces] italic font-light" style={{ color: "rgba(255,255,255,0.45)" }}>
-                corporativo
+              <span className="font-[Fraunces] italic font-light text-white/40 block sm:inline">
+                corporativo.
               </span>
-              .
             </motion.h2>
 
             <motion.p
@@ -137,11 +175,10 @@ export function CorporatePillars() {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
-              className="text-base sm:text-lg lg:text-xl font-light tracking-tight leading-relaxed max-w-2xl"
-              style={{ color: "rgba(255,255,255,0.42)" }}
+              className="text-base sm:text-lg lg:text-xl font-light tracking-tight leading-relaxed max-w-2xl text-white/50"
             >
               Desenvolvemos infraestrutura digital rigorosa para empresas que
-              buscam estabilidade, segurança e crescimento estruturado.
+              buscam estabilidade, segurança e crescimento estruturado a longo prazo.
             </motion.p>
           </div>
 
@@ -151,18 +188,17 @@ export function CorporatePillars() {
               whileInView="visible"
               viewport={{ once: true, margin: "-80px" }}
               variants={fadeUp}
-              className="grid grid-cols-2 gap-px bg-white/[0.07]"
+              className="grid grid-cols-2 gap-px bg-white/[0.08] p-px rounded-[16px] overflow-hidden"
             >
               {companyStats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="bg-[#0A0B0E] p-5 sm:p-6 border-t-2 transition-colors duration-300 hover:bg-[#0D0F13]"
-                  style={{ borderTopColor: `rgba(217,195,122,0.35)` }}
+                  className="bg-[#050505] p-5 sm:p-6 transition-colors duration-300 hover:bg-[#0A0A0A]"
                 >
-                  <div className="font-[JetBrains_Mono] text-[9px] sm:text-[10px] tracking-widest uppercase mb-2" style={{ color: "rgba(255,255,255,0.38)" }}>
+                  <div className="font-[JetBrains_Mono] text-[9px] sm:text-[10px] tracking-[0.2em] uppercase mb-3 text-white/30">
                     {stat.label}
                   </div>
-                  <div className="font-[Fraunces] text-xl sm:text-2xl font-light tracking-tight text-white">
+                  <div className="font-[Inter] text-lg sm:text-xl font-medium tracking-tight text-white/90">
                     {stat.value}
                   </div>
                 </div>
@@ -177,140 +213,128 @@ export function CorporatePillars() {
           viewport={{ once: true, margin: "-60px" }}
           variants={fadeUp}
         >
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-10">
-            <div>
-              <div className="font-[JetBrains_Mono] text-[10px] sm:text-[11px] tracking-[0.3em] uppercase mb-5" style={{ color: "rgba(255,255,255,0.35)" }}>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8">
+            <div className="w-full">
+              <div className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase mb-4 text-white/30">
                 Os Quatro Pilares
               </div>
-              <div className="h-px w-full bg-white/[0.08]" />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.08] mb-12 sm:mb-16">
+          {/* Seletor de Pilares */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.05] p-px rounded-[16px] overflow-hidden mb-12 sm:mb-16">
             {pillars.map((pillar, idx) => {
               const isActive = pillar.id === activeTab;
               return (
                 <button
                   key={pillar.id}
                   onClick={() => setActiveTab(pillar.id)}
-                  className="relative text-left p-5 sm:p-7 transition-colors duration-300 group"
-                  style={{ background: isActive ? "#101115" : "#0A0B0E" }}
+                  className="relative text-left p-5 sm:p-7 transition-all duration-300 group bg-[#050505] hover:bg-[#0A0A0A]"
                 >
+                  <div className="flex items-center justify-between mb-8">
+                    <span
+                      className="font-[JetBrains_Mono] text-[10px] tracking-[0.2em] uppercase transition-colors duration-300"
+                      style={{ color: isActive ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.3)" }}
+                    >
+                      {pillar.numeral}
+                    </span>
+                    <pillar.icon 
+                      className="w-4 h-4 transition-colors duration-300" 
+                      style={{ color: isActive ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.2)" }} 
+                    />
+                  </div>
+                  
                   <span
-                    className="block font-[Fraunces] text-xs tracking-[0.2em] mb-6 transition-colors duration-300"
-                    style={{ color: isActive ? brass : "rgba(255,255,255,0.22)" }}
-                  >
-                    {pillar.numeral}
-                  </span>
-                  <span
-                    className="block font-[JetBrains_Mono] text-[9px] sm:text-[10px] tracking-[0.25em] uppercase mb-2"
-                    style={{ color: isActive ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.35)" }}
+                    className="block font-[Inter] font-medium text-sm sm:text-base leading-snug tracking-tight mb-2"
+                    style={{ color: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.5)" }}
                   >
                     {pillar.tag}
                   </span>
+
+                  {/* Indicador de Atividade (Linha superior branca) */}
                   <span
-                    className="block font-[Fraunces] font-light text-base sm:text-lg leading-snug tracking-tight"
-                    style={{ color: isActive ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.5)" }}
-                  >
-                    {pillar.title}
-                  </span>
-                  <span
-                    className="absolute bottom-0 left-0 h-[2px] transition-all duration-300"
+                    className="absolute top-0 left-0 h-[2px] transition-all duration-300 bg-white shadow-[0_0_10px_rgba(255,255,255,0.5)]"
                     style={{
                       width: isActive ? "100%" : "0%",
-                      background: brass,
+                      opacity: isActive ? 1 : 0
                     }}
                   />
+                  
+                  {/* Glow de fundo sutil quando ativo */}
                   <span
-                    className="absolute right-5 sm:right-7 top-6 font-[JetBrains_Mono] text-[9px] tracking-[0.2em] transition-opacity duration-300"
-                    style={{ color: brass, opacity: isActive ? 1 : 0 }}
-                  >
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
+                    className="absolute inset-0 bg-white/[0.02] transition-opacity duration-300 pointer-events-none"
+                    style={{ opacity: isActive ? 1 : 0 }}
+                  />
                 </button>
               );
             })}
           </div>
         </motion.div>
 
-        <div
-          className="relative border-t border-white/[0.08] pt-12 sm:pt-16"
-          style={{ borderTopColor: "rgba(217,195,122,0.2)" }}
-        >
+        {/* Área de Conteúdo do Pilar */}
+        <div className="relative rounded-[24px] border border-white/[0.05] bg-[#050505]/80 backdrop-blur-xl shadow-2xl p-8 sm:p-12 lg:p-16 overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.15] to-transparent" />
+          
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPillar.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ duration: 0.5, ease: EASE }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start"
+              initial={{ opacity: 0, y: 15, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+              transition={{ duration: 0.4, ease: EASE }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center"
             >
               <div className="lg:col-span-7">
-                <div className="inline-flex items-center gap-3 mb-6 sm:mb-8">
-                  <div
-                    className="w-9 h-9 sm:w-11 sm:h-11 border flex items-center justify-center"
-                    style={{ borderColor: "rgba(217,195,122,0.4)" }}
-                  >
-                    <IconComponent strokeWidth={1.5} className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: brass }} />
-                  </div>
-                  <span className="font-[JetBrains_Mono] text-[10px] sm:text-[11px] tracking-[0.25em] uppercase" style={{ color: brass }}>
-                    Pilar {currentPillar.numeral} — {currentPillar.tag}
+                <div className="inline-flex items-center gap-3 mb-6">
+                  <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.3em] text-white/30">
+                    Pilar Operacional // {currentPillar.numeral}
                   </span>
                 </div>
 
-                <h3 className="font-[Raleway] font-light text-2xl sm:text-3xl lg:text-4xl tracking-[-0.02em] leading-snug text-white mb-4">
+                <h3 className="font-[Inter] font-medium text-3xl sm:text-4xl lg:text-[2.6rem] tracking-[-0.03em] leading-[1.1] text-white mb-5">
                   {currentPillar.title}
                 </h3>
 
-                <h4 className="font-[Fraunces] italic font-light text-lg sm:text-xl mb-6 sm:mb-8" style={{ color: "rgba(255,255,255,0.48)" }}>
+                <h4 className="font-[Fraunces] italic font-light text-xl sm:text-2xl text-white/40 mb-8">
                   {currentPillar.subtitle}
                 </h4>
 
-                <p className="text-base sm:text-lg font-light leading-relaxed tracking-tight mb-10 sm:mb-12 max-w-2xl" style={{ color: "rgba(255,255,255,0.45)" }}>
+                <p className="text-base sm:text-lg font-light leading-relaxed tracking-tight mb-12 max-w-2xl text-white/50">
                   {currentPillar.description}
                 </p>
 
                 <div className="flex items-center">
                   <a
                     href="/company"
-                    className="group inline-flex items-center gap-3 px-7 sm:px-8 py-3 sm:py-3.5 text-sm font-medium tracking-tight text-black transition-all duration-200 active:scale-[0.97] hover:bg-white/85"
-                    style={{ background: "#EDE8DA" }}
+                    className="group inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-sm font-semibold tracking-tight text-black bg-white transition-all duration-200 hover:scale-[0.98] hover:bg-white/90 shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                   >
-                    <span style={{ color: ink }}>Conhecer a Empresa</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" style={{ color: ink }} />
+                    Conhecer a Engenharia
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                   </a>
                 </div>
               </div>
 
               <div className="lg:col-span-5">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="font-[JetBrains_Mono] text-[9px] sm:text-[10px] tracking-[0.25em] uppercase" style={{ color: "rgba(255,255,255,0.3)" }}>
-                    Indicadores do Pilar
-                  </span>
-                  <span className="h-px flex-1 ml-4" style={{ background: "rgba(217,195,122,0.25)" }} />
-                </div>
-                <div className="divide-y divide-white/[0.07] border-t border-white/[0.07]">
-                  {currentPillar.metrics.map((m) => (
-                    <motion.div
-                      key={m.label}
-                      initial={{ opacity: 0, x: 12 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -12 }}
-                      transition={{ duration: 0.4, ease: EASE }}
-                      className="flex items-baseline justify-between py-5 group"
-                    >
-                      <span className="font-[JetBrains_Mono] text-[10px] sm:text-[11px] uppercase tracking-widest" style={{ color: "rgba(255,255,255,0.4)" }}>
-                        {m.label}
-                      </span>
-                      <span
-                        className="font-[Fraunces] font-light text-xl sm:text-2xl tracking-tight transition-colors duration-300"
-                        style={{ color: brass }}
-                      >
-                        {m.value}
-                      </span>
-                    </motion.div>
-                  ))}
+                <div className="bg-[#030303] rounded-[16px] border border-white/[0.05] p-6 sm:p-8">
+                  <div className="flex items-center justify-between mb-8">
+                    <span className="font-[JetBrains_Mono] text-[9px] tracking-[0.25em] uppercase text-white/30">
+                      Telemetria do Pilar
+                    </span>
+                    <IconComponent className="w-4 h-4 text-white/20" />
+                  </div>
+                  
+                  <div className="flex flex-col gap-6">
+                    {currentPillar.metrics.map((m) => (
+                      <div key={m.label} className="flex flex-col gap-1.5 border-b border-white/[0.03] pb-6 last:border-0 last:pb-0">
+                        <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40">
+                          {m.label}
+                        </span>
+                        <span className="font-[Inter] font-medium text-xl sm:text-2xl tracking-tight text-white/90">
+                          {m.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>

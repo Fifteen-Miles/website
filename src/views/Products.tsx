@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useRef } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Layers, Cpu, Box, Compass } from "lucide-react";
+import { ArrowRight, Layers, Cpu, Box, Compass, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import Seo from "../components/Seo";
 
@@ -22,19 +23,55 @@ const staggerContainer: Variants = {
   },
 };
 
+function MockupPlaceholder({ title, aspect = "video", dark = false }: { title: string, aspect?: "video" | "square" | "mobile", dark?: boolean }) {
+  const aspectClasses = {
+    video: "aspect-video w-full",
+    square: "aspect-square w-full max-w-xl mx-auto",
+    mobile: "aspect-[9/19] w-full max-w-xs mx-auto"
+  };
+
+  return (
+    <div className={`relative rounded-[24px] border ${dark ? 'border-white/10 bg-[#0F0E0C]' : 'border-[#1D1D1F]/10 bg-[#F5F5F7]'} shadow-xl overflow-hidden group ${aspectClasses[aspect]}`}>
+      <div className={`absolute inset-0 bg-gradient-to-br ${dark ? 'from-white/[0.02]' : 'from-black/[0.02]'} to-transparent pointer-events-none`} />
+      
+      <div className={`absolute top-0 inset-x-0 h-12 border-b ${dark ? 'border-white/[0.05] bg-white/[0.01]' : 'border-[#1D1D1F]/5 bg-black/[0.01]'} flex items-center px-6 gap-2`}>
+        <div className={`w-2.5 h-2.5 rounded-full ${dark ? 'bg-white/10' : 'bg-[#1D1D1F]/10'}`} />
+        <div className={`w-2.5 h-2.5 rounded-full ${dark ? 'bg-white/10' : 'bg-[#1D1D1F]/10'}`} />
+        <div className={`w-2.5 h-2.5 rounded-full ${dark ? 'bg-white/10' : 'bg-[#1D1D1F]/10'}`} />
+      </div>
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
+        <div className={`w-14 h-14 rounded-full border ${dark ? 'border-white/10 bg-white/[0.02]' : 'border-[#1D1D1F]/10 bg-black/[0.02]'} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+          <ImageIcon className={`w-6 h-6 ${dark ? 'text-white/30' : 'text-[#1D1D1F]/30'}`} />
+        </div>
+        <div>
+          <span className={`font-mono text-[10px] tracking-[0.2em] uppercase ${dark ? 'text-white/40' : 'text-[#86868B]'} block mb-1`}>
+            Preview Visual
+          </span>
+          <span className={`font-sans text-sm font-medium ${dark ? 'text-white/80' : 'text-[#1D1D1F]'}`}>
+            {title}
+          </span>
+        </div>
+      </div>
+      
+      <div className={`absolute inset-0 ring-1 ring-inset ${dark ? 'ring-white/[0.05]' : 'ring-[#1D1D1F]/[0.05]'} rounded-[24px] pointer-events-none`} />
+    </div>
+  );
+}
+
 export default function Products() {
   return (
     <div className="min-h-screen bg-white text-[#1D1D1F] font-sans selection:bg-black/50 selection:text-white pt-24 pb-20 overflow-x-hidden">
       <Seo 
         title="Produtos | Fifteen Miles" 
-        description="Conheça o Atlas OS, Hephaestus e Atlas Capture — produtos desenvolvidos pela Fifteen Miles para centralizar operações, transformar dados e estruturar a inteligência empresarial." 
+        description="Conheça o Atlas OS, o ecossistema Hephaestus e o Atlas Capture — desenvolvidos pela Fifteen Miles para unir software, hardware e inteligência operacional." 
         path="/products" 
       />
       <div className="fixed inset-0 bg-[radial-gradient(#1D1D1F_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.02] pointer-events-none z-0" />
 
       <main className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-12 lg:py-20 relative z-10">
         
-        {/* 1. HERO */}
+        {/* HERO SECTION */}
         <motion.div
           initial="hidden"
           animate="visible"
@@ -43,28 +80,99 @@ export default function Products() {
         >
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[11px] font-mono tracking-[0.2em] uppercase text-[#1D1D1F]/80 mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#F5F5F7] border border-[#1D1D1F]/10 text-[11px] font-mono tracking-[0.2em] uppercase text-[#1D1D1F]/80 mb-6 shadow-sm"
           >
-            <span>PRODUCTS / 001</span>
+            <span>PRODUCTS / ECOSYSTEM</span>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
             className="text-4xl sm:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.05] text-[#1D1D1F] mb-6"
           >
-            Um ecossistema construído para tornar empresas mais inteligentes.
+            <span className="font-[Helvetica] tracking-tighter">Um ecossistema que une </span>software, hardware e operação.
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="text-lg sm:text-xl text-[#86868B] font-light leading-relaxed max-w-2xl"
           >
-            A Fifteen Miles desenvolve produtos próprios para centralizar operações, transformar dados em contexto e aproximar o trabalho real da inteligência empresarial.
+            A Fifteen Miles expande o limite dos sistemas corporativos. Enquanto o Atlas pensa e organiza, o ecossistema Hephaestus e o Atlas Capture conectam o software diretamente ao mundo físico.
           </motion.p>
         </motion.div>
 
 
-        {/* 2. ATLAS OS — PRODUTO PRINCIPAL */}
+        {/* ECOSYSTEM NARRATIVE: BRAIN, SENSES, HANDS */}
+        <section className="mb-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            variants={staggerContainer}
+            className="p-8 sm:p-14 lg:p-16 rounded-3xl border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-sm relative overflow-hidden"
+          >
+            <div className="max-w-3xl mb-16">
+              <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#86868B] block mb-3">
+                ARQUITETURA DA OPERAÇÃO
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
+                O papel de cada camada na Fifteen Miles
+              </h2>
+              <p className="text-[#86868B] font-light text-base sm:text-lg">
+                O software isolado depende de inputs manuais. A nossa visão integra o ambiente físico e digital em um ciclo contínuo de inteligência, governança e automação.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 relative z-10">
+              <div className="bg-white border border-[#1D1D1F]/10 p-8 rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                <div>
+                  <span className="font-mono text-[10px] text-[#86868B] uppercase tracking-wider block mb-2">01 / NÚCLEO DE SOFTWARE</span>
+                  <h3 className="text-xl font-medium text-[#1D1D1F] mb-1">Atlas OS</h3>
+                  <p className="font-serif italic text-sm text-[#1D1D1F]/60 mb-4">"O cérebro"</p>
+                  <p className="text-xs text-[#86868B] font-light leading-relaxed">
+                    Centraliza informações, processos, pessoas, projetos, dados e toda a operação corporativa em um ambiente único, modular e configurável.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-[#1D1D1F]/5">
+                  <Link href="/atlas" className="inline-flex items-center gap-2 text-xs font-medium text-[#1D1D1F] hover:opacity-70 transition-opacity">
+                    <span>Explorar Atlas OS</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="bg-white border border-[#1D1D1F]/10 p-8 rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                <div>
+                  <span className="font-mono text-[10px] text-[#86868B] uppercase tracking-wider block mb-2">02 / DISPOSITIVO DE COLETA</span>
+                  <h3 className="text-xl font-medium text-[#1D1D1F] mb-1">Atlas Capture</h3>
+                  <p className="font-serif italic text-sm text-[#1D1D1F]/60 mb-4">"Os sentidos"</p>
+                  <p className="text-xs text-[#86868B] font-light leading-relaxed">
+                    Observa e registra o que realmente acontece na operação física, eliminando a barreira comportamental do registro manual de tempo.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-[#1D1D1F]/5 font-mono text-[10px] text-[#86868B] uppercase tracking-widest">
+                  Protótipo Físico
+                </div>
+              </div>
+
+              <div className="bg-white border border-[#1D1D1F]/10 p-8 rounded-2xl shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
+                <div>
+                  <span className="font-mono text-[10px] text-[#86868B] uppercase tracking-wider block mb-2">03 / PLATAFORMA DE HARDWARE</span>
+                  <h3 className="text-xl font-medium text-[#1D1D1F] mb-1">Hephaestus</h3>
+                  <p className="font-serif italic text-sm text-[#1D1D1F]/60 mb-4">"As mãos"</p>
+                  <p className="text-xs text-[#86868B] font-light leading-relaxed">
+                    A família de infraestrutura física e automação que conecta o software ao mundo real, permitindo que o ecossistema interaja com o ambiente de trabalho.
+                  </p>
+                </div>
+                <div className="mt-8 pt-4 border-t border-[#1D1D1F]/5 font-mono text-[10px] text-[#86868B] uppercase tracking-widest">
+                  Plataforma Futura
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+
+        {/* ATLAS OS SECTION */}
         <section className="mb-32">
           <motion.div
             initial="hidden"
@@ -76,18 +184,17 @@ export default function Products() {
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#1D1D1F]/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
             <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-              
               <div className="lg:col-span-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="inline-flex items-center gap-3">
-                    <div className="p-3 rounded-2xl bg-white border border-[#1D1D1F]/10 text-[#1D1D1F]">
+                    <div className="p-3 rounded-2xl bg-white border border-[#1D1D1F]/10 text-[#1D1D1F] shadow-sm">
                       <Layers className="w-5 h-5" />
                     </div>
                     <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#86868B]">
-                      ATLAS OS / PREVIEW
+                      ATLAS OS / NÚCLEO
                     </span>
                   </div>
-                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#1D1D1F] border border-[#1D1D1F]/10 px-3 py-1 rounded-full bg-white">
+                  <span className="font-mono text-[10px] tracking-wider uppercase text-[#1D1D1F] border border-[#1D1D1F]/10 px-3 py-1 rounded-full bg-white shadow-sm">
                     PRODUTO PRINCIPAL
                   </span>
                 </div>
@@ -100,7 +207,7 @@ export default function Products() {
                 </h3>
 
                 <p className="text-base sm:text-lg text-[#86868B] font-light leading-relaxed mb-8">
-                  Uma empresa normalmente possui informações espalhadas entre ferramentas, planilhas, documentos, mensagens e sistemas diferentes. O Atlas centraliza informações, processos, documentos, equipes, planejamento e operações em um ambiente único e configurável.
+                  Uma empresa normalmente possui informações espalhadas entre ferramentas fragmentadas. O Atlas centraliza informações, processos, documentos, equipes, planejamento e operações em um ambiente único e configurável.
                 </p>
 
                 <div className="space-y-4 mb-10 border-t border-[#1D1D1F]/10 pt-6">
@@ -115,14 +222,14 @@ export default function Products() {
                     <span className="font-mono text-xs text-[#86868B] mt-1">02</span>
                     <div>
                       <h4 className="text-sm font-medium text-[#1D1D1F]">Configurabilidade</h4>
-                      <p className="text-xs text-[#86868B] font-light">A organização adapta o sistema à própria operação.</p>
+                      <p className="text-xs text-[#86868B] font-light">A organização adapta o sistema à própria operação, sem amarras rígidas.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="font-mono text-xs text-[#86868B] mt-1">03</span>
                     <div>
                       <h4 className="text-sm font-medium text-[#1D1D1F]">Contexto</h4>
-                      <p className="text-xs text-[#86868B] font-light">A informação deixa de existir isoladamente e passa a fazer parte do contexto operacional.</p>
+                      <p className="text-xs text-[#86868B] font-light">A informação deixa de existir isoladamente e alimenta relatórios e automações.</p>
                     </div>
                   </div>
                 </div>
@@ -136,56 +243,15 @@ export default function Products() {
                 </Link>
               </div>
 
-              {/* Mockup visual conceitual do Atlas */}
               <div className="lg:col-span-6">
-                <div className="bg-white border border-[#1D1D1F]/10 rounded-2xl p-6 sm:p-8 shadow-sm">
-                  <div className="flex items-center justify-between pb-4 mb-6 border-b border-[#1D1D1F]/5">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-[#1D1D1F]/20" />
-                      <div className="w-3 h-3 rounded-full bg-[#1D1D1F]/10" />
-                      <div className="w-3 h-3 rounded-full bg-[#1D1D1F]/10" />
-                    </div>
-                    <span className="font-mono text-[10px] text-[#86868B] uppercase tracking-wider">Atlas Workspace</span>
-                  </div>
-
-                  <div className="grid grid-cols-12 gap-4">
-                    {/* Sidebar mini */}
-                    <div className="col-span-4 bg-[#F5F5F7] rounded-xl p-3 space-y-2">
-                      <div className="h-3 w-16 bg-[#1D1D1F]/20 rounded mb-4" />
-                      <div className="h-2.5 w-full bg-[#1D1D1F]/10 rounded" />
-                      <div className="h-2.5 w-4/5 bg-[#1D1D1F]/10 rounded" />
-                      <div className="h-2.5 w-3/4 bg-[#1D1D1F]/10 rounded" />
-                      <div className="h-2.5 w-5/6 bg-[#1D1D1F]/10 rounded" />
-                    </div>
-
-                    {/* Content preview mini */}
-                    <div className="col-span-8 space-y-4">
-                      <div className="p-3 rounded-xl border border-[#1D1D1F]/10 bg-[#F5F5F7]/50 space-y-2">
-                        <div className="h-3 w-1/2 bg-[#1D1D1F]/20 rounded" />
-                        <div className="h-2 w-full bg-[#1D1D1F]/10 rounded" />
-                        <div className="h-2 w-2/3 bg-[#1D1D1F]/10 rounded" />
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="p-3 rounded-xl border border-[#1D1D1F]/10 bg-[#F5F5F7]/50 space-y-2">
-                          <div className="h-2 w-1/3 bg-[#1D1D1F]/20 rounded" />
-                          <div className="h-4 w-2/3 bg-[#1D1D1F]/10 rounded" />
-                        </div>
-                        <div className="p-3 rounded-xl border border-[#1D1D1F]/10 bg-[#F5F5F7]/50 space-y-2">
-                          <div className="h-2 w-1/3 bg-[#1D1D1F]/20 rounded" />
-                          <div className="h-4 w-2/3 bg-[#1D1D1F]/10 rounded" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <MockupPlaceholder title="Interface Principal do Workspace Atlas OS" aspect="video" />
               </div>
-
             </div>
           </motion.div>
         </section>
 
 
-        {/* 3. HEPHAESTUS & 4. ATLAS CAPTURE (Grid de Produtos Secundários) */}
+        {/* HEPHAESTUS & ATLAS CAPTURE */}
         <section className="grid lg:grid-cols-2 gap-8 mb-32">
           
           {/* HEPHAESTUS */}
@@ -199,15 +265,15 @@ export default function Products() {
             <div>
               <div className="flex items-center justify-between mb-6">
                 <div className="inline-flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-white border border-[#1D1D1F]/10 text-[#86868B]">
+                  <div className="p-3 rounded-2xl bg-white border border-[#1D1D1F]/10 text-[#86868B] shadow-sm">
                     <Cpu className="w-5 h-5" />
                   </div>
                   <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#86868B]">
                     HEPHAESTUS
                   </span>
                 </div>
-                <span className="font-mono text-[10px] tracking-wider uppercase text-[#86868B] border border-[#1D1D1F]/10 px-3 py-1 rounded-full bg-white">
-                  EM DESENVOLVIMENTO
+                <span className="font-mono text-[10px] tracking-wider uppercase text-[#86868B] border border-[#1D1D1F]/10 px-3 py-1 rounded-full bg-white shadow-sm">
+                  PLATAFORMA DE HARDWARE
                 </span>
               </div>
 
@@ -215,20 +281,29 @@ export default function Products() {
                 Hephaestus
               </h2>
               <h3 className="font-serif italic font-light text-lg text-[#1D1D1F]/60 mb-6">
-                Uma nova camada do ecossistema Fifteen Miles.
+                A camada de infraestrutura física e automação.
               </h3>
 
               <p className="text-sm sm:text-base text-[#86868B] font-light leading-relaxed mb-8">
-                Módulo complementar de engenharia e automação estruturada. O Hephaestus está sendo construído para otimizar fluxos técnicos complexos e conectar dados profundos de infraestrutura diretamente ao núcleo operacional do Atlas.
+                Inspirado na mitologia da forja e da engenharia, o Hephaestus representa a família de hardware e dispositivos empresariais da Fifteen Miles. Ele viabiliza a expansão do software para o mundo real, interligando sensores, controladores e o Atlas OS.
               </p>
+
+              <div className="space-y-2 mb-8 font-mono text-xs text-[#86868B]">
+                <div>• Família de dispositivos modulares</div>
+                <div>• Conexão nativa com o ecossistema Atlas</div>
+                <div>• Arquitetura escalável para automação física</div>
+              </div>
+
+              <div className="mb-8">
+                <MockupPlaceholder title="Esquema da Plataforma de Hardware Hephaestus" aspect="square" />
+              </div>
             </div>
 
             <div className="pt-6 border-t border-[#1D1D1F]/10 flex items-center justify-between">
-              <span className="font-mono text-xs text-[#86868B]">Arquitetura de Apoio</span>
-              <span className="font-serif italic text-sm text-[#1D1D1F]/70">Extensão de ecossistema</span>
+              <span className="font-mono text-xs text-[#86868B]">Infraestrutura & Sensores</span>
+              <span className="font-serif italic text-sm text-[#1D1D1F]/70">Linha de expansão</span>
             </div>
           </motion.div>
-
 
           {/* ATLAS CAPTURE */}
           <motion.div
@@ -244,15 +319,15 @@ export default function Products() {
             <div className="relative z-10">
               <div className="flex items-center justify-between mb-6">
                 <div className="inline-flex items-center gap-3">
-                  <div className="p-3 rounded-2xl bg-white/10 border border-white/10 text-white">
+                  <div className="p-3 rounded-2xl bg-white/10 border border-white/10 text-white shadow-sm">
                     <Box className="w-5 h-5" />
                   </div>
                   <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/60">
-                    FIFTEEN MILES LAB
+                    HEPHAESTUS LAB / PROTÓTIPO
                   </span>
                 </div>
-                <span className="font-mono text-[10px] tracking-wider uppercase text-white border border-white/20 px-3 py-1 rounded-full bg-black/40">
-                  PROTÓTIPO EXPERIMENTAL
+                <span className="font-mono text-[10px] tracking-wider uppercase text-white border border-white/20 px-3 py-1 rounded-full bg-black/40 shadow-sm">
+                  PROJETO EXPERIMENTAL
                 </span>
               </div>
 
@@ -264,26 +339,42 @@ export default function Products() {
               </h3>
 
               <p className="text-sm sm:text-base text-white/70 font-light leading-relaxed mb-8">
-                Nem toda informação operacional nasce dentro de um computador. O Atlas Capture explora um dispositivo físico dedicado para capturar dados do trabalho real, enviando registros ao Atlas para gerar relatórios e identificar oportunidades de automação.
+                Um Time Tracker físico construído com ESP32, tela LCD touch, botões e Wi-Fi. Ele resolve o problema comportamental de lembrar de abrir abas no computador, transformando o registro de tarefas em um hábito natural e enviando dados precisos ao Atlas para análise de gargalos e automação.
               </p>
+
+              {/* Simulação visual do dispositivo */}
+              <div className="bg-black/60 border border-white/10 rounded-2xl p-5 mb-8 font-mono text-xs shadow-inner">
+                <div className="text-white/40 text-[10px] uppercase tracking-widest mb-2">Simulação do Display (ESP32)</div>
+                <div className="text-white font-medium text-sm">Atlas Capture</div>
+                <div className="text-white/70 text-[11px] mt-1">Projeto: Website · Tarefa: Landing Page</div>
+                <div className="text-emerald-400 font-bold text-lg my-2 font-mono">01:42:37</div>
+                <div className="flex items-center gap-2 text-[10px] text-white/90">
+                  <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>● TRABALHANDO</span>
+                </div>
+              </div>
+
+              <div className="mb-8">
+                <MockupPlaceholder title="Dispositivo Físico Atlas Capture (Gabinete & Display)" aspect="square" dark={true} />
+              </div>
             </div>
 
             <div className="relative z-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-2 font-mono text-[10px] text-white/50 tracking-wider">
-                <span>Captura</span>
+                <span>Capture</span>
                 <span>→</span>
                 <span>Atlas OS</span>
                 <span>→</span>
-                <span>Automação</span>
+                <span>Insights</span>
               </div>
-              <span className="font-serif italic text-xs text-white/60">Pesquisa & Hardware</span>
+              <span className="font-serif italic text-xs text-white/60">Hardware & Software</span>
             </div>
           </motion.div>
 
         </section>
 
 
-        {/* 5. ECOSSISTEMA */}
+        {/* ECOSYSTEM CYCLE */}
         <section className="mb-32">
           <motion.div
             initial="hidden"
@@ -293,13 +384,13 @@ export default function Products() {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#86868B] block mb-3">
-              ARQUITETURA INTEGRADA
+              CICLO OPERACIONAL
             </span>
             <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
-              Um ecossistema, não uma coleção de ferramentas.
+              Como o ecossistema se fecha
             </h2>
             <p className="text-[#86868B] font-light text-base sm:text-lg">
-              O Atlas é o núcleo operacional. Hephaestus e Atlas Capture atuam como extensões que exploram diferentes camadas da operação empresarial.
+              A união entre o Hephaestus e o Atlas transforma dados brutos do mundo físico em automações inteligentes.
             </p>
           </motion.div>
 
@@ -308,30 +399,36 @@ export default function Products() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeUp}
-            className="grid sm:grid-cols-3 gap-6"
+            className="grid sm:grid-cols-4 gap-6"
           >
-            <div className="p-8 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] text-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">01 / Núcleo</span>
-              <h3 className="text-xl font-medium text-[#1D1D1F] mb-2">Atlas OS</h3>
-              <p className="text-xs text-[#86868B] font-light">Centralização de processos, equipes e contexto institucional.</p>
+            <div className="p-6 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-sm">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">01 / COLETA</span>
+              <h3 className="text-lg font-medium text-[#1D1D1F] mb-1">Hephaestus</h3>
+              <p className="text-xs text-[#86868B] font-light">Dispositivos físicos capturam o tempo e as ações na estação de trabalho.</p>
             </div>
 
-            <div className="p-8 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] text-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">02 / Extensão</span>
-              <h3 className="text-xl font-medium text-[#1D1D1F] mb-2">Hephaestus</h3>
-              <p className="text-xs text-[#86868B] font-light">Camada complementar de engenharia, dados e automação técnica.</p>
+            <div className="p-6 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-sm">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">02 / ORGANIZAÇÃO</span>
+              <h3 className="text-lg font-medium text-[#1D1D1F] mb-1">Atlas OS</h3>
+              <p className="text-xs text-[#86868B] font-light">Os dados entram no núcleo e estruturam a operação e os projetos da empresa.</p>
             </div>
 
-            <div className="p-8 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] text-center">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">03 / Experimento</span>
-              <h3 className="text-xl font-medium text-[#1D1D1F] mb-2">Atlas Capture</h3>
-              <p className="text-xs text-[#86868B] font-light">Conexão física entre o ambiente de trabalho real e o software.</p>
+            <div className="p-6 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-sm">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">03 / ANÁLISE</span>
+              <h3 className="text-lg font-medium text-[#1D1D1F] mb-1">Inteligência</h3>
+              <p className="text-xs text-[#86868B] font-light">O sistema identifica padrões, gargalos e processos repetitivos.</p>
+            </div>
+
+            <div className="p-6 rounded-2xl border border-[#1D1D1F]/10 bg-[#F5F5F7] shadow-sm">
+              <span className="font-mono text-xs uppercase tracking-widest text-[#86868B] block mb-2">04 / AÇÃO</span>
+              <h3 className="text-lg font-medium text-[#1D1D1F] mb-1">Automação</h3>
+              <p className="text-xs text-[#86868B] font-light">O ecossistema sugere melhorias e executa fluxos otimizados no mundo real.</p>
             </div>
           </motion.div>
         </section>
 
 
-        {/* 6. CTA FINAL */}
+        {/* FINAL CTA */}
         <section className="border-t border-[#1D1D1F]/10 pt-20 text-center max-w-2xl mx-auto">
           <motion.div
             initial="hidden"
@@ -339,15 +436,15 @@ export default function Products() {
             viewport={{ once: true }}
             variants={fadeUp}
           >
-            <div className="w-10 h-10 rounded-full border border-[#1D1D1F]/20 bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center mx-auto mb-6">
+            <div className="w-10 h-10 rounded-full border border-[#1D1D1F]/20 bg-[#F5F5F7] text-[#1D1D1F] flex items-center justify-center mx-auto mb-6 shadow-sm">
               <Compass className="w-5 h-5" />
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-[#1D1D1F] mb-4">
-              Estamos construindo o próximo capítulo.
+              Estamos construindo o futuro da operação.
             </h2>
             <p className="text-[#86868B] font-light text-base sm:text-lg mb-8 leading-relaxed">
-              Conheça o Atlas e acompanhe os produtos que estamos desenvolvendo para transformar a operação empresarial.
+              Conheça o Atlas e acompanhe os produtos que estamos desenvolvendo para transformar a forma como as empresas operam.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
