@@ -106,7 +106,7 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <MenuColumn title="Empresa" links={[{t: "Nossa História", l: "/company"}, {t: "Manifesto", l: "/manifesto"}]} />
+                    <MenuColumn title="Empresa" links={[{t: "Nossa História", l: "/company"}, {t: "Manifesto", l: "/manifesto"}, {t: "Vagas", l: "/careers"}]} />
                     <MenuColumn title="Comunicação" links={[{t: "Blog", l: "/blog"}, {t: "Contato", l: "/contact"}]} />
                   </>
                 )}
