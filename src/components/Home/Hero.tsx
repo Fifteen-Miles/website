@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Activity, Check } from "lucide-react";
-import { TiltFrame } from "./TiltFrame";
-import LazyImage from "./LazyImage";
+import { TiltFrame } from "@/components/TiltFrame";
+import LazyImage from "@/components/LazyImage";
 import Image from "next/image";
 import Link from "next/link";
 

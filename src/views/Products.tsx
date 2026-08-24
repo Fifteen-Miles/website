@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Layers, Cpu, Box, Compass, Image as ImageIcon } from "lucide-react";
+import { ArrowRight, Layers, Cpu, Box, Compass, Image as ImageIcon, CheckCircle2, Sliders, GitBranch } from "lucide-react";
 import Link from "next/link";
 import Seo from "../components/Seo";
 
@@ -34,13 +33,11 @@ function MockupPlaceholder({ title, aspect = "video" }: { title: string, aspect?
   return (
     <div className={`relative rounded-[28px] border border-white/[0.08] bg-[#050505] shadow-2xl overflow-hidden group ${aspectClasses[aspect]}`}>
       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent pointer-events-none" />
-      
       <div className="absolute top-0 inset-x-0 h-12 border-b border-white/[0.05] bg-white/[0.01] flex items-center px-6 gap-2">
         <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
         <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
         <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
       </div>
-
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
         <div className="w-14 h-14 rounded-full border border-white/10 bg-white/[0.02] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
           <ImageIcon className="w-6 h-6 text-white/30" />
@@ -54,7 +51,6 @@ function MockupPlaceholder({ title, aspect = "video" }: { title: string, aspect?
           </span>
         </div>
       </div>
-      
       <div className="absolute inset-0 ring-1 ring-inset ring-white/[0.05] rounded-[28px] pointer-events-none" />
     </div>
   );
@@ -65,7 +61,7 @@ export default function Products() {
     <div className="min-h-screen bg-[#030303] text-white font-[Inter] selection:bg-white/20 pt-28 pb-24 overflow-x-hidden">
       <Seo 
         title="Produtos | Fifteen Miles" 
-        description="Conheça o Atlas OS, o ecossistema Hephaestus e o Atlas Capture — desenvolvidos pela Fifteen Miles para unir software, hardware e inteligência operacional." 
+        description="Produtos que transformam operações em sistemas. Conheça o Atlas OS, o ecossistema Hephaestus e o Atlas Capture." 
         path="/products" 
       />
       <div className="fixed inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.02] pointer-events-none z-0" />
@@ -83,96 +79,24 @@ export default function Products() {
             variants={fadeUp}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/[0.08] bg-[#050505] text-[10px] font-[JetBrains_Mono] tracking-[0.25em] uppercase text-white/70 mb-6 shadow-sm"
           >
-            <span>PRODUCTS / ECOSYSTEM</span>
+            <span>ECOSSISTEMA / CATÁLOGO</span>
           </motion.div>
 
           <motion.h1
             variants={fadeUp}
             className="text-5xl sm:text-7xl lg:text-[5.5rem] font-medium tracking-tight leading-[1.05] text-white mb-6"
           >
-            <span className="font-[Helvetica]">Um ecossistema que une </span>
-            <span className="font-[Fraunces] italic font-light text-white/40">software, hardware e operação.</span>
+            <span className="font-[Helvetica]">Produtos que transformam </span>
+            <span className="font-[Fraunces] italic font-light text-white/40">operações em sistemas.</span>
           </motion.h1>
 
           <motion.p
             variants={fadeUp}
             className="text-lg sm:text-xl text-white/50 font-light leading-relaxed max-w-2xl"
           >
-            A Fifteen Miles expande o limite dos sistemas corporativos. Enquanto o Atlas pensa e organiza, o ecossistema Hephaestus e o Atlas Capture conectam o software diretamente ao mundo físico.
+            Da organização centralizada da empresa à interação com o ambiente físico, construímos uma arquitetura integrada para tornar operações mais inteligentes, mensuráveis e adaptáveis.
           </motion.p>
         </motion.div>
-
-        {/* ECOSYSTEM NARRATIVE: BRAIN, SENSES, HANDS */}
-        <section className="mb-32">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="p-8 sm:p-14 lg:p-16 rounded-[36px] border border-white/[0.08] bg-[#050505] shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent pointer-events-none" />
-            
-            <div className="max-w-3xl mb-16 relative z-10">
-              <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase text-white/40 block mb-3">
-                ARQUITETURA DA OPERAÇÃO
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
-                O papel de cada camada na Fifteen Miles
-              </h2>
-              <p className="text-white/50 font-light text-base sm:text-lg">
-                O software isolado depende de inputs manuais. A nossa visão integra o ambiente físico e digital em um ciclo contínuo de inteligência, governança e automação.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 relative z-10">
-              <div className="bg-[#080808] border border-white/[0.08] p-8 rounded-[24px] shadow-xl flex flex-col justify-between hover:border-white/20 transition-all duration-500">
-                <div>
-                  <span className="font-[JetBrains_Mono] text-[10px] text-white/40 uppercase tracking-widest block mb-2">01 / NÚCLEO DE SOFTWARE</span>
-                  <h3 className="text-xl font-medium text-white mb-1">Atlas OS</h3>
-                  <p className="font-[Fraunces] italic text-sm text-white/40 mb-4">"O cérebro"</p>
-                  <p className="text-xs text-white/50 font-light leading-relaxed">
-                    Centraliza informações, processos, pessoas, projetos, dados e toda a operação corporativa em um ambiente único, modular e configurável.
-                  </p>
-                </div>
-                <div className="mt-8 pt-4 border-t border-white/[0.05]">
-                  <Link href="/atlas" className="inline-flex items-center gap-2 text-xs font-[JetBrains_Mono] uppercase tracking-wider text-white hover:text-white/70 transition-colors">
-                    <span>Explorar Atlas OS</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </div>
-              </div>
-
-              <div className="bg-[#080808] border border-white/[0.08] p-8 rounded-[24px] shadow-xl flex flex-col justify-between hover:border-white/20 transition-all duration-500">
-                <div>
-                  <span className="font-[JetBrains_Mono] text-[10px] text-white/40 uppercase tracking-widest block mb-2">02 / DISPOSITIVO DE COLETA</span>
-                  <h3 className="text-xl font-medium text-white mb-1">Atlas Capture</h3>
-                  <p className="font-[Fraunces] italic text-sm text-white/40 mb-4">"Os sentidos"</p>
-                  <p className="text-xs text-white/50 font-light leading-relaxed">
-                    Observa e registra o que realmente acontece na operação física, eliminando a barreira comportamental do registro manual de tempo.
-                  </p>
-                </div>
-                <div className="mt-8 pt-4 border-t border-white/[0.05] font-[JetBrains_Mono] text-[10px] text-white/40 uppercase tracking-widest">
-                  Protótipo Físico
-                </div>
-              </div>
-
-              <div className="bg-[#080808] border border-white/[0.08] p-8 rounded-[24px] shadow-xl flex flex-col justify-between hover:border-white/20 transition-all duration-500">
-                <div>
-                  <span className="font-[JetBrains_Mono] text-[10px] text-white/40 uppercase tracking-widest block mb-2">03 / PLATAFORMA DE HARDWARE</span>
-                  <h3 className="text-xl font-medium text-white mb-1">Hephaestus</h3>
-                  <p className="font-[Fraunces] italic text-sm text-white/40 mb-4">"As mãos"</p>
-                  <p className="text-xs text-white/50 font-light leading-relaxed">
-                    A família de infraestrutura física e automação que conecta o software ao mundo real, permitindo que o ecossistema interaja com o ambiente de trabalho.
-                  </p>
-                </div>
-                <div className="mt-8 pt-4 border-t border-white/[0.05] font-[JetBrains_Mono] text-[10px] text-white/40 uppercase tracking-widest">
-                  Plataforma Futura
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </section>
 
         {/* ATLAS OS SECTION */}
         <section className="mb-32">
@@ -193,7 +117,7 @@ export default function Products() {
                       <Layers className="w-5 h-5" />
                     </div>
                     <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase text-white/40">
-                      ATLAS OS / NÚCLEO
+                      SOFTWARE / NÚCLEO
                     </span>
                   </div>
                   <span className="font-[JetBrains_Mono] text-[10px] tracking-wider uppercase text-white border border-white/10 px-3 py-1 rounded-full bg-white/[0.03] shadow-sm">
@@ -205,11 +129,11 @@ export default function Products() {
                   Atlas OS
                 </h2>
                 <h3 className="font-[Fraunces] italic font-light text-xl text-white/40 mb-6">
-                  O centro operacional da empresa.
+                  O sistema operacional empresarial para centralizar a operação.
                 </h3>
 
                 <p className="text-base sm:text-lg text-white/50 font-light leading-relaxed mb-8">
-                  Uma empresa normalmente possui informações espalhadas entre ferramentas fragmentadas. O Atlas centraliza informações, processos, documentos, equipes, planejamento e operações em um ambiente único e configurável.
+                  Empresas utilizam ferramentas fragmentadas para projetos, tarefas, documentos e equipes. O Atlas centraliza essas estruturas em um ambiente modular onde a empresa não precisa se adaptar ao software — o software se adapta à operação.
                 </p>
 
                 <div className="space-y-4 mb-10 border-t border-white/[0.05] pt-6">
@@ -217,21 +141,21 @@ export default function Products() {
                     <span className="font-[JetBrains_Mono] text-xs text-white/40 mt-1">01</span>
                     <div>
                       <h4 className="text-sm font-medium text-white">Centralização</h4>
-                      <p className="text-xs text-white/50 font-light">Informações e processos reunidos em um único ambiente.</p>
+                      <p className="text-xs text-white/50 font-light">Informações e processos reunidos em um único workspace.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <span className="font-[JetBrains_Mono] text-xs text-white/40 mt-1">02</span>
                     <div>
                       <h4 className="text-sm font-medium text-white">Configurabilidade</h4>
-                      <p className="text-xs text-white/50 font-light">A organização adapta o sistema à própria operação, sem amarras rígidas.</p>
+                      <p className="text-xs text-white/50 font-light">Databases, formulários, wikis e fluxos sob medida.</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <span className="font-[JetBrains_Mono] text-xs text-white/40 mt-1">03</span>
                     <div>
-                      <h4 className="text-sm font-medium text-white">Contexto</h4>
-                      <p className="text-xs text-white/50 font-light">A informação deixa de existir isoladamente e alimenta relatórios e automações.</p>
+                      <h4 className="text-sm font-medium text-white">Contexto Operacional</h4>
+                      <p className="text-xs text-white/50 font-light">Dados conectados alimentam relatórios e inteligência.</p>
                     </div>
                   </div>
                 </div>
@@ -240,7 +164,7 @@ export default function Products() {
                   href="/atlas"
                   className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold text-xs font-[JetBrains_Mono] uppercase tracking-[0.15em] hover:bg-white/95 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] group"
                 >
-                  <span>Conhecer o Atlas</span>
+                  <span>Explorar Atlas OS</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -249,6 +173,50 @@ export default function Products() {
                 <MockupPlaceholder title="Interface Principal do Workspace Atlas OS" aspect="video" />
               </div>
             </div>
+          </motion.div>
+        </section>
+
+        {/* ATLAS MODULES GRID */}
+        <section className="mb-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase text-white/40 block mb-3">
+              ARQUITETURA MODULAR
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
+              Uma fundação para diferentes formas de trabalhar
+            </h2>
+            <p className="text-white/50 font-light text-base">
+              Módulos integrados que substituem dezenas de ferramentas isoladas.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {[
+              { name: "Projects & Tasks", desc: "Gestão de entregas e fluxos Kanban" },
+              { name: "Databases", desc: "Estruturas de dados flexíveis e relacionais" },
+              { name: "Forms", desc: "Coleta de inputs externos e internos" },
+              { name: "Goals & OKRs", desc: "Alinhamento estratégico e acompanhamento de metas" },
+              { name: "Wiki & Docs", desc: "Base de conhecimento institucional unificada" },
+              { name: "Analytics & Reports", desc: "Visão consolidada da performance operacional" },
+            ].map((mod, idx) => (
+              <motion.div key={idx} variants={fadeUp} className="p-8 rounded-[24px] border border-white/[0.08] bg-[#050505] shadow-xl hover:border-white/20 transition-all duration-300">
+                <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/30 block mb-2">Módulo 0{idx+1}</span>
+                <h3 className="text-lg font-medium text-white mb-1">{mod.name}</h3>
+                <p className="text-xs text-white/50 font-light">{mod.desc}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </section>
 
@@ -276,7 +244,7 @@ export default function Products() {
                   </span>
                 </div>
                 <span className="font-[JetBrains_Mono] text-[10px] tracking-wider uppercase text-white/60 border border-white/10 px-3 py-1 rounded-full bg-white/[0.03] shadow-sm">
-                  PLATAFORMA DE HARDWARE
+                  INFRAESTRUTURA DE HARDWARE
                 </span>
               </div>
 
@@ -284,7 +252,7 @@ export default function Products() {
                 Hephaestus
               </h2>
               <h3 className="font-[Fraunces] italic font-light text-lg text-white/40 mb-6">
-                A camada de infraestrutura física e automação.
+                A infraestrutura física para a operação inteligente.
               </h3>
 
               <p className="text-sm sm:text-base text-white/50 font-light leading-relaxed mb-8">
@@ -298,13 +266,13 @@ export default function Products() {
               </div>
 
               <div className="mb-8">
-                <MockupPlaceholder title="Esquema da Plataforma de Hardware Hephaestus" aspect="square" />
+                <MockupPlaceholder title="Plataforma de Hardware Hephaestus" aspect="square" />
               </div>
             </div>
 
             <div className="relative z-10 pt-6 border-t border-white/[0.05] flex items-center justify-between font-[JetBrains_Mono] text-xs text-white/40">
-              <span>Infraestrutura & Sensores</span>
-              <span className="font-[Fraunces] italic text-sm text-white/60">Linha de expansão</span>
+              <span>Hardware & Sensores</span>
+              <span className="font-[Fraunces] italic text-sm text-white/60">Research & Development</span>
             </div>
           </motion.div>
 
@@ -326,11 +294,11 @@ export default function Products() {
                     <Box className="w-5 h-5" />
                   </div>
                   <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase text-white/60">
-                    HEPHAESTUS LAB / PROTÓTIPO
+                    HEPHAESTUS LAB
                   </span>
                 </div>
                 <span className="font-[JetBrains_Mono] text-[10px] tracking-wider uppercase text-white border border-white/20 px-3 py-1 rounded-full bg-black/40 shadow-sm">
-                  PROJETO EXPERIMENTAL
+                  PROTÓTIPO / P&D
                 </span>
               </div>
 
@@ -338,22 +306,21 @@ export default function Products() {
                 Atlas Capture
               </h2>
               <h3 className="font-[Fraunces] italic font-light text-lg text-white/40 mb-6">
-                Do ambiente físico para o contexto digital.
+                O ponto físico entre o trabalho e os dados da operação.
               </h3>
 
               <p className="text-sm sm:text-base text-white/70 font-light leading-relaxed mb-8">
-                Um Time Tracker físico construído com ESP32, tela LCD touch, botões e Wi-Fi. Ele resolve o problema comportamental de lembrar de abrir abas no computador, transformando o registro de tarefas em um hábito natural e enviando dados precisos ao Atlas para análise de gargalos e automação.
+                Um time tracker físico construído com ESP32, touch LCD e Wi-Fi. Ele elimina a barreira comportamental do registro manual em abas de navegador, transformando a execução de tarefas em um fluxo natural que alimenta o Atlas com métricas de tempo e gargalos.
               </p>
 
-              {/* Simulação visual do dispositivo */}
               <div className="bg-black/80 border border-white/10 rounded-2xl p-5 mb-8 font-[JetBrains_Mono] text-xs shadow-inner">
                 <div className="text-white/40 text-[10px] uppercase tracking-widest mb-2">Simulação do Display (ESP32)</div>
                 <div className="text-white font-medium text-sm">Atlas Capture</div>
-                <div className="text-white/60 text-[11px] mt-1">Projeto: Website · Tarefa: Landing Page</div>
+                <div className="text-white/60 text-[11px] mt-1">Projeto: Workspace · Tarefa: API Integration</div>
                 <div className="text-emerald-400 font-bold text-lg my-2 font-[JetBrains_Mono]">01:42:37</div>
                 <div className="flex items-center gap-2 text-[10px] text-white/90">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>● TRABALHANDO</span>
+                  <span>● EM EXECUÇÃO</span>
                 </div>
               </div>
 
@@ -364,7 +331,7 @@ export default function Products() {
 
             <div className="relative z-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-2 font-[JetBrains_Mono] text-[10px] text-white/50 tracking-wider">
-                <span>Capture</span>
+                <span>Coleta física</span>
                 <span>→</span>
                 <span>Atlas OS</span>
                 <span>→</span>
@@ -376,7 +343,7 @@ export default function Products() {
 
         </section>
 
-        {/* ECOSYSTEM CYCLE */}
+        {/* OPERATIONAL CYCLE */}
         <section className="mb-32">
           <motion.div
             initial="hidden"
@@ -389,10 +356,10 @@ export default function Products() {
               CICLO OPERACIONAL
             </span>
             <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
-              Como o ecossistema se fecha
+              O dispositivo coleta. O Atlas entende.
             </h2>
             <p className="text-white/50 font-light text-base sm:text-lg">
-              A união entre o Hephaestus e o Atlas transforma dados brutos do mundo físico em automações inteligentes.
+              O objetivo não é apenas medir tempo. É transformar a execução cotidiana em informação útil para aprimorar processos e automatizar a rotina.
             </p>
           </motion.div>
 
@@ -406,25 +373,74 @@ export default function Products() {
             <div className="p-8 rounded-[24px] border border-white/[0.08] bg-[#050505] shadow-xl">
               <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40 block mb-2">01 / COLETA</span>
               <h3 className="text-lg font-medium text-white mb-1">Hephaestus</h3>
-              <p className="text-xs text-white/50 font-light">Dispositivos físicos capturam o tempo e as ações na estação de trabalho.</p>
+              <p className="text-xs text-white/50 font-light">Dispositivos físicos registram o tempo e a execução na estação de trabalho.</p>
             </div>
 
             <div className="p-8 rounded-[24px] border border-white/[0.08] bg-[#050505] shadow-xl">
               <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40 block mb-2">02 / ORGANIZAÇÃO</span>
               <h3 className="text-lg font-medium text-white mb-1">Atlas OS</h3>
-              <p className="text-xs text-white/50 font-light">Os dados entram no núcleo e estruturam a operação e os projetos da empresa.</p>
+              <p className="text-xs text-white/50 font-light">Os dados entram no núcleo e estruturam os projetos e fluxos da empresa.</p>
             </div>
 
             <div className="p-8 rounded-[24px] border border-white/[0.08] bg-[#050505] shadow-xl">
               <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40 block mb-2">03 / ANÁLISE</span>
               <h3 className="text-lg font-medium text-white mb-1">Inteligência</h3>
-              <p className="text-xs text-white/50 font-light">O sistema identifica padrões, gargalos e processos repetitivos.</p>
+              <p className="text-xs text-white/50 font-light">O sistema identifica desvios de prazos, gargalos e tarefas repetitivas.</p>
             </div>
 
             <div className="p-8 rounded-[24px] border border-white/[0.08] bg-[#050505] shadow-xl">
               <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-white/40 block mb-2">04 / AÇÃO</span>
               <h3 className="text-lg font-medium text-white mb-1">Automação</h3>
-              <p className="text-xs text-white/50 font-light">O ecossistema sugere melhorias e executa fluxos otimizados no mundo real.</p>
+              <p className="text-xs text-white/50 font-light">O ecossistema sugere melhorias e otimiza a operação no mundo real.</p>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* ROADMAP SECTION */}
+        <section className="mb-32">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="p-8 sm:p-14 rounded-[36px] border border-white/[0.08] bg-[#050505] shadow-2xl relative overflow-hidden"
+          >
+            <div className="max-w-2xl mb-12">
+              <span className="font-[JetBrains_Mono] text-[10px] tracking-[0.25em] uppercase text-white/40 block mb-3">
+                ESTÁGIO DOS PRODUTOS
+              </span>
+              <h2 className="text-3xl font-medium tracking-tight text-white mb-2">
+                Roadmap de Desenvolvimento
+              </h2>
+              <p className="text-white/50 font-light text-sm">
+                Transparência sobre o estágio atual de cada iniciativa da Fifteen Miles.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="p-6 rounded-2xl bg-[#080808] border border-white/10">
+                <span className="inline-block font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full mb-4">
+                  NOW / ATIVO
+                </span>
+                <h3 className="text-lg font-medium text-white mb-1">Atlas OS</h3>
+                <p className="text-xs text-white/50 font-light">Desenvolvimento ativo, expansão de módulos e suporte a workspaces corporativos.</p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#080808] border border-white/10">
+                <span className="inline-block font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full mb-4">
+                  NEXT / PROTÓTIPO
+                </span>
+                <h3 className="text-lg font-medium text-white mb-1">Atlas Capture</h3>
+                <p className="text-xs text-white/50 font-light">Testes de hardware com ESP32, prototipagem de gabinete 3D e integração com APIs do Atlas.</p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-[#080808] border border-white/10">
+                <span className="inline-block font-[JetBrains_Mono] text-[10px] uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full mb-4">
+                  RESEARCH / P&D
+                </span>
+                <h3 className="text-lg font-medium text-white mb-1">Hephaestus</h3>
+                <p className="text-xs text-white/50 font-light">Pesquisa de arquiteturas para novos dispositivos físicos de automação e sensores.</p>
+              </div>
             </div>
           </motion.div>
         </section>
@@ -442,7 +458,7 @@ export default function Products() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-medium tracking-tight text-white mb-4">
-              Estamos construindo o futuro da operação.
+              A próxima geração de operações começa com uma arquitetura melhor.
             </h2>
             <p className="text-white/50 font-light text-base sm:text-lg mb-10 leading-relaxed">
               Conheça o Atlas e acompanhe os produtos que estamos desenvolvendo para transformar a forma como as empresas operam.
@@ -453,7 +469,7 @@ export default function Products() {
                 href="/atlas"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-white text-black font-semibold text-xs font-[JetBrains_Mono] uppercase tracking-[0.15em] hover:bg-white/90 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)]"
               >
-                <span>Conhecer Atlas</span>
+                <span>Explorar o Atlas</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link

@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Hero from "../components/Hero";
-import { CorporatePillars } from "../components/CorporatePillars";
-import { AtlasInfrastructureRoom } from "../components/AtlasInfrastructureRoom";
-import { ChamberOfPhilosophy } from "../components/ChamberOfPhilosophy";
-import { HorizonThirtyYearsRoom } from "../components/HorizonThirtyYearsRoom";
+import Hero from "../components/Home/Hero";
+import { CorporatePillars } from "../components/Home/CorporatePillars";
+import { AtlasInfrastructureRoom } from "../components/Home/AtlasInfrastructureRoom";
+import { ChamberOfPhilosophy } from "../components/Home/ChamberOfPhilosophy";
+import { HorizonThirtyYearsRoom } from "../components/Home/HorizonThirtyYearsRoom";
 import Seo from "../components/Seo";
 
 export default function Home() {
