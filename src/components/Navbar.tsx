@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
@@ -173,13 +173,11 @@ export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const pathname = usePathname();
-  const [prevPathname, setPrevPathname] = useState(pathname);
 
-  if (pathname !== prevPathname) {
-    setPrevPathname(pathname);
+  useEffect(() => {
     setActiveMenu(null);
     setMobileMenuOpen(false);
-  }
+  }, [pathname]);
 
   const activeMenuData = activeMenu ? MEGA_MENU_DATA[activeMenu] : null;
 
@@ -245,12 +243,12 @@ export const Navbar = () => {
               animate="visible"
               className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-5 gap-8"
             >
-              {activeMenuData.columns.map((col, idx) => (
-                <motion.div key={idx} variants={itemParallaxVariants} className="space-y-6">
+              {activeMenuData.columns.map((col) => (
+                <motion.div key={col.title} variants={itemParallaxVariants} className="space-y-6">
                   <h4 className="font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.25em] text-white/40">{col.title}</h4>
                   <ul className="space-y-4">
-                    {col.links.map((link, linkIdx) => (
-                      <MegaLink key={linkIdx} title={link.title} desc={link.desc} href={link.href} />
+                    {col.links.map((link) => (
+                      <MegaLink key={link.href} title={link.title} desc={link.desc} href={link.href} />
                     ))}
                   </ul>
                 </motion.div>
@@ -293,8 +291,8 @@ export const Navbar = () => {
             <div className="flex flex-col gap-6">
               <motion.span variants={mobileItemVariants} className="font-[JetBrains_Mono] text-[10px] tracking-[0.3em] uppercase text-white/40 pb-2 border-b border-white/[0.08]">Navegação Principal</motion.span>
               <div className="grid gap-3">
-                {MOBILE_LINKS.map((link, idx) => (
-                  <motion.div key={idx} variants={mobileItemVariants}>
+                {MOBILE_LINKS.map((link) => (
+                  <motion.div key={link.href} variants={mobileItemVariants}>
                     <MobileLink href={link.href} label={link.label} sub={link.sub} onClick={() => setMobileMenuOpen(false)} />
                   </motion.div>
                 ))}
