@@ -193,7 +193,7 @@ const metricsList = [
 ];
 
 const trustedCompanies = [
-  "OpenAI", "Amazon", "NVIDIA", "Nuvemshop", "Coinbase", "Google", "Shopify"
+  "Eletra Energy Solutions", ""
 ];
 
 const pageTypes = [
