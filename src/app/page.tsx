@@ -98,26 +98,6 @@ function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
   );
 }
 
-function ChapterTag({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border"
-      style={{
-        fontFamily: FONT_EYEBROW,
-        color: WINE,
-        borderColor: "rgba(92,0,0,0.25)",
-        background: "rgba(92,0,0,0.04)",
-        fontSize: "10px",
-        letterSpacing: "0.26em",
-        textTransform: "uppercase",
-      }}
-    >
-      <span className="w-1.5 h-1.5 rounded-full" style={{ background: WINE }} />
-      {children}
-    </span>
-  );
-}
-
 function CornerMarks({ inset = 0 }: { inset?: number }) {
   const corners = [
     { cls: "top-0 left-0", d: "M1 10 L1 1 L10 1" },
@@ -558,7 +538,6 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
             <div className="lg:col-span-7">
               <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <ChapterTag>Capítulo II · Fundamentos</ChapterTag>
                 <h2
                   className="mt-7 text-4xl sm:text-5xl lg:text-[3.8rem] leading-[1.08]"
                   style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}
@@ -724,9 +703,6 @@ export default function Home() {
         <BlueprintGrid opacity={0.05} />
         <div className="relative z-10 max-w-[1400px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-3xl mb-16">
-            <motion.div variants={fadeUp}>
-              <ChapterTag>Capítulo III · A Infraestrutura</ChapterTag>
-            </motion.div>
             <motion.h2
               variants={fadeUp}
               className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05]"
@@ -848,9 +824,6 @@ export default function Home() {
       <section className="relative py-32 sm:py-40 px-6 sm:px-14" style={{ borderTop: "1px solid rgba(92,0,0,0.12)" }}>
         <div className="max-w-[1400px] mx-auto">
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-3xl mb-16">
-            <motion.div variants={fadeUp}>
-              <ChapterTag>Capítulo IV · Por Que Existimos</ChapterTag>
-            </motion.div>
             <motion.h2
               variants={fadeUp}
               className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05]"
@@ -906,7 +879,7 @@ export default function Home() {
               <div className="max-w-xl">
                 <div className="inline-flex items-center gap-2 mb-4 text-[11px] uppercase font-mono" style={{ letterSpacing: "0.2em", color: WINE }}>
                   <ScrollText className="w-3.5 h-3.5" />
-                  <span>Capítulo V · A Engenharia</span>
+                  <span>A Engenharia</span>
                 </div>
                 <h3 className="text-3xl sm:text-4xl mb-4" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
                   Filosofia de Engenharia Monumental
@@ -951,9 +924,6 @@ export default function Home() {
         <div className="relative z-10 max-w-[1400px] mx-auto">
           <div className="max-w-3xl mx-auto text-center mb-24">
             <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
-              <motion.div variants={fadeUp} className="flex justify-center">
-                <ChapterTag>Capítulo VI · Nossa Visão</ChapterTag>
-              </motion.div>
               <motion.h2
                 variants={fadeUp}
                 className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05]"
@@ -1019,7 +989,7 @@ export default function Home() {
                 style={{ letterSpacing: "0.28em", color: WINE }}
               >
                 <Landmark className="w-3.5 h-3.5" />
-                <span>Capítulo VII · O Convite Institucional</span>
+                <span>O Convite Institucional</span>
               </div>
               <h3
                 className="mt-6 text-4xl sm:text-6xl leading-[1.1] max-w-3xl"
