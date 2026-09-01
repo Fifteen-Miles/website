@@ -1,3 +1,5 @@
+# robots.txt for https://www.fifteenmiles.tech/
+
 User-agent: *
 Allow: /
 Disallow: /posts/
