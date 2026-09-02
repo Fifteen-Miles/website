@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Inter, Cinzel, Cormorant_Garamond } from 'next/font/google';
+import { Fraunces, Inter, Cinzel, Cormorant_Garamond, UnifrakturMaguntia } from 'next/font/google';
 import '@/index.css';
-import '@/App.css';
 import { Navbar } from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import GrainEffect from '@/components/GrainEffect';
@@ -30,6 +29,13 @@ const cormorant = Cormorant_Garamond({
   weight: ['400', '500', '600', '700'],
   display: 'swap',
   variable: '--font-cormorant',
+});
+
+const unifraktur = UnifrakturMaguntia({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'swap',
+  variable: '--font-gothic',
 });
 
 export const viewport: Viewport = {
@@ -135,14 +141,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="pt-BR" className={`${fraunces.variable} ${inter.variable} ${cinzel.variable} ${cormorant.variable}`}>
+    <html lang="pt-BR" className={`${fraunces.variable} ${inter.variable} ${cinzel.variable} ${cormorant.variable} ${unifraktur.variable}`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#FAF8F5] text-[#0F0E0C] font-[Inter] antialiased selection:bg-[#8C7355] selection:text-[#FAF8F5]">
+      <body className="min-h-screen antialiased">
         <GrainEffect />
         <Navbar />
         <ScrollToTop />

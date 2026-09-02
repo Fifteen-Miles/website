@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, AnimatePresence, useScroll, useTransform, type Variants } from "framer-motion";
 import {
   ArrowRight,
@@ -23,31 +22,12 @@ import {
   Building2,
   Code2,
   BookOpen,
+  SlidersHorizontal,
 } from "lucide-react";
 import Seo from "@/components/Seo";
+import Button from "@/components/ui/button";
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
-
-const FONT_BLACK = `'UnifrakturMaguntia', serif`;
-const FONT_HEADING = `'Coolvetica', 'Helvetica Neue', sans-serif`;
-const FONT_DISPLAY = `'Fraunces', serif`;
-const FONT_MONO = `'JetBrains Mono', monospace`;
-
-const INK = "#1C1710";
-const WINE = "#5C0000";
-const PARCHMENT = "#FAF7F0";
-
-function useMedievalFonts() {
-  useEffect(() => {
-    if (document.getElementById("fm-medieval-fonts")) return;
-    const link = document.createElement("link");
-    link.id = "fm-medieval-fonts";
-    link.rel = "stylesheet";
-    link.href =
-      "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=UnifrakturMaguntia&family=JetBrains+Mono:wght@400;500&display=swap";
-    document.head.appendChild(link);
-  }, []);
-}
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 32 },
@@ -65,16 +45,12 @@ function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
 
   return (
     <div
-      className="relative shrink-0 select-none pointer-events-none"
-      style={{
-        width: size,
-        height: size,
-        animation: spin ? "fm-seal-spin 120s linear infinite" : undefined,
-      }}
+      className={`relative shrink-0 select-none pointer-events-none ${spin ? "animate-seal-spin" : ""}`}
+      style={{ width: size, height: size }}
     >
       <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-        <circle cx="50" cy="50" r="47" fill="none" stroke={WINE} strokeWidth="1" opacity="0.45" />
-        <circle cx="50" cy="50" r="39" fill="none" stroke={WINE} strokeWidth="0.5" opacity="0.28" />
+        <circle cx="50" cy="50" r="47" fill="none" className="stroke-wine opacity-45" strokeWidth="1" />
+        <circle cx="50" cy="50" r="39" fill="none" className="stroke-wine opacity-[0.28]" strokeWidth="0.5" />
         {mounted &&
           Array.from({ length: 24 }).map((_, i) => {
             const angle = (i / 24) * Math.PI * 2;
@@ -88,7 +64,7 @@ function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
                 y1={50 + r1 * Math.sin(angle)}
                 x2={50 + r2 * Math.cos(angle)}
                 y2={50 + r2 * Math.sin(angle)}
-                stroke={WINE}
+                className="stroke-wine"
                 strokeWidth={long ? 1 : 0.5}
                 opacity={long ? 0.55 : 0.28}
               />
@@ -96,8 +72,8 @@ function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
           })}
       </svg>
       <div
-        className="absolute inset-0 flex items-center justify-center select-none"
-        style={{ fontFamily: FONT_BLACK, color: WINE, fontSize: size * 0.32, lineHeight: 1 }}
+        className="absolute inset-0 flex items-center justify-center select-none font-gothic text-wine leading-none"
+        style={{ fontSize: size * 0.32 }}
       >
         XV
       </div>
@@ -106,19 +82,7 @@ function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
 }
 
 function BlueprintGrid({ opacity = 0.04 }: { opacity?: number }) {
-  return (
-    <div
-      className="absolute inset-0 pointer-events-none"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(92,0,0,1) 1px, transparent 1px), linear-gradient(90deg, rgba(92,0,0,1) 1px, transparent 1px)",
-        backgroundSize: "64px 64px",
-        opacity,
-        maskImage: "radial-gradient(ellipse 80% 70% at 50% 15%, black 20%, transparent 90%)",
-        WebkitMaskImage: "radial-gradient(ellipse 80% 70% at 50% 15%, black 20%, transparent 90%)",
-      }}
-    />
-  );
+  return <div className="absolute inset-0 pointer-events-none bg-blueprint" style={{ opacity }} />;
 }
 
 function TiltCard({ children, className, style }: { children: React.ReactNode; className?: string; style?: React.CSSProperties }) {
@@ -175,12 +139,7 @@ function TiltCard({ children, className, style }: { children: React.ReactNode; c
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.2 }}
               exit={{ opacity: 0 }}
-              transition={{
-                opacity: {
-                  duration: 0.3,
-                  ease: "easeInOut",
-                },
-              }}
+              transition={{ opacity: { duration: 0.3, ease: "easeInOut" } }}
               className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-transparent via-white to-transparent"
               style={{ transform: "translateZ(30px)" }}
             />
@@ -194,29 +153,25 @@ function TiltCard({ children, className, style }: { children: React.ReactNode; c
   );
 }
 
-/* ---------------------------------------------------------------------- */
-/* Mini interface previews used inside bento cards and their modals       */
-/* ---------------------------------------------------------------------- */
-
 function MiniKanban() {
   const cols = [
-    { label: "A Fazer", items: 3, tone: WINE },
-    { label: "Em Curso", items: 2, tone: "#8C6B00" },
-    { label: "Concluído", items: 4, tone: "#2F6B3A" },
+    { label: "A Fazer", items: 3, tone: "bg-wine" },
+    { label: "Em Curso", items: 2, tone: "bg-amber-700" },
+    { label: "Concluído", items: 4, tone: "bg-emerald-800" },
   ];
   return (
     <div className="grid grid-cols-3 gap-2">
       {cols.map((c) => (
-        <div key={c.label} className="rounded-lg border p-2.5" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
-          <span className="block font-mono text-[8px] uppercase tracking-wider mb-2" style={{ color: "rgba(28,23,16,0.5)" }}>
+        <div key={c.label} className="rounded-lg border p-2.5 border-wine/[0.12] bg-parchment">
+          <span className="block font-mono text-[8px] uppercase tracking-wider mb-2 text-ink/50">
             {c.label}
           </span>
           <div className="space-y-1.5">
             {Array.from({ length: c.items }).map((_, i) => (
               <div
                 key={i}
-                className="h-2.5 rounded-sm"
-                style={{ background: i === 0 ? c.tone : "rgba(28,23,16,0.1)", opacity: i === 0 ? 0.75 : 1 }}
+                className={`h-2.5 rounded-sm ${i === 0 ? c.tone : "bg-ink/10"}`}
+                style={{ opacity: i === 0 ? 0.75 : 1 }}
               />
             ))}
           </div>
@@ -227,52 +182,70 @@ function MiniKanban() {
 }
 
 function MiniWorkspace() {
-  const rail = [Layers, Sliders, Database, Terminal];
   return (
-    <div className="rounded-xl border overflow-hidden" style={{ borderColor: "rgba(92,0,0,0.15)" }}>
-      <div className="flex items-center gap-1.5 px-3 py-2 border-b" style={{ borderColor: "rgba(92,0,0,0.1)", background: PARCHMENT }}>
-        <span className="w-2 h-2 rounded-full" style={{ background: "rgba(92,0,0,0.3)" }} />
-        <span className="w-2 h-2 rounded-full" style={{ background: "rgba(92,0,0,0.2)" }} />
-        <span className="w-2 h-2 rounded-full" style={{ background: "rgba(92,0,0,0.15)" }} />
-        <span className="ml-2 font-mono text-[9px] tracking-wider" style={{ color: "rgba(28,23,16,0.4)" }}>
-          workspace.atlas
-        </span>
-      </div>
-      <div className="flex bg-white">
-        <div className="w-12 border-r py-3 flex flex-col items-center gap-2.5" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
-          {rail.map((Icon, i) => (
-            <div
-              key={i}
-              className="w-6 h-6 rounded-lg flex items-center justify-center"
-              style={{ background: i === 0 ? "rgba(92,0,0,0.1)" : "transparent" }}
-            >
-              <Icon className="w-3 h-3" style={{ color: i === 0 ? WINE : "rgba(28,23,16,0.35)" }} />
-            </div>
-          ))}
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 1.1, delay: 0.3, ease: EASE }}
+      className="relative flex flex-col items-center justify-center pt-6 lg:pt-0 w-full"
+    >
+      <div className="relative w-full flex items-center justify-center py-12 px-8">
+        <div className="absolute w-[50vw] left-[12vw] z-10 filter  flex justify-center">
+          <Image
+            src="/notebook.png"
+            alt="Atlas OS no Notebook"
+            width={1900}
+            height={1200}
+            priority
+            className="w-full h-full object-cover select-none hover:scale-[1.02] transition-transform duration-700 drop-shadow-[-27px_13px_30px_2px_rgba(0,_0,_0,_0.1)]"
+            draggable={false}
+          />
         </div>
-        <div className="flex-1 p-3">
-          <MiniKanban />
+        <div className="absolute left-[5%] w-[42%] mb-50 sm:w-[30%] z-20 filter ">
+          <Image
+            src="/phone.png"
+            alt="Atlas OS no Celular"
+            width={500}
+            height={1000}
+            priority
+            className="w-full h-auto object-cover select-none hover:-translate-y-2 transition-transform duration-500"
+            draggable={false}
+          />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
-function MiniWorkflow() {
-  const steps = ["Gatilho", "Condição", "Ação"];
+function MiniCustomization() {
+  const items = [
+    { label: "Página", value: "Projetos" },
+    { label: "Campo", value: "Responsável" },
+    { label: "Tipo", value: "Seleção" },
+  ];
+
   return (
-    <div className="flex items-center gap-2 flex-wrap">
-      {steps.map((s, i) => (
-        <div key={s} className="flex items-center gap-2">
-          <div
-            className="rounded-full border px-3 py-1.5 font-mono text-[9px] uppercase tracking-wider"
-            style={{ borderColor: "rgba(92,0,0,0.2)", color: WINE, background: PARCHMENT }}
-          >
-            {s}
-          </div>
-          {i < steps.length - 1 && <ArrowRight className="w-3 h-3 shrink-0" style={{ color: "rgba(92,0,0,0.35)" }} />}
+    <div className="flex -mt-40 flex-col gap-2">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className="flex items-center justify-between rounded-md border border-wine/20 bg-parchment px-3 py-2"
+        >
+          <span className="font-mono text-[9px] uppercase text-wine/50">
+            {item.label}
+          </span>
+
+          <span className="font-mono text-[10px] text-wine">
+            {item.value}
+          </span>
         </div>
       ))}
+
+      <div className="flex items-center justify-center gap-2 pt-1">
+        <div className="h-px flex-1 bg-wine/15" />
+        <SlidersHorizontal className="h-3 w-3 text-wine/40" />
+        <div className="h-px flex-1 bg-wine/15" />
+      </div>
     </div>
   );
 }
@@ -286,18 +259,9 @@ function MiniPermissions() {
   return (
     <div className="space-y-2">
       {rows.map((r) => (
-        <div
-          key={r.name}
-          className="flex items-center justify-between rounded-lg border px-3 py-2"
-          style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}
-        >
-          <span className="text-[11px] font-medium" style={{ color: INK }}>
-            {r.name}
-          </span>
-          <span
-            className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full"
-            style={{ color: WINE, background: "rgba(92,0,0,0.08)" }}
-          >
+        <div key={r.name} className="flex items-center justify-between rounded-lg border px-3 py-2 border-wine/[0.12] bg-parchment">
+          <span className="text-[11px] font-medium text-ink">{r.name}</span>
+          <span className="font-mono text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full text-wine bg-wine/[0.08]">
             {r.level}
           </span>
         </div>
@@ -308,12 +272,9 @@ function MiniPermissions() {
 
 function MiniApi() {
   return (
-    <div
-      className="rounded-lg border p-3 font-mono text-[10px] leading-relaxed overflow-hidden"
-      style={{ borderColor: "rgba(92,0,0,0.15)", background: "#1C1710", color: "#F3EDE3" }}
-    >
+    <div className="rounded-lg border p-3 font-mono text-[10px] leading-relaxed overflow-hidden border-wine/[0.15] bg-ink text-parchment-dark">
       <div>
-        <span style={{ color: "#D8A657" }}>POST</span> /v1/workflows/run
+        <span className="text-amber-500">POST</span> /v1/workflows/run
       </div>
       <div className="opacity-50">{"{"}</div>
       <div className="pl-3 opacity-80">&quot;trigger&quot;: &quot;novo_contrato&quot;,</div>
@@ -328,14 +289,8 @@ function MiniInstitutionalMemory() {
   return (
     <div className="space-y-2">
       {items.map((it) => (
-        <div
-          key={it}
-          className="rounded-lg border px-3 py-2"
-          style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}
-        >
-          <span className="text-[11px] font-medium" style={{ color: INK }}>
-            {it}
-          </span>
+        <div key={it} className="rounded-lg border px-3 py-2 border-wine/[0.12] bg-parchment">
+          <span className="text-[11px] font-medium text-ink">{it}</span>
         </div>
       ))}
     </div>
@@ -349,20 +304,15 @@ function MiniTenants() {
       {tenants.map((t, i) => (
         <div
           key={t}
-          className="flex items-center gap-3 rounded-lg border px-3 py-2"
-          style={{ borderColor: "rgba(92,0,0,0.12)", background: i === 0 ? "rgba(92,0,0,0.05)" : PARCHMENT }}
+          className={`flex items-center gap-3 rounded-lg border px-3 py-2 border-wine/[0.12] ${i === 0 ? "bg-wine/[0.05]" : "bg-parchment"}`}
         >
-          <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: WINE }} />
-          <span className="text-[11px] font-medium" style={{ color: INK }}>
-            {t}
-          </span>
+          <span className="w-1.5 h-1.5 rounded-full shrink-0 bg-wine" />
+          <span className="text-[11px] font-medium text-ink">{t}</span>
         </div>
       ))}
     </div>
   );
 }
-
-/* ---------------------------------------------------------------------- */
 
 const metricsList = [
   { value: "Mais de 20", label: "Módulos, vistas e ferramentas integradas" },
@@ -441,22 +391,22 @@ const bentoItems: BentoItem[] = [
     },
   },
   {
-    id: "automations",
-    icon: Workflow,
-    eyebrow: "Automação",
-    title: "Fluxos que rodam sozinhos",
-    desc: "Gatilhos, condições e ações conectam módulos sem depender de planilhas paralelas ou lembretes manuais.",
+    id: "customization",
+    icon: SlidersHorizontal,
+    eyebrow: "Personalização",
+    title: "A empresa define o sistema",
+    desc: "Configure páginas, campos e estruturas do Atlas para refletir a forma como sua empresa realmente trabalha.",
     gridClass: "lg:col-start-5 lg:col-end-7 lg:row-start-1 lg:row-end-4",
-    preview: <MiniWorkflow />,
+    preview: <MiniCustomization />,
     modal: {
-      headline: "Fluxos que rodam sozinhos",
-      body: "Cada mudança de status, prazo vencido ou novo registro pode disparar uma cadeia de ações — notificar uma equipe, mover um cartão, atualizar um dado — sem intervenção manual.",
-      features: [
-        "Gatilhos por evento, prazo ou condição de dado",
-        "Ações encadeadas entre módulos diferentes",
-        "Histórico completo de cada execução",
-      ],
-      preview: <MiniWorkflow />,
+    headline: "A empresa define o sistema",
+    body: "O Atlas não obriga sua operação a seguir uma estrutura pronta. Páginas, campos e informações podem ser organizados de acordo com as necessidades de cada área, criando um ambiente alinhado à realidade da empresa.",
+    features: [
+    "Páginas e estruturas configuráveis por área",
+    "Campos e informações adaptáveis à operação",
+    "Ambiente moldado às necessidades de cada empresa",
+    ],
+    preview: <MiniCustomization />,
     },
   },
   {
@@ -539,7 +489,6 @@ const bentoItems: BentoItem[] = [
 ];
 
 export default function AtlasLanding() {
-  useMedievalFonts();
   const containerRef = useRef<HTMLDivElement>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -555,122 +504,66 @@ export default function AtlasLanding() {
   const activeItem = bentoItems.find((b) => b.id === activeModal) ?? null;
 
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen overflow-x-hidden"
-      style={{ background: PARCHMENT, color: INK, fontFamily: FONT_HEADING }}
-    >
+    <div ref={containerRef} className="min-h-screen overflow-x-hidden bg-parchment text-ink font-heading">
       <Seo title="Atlas OS — Fifteen Miles" description="Atlas: plataforma operacional definitiva para centralizar pessoas, processos e dados com precisão arquitetural." path="/atlas" />
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @font-face {
-          font-family: 'Coolvetica';
-          src: url('https://cdn.jsdelivr.net/gh/luxonauta/coolvetica@master/woff2/CoolveticaRg.woff2') format('woff2');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-        @keyframes fm-seal-spin {
-          to { transform: rotate(360deg); }
-        }
-        ::selection {
-          background: rgba(92, 0, 0, 0.18);
-          color: ${INK};
-        }
-      `,
-        }}
-      />
-
-      <section className="relative w-full pt-32 sm:pt-44 pb-20 px-6 sm:px-14">
+      {/* Hero Section */}
+      <section className="relative w-full pt-25 sm:pt-30 pb-20 px-6 sm:px-14">
         <BlueprintGrid />
         <div className="absolute top-10 right-14 hidden lg:block opacity-70">
-          <Seal size={150} spin />
         </div>
 
-        <motion.div
-          style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 max-w-[1400px] mx-auto flex flex-col items-center text-center"
-        >
-          <motion.h1
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-            className="text-4xl sm:text-7xl lg:text-[6.5rem] tracking-tight uppercase leading-[1.02]"
-            style={{ fontFamily: FONT_HEADING }}
-          >
-            <motion.span variants={fadeUp} className="block">
-              PROJETADO PARA DURAR
-            </motion.span>
-            <motion.span
-              variants={fadeUp}
-              className="block font-Pnormal normal-case"
-              style={{ fontFamily: FONT_BLACK, color: WINE, fontStyle: "italic", fontSize: "7vw" }}
-            >
-              Décadas.
-            </motion.span>
-          </motion.h1>
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 max-w-[1400px] mx-auto flex flex-col items-center text-center">
+          <motion.h1 className="block text-[10vw] font-thin animate-text-opening font-mono">ATLAS</motion.h1>
+            <motion.div initial="hidden" animate="visible" variants={staggerContainer} className="flex flex-col gap-10 mb-2 5">
+              <motion.span variants={fadeUp} className="text-3xl font-raleway tracking-[0.5rem] font-[100]">
+                INTELIGÊNCIA EXECUTIVA
+              </motion.span>
+              <motion.span variants={fadeUp} className="text-xl font-raleway">
+                Veja sua empresa como ela realmente funciona.<br/><br/>
+              </motion.span>
+              <motion.span variants={fadeUp} className="text-xl font-raleway text-regular">
+                "Todo número escreve uma história <br/><br/>
+                Atlas conta ela inteira." 
+              </motion.span>
+            </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.35, ease: EASE }}
-            className="mt-8 text-lg sm:text-2xl max-w-3xl leading-relaxed font-light"
-            style={{ color: "rgba(28,23,16,0.7)" }}
-          >
+          {/*<motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.35, ease: EASE }} className="mt-8 text-lg sm:text-2xl max-w-3xl leading-relaxed font-light text-ink/70">
             Impulsionamos negócios de todos os tamanhos. Sua empresa possui muitas tecnologias fragmentadas? Gerencie tudo em uma plataforma unificada e confiável que se adapta às suas necessidades e resiste ao tempo.
-          </motion.p>
+          </motion.p>*/}
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
-            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
-          >
-            <button
-              onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm transition-all duration-200 cursor-pointer"
-              style={{ background: WINE, color: PARCHMENT, fontFamily: "Inter", boxShadow: "0 15px 35px -10px rgba(92,0,0,0.55)" }}
-            >
-              <span>Comece já</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
-            <Link
-              href="/docs"
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm transition-all duration-200 cursor-pointer border border-[rgba(92,0,0,0.35)] hover:border-[rgba(38,0,0,0.6)]"
-              style={{ color: WINE, fontFamily: "Inter" }}
-            >
-              <Image src="/google-icon-logo-svgrepo-com.svg" alt="Google" width={12} height={12} priority draggable={false} />
-              Registre-se com o Google
-            </Link>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: EASE }} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+            <Button href="https://atlas.fifteenmiles.tech/register" variant="primary-dark" showArrow>Comece já</Button>
+            <Button href="https://atlas.fifteenmiles.tech/register" variant="google">Registre-se com o Google</Button>
           </motion.div>
         </motion.div>
       </section>
 
-      <section className="py-16 border-y bg-white" style={{ borderColor: "rgba(92,0,0,0.12)" }}>
+      {/* Metrics Section */}
+      <section className="py-16 border-y border-wine/[0.12] bg-white">
         <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {metricsList.map((m, i) => (
-            <div key={i} className="px-4">
-              <span className="block text-3xl sm:text-4xl font-bold tracking-tight mb-2" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: EASE }}  key={i} className="px-4">
+              <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: EASE }} className="block text-3xl sm:text-4xl font-bold tracking-tight mb-2 font-display text-ink">
                 {m.value}
-              </span>
-              <span className="text-xs uppercase font-mono tracking-wider" style={{ color: "rgba(28,23,16,0.6)" }}>
+              </motion.span>
+              <span className="text-xs uppercase font-mono tracking-wider text-ink/60">
                 {m.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
-      <div className="py-12 border-b bg-[#FAF7F0]" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
+      {/* Trusted Companies */}
+      <div className="py-12 border-b border-wine/[0.1] bg-parchment">
         <div className="max-w-[1400px] mx-auto px-6 text-center">
-          <span className="block font-mono text-[10px] uppercase tracking-[0.3em] mb-6" style={{ color: "rgba(28,23,16,0.4)" }}>
+          <span className="block font-mono text-[10px] uppercase tracking-[0.3em] mb-6 text-ink/40">
             Empresas globais que confiam na arquitetura Atlas
           </span>
           <div className="flex flex-wrap items-center justify-center gap-10 sm:gap-16 opacity-70">
             {trustedCompanies.map((comp) => (
-              <span key={comp} className="font-mono text-sm sm:text-base font-bold tracking-widest uppercase" style={{ color: INK }}>
+              <span key={comp} className="font-mono text-sm sm:text-base font-bold tracking-widest uppercase text-ink">
                 {comp}
               </span>
             ))}
@@ -678,82 +571,69 @@ export default function AtlasLanding() {
         </div>
       </div>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F6F1EA" }}>
+      {/* Silos Section */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-alt">
         <BlueprintGrid opacity={0.03} />
         <div className="relative z-10 max-w-[1000px] mx-auto text-center">
-          <h2 className="mt-8 text-4xl sm:text-6xl leading-[1.1]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
+          <h2 className="mt-8 text-4xl sm:text-6xl leading-[1.1] font-display font-semibold text-ink">
             Sua empresa usa <br />
-            <span style={{ color: WINE, fontStyle: "italic" }}>sistemas demais.</span>
+            <span className="text-wine italic font-normal">sistemas demais.</span>
           </h2>
-          <p className="mt-6 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
+          <p className="mt-6 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed text-ink/70">
             O crescimento fragmentado empurra operações para dezenas de ferramentas desconectadas, criando silos de ignorância, retrabalho e alto custo de manutenção.
           </p>
         </div>
 
         <div className="relative z-10 max-w-xl mx-auto mt-16 grid grid-cols-2 sm:grid-cols-3 gap-4">
           {["Excel", "Google Drive", "WhatsApp", "ERP Legado", "CRM de Vendas", "Power BI", "Notion", "ClickUp", "E-mails Soltos"].map((tool) => (
-            <div
-              key={tool}
-              className="p-5 rounded-[8px] border bg-white text-center shadow-sm flex items-center justify-center"
-              style={{ borderColor: "rgba(92,0,0,0.15)" }}
-            >
-              <span className="font-mono text-xs uppercase tracking-widest opacity-70" style={{ color: INK }}>
+            <div key={tool} className="p-5 rounded-[8px] border bg-white text-center shadow-sm flex items-center justify-center border-wine/[0.15]">
+              <span className="font-mono text-xs uppercase tracking-widest opacity-70 text-ink">
                 {tool}
               </span>
             </div>
           ))}
         </div>
 
-        <div className="relative z-10 max-w-xl mx-auto mt-8 p-8 rounded-[10px] border text-center shadow-xl" style={{ background: WINE, borderColor: WINE }}>
+        <div className="relative z-10 max-w-xl mx-auto mt-8 p-8 rounded-[10px] border text-center shadow-xl bg-wine border-wine">
           <span className="text-sm tracking-[0.3em] uppercase font-bold text-white font-mono block">Convergência Total: Atlas OS</span>
           <p className="text-xs text-white/80 mt-2 font-light">Unificação completa de dados, processos e equipes em um único ambiente imutável.</p>
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
+      {/* ERP Comparison Statement */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
           <div className="space-y-4 md:col-span-1">
-            <p
-              className="text-2xl sm:text-3xl font-light line-through"
-              style={{ fontFamily: FONT_DISPLAY, color: "rgba(28,23,16,0.35)", textDecorationColor: WINE }}
-            >
+            <p className="text-2xl sm:text-3xl font-light line-through font-display text-ink/35 decoration-wine">
               O Atlas não é um ERP.
             </p>
-            <p
-              className="text-2xl sm:text-3xl font-light line-through"
-              style={{ fontFamily: FONT_DISPLAY, color: "rgba(28,23,16,0.35)", textDecorationColor: WINE }}
-            >
+            <p className="text-2xl sm:text-3xl font-light line-through font-display text-ink/35 decoration-wine">
               O Atlas não é gestor de tarefas.
             </p>
-            <p
-              className="text-2xl sm:text-3xl font-light line-through"
-              style={{ fontFamily: FONT_DISPLAY, color: "rgba(28,23,16,0.35)", textDecorationColor: WINE }}
-            >
+            <p className="text-2xl sm:text-3xl font-light line-through font-display text-ink/35 decoration-wine">
               O Atlas não é apenas software.
             </p>
           </div>
 
-          <div className="md:col-span-2 p-12 sm:p-16 rounded-[12px] border shadow-xl bg-white relative overflow-hidden" style={{ borderColor: "rgba(92,0,0,0.2)" }}>
-            <h3 className="text-3xl sm:text-5xl leading-[1.15]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
+          <div className="md:col-span-2 p-12 sm:p-16 rounded-[12px] border shadow-xl bg-white relative overflow-hidden border-wine/20">
+            <h3 className="text-3xl sm:text-5xl leading-[1.15] font-display font-semibold text-ink">
               O Atlas é onde <br />
-              <span style={{ color: WINE, fontStyle: "italic" }}>toda a operação</span> <br />
+              <span className="text-wine italic font-normal">toda a operação</span> <br />
               da empresa acontece.
             </h3>
-            <p className="mt-6 text-base sm:text-lg font-light leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
+            <p className="mt-6 text-base sm:text-lg font-light leading-relaxed text-ink/70">
               Substitua a dispersão operacional por um núcleo de alta performance projetado para alinhar equipes e preservar a memória corporativa.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* Bento grid — infraestrutura modular                              */}
-      {/* ---------------------------------------------------------------- */}
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 selection:bg-fuchsia-300 border-t overflow-hidden" style={{ borderColor: "rgba(92,0,0,0.12)", background: "white" }}>
+      {/* Bento Grid */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 selection:bg-fuchsia-300 border-t border-wine/[0.12] bg-white overflow-hidden">
         <BlueprintGrid />
         <div className="max-w-[1400px] mx-auto relative z-10">
           <div className="text-center mb-16 sm:mb-20 max-w-2xl mx-auto">
-            <h2 className="text-4xl sm:text-6xl leading-[1.1] text-black" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600 }}>
+            <h2 className="text-4xl sm:text-6xl leading-[1.1] text-black font-display font-semibold">
               Infraestrutura modular, interface personalizável.
             </h2>
           </div>
@@ -767,36 +647,40 @@ export default function AtlasLanding() {
                   onClick={() => setActiveModal(item.id)}
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.3, ease: EASE }}
-                  className={`group relative flex flex-col justify-between overflow-hidden rounded-xl border p-7 sm:p-8 text-left bg-white cursor-pointer ${item.gridClass}`}
+                  className={`group relative flex flex-col justify-between overflow-hidden rounded-xl border p-7 sm:p-8 text-left cursor-pointer ${item.gridClass}`}
                   style={{ borderColor: "rgba(255,255,255,0.14)", boxShadow: "0 20px 40px -20px rgba(0,0,0,0.35)" }}
                 >
-                  <div>
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 border"
-                      style={{ borderColor: "rgba(92,0,0,0.18)", background: "rgba(92,0,0,0.05)" }}
-                    >
-                      <Icon className="w-4.5 h-4.5" style={{ color: WINE }} />
-                    </div>
-                    <span className="block font-mono text-[9px] uppercase tracking-[0.2em] mb-2" style={{ color: "rgba(28,23,16,0.45)" }}>
-                      {item.eyebrow}
-                    </span>
-                    <h3 className="text-lg sm:text-xl font-medium leading-snug" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
-                      {item.title}
-                    </h3>
-                    <p className="mt-2.5 text-xs sm:text-sm font-light leading-relaxed max-w-sm" style={{ color: "rgba(28,23,16,0.62)" }}>
-                      {item.desc}
-                    </p>
+                  <div className="absolute inset-0 bg-white">
+                    <img
+                      src="/bg-cards.png"
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-multiply"
+                    />
                   </div>
 
-                  <div className="mt-6">{item.preview}</div>
+                  <div className="relative z-10 flex flex-col justify-between h-full w-full">
+                    <div>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-5 border border-wine/[0.18] bg-wine/[0.05]">
+                        <Icon className="w-4.5 h-4.5 text-wine" />
+                      </div>
+                      <span className="block font-mono text-[9px] uppercase tracking-[0.2em] mb-2 text-ink/45">
+                        {item.eyebrow}
+                      </span>
+                      <h3 className="text-lg sm:text-xl font-semibold leading-tight font-raleway text-ink">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2.5 text-xs sm:text-sm font-raleway leading-relaxed max-w-sm text-ink/[0.62]">
+                        {item.desc}
+                      </p>
+                    </div>
 
-                  <span
-                    className="mt-6 inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest"
-                    style={{ color: WINE }}
-                  >
-                    Explorar módulo
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                    <div className="my-4">{item.preview}</div>
+
+                    <span className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-widest text-wine">
+                      Explorar módulo
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
                 </motion.button>
               );
             })}
@@ -804,17 +688,14 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------------------- */}
-      {/* Modal                                                             */}
-      {/* ---------------------------------------------------------------- */}
+      {/* Modal */}
       <AnimatePresence>
         {activeItem && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
-            style={{ background: "rgba(28,23,16,0.7)", backdropFilter: "blur(6px)" }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-ink/70 backdrop-blur-[6px]"
             onClick={() => setActiveModal(null)}
           >
             <motion.div
@@ -823,25 +704,18 @@ export default function AtlasLanding() {
               exit={{ opacity: 0, scale: 0.96, y: 16 }}
               transition={{ duration: 0.35, ease: EASE }}
               onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl border bg-white shadow-2xl"
-              style={{ borderColor: "rgba(92,0,0,0.18)" }}
+              className="relative w-full max-w-3xl max-h-[88vh] overflow-y-auto rounded-2xl border bg-white shadow-2xl border-wine/[0.18]"
             >
-              <div
-                className="sticky top-0 z-10 flex items-start justify-between gap-6 px-7 sm:px-10 pt-8 pb-6 border-b bg-white/95"
-                style={{ borderColor: "rgba(92,0,0,0.1)", backdropFilter: "blur(8px)" }}
-              >
+              <div className="sticky top-0 z-10 flex items-start justify-between gap-6 px-7 sm:px-10 pt-8 pb-6 border-b bg-white/95 border-wine/10 backdrop-blur-[8px]">
                 <div className="flex items-start gap-4">
-                  <div
-                    className="w-11 h-11 rounded-2xl flex items-center justify-center border shrink-0"
-                    style={{ borderColor: "rgba(92,0,0,0.2)", background: "rgba(92,0,0,0.05)" }}
-                  >
-                    <activeItem.icon className="w-5 h-5" style={{ color: WINE }} />
+                  <div className="w-11 h-11 rounded-2xl flex items-center justify-center border shrink-0 border-wine/20 bg-wine/[0.05]">
+                    <activeItem.icon className="w-5 h-5 text-wine" />
                   </div>
                   <div>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.25em] mb-1.5" style={{ color: "rgba(28,23,16,0.45)" }}>
+                    <span className="block font-mono text-[10px] uppercase tracking-[0.25em] mb-1.5 text-ink/45">
                       {activeItem.eyebrow}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl font-medium leading-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                    <h3 className="text-2xl sm:text-3xl font-medium leading-tight font-display text-ink">
                       {activeItem.modal.headline}
                     </h3>
                   </div>
@@ -850,24 +724,24 @@ export default function AtlasLanding() {
                   onClick={() => setActiveModal(null)}
                   className="w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center shrink-0 cursor-pointer transition-colors"
                 >
-                  <X className="w-4 h-4" style={{ color: INK }} />
+                  <X className="w-4 h-4 text-ink" />
                 </button>
               </div>
 
               <div className="px-7 sm:px-10 py-8">
-                <p className="text-base font-light leading-relaxed max-w-xl" style={{ color: "rgba(28,23,16,0.7)" }}>
+                <p className="text-base font-light leading-relaxed max-w-xl text-ink/70">
                   {activeItem.modal.body}
                 </p>
 
-                <div className="mt-8 rounded-2xl border p-5 sm:p-6" style={{ borderColor: "rgba(92,0,0,0.15)", background: PARCHMENT }}>
+                <div className="mt-8 rounded-2xl border p-5 sm:p-6 border-wine/[0.15] bg-parchment">
                   {activeItem.modal.preview}
                 </div>
 
                 <div className="mt-8 grid sm:grid-cols-2 gap-3">
                   {activeItem.modal.features.map((f) => (
-                    <div key={f} className="flex items-start gap-3 p-4 rounded-xl bg-white border" style={{ borderColor: "rgba(92,0,0,0.12)" }}>
-                      <Check className="w-4 h-4 shrink-0 mt-0.5" style={{ color: WINE }} />
-                      <span className="text-sm font-light" style={{ color: "rgba(28,23,16,0.8)" }}>
+                    <div key={f} className="flex items-start gap-3 p-4 rounded-xl bg-white border border-wine/[0.12]">
+                      <Check className="w-4 h-4 shrink-0 mt-0.5 text-wine" />
+                      <span className="text-sm font-light text-ink/80">
                         {f}
                       </span>
                     </div>
@@ -875,14 +749,13 @@ export default function AtlasLanding() {
                 </div>
               </div>
 
-              <div className="px-7 sm:px-10 py-6 border-t flex items-center justify-between gap-4" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
-                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest" style={{ color: "rgba(28,23,16,0.4)" }}>
+              <div className="px-7 sm:px-10 py-6 border-t border-wine/10 flex items-center justify-between gap-4">
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-ink/40">
                   Módulo // {activeItem.eyebrow}
                 </span>
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-widest text-white cursor-pointer"
-                  style={{ background: WINE }}
+                  className="px-6 py-2.5 rounded-full text-xs font-mono uppercase tracking-widest text-white cursor-pointer bg-wine"
                 >
                   Fechar painel
                 </button>
@@ -892,15 +765,16 @@ export default function AtlasLanding() {
         )}
       </AnimatePresence>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F3EDE3" }}>
-        <BlueprintGrid opacity={0.04} />
+      {/* Page Types Section */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-dark">
+        <BlueprintGrid opacity={0.05} />
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-24">
-            <h2 className="mt-6 text-4xl sm:text-6xl leading-[1.1]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
+            <h2 className="mt-6 text-4xl sm:text-6xl leading-[1.1] font-display font-semibold text-ink">
               Onde o trabalho <br />
-              <span style={{ color: WINE, fontStyle: "italic" }}>acontece.</span>
+              <span className="text-wine italic font-normal">acontece.</span>
             </h2>
-            <p className="mt-6 text-lg font-light" style={{ color: "rgba(28,23,16,0.7)" }}>
+            <p className="mt-6 text-lg font-light text-ink/70">
               Cada módulo do Atlas é composto por páginas modulares e widgets configuráveis, adaptados cirurgicamente à sua operação.
             </p>
           </div>
@@ -911,31 +785,24 @@ export default function AtlasLanding() {
               return (
                 <div
                   key={page.name}
-                  className="rounded-[12px] overflow-hidden border flex flex-col h-[300px] transition-all hover:-translate-y-1 hover:shadow-2xl bg-white group"
-                  style={{ borderColor: "rgba(92,0,0,0.18)" }}
+                  className="rounded-[12px] overflow-hidden border flex flex-col h-[300px] transition-all hover:-translate-y-1 hover:shadow-2xl bg-white group border-wine/[0.18]"
                 >
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center justify-between mb-5">
-                        <span
-                          className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded border"
-                          style={{ borderColor: "rgba(92,0,0,0.25)", color: WINE, background: "rgba(92,0,0,0.03)" }}
-                        >
+                        <span className="font-mono text-[10px] uppercase tracking-widest px-2.5 py-1 rounded border border-wine/25 text-wine bg-wine/[0.03]">
                           Vista // {page.name}
                         </span>
-                        <Icon className="w-4 h-4" style={{ color: WINE, opacity: 0.6 }} />
+                        <Icon className="w-4 h-4 text-wine opacity-60" />
                       </div>
-                      <h3 className="text-xl font-medium tracking-tight mb-2" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                      <h3 className="text-xl font-medium tracking-tight mb-2 font-display text-ink">
                         {page.name}
                       </h3>
-                      <p className="text-xs font-light leading-relaxed" style={{ color: "rgba(28,23,16,0.65)" }}>
+                      <p className="text-xs font-light leading-relaxed text-ink/[0.65]">
                         {page.desc}
                       </p>
                     </div>
-                    <span
-                      className="text-[10px] font-mono uppercase tracking-widest pt-4 border-t flex items-center gap-1.5"
-                      style={{ borderColor: "rgba(92,0,0,0.08)", color: WINE }}
-                    >
+                    <span className="text-[10px] font-mono uppercase tracking-widest pt-4 border-t border-wine/[0.08] text-wine flex items-center gap-1.5">
                       <span>Explorar módulo</span>
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -947,90 +814,82 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
+      {/* Customization & Governance */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment">
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-24">
-            <h2 className="mt-6 text-4xl sm:text-6xl leading-[1.1]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
+            <h2 className="mt-6 text-4xl sm:text-6xl leading-[1.1] font-display font-semibold text-ink">
               Feito para a sua empresa. <br />
-              <span style={{ color: WINE, fontStyle: "italic", fontFamily: FONT_BLACK }}>Sob medida para você.</span>
+              <span className="text-wine italic font-normal font-gothic">Sob medida para você.</span>
             </h2>
-            <p className="mt-6 text-lg font-light" style={{ color: "rgba(28,23,16,0.7)" }}>
+            <p className="mt-6 text-lg font-light text-ink/70">
               O Atlas resolve o problema de empresas com muitas tecnologias, combinando o isolamento rigoroso de dados com uma flexibilidade radical de personalização.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm" style={{ borderColor: "rgba(92,0,0,0.18)" }}>
+            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm border-wine/[0.18]">
               <div>
-                <div
-                  className="w-10 h-10 rounded-full border flex items-center justify-center mb-6"
-                  style={{ borderColor: "rgba(92,0,0,0.25)", background: "rgba(92,0,0,0.04)" }}
-                >
-                  <Sliders className="w-5 h-5" style={{ color: WINE }} />
+                <div className="w-10 h-10 rounded-full border flex items-center justify-center mb-6 border-wine/25 bg-wine/[0.04]">
+                  <Sliders className="w-5 h-5 text-wine" />
                 </div>
-                <h3 className="text-xl font-medium mb-3" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                <h3 className="text-xl font-medium mb-3 font-display text-ink">
                   Identidade & Accent Color
                 </h3>
-                <p className="text-sm font-light leading-relaxed mb-6" style={{ color: "rgba(28,23,16,0.65)" }}>
+                <p className="text-sm font-light leading-relaxed mb-6 text-ink/[0.65]">
                   Personalize o workspace com sua logomarca e escolha cores de destaque que alimentam dinamicamente toda a interface.
                 </p>
               </div>
-              <div className="pt-6 border-t flex items-center gap-3" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
+              <div className="pt-6 border-t border-wine/10 flex items-center gap-3">
                 <span className="w-3 h-3 rounded-full bg-[#5C0000]" />
                 <span className="w-3 h-3 rounded-full bg-blue-700" />
                 <span className="w-3 h-3 rounded-full bg-amber-700" />
                 <span className="w-3 h-3 rounded-full bg-emerald-700" />
-                <span className="text-[10px] font-mono uppercase tracking-widest ml-auto" style={{ color: WINE }}>
+                <span className="text-[10px] font-mono uppercase tracking-widest ml-auto text-wine">
                   Dinâmico
                 </span>
               </div>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm" style={{ borderColor: "rgba(92,0,0,0.18)" }}>
+            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm border-wine/[0.18]">
               <div>
-                <div
-                  className="w-10 h-10 rounded-full border flex items-center justify-center mb-6"
-                  style={{ borderColor: "rgba(92,0,0,0.25)", background: "rgba(92,0,0,0.04)" }}
-                >
-                  <Shield className="w-5 h-5" style={{ color: WINE }} />
+                <div className="w-10 h-10 rounded-full border flex items-center justify-center mb-6 border-wine/25 bg-wine/[0.04]">
+                  <Shield className="w-5 h-5 text-wine" />
                 </div>
-                <h3 className="text-xl font-medium mb-3" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                <h3 className="text-xl font-medium mb-3 font-display text-ink">
                   Governança & RBAC
                 </h3>
-                <p className="text-sm font-light leading-relaxed mb-6" style={{ color: "rgba(28,23,16,0.65)" }}>
+                <p className="text-sm font-light leading-relaxed mb-6 text-ink/[0.65]">
                   Controle cirúrgico de acessos por usuário, equipes ou páginas. Defina papéis com total segurança jurídica e técnica.
                 </p>
               </div>
-              <div className="pt-6 border-t flex items-center justify-between" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
-                <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: "rgba(28,23,16,0.45)" }}>
+              <div className="pt-6 border-t border-wine/10 flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink/45">
                   Multi-tenancy
                 </span>
-                <span className="text-xs font-medium" style={{ color: WINE }}>
+                <span className="text-xs font-medium text-wine">
                   Isolado & Seguro
                 </span>
               </div>
             </div>
 
-            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm" style={{ borderColor: "rgba(92,0,0,0.18)" }}>
+            <div className="p-8 sm:p-10 rounded-[12px] border flex flex-col justify-between bg-white shadow-sm border-wine/[0.18]">
               <div>
-                <div
-                  className="w-10 h-10 rounded-full border flex items-center justify-center mb-6"
-                  style={{ borderColor: "rgba(92,0,0,0.25)", background: "rgba(92,0,0,0.04)" }}
-                >
-                  <FolderTree className="w-5 h-5" style={{ color: WINE }} />
+                <div className="w-10 h-10 rounded-full border flex items-center justify-center mb-6 border-wine/25 bg-wine/[0.04]">
+                  <FolderTree className="w-5 h-5 text-wine" />
                 </div>
-                <h3 className="text-xl font-medium mb-3" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                <h3 className="text-xl font-medium mb-3 font-display text-ink">
                   Módulos Ativáveis
                 </h3>
-                <p className="text-sm font-light leading-relaxed mb-6" style={{ color: "rgba(28,23,16,0.65)" }}>
+                <p className="text-sm font-light leading-relaxed mb-6 text-ink/[0.65]">
                   Elimine ruídos visuais. Ative apenas os módulos de CRM, Financeiro, Wiki e Projetos essenciais para o seu negócio.
                 </p>
               </div>
-              <div className="pt-6 border-t flex items-center justify-between" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
-                <span className="text-[10px] font-mono uppercase tracking-widest" style={{ color: "rgba(28,23,16,0.45)" }}>
+              <div className="pt-6 border-t border-wine/10 flex items-center justify-between">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-ink/45">
                   Sidebar Dinâmica
                 </span>
-                <span className="text-xs font-medium" style={{ color: INK }}>
+                <span className="text-xs font-medium text-ink">
                   Configurável
                 </span>
               </div>
@@ -1039,10 +898,11 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F6F1EA" }}>
+      {/* Backbone / Architecture Steps */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-alt">
         <BlueprintGrid opacity={0.03} />
         <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10">
-          <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight text-center mb-20" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+          <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight text-center mb-20 font-display text-ink">
             A espinha dorsal da operação.
           </h2>
 
@@ -1058,18 +918,12 @@ export default function AtlasLanding() {
               const isLast = i === arr.length - 1;
               return (
                 <div key={step} className="flex flex-col items-center w-full max-w-lg">
-                  <div
-                    className="w-full px-8 py-5 rounded-[10px] border flex items-center justify-center shadow-sm relative bg-white"
-                    style={{ borderColor: "rgba(92,0,0,0.2)" }}
-                  >
-                    <span
-                      className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-center relative z-10"
-                      style={{ color: INK, fontFamily: FONT_MONO }}
-                    >
+                  <div className="w-full px-8 py-5 rounded-[10px] border flex items-center justify-center shadow-sm relative bg-white border-wine/20">
+                    <span className="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-center relative z-10 text-ink font-mono">
                       {step}
                     </span>
                   </div>
-                  {!isLast && <div className="h-10 w-px my-2" style={{ background: "rgba(92,0,0,0.25)" }} />}
+                  {!isLast && <div className="h-10 w-px my-2 bg-wine/25" />}
                 </div>
               );
             })}
@@ -1077,24 +931,25 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 max-w-[1400px] mx-auto border-t" style={{ borderColor: "rgba(92,0,0,0.12)" }}>
+      {/* Brazil / Currency Comparison */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 max-w-[1400px] mx-auto border-t border-wine/[0.12]">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <div className="p-8 sm:p-14 rounded-[12px] border shadow-xl bg-white relative overflow-hidden flex flex-col justify-between" style={{ borderColor: "rgba(92,0,0,0.2)" }}>
+          <div className="p-8 sm:p-14 rounded-[12px] border shadow-xl bg-white relative overflow-hidden flex flex-col justify-between border-wine/20">
             <div>
-              <h2 className="mt-6 text-3xl sm:text-4xl font-medium tracking-tight mb-6" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+              <h2 className="mt-6 text-3xl sm:text-4xl font-medium tracking-tight mb-6 font-display text-ink">
                 Construído no Brasil.
                 <br />
-                <span style={{ color: WINE, fontStyle: "italic" }}>Para o Brasil.</span>
+                <span className="text-wine italic font-normal">Para o Brasil.</span>
               </h2>
-              <p className="text-base sm:text-lg font-light leading-relaxed mb-10" style={{ color: "rgba(28,23,16,0.7)" }}>
+              <p className="text-base sm:text-lg font-light leading-relaxed mb-10 text-ink/70">
                 Desenvolvido considerando idioma nativo, suporte humanizado de plantão, legislação fiscal brasileira e fuso horário alinhado. Sem barreiras de suporte estrangeiro.
               </p>
             </div>
             <div className="space-y-4">
               {["Português nativo e natural", "Suporte nacional prioritário", "Conformidade regulatória local", "Alinhamento total de fuso horário"].map((item) => (
-                <div key={item} className="flex items-center gap-4 border-b pb-4" style={{ borderColor: "rgba(92,0,0,0.1)" }}>
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: WINE }} />
-                  <span className="text-sm font-light" style={{ color: INK }}>
+                <div key={item} className="flex items-center gap-4 border-b border-wine/10 pb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-wine" />
+                  <span className="text-sm font-light text-ink">
                     {item}
                   </span>
                 </div>
@@ -1104,14 +959,14 @@ export default function AtlasLanding() {
 
           <div>
             <div className="mb-6">
-              <h2 className="mt-4 text-3xl sm:text-4xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+              <h2 className="mt-4 text-3xl sm:text-4xl font-medium tracking-tight font-display text-ink">
                 Pagamento em Real.
-                <br /> <span style={{ color: WINE, fontStyle: "italic" }}>Sem surpresas em dólar.</span>
+                <br /> <span className="text-wine italic font-normal">Sem surpresas em dólar.</span>
               </h2>
             </div>
 
             <TiltCard>
-              <div className="flex justify-between items-end border-b pb-6 mb-6" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
+              <div className="flex justify-between items-end border-b border-white/15 pb-6 mb-6">
                 <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-white/70">SaaS Internacional</span>
                 <div className="text-right">
                   <span className="block text-sm font-light mb-1.5 text-white/90">USD + IOF + Câmbio Flutuante</span>
@@ -1119,7 +974,7 @@ export default function AtlasLanding() {
                 </div>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-3xl font-medium" style={{ fontFamily: FONT_DISPLAY, color: "white" }}>
+                <span className="text-3xl font-medium font-display text-white">
                   Atlas OS
                 </span>
                 <span className="font-mono text-xs uppercase tracking-widest font-medium px-4 py-2 rounded-full border border-white/30 bg-white/10 text-amber-300">
@@ -1131,13 +986,14 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: WINE }}>
+      {/* Developers Section */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-wine">
         <div className="max-w-[1400px] mx-auto text-white">
           <div className="max-w-3xl mb-12">
             <span className="text-[10px] uppercase tracking-[0.3em] font-mono px-4 py-2 rounded-full border border-white/20 text-white/90 bg-white/10 inline-block mb-4">
               Desenvolvedores & APIs
             </span>
-            <h2 className="text-4xl sm:text-6xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY }}>
+            <h2 className="text-4xl sm:text-6xl font-medium tracking-tight font-display">
               Infraestrutura confiável e extensível para cada pilha tecnológica.
             </h2>
             <p className="mt-6 text-lg text-white/80 font-light">
@@ -1146,8 +1002,7 @@ export default function AtlasLanding() {
             <div className="mt-8 flex gap-4">
               <a
                 href="https://atlas.fifteenmiles.tech/docs"
-                className="px-6 py-3 rounded-full text-xs font-mono uppercase tracking-widest text-white transition-all hover:opacity-90"
-                style={{ background: "#3D0000", border: "1px solid rgba(255,255,255,0.2)" }}
+                className="px-6 py-3 rounded-full text-xs font-mono uppercase tracking-widest text-white transition-all hover:opacity-95 bg-[#3D0000] border border-white/20"
               >
                 Veja a documentação
               </a>
@@ -1164,10 +1019,11 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F6F1EA" }}>
+      {/* Philosophy Section */}
+      <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-alt">
         <BlueprintGrid opacity={0.03} />
         <div className="max-w-4xl mx-auto text-center mb-20 relative z-10">
-          <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+          <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight font-display text-ink">
             A Filosofia da Permanência.
           </h2>
         </div>
@@ -1179,14 +1035,14 @@ export default function AtlasLanding() {
             { num: "III", title: "Princípio do Contexto", desc: "Dados isolados geram ruído. Toda informação corporativa exige hierarquia e contexto." },
             { num: "IV", title: "Princípio da Engenharia", desc: "A verdadeira simplicidade exige um rigor colossal de engenharia invisível." },
           ].map((item) => (
-            <div key={item.num} className="text-center relative p-10 sm:p-12 rounded-[12px] border shadow-sm bg-white" style={{ borderColor: "rgba(92,0,0,0.18)" }}>
-              <span className="font-mono text-[10px] tracking-[0.3em] uppercase block mb-3" style={{ color: WINE }}>
+            <div key={item.num} className="text-center relative p-10 sm:p-12 rounded-[12px] border shadow-sm bg-white border-wine/[0.18]">
+              <span className="font-mono text-[10px] tracking-[0.3em] uppercase block mb-3 text-wine">
                 Princípio {item.num}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-4" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+              <h3 className="text-2xl sm:text-3xl font-medium tracking-tight mb-4 font-display text-ink">
                 {item.title}
               </h3>
-              <p className="text-base sm:text-lg font-light max-w-xl mx-auto leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
+              <p className="text-base sm:text-lg font-light max-w-xl mx-auto leading-relaxed text-ink/70">
                 {item.desc}
               </p>
             </div>
@@ -1194,13 +1050,14 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="py-36 sm:py-48 px-6 sm:px-14 border-t relative overflow-hidden" style={{ borderColor: "rgba(92,0,0,0.12)", background: "linear-gradient(180deg, #FAF7F0 0%, #F3EDE3 100%)" }}>
+      {/* FAQ Section */}
+      <section className="py-36 sm:py-48 px-6 sm:px-14 border-t border-wine/[0.12] relative overflow-hidden bg-gradient-to-b from-parchment to-parchment-dark">
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-20">
-            <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+            <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight font-display text-ink">
               Dúvidas Frequentes
             </h2>
-            <p className="mt-4 text-base font-light text-[#1C1710]/70 max-w-lg mx-auto">
+            <p className="mt-4 text-base font-light text-ink/70 max-w-lg mx-auto">
               Tudo o que você precisa saber sobre a arquitetura, soberania e implantação do Atlas OS.
             </p>
           </div>
@@ -1213,31 +1070,27 @@ export default function AtlasLanding() {
                   key={faq.q}
                   className="rounded-[16px] border bg-white shadow-sm transition-all duration-300 overflow-hidden"
                   style={{
-                    borderColor: isOpen ? WINE : "rgba(92,0,0,0.18)",
+                    borderColor: isOpen ? "rgba(92,0,0,0.6)" : "rgba(92,0,0,0.18)",
                     boxShadow: isOpen ? "0 15px 30px -10px rgba(92,0,0,0.08)" : "0 2px 4px rgba(0,0,0,0.02)",
                   }}
                 >
                   <button onClick={() => setOpenFaq(isOpen ? null : idx)} className="w-full p-7 text-left flex items-center justify-between gap-6 cursor-pointer group">
                     <div className="flex items-center gap-4">
-                      <span className="font-mono text-xs font-semibold tracking-widest text-[#5C0000]/60 group-hover:text-[#5C0000] transition-colors">
+                      <span className="font-mono text-xs font-semibold tracking-widest text-wine/60 group-hover:text-wine transition-colors">
                         0{idx + 1}
                       </span>
-                      <span className="text-lg sm:text-xl font-medium transition-colors" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+                      <span className="text-lg sm:text-xl font-medium transition-colors font-display text-ink">
                         {faq.q}
                       </span>
                     </div>
-                    <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
-                        isOpen ? "bg-[#5C0000] text-white border-[#5C0000]" : "bg-[#FAF7F0] text-[#5C0000] border-[rgba(92,0,0,0.2)]"
-                      }`}
-                    >
+                    <div className={`w-9 h-9 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${isOpen ? "bg-wine text-white border-wine" : "bg-parchment text-wine border-wine/20"}`}>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
                     </div>
                   </button>
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: EASE }}>
-                        <div className="px-7 pb-8 pt-2 text-sm sm:text-base font-regular leading-relaxed font-[Raleway] border-t border-[rgba(92,0,0,0.08)] text-[#1C1710]/80">{faq.a}</div>
+                        <div className="px-7 pb-8 pt-2 text-sm sm:text-base font-regular leading-relaxed border-t border-wine/10 text-ink/80">{faq.a}</div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -1248,38 +1101,25 @@ export default function AtlasLanding() {
         </div>
       </section>
 
-      <section className="relative py-40 sm:py-52 px-6 sm:px-14 flex flex-col items-center justify-center text-center border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#ffdede" }}>
+      {/* Final CTA Section */}
+      <section className="relative py-40 sm:py-52 px-6 sm:px-14 flex flex-col items-center justify-center text-center border-t border-wine/12 bg-parchment-alt">
         <BlueprintGrid opacity={0.04} />
-        <div className="relative z-10 h-[100dvh] w-full max-w-4xl flex flex-col justify-center items-center">
+        <div className="relative z-10 w-full max-w-4xl flex flex-col justify-center items-center">
           <Seal size={96} spin />
           <div className="mt-8" />
 
-          <h2 className="mt-8 text-4xl sm:text-6xl lg:text-[4.5rem] leading-[1.05]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
+          <h2 className="mt-8 text-4xl sm:text-6xl lg:text-[4.5rem] leading-[1.05] font-display font-semibold text-ink">
             A infraestrutura digital <br />
-            <span style={{ color: WINE, fontStyle: "italic", fontFamily: FONT_BLACK }}>começa aqui.</span>
+            <span className="text-wine italic font-gothic font-normal">começa aqui.</span>
           </h2>
 
-          <p className="mt-8 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
+          <p className="mt-8 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed text-ink/70">
             Memória institucional intacta, execução fluida e inteligência centralizada. Assuma o controle absoluto da sua operação hoje.
           </p>
 
           <div className="mt-14 flex flex-col sm:flex-row gap-4">
-            <button
-              onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")}
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm transition-all duration-200 cursor-pointer"
-              style={{ background: WINE, color: PARCHMENT, fontFamily: "Inter", boxShadow: "0 15px 35px -10px rgba(92,0,0,0.55)" }}
-            >
-              <span>Comece já</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
-            <Link
-              href="/docs"
-              className="group flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm transition-all duration-200 cursor-pointer border border-[rgba(92,0,0,0.35)] hover:border-[rgba(38,0,0,0.6)]"
-              style={{ color: WINE, fontFamily: "Inter" }}
-            >
-              <Image src="/google-icon-logo-svgrepo-com.svg" alt="Google" width={12} height={12} priority draggable={false} />
-              Registre-se com o Google
-            </Link>
+            <Button href="https://atlas.fifteenmiles.tech/register" variant="primary-dark" showArrow>Comece já</Button>
+            <Button href="https://atlas.fifteenmiles.tech/register" variant="google">Registre-se com o Google</Button>
           </div>
         </div>
       </section>

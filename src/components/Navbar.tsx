@@ -199,7 +199,7 @@ export const Navbar = () => {
       style={{ background: PARCHMENT, borderColor: "rgba(92,0,0,0.18)", color: INK }}
       onMouseLeave={() => setActiveMenu(null)}
     >
-      <div className="max-w-[1500px] mx-auto px-6 sm:px-14 h-20 flex items-center justify-between">
+      <div className="max-w-[1500px] mx-auto px-6 sm:px-14 h-12 flex items-center justify-between">
         <Link href="/" className="flex items-center group py-2">
           <Image 
             src="/TopLogo.png" 
@@ -242,8 +242,7 @@ export const Navbar = () => {
         <div className="hidden lg:flex items-center">
           <a 
             href="https://atlas.fifteenmiles.tech" 
-            className="inline-flex items-center gap-2.5 px-5 py-2 rounded-md text-[11px] tracking-[0.18em] transition-all"
-            style={{ background: WINE, color: PARCHMENT, fontFamily: "Raleway", boxShadow: "0 10px 25px -8px rgba(92,0,0,0.4)" }}
+            className="inline-flex items-center gap-2.5 px-5 py-1.5 bg-[#590C0D] text-white border font-raleway rounded-md text-[11px] tracking-[0.18em] uppercase transition-all duration-200 hover:bg-white hover:text-[#590C0D]"
           >
             <span>Atlas OS</span>
             <ArrowRight className="w-3.5 h-3.5" />
