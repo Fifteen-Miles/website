@@ -244,24 +244,30 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative flex w-full h-[100dvh] flex-col items-center justify-center gap-10 px-6 pb-28 pt-36 sm:gap-12 sm:px-14 sm:pb-36 sm:pt-44">
-        <Image src="/BigThree.webp" alt="Logo" width={1400} height={900} priority className="h-auto w-full max-w-5xl select-none object-contain" draggable={false} />
-        <Button href="/products" className="mt-5">Conheça nossos produtos</Button>
+        <Image src="/BigThree.png" alt="Logo" width={1400} height={900} priority className="h-auto w-full max-w-5xl select-none object-contain" draggable={false} />
+        <Button href="/atlas" className="mt-5">Conheça o <strong>Atlas</strong></Button>
       </section>
 
       {/* Padrão Arquitetural */}
       <section className="relative py-32 sm:py-40 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-alt">
-        <BlueprintGrid opacity={0.03} />
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="relative z-10 max-w-[1000px] mx-auto text-center">
-          <SectionRule />
-          <span className="block mb-6 text-[10px] uppercase font-eyebrow tracking-[0.3em] text-wine">
-            Padrão Arquitetural
-          </span>
-          <h2 className="text-4xl sm:text-5xl md:text-[3.8rem] leading-[0.9] font-raleway font-semibold text-ink">
-            Uma nova era de <span className="text-wine font-gothic italic font-normal">infraestrutura empresarial.</span>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="relative z-10 max-w-[1400px] mx-auto text-left">
+          <h2 className="text-3xl sm:text-4xl md:text-[2.8rem] leading-[1.3] font-raleway font-regular text-ink">
+            Infraestrutura digital para empresas que não podem operar em sistemas desconectados. <span className="text-wine/70 font-[500]">A Fifteen Miles desenvolve plataformas corporativas configuráveis que centralizam processos, informações, pessoas e decisões.</span>
           </h2>
-          <p className="mt-8 text-lg sm:text-xl leading-relaxed font-light text-ink/[0.7]">
-            Forjada para organizações que recusam operar em trevas fragmentadas, onde cada sistema é uma vela isolada. O Atlas acende uma única chama: governança, flexibilidade e precisão, erguidas desde a fundação.
-          </p>
+          <div className="flex flex-row mt-10 gap-5">
+            <Button href="/atlas" showArrow>Conheça o Atlas</Button>
+            <Button href="/company" showArrow>Conheça a Fifteen Miles</Button>
+          </div>
+        </motion.div>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: EASE }} className="relative z-10 max-w-[1500px] mx-auto mt-28 pt-12 border-t border-wine/[0.14]">
+          <h3 className="text-center mb-8 text-[10px] uppercase font-mono tracking-[0.3em] text-ink/[0.45]">
+            EMPRESAS QUE UTILIZAM NOSSAS SOLUÇÕES
+          </h3>
+          <div className="w-full flex flex-wrap justify-center items-center gap-x-16 gap-y-8">
+            <span className="opacity-70 hover:opacity-100 transition-opacity duration-500">
+              <Image src="/eletra.png" alt="Eletra" width={150} height={150} className="pointer-events-none w-28 sm:w-32 h-auto" />
+            </span>
+          </div>
         </motion.div>
       </section>
 
@@ -271,7 +277,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-[1600px] mx-auto flex flex-row justify-center items-center items-center">
           <div>
-            <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }} className="mt-8 text-[3rem] sm:text-6xl md:text-[4.2rem] lg:text-[4.8rem] leading-[1.08] tracking-tight uppercase font-heading">
+            <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }} className="mt-8 text-[2rem] sm:text-5xl md:text-[3.2rem] lg:text-[3.8rem] leading-[1.08] tracking-tight uppercase font-raleway">
               É hora de iluminar{" "}
               <span className="font-gothic text-wine normal-case inline-block text-[3.4rem] sm:text-7xl md:text-[5.2rem] lg:text-[5.8rem] font-normal">
                 os seus processos.
@@ -408,16 +414,6 @@ export default function Home() {
             <Button href="/atlas" showArrow>Especificações do Atlas OS</Button>
           </motion.div>
         </div>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: EASE }} className="relative z-10 max-w-[1500px] mx-auto mt-28 pt-12 border-t border-wine/[0.14]">
-          <h3 className="text-center mb-8 text-[10px] uppercase font-mono tracking-[0.3em] text-ink/[0.45]">
-            Selo de confiança de
-          </h3>
-          <div className="w-full flex flex-wrap justify-center items-center gap-x-16 gap-y-8">
-            <span className="opacity-70 hover:opacity-100 transition-opacity duration-500">
-              <Image src="/eletra.png" alt="Eletra" width={128} height={128} className="w-28 sm:w-32 h-auto" />
-            </span>
-          </div>
-        </motion.div>
       </section>
 
       {/* A Filosofia da Permanência */}
