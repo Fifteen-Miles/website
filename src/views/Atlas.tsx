@@ -584,7 +584,7 @@ export default function AtlasLanding() {
 
                   <div className="relative z-10 flex flex-col justify-between h-full w-full">
                     <div>
-                      <p className="mt-2.5 text-[1vw] font-raleway leading-relaxed max-w-sm text-ink">
+                      <p className="mt-2.5 text-[4vw] sm:text-[2vw] lg:text-[1vw] font-raleway leading-relaxed max-w-sm text-ink">
                         {item.desc}
                       </p>
                     </div>
