@@ -144,7 +144,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative flex w-full h-[100dvh] flex-col items-center justify-center gap-10 px-6 pb-28 pt-36 sm:gap-12 sm:px-14 sm:pb-36 sm:pt-44">
-        <Image src="/BigThree.png" alt="Logo" width={1400} height={900} priority className="h-auto w-full max-w-5xl select-none object-contain" draggable={false} />
+        <Image src="/BigThree.png" alt="Logo" width={1400} height={900} priority className="h-auto w-full max-w-5xl select-none pointer-events-none object-contain" draggable={false} />
         <Button href="/atlas" className="mt-5">Conheça o <strong>Atlas</strong></Button>
       </section>
 
