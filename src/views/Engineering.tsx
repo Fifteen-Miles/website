@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/link";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 import { ArrowRight, Compass, Shield, Code2, Layers, Cpu, Box, Terminal } from "lucide-react";
@@ -139,7 +138,7 @@ export default function Engineering() {
       className="relative min-h-screen overflow-x-hidden"
       style={{ background: PARCHMENT, color: INK, fontFamily: FONT_HEADING }}
     >
-      <Seo title="Engenharia — Fifteen Miles" description="Arquitetura de sistemas e princípios técnicos projetados para durar décadas." path="/engineering" />
+      <Seo title="Engenharia de software corporativo | Fifteen Miles" description="Conheça os princípios, processos e padrões que orientam a construção do Atlas e da infraestrutura de software corporativo da Fifteen Miles." path="/engineering" />
 
       <style dangerouslySetInnerHTML={{ __html: `
         @font-face {
@@ -157,8 +156,6 @@ export default function Engineering() {
           color: ${INK};
         }
       `}} />
-
-      {/* HERO SECTION */}
       <section ref={heroRef} className="relative w-full pt-32 sm:pt-44 pb-20 px-6 sm:px-14">
         <BlueprintGrid />
         <div className="absolute top-10 right-14 hidden lg:block opacity-70">
@@ -181,7 +178,7 @@ export default function Engineering() {
             style={{ fontFamily: FONT_HEADING }}
           >
             <motion.span variants={fadeUp} className="block">A engenharia é</motion.span>
-            <motion.span variants={fadeUp} className="block font-normal normal-case" style={{ fontFamily: FONT_DISPLAY, color: WINE, fontStyle: "italic" }}>o próprio produto.</motion.span>
+            <motion.span variants={fadeUp} className="block font-normal normal-case" style={{ fontFamily: FONT_DISPLAY, color: WINE, fontStyle: "italic" }}>o que permanece.</motion.span>
           </motion.h1>
 
           <motion.p
@@ -189,7 +186,7 @@ export default function Engineering() {
             className="mt-8 text-lg sm:text-2xl max-w-3xl leading-relaxed font-light"
             style={{ color: "rgba(28,23,16,0.7)" }}
           >
-            Rejeitamos software descartável. Construímos infraestruturas modulares, tipadas e resilientes, desenhadas para permanecerem perenes ao longo de décadas.
+            Construímos software corporativo com arquitetura modular, decisões explícitas e evolução controlada — para que sistemas importantes continuem legíveis, governáveis e úteis conforme a empresa cresce.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-10 flex flex-col sm:flex-row items-center gap-4">
@@ -210,8 +207,6 @@ export default function Engineering() {
             </a>
           </motion.div>
         </motion.div>
-
-        {/* HERO IMAGE CONTAINER */}
         <motion.div 
           style={{ y: parallaxY, opacity: parallaxOpacity }}
           className="w-full max-w-[1280px] mx-auto mt-20 h-[45vh] md:h-[65vh] rounded-[24px] overflow-hidden relative border border-[rgba(92,0,0,0.2)] shadow-2xl bg-white"
@@ -233,8 +228,6 @@ export default function Engineering() {
           </div>
         </motion.div>
       </section>
-
-      {/* PHILOSOPHY SECTION */}
       <section id="filosofia" className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F3EDE3" }}>
         <BlueprintGrid opacity={0.04} />
         <div className="max-w-7xl mx-auto relative z-10">
@@ -242,16 +235,16 @@ export default function Engineering() {
             <ChapterTag>Capítulo II · A Filosofia</ChapterTag>
             <h2 className="mt-6 text-4xl sm:text-6xl leading-[1.1]" style={{ fontFamily: FONT_DISPLAY, fontWeight: 600, color: INK }}>
               Antes de escrever código, <br />
-              <span style={{ color: WINE, fontStyle: "italic" }}>tomamos decisões definitivas.</span>
+              <span style={{ color: WINE, fontStyle: "italic" }}>tornamos decisões importantes explícitas.</span>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              { tag: "Módulo 01.A", num: "I", title: "Clareza acima da complexidade.", desc: "Soluções brilhantes são simples de entender. Se a arquitetura exige um manual exaustivo para ser operada, ela falhou em seu propósito fundamental." },
-              { tag: "Módulo 01.B", num: "II", title: "Escalabilidade desde a origem.", desc: "Não construímos para o tráfego de hoje. Erguemos fundações sólidas que suportam o peso do crescimento natural da operação sem reescritas dramáticas." },
-              { tag: "Módulo 01.C", num: "III", title: "Software como patrimônio vital.", desc: "Linhas de código não são despesas descartáveis; são ativos corporativos de alto valor. Tratamos a base técnica com o rigor de um projeto de engenharia civil." },
-              { tag: "Módulo 01.D", num: "IV", title: "Projetado para durar décadas.", desc: "Ignoramos modismos e metodologias efêmeras. Focamos em padrões arquiteturais comprovados pelo tempo que continuarão irrepreensíveis no futuro." }
+              { tag: "Módulo 01.A", num: "I", title: "Clareza acima da complexidade.", desc: "Soluções importantes precisam ser simples de entender. Clareza reduz dependência, acelera decisões e torna a operação mais segura." },
+              { tag: "Módulo 01.B", num: "II", title: "Escalabilidade desde a origem.", desc: "Projetamos limites claros para que a plataforma possa crescer em dados, equipes e módulos sem transformar cada evolução em uma reescrita estrutural." },
+              { tag: "Módulo 01.C", num: "III", title: "Software como patrimônio vital.", desc: "Código, decisões e documentação formam um patrimônio técnico. Tratamos a base da empresa como algo que precisa continuar legível para as próximas pessoas e equipes." },
+              { tag: "Módulo 01.D", num: "IV", title: "Projetado para durar décadas.", desc: "Não confundimos novidade com evolução. Escolhemos padrões adequados ao problema e revisamos decisões quando novas evidências realmente justificam a mudança." }
             ].map((item, i) => (
               <div
                 key={item.num}
@@ -279,8 +272,6 @@ export default function Engineering() {
           </div>
         </div>
       </section>
-
-      {/* PIPELINE / STEPS */}
       <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
         <div className="max-w-[1400px] mx-auto text-center">
           <ChapterTag>Ciclo de Vida</ChapterTag>
@@ -289,9 +280,16 @@ export default function Engineering() {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4 w-full">
-            {["Problema", "Arquitetura", "Produto", "Código", "Validação", "Evolução"].map((step, i) => (
+            {[
+              { name: "Problema", desc: "Entendemos a operação e o contexto antes da solução." },
+              { name: "Arquitetura", desc: "Definimos limites, dados, dependências e trade-offs." },
+              { name: "Produto", desc: "Transformamos a decisão em uma experiência que a equipe consegue usar." },
+              { name: "Código", desc: "Implementamos com contratos claros e responsabilidade compartilhada." },
+              { name: "Validação", desc: "Testamos comportamento, risco e impacto operacional." },
+              { name: "Evolução", desc: "Medimos, documentamos e melhoramos sem perder o contexto." },
+            ].map((step, i) => (
               <div
-                key={step}
+                key={step.name}
                 className="p-6 rounded-[12px] border bg-white flex flex-col justify-between text-center shadow-sm"
                 style={{ borderColor: "rgba(92,0,0,0.18)" }}
               >
@@ -299,15 +297,14 @@ export default function Engineering() {
                   0{i + 1}
                 </span>
                 <span className="text-sm sm:text-base font-medium uppercase tracking-wide" style={{ color: INK, fontFamily: FONT_MONO }}>
-                  {step}
+                  {step.name}
                 </span>
+                <span className="mt-4 text-xs leading-relaxed font-light" style={{ color: "rgba(28,23,16,0.6)" }}>{step.desc}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* RESTRICTIONS SECTION */}
       <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F6F1EA" }}>
         <BlueprintGrid opacity={0.03} />
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-16 items-center relative z-10">
@@ -318,17 +315,17 @@ export default function Engineering() {
               <span style={{ color: WINE, fontStyle: "italic" }}>em dizer não.</span>
             </h2>
             <p className="text-lg font-light leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
-              Manter a integridade arquitetural exige limites absolutos sobre o que recusamos admitir na base de código.
+              Manter a integridade arquitetural exige critérios claros sobre o que entra na base de código, por que entra e como será mantido.
             </p>
           </div>
 
           <div className="lg:col-span-7 space-y-4">
             {[
-              "Nunca criamos soluções específicas ou pontuais para um único cliente.",
-              "Nunca duplicamos componentes nem reescrevemos lógica existente.",
-              "Nunca espalhamos regras de negócio sem centralização clara.",
-              "Nunca sacrificamos estabilidade arquitetural por velocidade efêmera.",
-              "Nunca implementamos funcionalidades sem um propósito operacional cristalino."
+              "Evitamos customizações descartáveis; priorizamos capacidades reutilizáveis e configuráveis.",
+              "Preferimos reutilizar e refatorar componentes antes de duplicar lógica.",
+              "Mantemos regras de negócio em limites claros e rastreáveis.",
+              "Velocidade não justifica dívida técnica invisível ou risco operacional desnecessário.",
+              "Toda entrega precisa de hipótese, propósito operacional e critério de validação."
             ].map((text, i) => (
               <div key={i} className="p-6 sm:p-7 rounded-[12px] border bg-white shadow-sm flex items-center gap-6" style={{ borderColor: "rgba(92,0,0,0.15)" }}>
                 <span className="font-mono text-xs text-[#5C0000] tracking-widest font-bold">
@@ -342,25 +339,23 @@ export default function Engineering() {
           </div>
         </div>
       </section>
-
-      {/* SYSTEMIC PATTERNS */}
       <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
         <div className="max-w-[1400px] mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <ChapterTag>Padrões Sistêmicos</ChapterTag>
             <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
-              Princípios de Arquitetura
+              Princípios que reduzem risco
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { icon: Cpu, title: "Escalabilidade", desc: "A infraestrutura cresce de forma transparente, suportando novos cenários sem intervenção manual." },
-              { icon: Layers, title: "Modularidade", desc: "Blocos isolados e independentes. Se uma peça for substituída, o sistema permanece intacto." },
-              { icon: Code2, title: "Consistência", desc: "Um único padrão visual, lógico e estrutural permeia absolutamente toda a aplicação." },
-              { icon: Terminal, title: "Legibilidade", desc: "Código escrito para ser lido por humanos primeiro, e processado por máquinas depois." },
-              { icon: Shield, title: "Reutilização", desc: "Nenhum problema deve ser resolvido duas vezes. Centralizamos inteligência e design." },
-              { icon: Compass, title: "Governança", desc: "Controle estrito sobre permissões, histórico e ciclo de vida de cada dado criado." }
+              { icon: Cpu, title: "Escalabilidade", desc: "Evolução por camadas. Novos módulos e cenários podem ser adicionados sem transformar cada mudança em uma reescrita estrutural." },
+              { icon: Layers, title: "Modularidade", desc: "Limites claros entre domínios e componentes tornam mudanças mais seguras e reduzem efeitos inesperados." },
+              { icon: Code2, title: "Consistência", desc: "Contratos consistentes reduzem ambiguidade entre produto, código, dados e experiência de uso." },
+              { icon: Terminal, title: "Legibilidade", desc: "Código, decisões e documentação são organizados para reduzir dependência de conhecimento tribal." },
+              { icon: Shield, title: "Reutilização", desc: "Reutilizamos inteligência e design para que a empresa não pague duas vezes pelo mesmo problema." },
+              { icon: Compass, title: "Governança", desc: "Permissões, histórico e ciclo de vida tornam dados críticos mais governáveis e auditáveis." }
             ].map((item) => {
               const IconComp = item.icon;
               return (
@@ -384,8 +379,6 @@ export default function Engineering() {
           </div>
         </div>
       </section>
-
-      {/* HORIZON & CULTURE */}
       <section className="relative py-32 sm:py-44 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: "#F3EDE3" }}>
         <BlueprintGrid opacity={0.04} />
         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-2 gap-12 relative z-10">
@@ -393,12 +386,12 @@ export default function Engineering() {
             <div>
               <ChapterTag>Visão de Horizonte</ChapterTag>
               <h2 className="mt-6 text-3xl sm:text-5xl font-medium tracking-tight leading-[1.1] mb-6" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
-                Construímos produtos. <br />
+                Construímos produtos que acompanham a empresa. <br />
                 <span style={{ color: WINE, fontStyle: "italic" }}>Não projetos efêmeros.</span>
               </h2>
             </div>
             <p className="text-base sm:text-lg font-light leading-relaxed mt-8 pt-6 border-t" style={{ borderColor: "rgba(92,0,0,0.1)", color: "rgba(28,23,16,0.7)" }}>
-              Enxergamos o horizonte. Toda escolha de abstração, arquitetura ou banco de dados considera um cenário de uso para daqui a 5, 10 ou 20 anos. O tempo é o verdadeiro juiz da boa engenharia.
+              Pensamos no horizonte sem abandonar o presente. Cada escolha de arquitetura considera a operação de hoje, a evolução dos próximos anos e o custo de manutenção para as equipes que virão.
             </p>
           </div>
 
@@ -406,41 +399,56 @@ export default function Engineering() {
             <div>
               <ChapterTag>Cultura de Engenharia</ChapterTag>
               <h2 className="mt-6 text-3xl sm:text-5xl font-medium tracking-tight leading-[1.1] mb-6" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
-                A melhor ideia <br />
-                <span style={{ color: WINE, fontStyle: "italic" }}>sempre vence.</span>
+                O conhecimento é compartilhado. <br />
+                <span style={{ color: WINE, fontStyle: "italic" }}>A responsabilidade é explícita.</span>
               </h2>
             </div>
             <div className="space-y-4 mt-8 pt-6 border-t" style={{ borderColor: "rgba(92,0,0,0.1)", color: "rgba(28,23,16,0.7)" }}>
               <p className="text-base sm:text-lg font-light leading-relaxed">
-                Toda decisão arquitetural é debatida e revisada rigorosamente. O código é uma responsabilidade compartilhada por toda a equipe, sem donos de módulos e sem egos.
+                Toda decisão arquitetural é debatida e revisada rigorosamente. O conhecimento é compartilhado, a responsabilidade é explícita e o código não depende de uma única pessoa.
               </p>
               <p className="text-base sm:text-lg font-light leading-relaxed">
-                A excelência coletiva supera qualquer genialidade isolada.
+                A excelência coletiva supera a genialidade isolada sem abrir mão de ownership e prestação de contas.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FINAL STATEMENT & CTA */}
+
+      <section className="relative py-28 sm:py-36 px-6 sm:px-14 border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: PARCHMENT }}>
+        <div className="max-w-5xl mx-auto relative z-10 text-center">
+          <ChapterTag>Onde a engenharia vira produto</ChapterTag>
+          <h2 className="mt-6 text-4xl sm:text-6xl font-medium tracking-tight" style={{ fontFamily: FONT_DISPLAY, color: INK }}>
+            Princípios que aparecem <span style={{ color: WINE, fontStyle: "italic" }}>no Atlas.</span>
+          </h2>
+          <p className="mt-6 text-lg sm:text-xl max-w-3xl mx-auto font-light leading-relaxed" style={{ color: "rgba(28,23,16,0.7)" }}>
+            A engenharia da Fifteen Miles se materializa no Atlas como uma fundação configurável para dados e processos, uma camada de governança para acessos e histórico e uma arquitetura preparada para receber automações, integrações e módulos sem fragmentar a operação.
+          </p>
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/atlas" className="group flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm" style={{ background: WINE, color: PARCHMENT, fontFamily: "Inter" }}>
+              <span>Ver o Atlas em ação</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
+            <Link href="/docs" className="flex items-center justify-center gap-2 px-6 py-3 rounded-md text-sm border" style={{ color: WINE, borderColor: "rgba(92,0,0,0.35)", fontFamily: "Inter" }}>
+              Ver a documentação
+            </Link>
+          </div>
+        </div>
+      </section>
       <section className="relative py-40 sm:py-52 px-6 sm:px-14 flex flex-col items-center justify-center text-center border-t" style={{ borderColor: "rgba(92,0,0,0.12)", background: WINE }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(0,0,0,0.25)_0%,transparent_70%)] pointer-events-none" />
         <div className="relative z-10 w-full max-w-4xl flex flex-col items-center text-white">
-          <Seal size={96} spin />
-          <div className="mt-8">
-            <ChapterTag>Conclusão Técnica</ChapterTag>
-          </div>
-
           <h2
             className="mt-8 text-4xl sm:text-6xl lg:text-[4.5rem] leading-[1.05]"
             style={{ fontFamily: FONT_DISPLAY, fontWeight: 600 }}
           >
-            Nosso trabalho não termina <br />
+            O trabalho não termina <br />
             <span className="italic" style={{ color: "#FDE68A" }}>quando o software funciona.</span>
           </h2>
 
           <p className="mt-8 text-lg sm:text-xl font-light max-w-2xl mx-auto leading-relaxed text-white/80">
-            O verdadeiro objetivo da engenharia é construir plataformas que continuem operando de forma impecável, transparente e silenciosa conforme sua empresa escala.
+            Ele continua na documentação, na observabilidade, na manutenção e na capacidade de evoluir sem perder o contexto da operação.
           </p>
 
           <div className="mt-14">
@@ -448,14 +456,12 @@ export default function Engineering() {
               href="/atlas"
               className="flex items-center justify-center gap-2 px-8 py-4 rounded-md text-xs font-mono uppercase tracking-widest bg-white text-[#5C0000] font-bold transition-all hover:bg-white/90 shadow-2xl"
             >
-              <span>Ver a plataforma em ação</span>
+              <span>Ver o Atlas em ação</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* FOOTER BADGE */}
       <section className="py-20 px-6 sm:px-14 flex flex-col items-center justify-center text-center bg-[#FAF7F0] border-t" style={{ borderColor: "rgba(92,0,0,0.12)" }}>
         <div className="flex flex-col items-center gap-4 w-full max-w-lg">
           <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-black/50">

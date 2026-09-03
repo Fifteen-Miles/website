@@ -167,7 +167,7 @@ function MiniWorkspace() {
       initial={{ opacity: 0, y: 40, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 1.1, delay: 0.3, ease: EASE }}
-      className="relative flex items-center justify-center w-full h-full min-h-[250px] sm:min-h-[350px] overflow-hidden"
+      className="relative flex items-center justify-center w-full h-full min-h-[250px] sm:min-h-[350px]"
     >
       <div className="relative w-full max-w-[80%] aspect-video flex items-center justify-center">
         <Image src="/notebook.png" alt="Atlas OS no Notebook" fill priority className="object-contain hover:scale-[1.02] transition-transform duration-700 drop-shadow-2xl" draggable={false} />
@@ -429,7 +429,7 @@ export default function AtlasLanding() {
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: EASE }} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4">
             <Button href="https://atlas.fifteenmiles.tech/demo" variant="primary-dark" showArrow className="w-full sm:w-auto">Solicitar Demonstração</Button>
-            <Button href="https://atlas.fifteenmiles.tech/contact" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Agendar Diagnóstico</Button>
+            <Button href="https://atlas.fifteenmiles.tech/register" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Crie sua conta</Button>
           </motion.div>
         </motion.div>
       </section>
@@ -497,7 +497,7 @@ export default function AtlasLanding() {
             </div>
           ))}
         </div>
-        <div className="relative z-10 max-w-2xl mx-auto mt-8 p-8 rounded-lg border text-center shadow-xl bg-wine border-wine">
+        <div className="relative z-10 max-w-2xl mx-auto mt-8 p-8 rounded-lg border text-center shadow-xl bg-wine border-wine selection:bg-white">
           <span className="text-sm tracking-[0.3em] uppercase font-bold text-white font-mono block">Convergência Total: Atlas OS</span>
           <p className="text-xs text-white/80 mt-2 font-light">Fundação estável, configuração adaptável e histórico rastreável em um único ambiente.</p>
         </div>
@@ -796,7 +796,7 @@ export default function AtlasLanding() {
                 Pagamento em Real.<br /><span className="text-wine italic font-normal">Sem surpresas em dólar.</span>
               </h2>
             </div>
-            <TiltCard className="w-full">
+            <TiltCard className="w-full selection:bg-white">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end border-b border-white/15 pb-6 mb-6 gap-4">
                 <span className="font-mono text-[10px] tracking-[0.1em] uppercase text-white/70">SaaS Internacional</span>
                 <div className="text-left sm:text-right">
@@ -816,7 +816,7 @@ export default function AtlasLanding() {
       </section>
 
       {/* Developers Section */}
-      <section className="relative py-24 sm:py-36 px-6 sm:px-14 border-t border-wine/[0.12] bg-wine">
+      <section className="relative py-24 sm:py-36 px-6 sm:px-14 border-t selection:bg-white border-wine/[0.12] bg-wine">
         <div className="max-w-[1400px] mx-auto text-white">
           <div className="max-w-3xl">
             <h2 className="text-4xl sm:text-5xl font-medium tracking-tight font-display">

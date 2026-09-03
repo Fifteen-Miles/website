@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { Check, Activity, Shield, Compass, Handshake, KeyRound, ScrollText, Castle, Landmark } from "lucide-react";
+import { Check, Activity, Shield, Compass, KeyRound, Castle, Layers, ArrowRight } from "lucide-react";
 import Seo from "../components/Seo";
 import Button from "@/components/ui/button";
 
@@ -20,75 +19,8 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-function Seal({ size = 100, spin = false }: { size?: number; spin?: boolean }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  return (
-    <div className={`relative shrink-0 ${spin ? "animate-seal-spin" : ""}`} style={{ width: size, height: size }}>
-      <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-        <circle cx="50" cy="50" r="47" fill="none" className="stroke-wine opacity-45" strokeWidth="1" />
-        <circle cx="50" cy="50" r="39" fill="none" className="stroke-wine opacity-[0.28]" strokeWidth="0.5" />
-        {mounted &&
-          Array.from({ length: 24 }).map((_, i) => {
-            const angle = (i / 24) * Math.PI * 2;
-            const long = i % 6 === 0;
-            const r1 = 47;
-            const r2 = long ? 41 : 44.5;
-            return (
-              <line
-                key={i}
-                x1={50 + r1 * Math.cos(angle)}
-                y1={50 + r1 * Math.sin(angle)}
-                x2={50 + r2 * Math.cos(angle)}
-                y2={50 + r2 * Math.sin(angle)}
-                className="stroke-wine"
-                strokeWidth={long ? 1 : 0.5}
-                opacity={long ? 0.55 : 0.28}
-              />
-            );
-          })}
-      </svg>
-      <div 
-        className="absolute inset-0 flex items-center justify-center select-none font-gothic text-wine leading-none"
-        style={{ fontSize: size * 0.32 }}
-      >
-        XV
-      </div>
-    </div>
-  );
-}
-
-function CornerMarks({ inset = 0 }: { inset?: number }) {
-  const corners = [
-    { cls: "top-0 left-0", d: "M1 10 L1 1 L10 1" },
-    { cls: "top-0 right-0", d: "M10 1 L19 1 L19 10" },
-    { cls: "bottom-0 right-0", d: "M19 10 L19 19 L10 19" },
-    { cls: "bottom-0 left-0", d: "M10 19 L1 19 L1 10" },
-  ];
-  return (
-    <>
-      {corners.map((c, i) => (
-        <svg key={i} className={`absolute w-5 h-5 pointer-events-none ${c.cls}`} style={{ margin: inset }} viewBox="0 0 20 20">
-          <path d={c.d} className="stroke-wine opacity-40" strokeWidth="1.25" fill="none" />
-        </svg>
-      ))}
-    </>
-  );
-}
-
 function BlueprintGrid({ opacity = 0.045 }: { opacity?: number }) {
   return <div className="absolute inset-0 pointer-events-none bg-blueprint" style={{ opacity }} />;
-}
-
-function SectionRule() {
-  return (
-    <div className="flex items-center justify-center gap-4 mb-10">
-      <span className="h-px w-16 bg-wine/[0.3]" />
-      <Seal size={26} />
-      <span className="h-px w-16 bg-wine/[0.3]" />
-    </div>
-  );
 }
 
 const FEATURES = [
@@ -97,118 +29,10 @@ const FEATURES = [
   "Telemetria em tempo real, sem véus",
 ];
 
-type Pillar = {
-  id: string;
-  numeral: string;
-  tag: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  metrics: { label: string; value: string }[];
-  icon: typeof Shield;
-};
-
-const pillars: Pillar[] = [
-  {
-    id: "engenharia",
-    numeral: "I",
-    tag: "Engenharia",
-    title: "Código construído para durar décadas.",
-    subtitle: "Rigor arquitetônico sobre velocidade.",
-    description: "Tratamos software como infraestrutura crítica — a mesma exigência de uma catedral, não de uma barraca de feira. Não adotamos modismos; erguemos fundações capazes de sustentar operações por gerações de uso.",
-    metrics: [
-      { label: "Padrão", value: "Clean Architecture" },
-      { label: "Manutenção", value: "Sustentável" },
-      { label: "Foco", value: "Longo Prazo" },
-    ],
-    icon: Shield,
-  },
-  {
-    id: "presenca",
-    numeral: "II",
-    tag: "Presença",
-    title: "Software de excelência, forjado no Ceará.",
-    subtitle: "Ofício local. Padrão global.",
-    description: "Nascemos no Ceará com um objetivo simples: entregar às empresas brasileiras o mesmo nível de infraestrutura exigido nos grandes centros — adaptado à nossa moeda, à nossa realidade e ao nosso ritmo.",
-    metrics: [
-      { label: "Sede", value: "Ceará · BR" },
-      { label: "Cobrança", value: "Em Reais (R$)" },
-      { label: "Atendimento", value: "Local" },
-    ],
-    icon: Compass,
-  },
-  {
-    id: "mercado",
-    numeral: "III",
-    tag: "Mercado",
-    title: "Aliança estratégica, não apenas fornecimento.",
-    subtitle: "Não somos apenas fornecedores.",
-    description: "O sistema de uma empresa é o seu coração pulsante. Caminhamos ao lado de nossos parceiros, revisando o desenho de nossas soluções conforme os gargalos reais do dia a dia — não conforme tendências.",
-    metrics: [
-      { label: "Modelo", value: "SaaS B2B" },
-      { label: "Foco", value: "PMEs" },
-      { label: "Expansão", value: "Mútua" },
-    ],
-    icon: Handshake,
-  },
-  {
-    id: "governanca",
-    numeral: "IV",
-    tag: "Governança",
-    title: "Soberania sobre a memória da empresa.",
-    subtitle: "Seus dados pertencem à sua organização.",
-    description: "Construímos garantindo que o patrimônio de informação de cada empresa seja preservado em ambientes seguros, com políticas rígidas de acesso e transparência total — sem silos opacos, sem letras miúdas.",
-    metrics: [
-      { label: "Privacidade", value: "By Design" },
-      { label: "Soberania", value: "Total" },
-      { label: "Acesso", value: "Granular" },
-    ],
-    icon: KeyRound,
-  },
-];
-
-const companyStats = [
-  { label: "Origem", value: "Brasil" },
-  { label: "Modelo", value: "B2B" },
-  { label: "Estágio", value: "Evolutivo" },
-  { label: "Infra", value: "Configurável" },
-];
-
 const atlasLegend = [
   { label: "Governança Operacional", value: "Arquitetura Imutável" },
   { label: "Modelo de Conhecimento", value: "Memória Institucional" },
   { label: "Controle de Acesso", value: "Granularidade Estrita" },
-];
-
-const philosophyPrinciples = [
-  {
-    numeral: "I",
-    title: "Pensamento de Longo Prazo",
-    desc: "Rejeitamos a cultura de lançamentos apressados. Planejamos software para ciclos de vida de décadas — não de trimestres.",
-  },
-  {
-    numeral: "II",
-    title: "Engenharia & Precisão",
-    desc: "Cada contrato de API, modelo de dados e elemento de interface possui intenção clara e fundamentação formal.",
-  },
-  {
-    numeral: "III",
-    title: "Elegância & Calma",
-    desc: "Interfaces limpas que transmitem tranquilidade operacional, eliminando ruído visual e modismos efêmeros.",
-  },
-  {
-    numeral: "IV",
-    title: "Execução Deliberada",
-    desc: "Nunca velocidade cega. Nossos sistemas são erguidos com a disciplina das grandes obras de arquitetura.",
-  },
-];
-
-const commands = [
-  "arquitetura --first",
-  "typecheck --strict",
-  "git workflow --disciplined",
-  "review --peer",
-  "docs --living",
 ];
 
 const horizons = [
@@ -229,10 +53,86 @@ const horizons = [
   },
 ];
 
+const doctrinePillars = [
+  {
+    id: "rigor",
+    numeral: "01",
+    title: "Rigor Estrutural",
+    subtitle: "Código como infraestrutura crítica.",
+    description: "Rejeitamos a conveniência das abstrações mágicas e frameworks efêmeros. O núcleo do Atlas é forjado com engenharia estrita, tipagem forte e arquitetura limpa, garantindo estabilidade sistêmica que não degrada com o passar das décadas.",
+    metrics: [
+      { label: "Arquitetura", value: "Clean & Hexagonal" },
+      { label: "Estabilidade", value: "Zero-Degradation" },
+      { label: "Revisão", value: "Peer-Reviewed Strict" }
+    ],
+    icon: Shield
+  },
+  {
+    id: "soberania",
+    numeral: "02",
+    title: "Soberania de Dados",
+    subtitle: "A memória corporativa inegociável.",
+    description: "O patrimônio intelectual da sua empresa não deve residir em silos opacos de nuvens públicas descontroladas. Garantimos isolamento absoluto, onde a inteligência corporativa permanece estritamente sua, auditável e protegida por design.",
+    metrics: [
+      { label: "Isolamento", value: "Multi-tenant Lógico" },
+      { label: "Governança", value: "Privacidade by Design" },
+      { label: "Auditoria", value: "Registros Imutáveis" }
+    ],
+    icon: KeyRound
+  },
+  {
+    id: "convergencia",
+    numeral: "03",
+    title: "Convergência Total",
+    subtitle: "O fim dos feudos de informação.",
+    description: "Destruímos a fragmentação. Construímos módulos que conversam entre si organicamente, formando um tecido neural único para todas as áreas da sua organização. Onde termina o limite de uma equipe, começa o contexto da outra.",
+    metrics: [
+      { label: "Ecossistema", value: "Módulos Interconectados" },
+      { label: "Processos", value: "Event-Driven Native" },
+      { label: "Interface", value: "Adaptação Dinâmica" }
+    ],
+    icon: Activity
+  },
+  {
+    id: "oficio",
+    numeral: "04",
+    title: "Ofício & Origem",
+    subtitle: "Engenharia global, forjada no Ceará.",
+    description: "Desenhado e arquitetado no Brasil como uma resposta direta ao software importado genérico. Entregamos o mais alto rigor técnico internacional, adaptado à nossa realidade econômica, com previsibilidade e parceria direta.",
+    metrics: [
+      { label: "Engenharia", value: "In-house (Ceará)" },
+      { label: "Modelo", value: "BRL (Previsível)" },
+      { label: "Suporte", value: "Acesso Direto (L3)" }
+    ],
+    icon: Castle
+  }
+];
+
+const philosophyPrinciples = [
+  {
+    numeral: "01",
+    title: "Pensamento de Longo Prazo",
+    desc: "Rejeitamos a cultura de lançamentos apressados e a aceitação pacífica da dívida técnica. Planejamos software para ciclos de vida de décadas, não de trimestres financeiros.",
+  },
+  {
+    numeral: "02",
+    title: "Rigor & Precisão",
+    desc: "Cada contrato de API, modelo de dados e elemento de interface possui intenção clara e fundamentação formal. Na nossa engenharia, não há espaço para o acaso estrutural.",
+  },
+  {
+    numeral: "03",
+    title: "Elegância Operacional",
+    desc: "Construímos interfaces que transmitem tranquilidade. Eliminamos implacavelmente o ruído visual, a sobrecarga cognitiva e os modismos efêmeros de design corporativo.",
+  },
+  {
+    numeral: "04",
+    title: "Execução Deliberada",
+    desc: "Nunca velocidade cega. Nossos ecossistemas são erguidos com a disciplina exigida pelas grandes obras de arquitetura: fundações profundas e definitivas antes de qualquer fachada.",
+  },
+];
+
 export default function Home() {
-  const [activePillar, setActivePillar] = useState(pillars[0].id);
-  const currentPillar = pillars.find((p) => p.id === activePillar) || pillars[0];
-  const PillarIcon = currentPillar.icon;
+  const [activePillar, setActivePillar] = useState(doctrinePillars[0].id);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-parchment text-ink font-heading">
@@ -275,7 +175,7 @@ export default function Home() {
       <section className="relative w-full pt-36 sm:pt-44 pb-28 sm:pb-36 px-6 sm:px-14">
         <BlueprintGrid />
 
-        <div className="relative z-10 max-w-[1600px] mx-auto flex flex-row justify-center items-center items-center">
+        <div className="relative z-10 max-w-[1600px] mx-auto flex flex-row justify-center items-center">
           <div>
             <motion.h1 initial={{ opacity: 0, y: 26 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1, ease: EASE }} className="mt-8 text-[2rem] sm:text-5xl md:text-[3.2rem] lg:text-[3.8rem] leading-[1.08] tracking-tight uppercase font-raleway">
               É hora de iluminar{" "}
@@ -318,8 +218,8 @@ export default function Home() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.58, ease: EASE }} className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")} showArrow>Comece já</Button>
-              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")} variant="google">Registre-se com o Google</Button>
+              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/demo")} showArrow>Solicitar demonstração</Button>
+              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")} variant="outline">Crie sua conta</Button>
             </motion.div>
           </div>
 
@@ -336,282 +236,342 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Atlas OS Placas */}
-      <section className="relative pb-10 px-6 sm:px-14">
+      {/* Atlas OS - Core Architecture Section */}
+      <section className="relative py-28 sm:py-40 px-6 sm:px-14 bg-parchment overflow-hidden border-t border-wine/[0.12]">
+        <BlueprintGrid opacity={0.06} />
+
         <div className="relative z-10 max-w-[1400px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-3xl mb-16">
-            <motion.h2 variants={fadeUp} className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05] font-display font-semibold text-ink">
-              Atlas OS.
-              <br />
-              <span className="text-wine italic font-normal">Uma plataforma. Toda a operação.</span>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-4xl">
+            <motion.div variants={fadeUp} className="flex items-center gap-4 mb-8">
+              <span className="w-12 h-px bg-wine/40" />
+              <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-wine font-semibold">Núcleo Arquitetural</span>
+            </motion.div>
+            
+            <motion.h2 variants={fadeUp} className="text-5xl sm:text-7xl lg:text-[5.5rem] leading-[0.95] font-display font-medium text-ink tracking-tight">
+              Atlas OS. <br />
+              <span className="text-wine italic font-light">Toda a operação.</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-6 text-lg sm:text-xl leading-relaxed max-w-2xl font-light text-ink/[0.7]">
+            
+            <motion.p variants={fadeUp} className="mt-8 text-lg sm:text-xl leading-relaxed max-w-2xl font-light text-ink/75">
               O Atlas não é um aplicativo. É a infraestrutura central desenhada para servir como o sistema operacional de organizações que pensam no longo prazo.
             </motion.p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="grid lg:grid-cols-12 gap-6 mb-20">
-            <motion.div variants={fadeUp} className="relative lg:col-span-8 p-8 sm:p-14 rounded-[10px] flex flex-col justify-between overflow-hidden border border-wine/[0.2] bg-white">
-              <CornerMarks inset={8} />
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-ink/[0.45]">Arquitetura Central</span>
-                  <span className="text-[10px] uppercase px-3.5 py-1 rounded-full font-mono tracking-[0.2em] text-wine border border-wine/[0.25]">Placa III.A</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl mb-6 font-display font-semibold text-ink">Fundação Unificada de Dados e Decisão</h3>
-                <p className="text-base sm:text-lg leading-relaxed max-w-xl mb-12 font-light text-ink/[0.7]">
-                  A maioria dos softwares força as empresas a se adaptarem a fluxos engessados. O Atlas faz o inverso: fornece um ambiente configurável e imutável onde a inteligência corporativa é preservada de ponta a ponta.
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-x-12 gap-y-6 pt-8 border-t border-wine/[0.1]">
-                {atlasLegend.map((item) => (
-                  <div key={item.label} className="flex items-start gap-3">
-                    <span className="mt-[7px] w-2 h-2 rounded-full shrink-0 border border-wine bg-wine/[0.15]" />
-                    <div>
-                      <span className="block mb-1 text-[10px] uppercase font-mono tracking-[0.15em] text-ink/[0.4]">{item.label}</span>
-                      <span className="block text-sm font-medium text-ink">{item.value}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <div className="lg:col-span-4 flex flex-col gap-6">
-              <motion.div variants={fadeUp} className="relative p-8 rounded-[10px] border border-wine/[0.2] bg-white">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-wine/[0.06]">
-                    <Castle className="w-5 h-5 text-wine" />
-                  </span>
-                  <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-ink/[0.4]">Placa III.B</span>
-                </div>
-                <h4 className="text-xl font-medium mb-2 tracking-tight text-ink font-display">Sem Dependências Frágeis</h4>
-                <p className="text-sm leading-relaxed font-light text-ink/[0.65]">Construído do zero, sem depender de integrações instáveis de terceiros que quebram com o tempo ou comprometem a estabilidade do sistema.</p>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="relative p-8 rounded-[10px] border border-wine/[0.2] bg-white">
-                <div className="flex items-center justify-between mb-5">
-                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-wine/[0.06]">
-                    <KeyRound className="w-5 h-5 text-wine" />
-                  </span>
-                  <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-ink/[0.4]">Placa III.C</span>
-                </div>
-                <h4 className="text-xl font-medium mb-2 tracking-tight text-ink font-display">Soberania Institucional</h4>
-                <p className="text-sm leading-relaxed font-light text-ink/[0.65]">Seus dados nunca residem em silos opacos de nuvens públicas descontroladas. Sua empresa mantém o controle absoluto e imutável de sua inteligência.</p>
-              </motion.div>
-            </div>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} className="flex flex-col items-center gap-10 pt-12 border-t border-wine/[0.12]">
-            <div className="flex items-center gap-3 text-ink/[0.45]">
-              <Compass className="w-4 h-4 text-wine" strokeWidth={1.5} />
-              <div className="flex items-end gap-[2px]">
-                {Array.from({ length: 17 }).map((_, i) => (
-                  <span key={i} className={`w-px bg-wine/[0.3] ${i % 4 === 0 ? 'h-2' : 'h-1'}`} />
-                ))}
-              </div>
-              <span className="text-[10px] uppercase font-mono tracking-[0.2em]">Escala 1:1 — ambiente real de produção</span>
-            </div>
-            <Button href="/atlas" showArrow>Especificações do Atlas OS</Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* A Filosofia da Permanência */}
-      <section className="relative py-32 sm:py-40 px-6 sm:px-14 border-t border-wine/[0.12]">
-        <div className="max-w-[1400px] mx-auto">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-3xl mb-16">
-            <motion.h2 variants={fadeUp} className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05] font-display font-semibold text-ink">
-              A Filosofia da <span className="font-gothic text-wine font-normal">Permanência.</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mt-6 text-lg sm:text-xl leading-relaxed font-light text-ink/[0.7]">
-              A Fifteen Miles não foi criada para lançar um produto de passagem. Foi criada para edificar um legado na engenharia de software corporativo.
-            </motion.p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-            {philosophyPrinciples.map((item) => (
-              <motion.div variants={fadeUp} key={item.numeral} className="relative p-8 rounded-[8px] flex flex-col justify-between border border-wine/[0.18] bg-white">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="mt-20 border border-wine/20 bg-white shadow-2xl relative">
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 lg:divide-x divide-wine/20">
+              <div className="relative p-10 sm:p-14 flex flex-col justify-between group hover:bg-parchment-alt transition-colors duration-500 overflow-hidden min-h-[420px]">
+                <Layers className="absolute -bottom-10 -right-10 w-64 h-64 text-wine/[0.03] group-hover:text-wine/[0.06] transition-colors duration-700 pointer-events-none" strokeWidth={0.5} />
                 <div>
-                  <span className="block mb-6 text-4xl italic font-display text-wine opacity-60">{item.numeral}</span>
-                  <h3 className="mb-3 text-xl font-medium tracking-tight text-ink font-display">{item.title}</h3>
-                  <p className="text-sm leading-relaxed font-light text-ink/[0.65]">{item.desc}</p>
+                  <span className="block mb-6 text-[10px] font-mono text-wine/60 tracking-widest">01 // CONVERGÊNCIA</span>
+                  <h3 className="text-3xl font-display font-medium text-ink mb-4">Fundação Unificada de Dados</h3>
+                  <p className="text-sm sm:text-base leading-relaxed font-light text-ink/70 max-w-sm">
+                    A maioria dos softwares força as empresas a se adaptarem a fluxos engessados. O Atlas fornece um ambiente configurável onde a inteligência corporativa é preservada de ponta a ponta.
+                  </p>
                 </div>
-                <div className="mt-8 pt-4 flex items-center justify-between text-[10px] uppercase font-mono border-t border-wine/[0.1] tracking-[0.15em] text-ink/[0.4]">
-                  <span>Princípio</span>
-                  <span>Placa IV.{item.numeral}</span>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="relative p-10 sm:p-16 rounded-[10px] border border-wine/[0.2] bg-white">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-12">
-              <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 mb-4 text-[11px] uppercase font-mono tracking-[0.2em] text-wine">
-                  <ScrollText className="w-3.5 h-3.5" />
-                  <span>A Engenharia</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl mb-4 font-display font-semibold text-ink">Filosofia de Engenharia Monumental</h3>
-                <p className="text-lg leading-relaxed mb-8 font-light text-ink/[0.7]">Arquitetura em primeiro lugar. Tudo o resto é consequência.</p>
-                <Button href="/engineering" showArrow className="w-fit">Ver Manifesto de Engenharia</Button>
-              </div>
-
-              <div className="w-full lg:w-[26rem] shrink-0 rounded-[8px] overflow-hidden border border-wine/[0.2]">
-                <div className="flex items-center gap-1.5 px-4 py-3.5 border-b border-wine/[0.15] bg-wine/[0.04]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-wine/[0.3]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-wine/[0.3]" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-wine/[0.3]" />
-                  <span className="ml-3 text-[10px] uppercase font-mono tracking-[0.2em] text-ink/[0.45]">fifteenmiles.eng</span>
-                </div>
-                <div className="p-6 text-xs leading-relaxed space-y-2 font-mono bg-parchment">
-                  {commands.map((cmd) => (
-                    <p key={cmd} className="text-ink/[0.75]">
-                      <span className="text-wine">$</span> {cmd}
-                    </p>
+                <div className="mt-12 flex flex-col gap-3 relative z-10">
+                  {atlasLegend.map((item) => (
+                    <div key={item.label} className="flex items-center gap-3 border-t border-wine/10 pt-3">
+                      <span className="w-1.5 h-1.5 rounded-full bg-wine/40" />
+                      <div className="flex flex-col">
+                        <span className="text-[9px] uppercase font-mono tracking-[0.2em] text-ink/40">{item.label}</span>
+                        <span className="text-xs font-medium text-ink/90">{item.value}</span>
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>
+
+              <div className="relative p-10 sm:p-14 flex flex-col justify-between group hover:bg-parchment-alt transition-colors duration-500 overflow-hidden min-h-[420px]">
+                <Castle className="absolute -bottom-10 -right-10 w-64 h-64 text-wine/[0.03] group-hover:text-wine/[0.06] transition-colors duration-700 pointer-events-none" strokeWidth={0.5} />
+                <div>
+                  <span className="block mb-6 text-[10px] font-mono text-wine/60 tracking-widest">02 // AUTONOMIA</span>
+                  <h3 className="text-3xl font-display font-medium text-ink mb-4">Sem Dependências Frágeis</h3>
+                  <p className="text-sm sm:text-base leading-relaxed font-light text-ink/70 max-w-sm">
+                    Construído do zero para rodar de forma nativa e integrada, sem depender de integrações instáveis de terceiros que quebram com o tempo ou comprometem a estabilidade estrutural do sistema.
+                  </p>
+                </div>
+                <div className="mt-12 inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.2em] text-wine/80 relative z-10">
+                  <span className="w-8 h-px bg-wine/30" />
+                  Arquitetura Fechada
+                </div>
+              </div>
+
+              <div className="relative p-10 sm:p-14 flex flex-col justify-between group hover:bg-parchment-alt transition-colors duration-500 overflow-hidden min-h-[420px]">
+                <KeyRound className="absolute -bottom-10 -right-10 w-64 h-64 text-wine/[0.03] group-hover:text-wine/[0.06] transition-colors duration-700 pointer-events-none" strokeWidth={0.5} />
+                <div>
+                  <span className="block mb-6 text-[10px] font-mono text-wine/60 tracking-widest">03 // SOBERANIA</span>
+                  <h3 className="text-3xl font-display font-medium text-ink mb-4">Soberania Institucional</h3>
+                  <p className="text-sm sm:text-base leading-relaxed font-light text-ink/70 max-w-sm">
+                    Seus dados nunca residem em silos opacos de nuvens públicas descontroladas. Através de nossa infraestrutura multi-tenant, sua empresa mantém o controle absoluto e imutável de sua inteligência.
+                  </p>
+                </div>
+                <div className="mt-12 inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.2em] text-wine/80 relative z-10">
+                  <span className="w-8 h-px bg-wine/30" />
+                  Isolamento de Dados
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-wine/20 bg-wine/[0.03] p-6 sm:px-14 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4 text-ink/50 w-full sm:w-auto">
+                <Compass className="w-5 h-5 text-wine" strokeWidth={1.5} />
+                <div className="flex items-end gap-[3px] flex-1 sm:w-48">
+                  {Array.from({ length: 24 }).map((_, i) => (
+                    <span key={i} className={`w-px bg-wine/30 ${i % 6 === 0 ? 'h-3' : 'h-1.5'}`} />
+                  ))}
+                </div>
+                <span className="text-[9px] uppercase font-mono tracking-[0.2em] whitespace-nowrap hidden sm:block">Escala 1:1</span>
+              </div>
+              <Button href="/atlas" showArrow className="w-full sm:w-auto px-8">Especificações do Atlas OS</Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Construindo o futuro */}
-      <section className="relative py-28 sm:py-36 px-6 sm:px-14 border-t border-wine/[0.12]">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-            <div className="lg:col-span-7">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp}>
-                <h2 className="mt-7 text-4xl sm:text-5xl lg:text-[3.8rem] leading-[1.08] font-display font-semibold text-ink">
-                  Construindo o futuro do <span className="text-wine italic font-normal">software corporativo.</span>
-                </h2>
-                <p className="mt-6 text-base sm:text-lg leading-relaxed max-w-xl font-light text-ink/[0.65]">
-                  Infraestrutura digital rigorosa para empresas que buscam estabilidade, segurança e crescimento estruturado a longo prazo.
-                </p>
-              </motion.div>
-            </div>
-            <div className="lg:col-span-5 flex items-end">
-              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} className="grid grid-cols-2 gap-px w-full rounded-[6px] overflow-hidden bg-wine/[0.18]">
-                {companyStats.map((stat) => (
-                  <div key={stat.label} className="p-6 sm:p-7 bg-white">
-                    <div className="text-[10px] uppercase mb-2 font-mono tracking-[0.2em] text-ink/[0.45]">{stat.label}</div>
-                    <div className="text-xl font-medium tracking-tight text-ink font-display">{stat.value}</div>
-                  </div>
-                ))}
+      {/* A Filosofia da Permanência - NOVO LAYOUT EDITORIAL STICKY */}
+      <section className="relative py-32 sm:py-48 px-6 sm:px-14 bg-white border-t border-wine/10">
+        <BlueprintGrid opacity={0.03} />
+        <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-16 lg:gap-24 relative z-10">
+          
+          {/* Coluna Esquerda - Sticky */}
+          <div className="lg:w-1/3">
+            <div className="lg:sticky lg:top-40">
+              <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
+                <motion.div variants={fadeUp} className="flex items-center gap-4 mb-6">
+                  <span className="w-10 h-px bg-wine/30" />
+                  <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-wine font-medium">Manifesto</span>
+                </motion.div>
+                <motion.h2 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-[4rem] leading-[1.05] font-display font-semibold text-ink tracking-tight mb-8">
+                  A Filosofia da <br />
+                  <span className="text-wine italic font-light">Permanência.</span>
+                </motion.h2>
+                <motion.p variants={fadeUp} className="text-lg leading-relaxed font-light text-ink/70">
+                  A Fifteen Miles não foi criada para lançar um produto de passagem. Foi fundada para edificar um legado absoluto na engenharia de software corporativo.
+                </motion.p>
               </motion.div>
             </div>
           </div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-60px" }} variants={stagger} className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            {pillars.map((pillar) => {
-              const isActive = pillar.id === activePillar;
-              const Icon = pillar.icon;
-              return (
-                <motion.button
-                  variants={fadeUp}
-                  key={pillar.id}
-                  onClick={() => setActivePillar(pillar.id)}
-                  className={`relative text-left p-7 sm:p-8 rounded-[8px] transition-all duration-300 border ${isActive ? "border-wine bg-wine/[0.04]" : "border-wine/[0.18] bg-white"}`}
-                >
-                  <div className="flex items-center justify-between mb-8">
-                    <span className={`font-display text-3xl italic font-normal ${isActive ? "text-wine" : "text-ink/[0.3]"}`}>{pillar.numeral}</span>
-                    <Icon className={`w-4 h-4 ${isActive ? "text-wine" : "text-ink/[0.25]"}`} />
-                  </div>
-                  <span className={`block text-base font-medium tracking-tight ${isActive ? "text-ink" : "text-ink/[0.5]"}`}>{pillar.tag}</span>
-                  <span className={`absolute top-0 left-0 h-[3px] transition-all duration-300 bg-wine ${isActive ? "w-full" : "w-0"}`} />
-                </motion.button>
-              );
-            })}
-          </motion.div>
-
-          <div className="relative rounded-[10px] p-8 sm:p-14 lg:p-18 overflow-hidden border border-wine/[0.2] bg-white">
-            <CornerMarks inset={8} />
-            <div className="absolute inset-x-0 top-0 h-px bg-wine/[0.25]" />
-            <AnimatePresence mode="wait">
-              <motion.div key={currentPillar.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.4, ease: EASE }} className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-                <div className="lg:col-span-7">
-                  <span className="text-[10px] uppercase font-mono tracking-[0.3em] text-ink/[0.45]">Pilar Operacional · Placa {currentPillar.numeral}</span>
-                  <h3 className="mt-4 text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.12] font-display font-semibold text-ink">{currentPillar.title}</h3>
-                  <h4 className="mt-4 text-xl italic font-light font-display text-wine">{currentPillar.subtitle}</h4>
-                  <p className="mt-6 text-base sm:text-lg leading-relaxed max-w-2xl font-light text-ink/[0.7]">{currentPillar.description}</p>
-                  <Button href="/company" className="mt-10 w-fit" showArrow>Conhecer a Engenharia</Button>
+          {/* Coluna Direita - Scrollável */}
+          <div className="lg:w-2/3 flex flex-col">
+            {philosophyPrinciples.map((item, idx) => (
+              <motion.div 
+                key={item.numeral}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                variants={fadeUp}
+                className={`relative py-12 sm:py-16 flex flex-col sm:flex-row gap-6 sm:gap-12 border-wine/15 ${idx !== 0 ? 'border-t' : ''}`}
+              >
+                <div className="text-6xl sm:text-7xl font-display font-light text-wine/20 select-none shrink-0 sm:w-24">
+                  {item.numeral}
                 </div>
-                <div className="lg:col-span-5">
-                  <div className="rounded-[8px] p-7 sm:p-9 border border-wine/[0.18] bg-parchment">
-                    <div className="flex items-center justify-between mb-8">
-                      <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-ink/[0.45]">Telemetria do Pilar</span>
-                      <PillarIcon className="w-5 h-5 text-wine opacity-60" />
-                    </div>
-                    <div className="flex flex-col gap-6">
-                      {currentPillar.metrics.map((m, i) => (
-                        <div key={m.label} className={`flex flex-col gap-1 pb-5 ${i < currentPillar.metrics.length - 1 ? "border-b border-wine/[0.08]" : ""}`}>
-                          <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-ink/[0.4]">{m.label}</span>
-                          <span className="text-xl font-medium tracking-tight text-ink font-display">{m.value}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                <div className="flex-1 sm:mt-3">
+                  <h3 className="text-2xl sm:text-3xl font-display font-medium text-ink mb-4 tracking-tight">{item.title}</h3>
+                  <p className="text-base sm:text-lg leading-relaxed font-light text-ink/70 max-w-xl">
+                    {item.desc}
+                  </p>
                 </div>
               </motion.div>
-            </AnimatePresence>
+            ))}
           </div>
+          
         </div>
       </section>
 
-      {/* Um horizonte de três décadas */}
-      <section className="relative py-32 sm:py-40 px-6 sm:px-14 border-t border-wine/[0.12] bg-parchment-alt">
-        <BlueprintGrid opacity={0.04} />
+      {/* A Anatomia da Permanência */}
+      <section className="relative py-32 sm:py-48 px-6 sm:px-14 border-t border-wine/10 bg-parchment overflow-hidden">
+        <BlueprintGrid opacity={0.05} />
+        
         <div className="relative z-10 max-w-[1400px] mx-auto">
-          <div className="max-w-3xl mx-auto text-center mb-24">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
-              <motion.h2 variants={fadeUp} className="mt-7 text-5xl sm:text-6xl lg:text-[4.2rem] leading-[1.05] font-display font-semibold text-ink">
-                Um horizonte de <br />
-                <span className="text-wine italic font-normal">três décadas.</span>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 lg:mb-32">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="max-w-3xl">
+              <motion.div variants={fadeUp} className="flex items-center gap-4 mb-6">
+                <span className="w-10 h-px bg-wine/30" />
+                <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-wine font-medium">A Doutrina de Engenharia</span>
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-[5rem] leading-[1.02] font-display font-semibold text-ink tracking-tight">
+                A Anatomia da <br />
+                <span className="text-wine italic font-light">Permanência.</span>
               </motion.h2>
-              <motion.p variants={fadeUp} className="mt-7 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto italic font-light font-display text-ink/[0.7]">
-                &quot;Não fomos fundados para o próximo trimestre, nem para uma rodada efêmera. Fomos criados para erguer a infraestrutura digital dos próximos trinta anos.&quot;
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="max-w-md pb-3">
+              <p className="text-lg leading-relaxed font-light text-ink/70">
+                Não construímos para o próximo trimestre. Forjamos infraestrutura digital projetada com rigor técnico para sustentar o crescimento da sua operação pelas próximas décadas.
+              </p>
+            </motion.div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            <div className="lg:col-span-5 flex flex-col border-t border-wine/15 relative z-20">
+              {doctrinePillars.map((pillar) => {
+                const isActive = pillar.id === activePillar;
+                return (
+                  <button
+                    key={pillar.id}
+                    onClick={() => setActivePillar(pillar.id)}
+                    className="relative flex items-center justify-between w-full py-8 text-left border-b border-wine/15 group transition-all duration-500 cursor-pointer"
+                  >
+                    <div className="flex items-center gap-8">
+                      <span className={`font-mono text-sm tracking-[0.2em] transition-colors duration-500 ${isActive ? "text-wine" : "text-ink/30 group-hover:text-ink/50"}`}>
+                        {pillar.numeral}
+                      </span>
+                      <span className={`text-2xl sm:text-3xl font-display tracking-tight transition-all duration-500 ${isActive ? "text-ink font-medium" : "text-ink/40 font-light group-hover:text-ink/70"}`}>
+                        {pillar.title}
+                      </span>
+                    </div>
+                    <ArrowRight className={`w-5 h-5 transition-all duration-500 ${isActive ? "text-wine opacity-100 translate-x-0" : "text-wine opacity-0 -translate-x-4"}`} />
+                    
+                    <span className={`absolute bottom-0 left-0 h-px bg-wine transition-all duration-700 ease-out ${isActive ? "w-full" : "w-0"}`} />
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="lg:col-span-7 relative min-h-[500px] lg:min-h-[550px] flex items-center">
+              <AnimatePresence mode="wait">
+                {doctrinePillars.map((pillar) => {
+                  if (pillar.id !== activePillar) return null;
+                  const Icon = pillar.icon;
+                  return (
+                    <motion.div
+                      key={pillar.id}
+                      initial={{ opacity: 0, filter: "blur(8px)", x: 20 }}
+                      animate={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+                      exit={{ opacity: 0, filter: "blur(8px)", x: -20 }}
+                      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute inset-0 flex flex-col justify-center w-full"
+                    >
+                      <div className="absolute -top-10 -right-10 select-none pointer-events-none opacity-[0.03]">
+                        <span className="text-[280px] sm:text-[350px] leading-none font-display font-bold text-wine italic">
+                          {pillar.numeral}
+                        </span>
+                      </div>
+
+                      <div className="relative z-10">
+                        <Icon className="w-8 h-8 text-wine mb-8 opacity-80" strokeWidth={1.5} />
+                        <h3 className="text-3xl sm:text-4xl lg:text-[2.8rem] leading-[1.1] font-display font-medium text-ink mb-6">
+                          {pillar.subtitle}
+                        </h3>
+                        <p className="text-lg sm:text-xl leading-relaxed font-light text-ink/70 max-w-2xl mb-14">
+                          {pillar.description}
+                        </p>
+
+                        <div className="grid sm:grid-cols-3 gap-8 pt-8 border-t border-wine/15">
+                          {pillar.metrics.map((metric, idx) => (
+                            <div key={idx} className="flex flex-col gap-2">
+                              <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-wine/70">
+                                {metric.label}
+                              </span>
+                              <span className="text-sm font-medium text-ink">
+                                {metric.value}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visão de Longo Prazo */}
+      <section className="relative py-32 sm:py-48 px-6 sm:px-14 border-t border-wine/10 bg-parchment-alt overflow-hidden">
+        <BlueprintGrid opacity={0.04} />
+        
+        <div className="relative z-10 max-w-[1400px] mx-auto">
+          <div className="max-w-4xl mb-24 sm:mb-32">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger}>
+              <motion.div variants={fadeUp} className="flex items-center gap-4 mb-6">
+                <span className="w-10 h-px bg-wine/30" />
+                <span className="text-[10px] uppercase font-mono tracking-[0.25em] text-wine font-medium">Visão de Longo Prazo</span>
+              </motion.div>
+              <motion.h2 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-[5.5rem] leading-[1.02] font-display font-semibold text-ink tracking-tight">
+                Um horizonte de <br />
+                <span className="text-wine italic font-light">três décadas.</span>
+              </motion.h2>
+              <motion.p variants={fadeUp} className="mt-10 text-xl sm:text-2xl leading-relaxed max-w-3xl italic font-light font-display text-ink/70 border-l border-wine/30 pl-6">
+                "Não fomos fundados para o próximo trimestre, nem para uma rodada efêmera. Fomos criados para erguer a infraestrutura digital dos próximos trinta anos."
               </motion.p>
             </motion.div>
-
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="relative mt-20 grid sm:grid-cols-3 gap-6 text-left">
-              <div className="hidden sm:block absolute top-[52px] left-[16.5%] right-[16.5%] h-px bg-wine/[0.25]" />
-              {horizons.map((item, idx) => (
-                <motion.div variants={fadeUp} key={item.year} className="relative p-8 rounded-[8px] flex flex-col justify-between border border-wine/[0.18] bg-white">
-                  <div>
-                    <span className="block mb-4 text-[10px] uppercase font-mono tracking-[0.22em] text-wine">{item.year}</span>
-                    <h3 className="mb-3 text-xl font-medium tracking-tight text-ink font-display">{item.title}</h3>
-                    <p className="text-sm leading-relaxed font-light text-ink/[0.65]">{item.desc}</p>
-                  </div>
-                  <div className="mt-8 pt-4 flex items-center justify-between text-[10px] uppercase font-mono border-t border-wine/[0.1] tracking-[0.15em] text-ink/[0.4]">
-                    <span>Fase 0{idx + 1}</span>
-                    <span>Placa VI.{idx + 1}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="relative p-12 sm:p-24 rounded-[12px] text-center overflow-hidden border border-wine/[0.25] bg-white shadow-[0_30px_60px_-15px_rgba(28,23,16,0.1)]">
-            <CornerMarks inset={10} />
-            <div className="relative z-10 flex flex-col items-center">
-              <Seal size={84} />
-              <div className="mt-8 inline-flex items-center gap-2 text-[10px] uppercase font-mono tracking-[0.28em] text-wine">
-                <Landmark className="w-3.5 h-3.5" />
-                <span>O Convite Institucional</span>
-              </div>
-              <h3 className="mt-6 text-4xl sm:text-6xl leading-[1.1] max-w-3xl font-display font-semibold text-ink">
-                Construa sua operação sobre fundações permanentes.
-              </h3>
-              <p className="mt-6 text-lg sm:text-xl max-w-xl leading-relaxed font-light text-ink/[0.68]">
-                Se sua empresa busca estabilidade operacional e visão de longo prazo, convidamos você a dialogar diretamente com nosso time de arquitetura e engenharia.
-              </p>
-              <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-                <Button href="/contact" variant="primary-dark">Iniciar Diálogo Institucional</Button>
-                <Button href="/atlas" variant="outline" showArrow>Explorar Atlas OS</Button>
-              </div>
-              <div className="mt-16 text-[10px] uppercase font-mono tracking-[0.25em] text-ink/[0.4]">
-                Fifteen Miles Technologies · Projetado para durar décadas · MMXXVI
-              </div>
+          <div className="relative max-w-5xl mx-auto">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={stagger} className="flex flex-col">
+              {horizons.map((item, idx) => {
+                const yearNumber = item.year.replace(/\D/g, "");
+                return (
+                  <motion.div variants={fadeUp} key={item.year} className="relative pl-8 sm:pl-16 py-12 sm:py-16 border-l border-wine/15 group">
+                    <div className="absolute -left-[5px] top-16 sm:top-20 w-2.5 h-2.5 bg-parchment-alt border border-wine rounded-full group-hover:scale-150 transition-transform duration-500" />
+                    
+                    <div className="absolute top-0 sm:-top-4 left-8 sm:left-16 text-[6rem] sm:text-[9rem] font-display font-bold text-wine/[0.03] select-none pointer-events-none tracking-tighter">
+                      {yearNumber}
+                    </div>
+
+                    <div className="relative z-10">
+                      <div className="flex items-center gap-4 mb-4">
+                        <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-wine font-semibold px-2 py-1 bg-wine/5 border border-wine/10 rounded">
+                          Fase 0{idx + 1}
+                        </span>
+                        <span className="text-[10px] uppercase font-mono tracking-[0.2em] text-ink/40">
+                          Placa VI.{idx + 1}
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-2xl sm:text-4xl font-display font-medium text-ink mb-4 tracking-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-base sm:text-lg leading-relaxed font-light text-ink/70 max-w-2xl">
+                        {item.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Convite Institucional */}
+      <section className="relative py-32 sm:py-48 px-6 sm:px-14 bg-[#110E0D] overflow-hidden selection:bg-white">
+        <div className="absolute inset-0 pointer-events-none bg-[url('/blueprint-pattern.svg')] bg-repeat opacity-[0.02] invert" />
+        
+        <div className="relative z-10 max-w-[1400px] mx-auto">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} variants={fadeUp} className="flex flex-col items-center text-center">
+            
+            <h3 className="text-4xl sm:text-6xl lg:text-[5.5rem] leading-[1.05] max-w-5xl font-display font-medium text-parchment tracking-tight">
+              Construa sua operação sobre <span className="italic text-white/60 font-light">fundações permanentes.</span>
+            </h3>
+            
+            <p className="mt-8 text-lg sm:text-xl max-w-2xl leading-relaxed font-light text-parchment/60">
+              Se sua organização busca estabilidade, centralização e visão de longo prazo, convidamos você a dialogar diretamente com nosso time de arquitetura e engenharia.
+            </p>
+
+            <div className="mt-14 flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+              <a 
+                href="/contact" 
+                className="w-full sm:w-auto px-10 py-5 bg-wine text-white text-xs font-mono uppercase tracking-[0.2em] hover:bg-wine/80 transition-colors duration-300 text-center cursor-pointer"
+              >
+                Iniciar Diálogo Institucional
+              </a>
+              <a 
+                href="/atlas" 
+                className="w-full sm:w-auto px-10 py-5 bg-transparent text-parchment text-xs font-mono uppercase tracking-[0.2em] border border-parchment/20 hover:bg-parchment/5 transition-colors duration-300 text-center flex items-center justify-center gap-3 cursor-pointer"
+              >
+                Explorar Atlas OS <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            <div className="mt-32 pt-10 border-t border-parchment/10 w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-[9px] uppercase font-mono tracking-[0.3em] text-parchment/30">
+              <span>Fifteen Miles Technologies</span>
+              <span>Projetado para durar décadas</span>
+              <span>MMXXVI</span>
             </div>
           </motion.div>
         </div>

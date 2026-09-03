@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight, Clock, Bookmark } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import Seo from '@/components/Seo';
 
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `https://www.fifteenmiles.tech/blog/${post.slug}`;
 
   return {
-    title: `${post.title} — Fifteen Miles`,
+    title: `${post.title} — Fifteen Miles Gazette`,
     description: post.summary || post.description,
     alternates: {
       canonical: url,
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       type: 'article',
       url,
-      title: `${post.title} — Fifteen Miles`,
+      title: `${post.title} — Fifteen Miles Gazette`,
       description: post.summary || post.description,
       images: [{ url: post.image || '/TopLogo.png' }],
       publishedTime: post.date,
@@ -52,32 +52,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} — Fifteen Miles`,
+      title: `${post.title} — Fifteen Miles Gazette`,
       description: post.summary || post.description,
       images: [post.image || '/TopLogo.png'],
     },
   };
-}
-
-function GridBackground() {
-  return (
-    <div className="absolute inset-0 pointer-events-none [perspective:1000px] overflow-hidden opacity-15 z-0">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#030303] via-transparent to-[#030303] z-10" />
-      <div 
-        className="absolute inset-x-0 bottom-0 h-[100vh] origin-bottom"
-        style={{
-          transform: "rotateX(75deg) translateY(100px) scale(2)",
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)
-          `,
-          backgroundSize: "48px 48px",
-          maskImage: "linear-gradient(to top, black 10%, transparent 85%)",
-          WebkitMaskImage: "linear-gradient(to top, black 10%, transparent 85%)"
-        }}
-      />
-    </div>
-  );
 }
 
 export default async function BlogPostPage({ params }: Props) {
@@ -111,238 +90,244 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] text-white font-[Inter] selection:bg-white/20 selection:text-white pt-36 pb-32 relative overflow-hidden">
+    <div className="min-h-screen bg-[#F4F0EA] text-[#1A1816] font-serif selection:bg-[#1A1816] selection:text-[#F4F0EA] pt-24 pb-32 relative overflow-hidden">
       <Seo 
-        title={`${post.title} — Fifteen Miles`} 
+        title={`${post.title} — Fifteen Miles Gazette`} 
         description={post.summary || post.description} 
         path={`/blog/${post.slug}`} 
       />
-      <GridBackground />
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,rgba(255,255,255,0.03)_0%,transparent_60%)] pointer-events-none z-0" />
 
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify([blogPostingSchema, organizationSchema]) }}
       />
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-12 relative z-10">
-        <div className="mb-16">
-          <div className="mb-12">
-            <Link 
-              href="/blog" 
-              className="inline-flex items-center gap-2 font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.25em] text-white/60 hover:text-white transition-colors border-b border-transparent hover:border-white/40 pb-1"
-            >
-              <ArrowRight className="w-3.5 h-3.5 rotate-180" />
-              <span>Retornar ao Acervo Editorial</span>
-            </Link>
+      <main className="max-w-5xl mx-auto px-4 sm:px-8 relative z-10">
+        {/* Newspaper Header Info / Return */}
+        <div className="mb-8 flex items-center justify-between border-b-2 border-[#1A1816] pb-3 text-xs uppercase tracking-widest font-mono">
+          <Link 
+            href="/blog" 
+            className="inline-flex items-center gap-2 hover:opacity-70 transition-opacity"
+          >
+            <ArrowRight className="w-3.5 h-3.5 rotate-180" />
+            <span>Voltar ao Arquivo Editorial</span>
+          </Link>
+          <div className="hidden sm:flex items-center gap-6">
+            <span>Edição Especial Digital</span>
+            <span>·</span>
+            <span>ISSN 2940-15X</span>
           </div>
+        </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-y border-white/[0.08] py-4 mb-12">
-            <div className="flex items-center gap-4">
-              <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.25em] text-white/40">Edição Institucional</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
-              <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.25em] text-white/80 px-3 py-1 bg-white/[0.03] rounded-full border border-white/10">{post.tag}</span>
-            </div>
-            <div className="flex items-center gap-6 font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.2em] text-white/40">
-              <time dateTime={post.date}>{post.displayDate || post.date}</time>
-              <span className="hidden sm:block">|</span>
-              <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> {post.readTime || '5 min de leitura'}</span>
-            </div>
+        {/* Newspaper Masthead */}
+        <header className="text-center pb-8 mb-10 border-b-4 border-[#1A1816]">
+          <div className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.3em] mb-2 text-[#1A1816]/70">
+            Gazeta Oficial de Engenharia & Arquitetura de Sistemas
           </div>
-
-          <h1 className="font-[Fraunces] text-4xl sm:text-6xl lg:text-[5rem] font-normal tracking-tight leading-[1.05] text-white mb-12">
-            {post.title}
+          <h1 className="font-serif text-5xl sm:text-8xl tracking-tighter uppercase font-bold text-[#1A1816] my-2 leading-none">
+            Fifteen Miles
           </h1>
-
-          <div className="flex items-center gap-4 border-b border-white/[0.08] pb-10 mb-16">
-            <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center font-[Fraunces] text-base bg-white/[0.05] text-white shadow-inner">
-              NS
-            </div>
-            <div>
-              <span className="font-[Inter] text-sm font-medium text-white block uppercase tracking-wider">{post.author || 'Nathanael Secundo Cardoso'}</span>
-              <span className="font-[JetBrains_Mono] text-[11px] text-white/40 italic">Diretoria de Engenharia & Arquitetura</span>
-            </div>
+          <div className="flex items-center justify-between border-y border-[#1A1816] py-1.5 mt-4 text-[11px] font-mono uppercase tracking-widest px-2">
+            <span className="hidden sm:inline">Fundada em MMXXIV</span>
+            <span className="font-semibold">{post.displayDate || post.date}</span>
+            <span>{post.readTime || '5 min de leitura'}</span>
+            <span className="hidden sm:inline">Circulação Global</span>
           </div>
+        </header>
 
-          {post.image && (
-            <div className="relative w-full h-[400px] sm:h-[480px] mb-20 rounded-[28px] overflow-hidden border border-white/[0.08] bg-[#050505] shadow-2xl">
+        {/* Article Meta Bar */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10 pb-8 border-b border-[#1A1816]/40 items-center">
+          <div className="md:col-span-8">
+            <div className="inline-block bg-[#1A1816] text-[#F4F0EA] text-[10px] font-mono uppercase tracking-widest px-2.5 py-1 mb-4">
+              {post.tag || 'Artigo de Opinião'}
+            </div>
+            <h2 className="font-serif text-3xl sm:text-5xl font-normal leading-[1.15] text-[#1A1816]">
+              {post.title}
+            </h2>
+          </div>
+          <div className="md:col-span-4 border-l-0 md:border-l-2 border-[#1A1816]/20 md:pl-6 text-sm">
+            <p className="font-bold uppercase tracking-wider mb-1 font-mono text-xs">Por {post.author || 'Nathanael Secundo Cardoso'}</p>
+            <p className="text-[#1A1816]/70 italic text-xs font-serif">Diretoria de Engenharia & Arquitetura, Fifteen Miles Technologies.</p>
+          </div>
+        </div>
+
+        {/* Main Cover Image */}
+        {post.image && (
+          <div className="mb-12 border-2 border-[#1A1816] p-2 bg-white shadow-sm">
+            <div className="relative w-full h-[380px] sm:h-[500px] overflow-hidden bg-[#1A1816]">
               <Image
                 src={post.image}
                 alt={post.title}
                 fill
-                className="object-cover grayscale contrast-125 opacity-90"
+                className="object-cover grayscale contrast-125 sepia-[0.1]"
                 sizes="(max-width: 1200px) 100vw, 1200px"
                 priority
               />
             </div>
-          )}
-        </div>
+            <div className="pt-2 pb-1 px-2 flex justify-between items-center text-[10px] font-mono uppercase text-[#1A1816]/70">
+              <span>Registro fotográfico do acervo técnico</span>
+              <span>Doc. Arquivo #15M</span>
+            </div>
+          </div>
+        )}
 
-        <article className="max-w-none text-white/80 font-light leading-relaxed font-[Inter]">
+        {/* Article Content Layout (Multi-column feel using CSS) */}
+        <article className="max-w-none text-[#1A1816] leading-relaxed font-serif">
           <style dangerouslySetInnerHTML={{__html: `
-            .blog-content,
-            .blog-content * {
+            .newspaper-content,
+            .newspaper-content * {
               white-space: normal !important;
               overflow-wrap: break-word !important;
               max-width: 100% !important;
               background-color: transparent !important;
               font-family: inherit !important;
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-              padding-left: 0 !important;
-              padding-right: 0 !important;
-              text-indent: 0 !important;
-              word-spacing: normal !important;
-              letter-spacing: normal !important;
-              color: rgba(255, 255, 255, 0.75) !important;
+              color: #1A1816 !important;
             }
 
-            .blog-content {
+            .newspaper-content {
               width: 100%;
               overflow-x: hidden;
-              hyphens: auto;
-              -webkit-hyphens: auto;
-              -ms-hyphens: auto;
             }
 
-            .blog-content p,
-            .blog-content li,
-            .blog-content blockquote {
-              hyphens: auto;
-              -webkit-hyphens: auto;
-              -ms-hyphens: auto;
-              word-break: normal;
-              overflow-wrap: break-word;
-              line-height: 1.85 !important;
-              font-size: 1.125rem !important;
+            .newspaper-content p,
+            .newspaper-content li,
+            .newspaper-content blockquote {
+              line-height: 1.8 !important;
+              font-size: 1.15rem !important;
               font-weight: 300 !important;
             }
 
-            .blog-content p {
-              margin-bottom: 2.5rem !important;
+            .newspaper-content p {
+              margin-bottom: 2rem !important;
+              text-align: justify;
+              text-justify: inter-word;
             }
 
-            .blog-content h1, .blog-content h2, .blog-content h3 {
-              font-family: var(--font-fraunces), serif !important;
-              color: #FFFFFF !important;
+            .newspaper-content h1, .newspaper-content h2, .newspaper-content h3 {
+              font-family: inherit !important;
+              color: #1A1816 !important;
               text-align: left !important;
-              font-weight: 400 !important;
-              margin-left: 0 !important;
-              padding-left: 0 !important;
+              font-weight: 700 !important;
+              text-transform: uppercase;
+              letter-spacing: -0.02em;
             }
 
-            .blog-content h1 {
-              font-size: 3rem !important;
-              margin-top: 4rem !important;
-              margin-bottom: 2rem !important;
-              border-top: 1px solid rgba(255, 255, 255, 0.08);
-              padding-top: 2.5rem !important;
-            }
-
-            .blog-content h2 {
-              font-size: 2.25rem !important;
-              margin-top: 4rem !important;
-              margin-bottom: 2rem !important;
-              border-top: 1px solid rgba(255, 255, 255, 0.08);
-              padding-top: 2.5rem !important;
-            }
-
-            .blog-content h3 {
-              font-size: 1.5rem !important;
-              margin-top: 3rem !important;
+            .newspaper-content h1 {
+              font-size: 2.5rem !important;
+              margin-top: 3.5rem !important;
               margin-bottom: 1.5rem !important;
-              color: rgba(255, 255, 255, 0.9) !important;
+              border-bottom: 2px solid #1A1816;
+              padding-bottom: 0.75rem !important;
             }
 
-            .blog-content ul, .blog-content ol {
-              margin-bottom: 2.5rem !important;
+            .newspaper-content h2 {
+              font-size: 1.85rem !important;
+              margin-top: 3rem !important;
+              margin-bottom: 1.25rem !important;
+              border-bottom: 1px solid rgba(26, 24, 22, 0.3);
+              padding-bottom: 0.5rem !important;
+            }
+
+            .newspaper-content h3 {
+              font-size: 1.35rem !important;
+              margin-top: 2.25rem !important;
+              margin-bottom: 1rem !important;
+            }
+
+            .newspaper-content ul, .newspaper-content ol {
+              margin-bottom: 2rem !important;
               padding-left: 1.5rem !important;
             }
 
-            .blog-content ul {
-              list-style-type: disc !important;
+            .newspaper-content ul {
+              list-style-type: square !important;
             }
 
-            .blog-content ol {
+            .newspaper-content ol {
               list-style-type: decimal !important;
             }
 
-            .blog-content li {
-              margin-bottom: 0.75rem !important;
+            .newspaper-content li {
+              margin-bottom: 0.5rem !important;
               text-align: left !important;
             }
 
-            .blog-content pre {
+            .newspaper-content pre {
               white-space: pre-wrap !important;
               overflow-x: auto !important;
-              background: #050505 !important;
-              border: 1px solid rgba(255, 255, 255, 0.1) !important;
+              background: #1A1816 !important;
+              color: #F4F0EA !important;
+              border: 1px solid #1A1816 !important;
               padding: 1.5rem !important;
-              border-radius: 1rem !important;
+              border-radius: 0px !important;
               font-family: 'JetBrains Mono', monospace !important;
               font-size: 0.85rem !important;
               margin: 2.5rem 0 !important;
-              color: #FFFFFF !important;
+            }
+            
+            .newspaper-content pre * {
+              color: #F4F0EA !important;
             }
 
-            .blog-content blockquote {
-              border-left: 2px solid rgba(255, 255, 255, 0.3) !important;
-              padding-left: 2rem !important;
+            .newspaper-content blockquote {
+              border-top: 1px solid #1A1816 !important;
+              border-bottom: 1px solid #1A1816 !important;
+              padding: 2rem 0 !important;
               font-style: italic !important;
-              margin: 3.5rem 0 !important;
-              color: rgba(255, 255, 255, 0.6) !important;
-              font-family: var(--font-fraunces), serif !important;
-              font-size: 1.65rem !important;
-              line-height: 1.6 !important;
+              margin: 3rem 0 !important;
+              color: #1A1816 !important;
+              font-size: 1.5rem !important;
+              line-height: 1.4 !important;
+              text-align: center;
+              font-weight: 400;
             }
 
-            .blog-content a {
-              color: #FFFFFF !important;
+            .newspaper-content a {
+              color: #1A1816 !important;
               text-decoration: underline !important;
-              text-decoration-color: rgba(255, 255, 255, 0.4) !important;
-              text-underline-offset: 4px !important;
-              transition: color 0.2s, text-decoration-color 0.2s;
+              text-decoration-thickness: 1px !important;
+              text-underline-offset: 3px !important;
             }
 
-            .blog-content a:hover {
-              color: #FFFFFF !important;
-              text-decoration-color: #FFFFFF !important;
+            .newspaper-content a:hover {
+              background-color: #1A1816 !important;
+              color: #F4F0EA !important;
             }
 
-            .blog-content > p:first-of-type::first-letter {
-              font-family: var(--font-fraunces), serif !important;
-              font-size: 6.5rem !important;
+            .newspaper-content > p:first-of-type::first-letter {
+              font-size: 5.5rem !important;
               float: left !important;
-              line-height: 0.8 !important;
-              margin-right: 1.25rem !important;
-              margin-top: 0.25rem !important;
-              color: #FFFFFF !important;
+              line-height: 0.75 !important;
+              margin-right: 1rem !important;
+              margin-top: 0.1rem !important;
+              font-weight: bold;
             }
           `}} />
 
-          <p
-            lang="pt-BR"
-            style={{ hyphens: 'auto', WebkitHyphens: 'auto' } as React.CSSProperties}
-            className="text-xl sm:text-2xl italic font-[Fraunces] text-white/90 border-l-2 border-white/30 pl-8 py-3 my-14 leading-relaxed"
-          >
-            {post.summary || post.description}
-          </p>
+          {/* Lead Summary Callout */}
+          <div className="border-y-2 border-[#1A1816] py-4 my-8 font-serif italic text-xl sm:text-2xl text-[#1A1816]/90 leading-relaxed text-center">
+            &ldquo;{post.summary || post.description}&rdquo;
+          </div>
 
           <div
             lang="pt-BR"
-            className="blog-content text-lg sm:text-xl font-light tracking-tight"
+            className="newspaper-content text-lg sm:text-xl font-light"
             dangerouslySetInnerHTML={{ __html: post.content || '' }}
           />
         </article>
 
-        <div className="mt-36 pt-16 border-t border-white/[0.08] flex flex-col items-center justify-center text-center">
-          <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center font-[Fraunces] text-lg bg-white/[0.03] text-white mb-4 shadow-md">
-            FM
+        {/* Newspaper Footer / Colophon */}
+        <footer className="mt-32 pt-12 border-t-4 border-[#1A1816] text-center">
+          <div className="font-mono text-xs uppercase tracking-[0.25em] mb-4 text-[#1A1816]/70">
+            Publicação Oficial do Circuito de Imprensa · Fifteen Miles
           </div>
-          <span className="font-[JetBrains_Mono] text-[10px] uppercase tracking-[0.3em] text-white/40 font-medium">
-            Fifteen Miles · Imprensa Oficial Institucional
-          </span>
-        </div>
+          <div className="font-serif text-2xl font-bold tracking-tight mb-2">
+            FIM DA EDIÇÃO
+          </div>
+          <p className="text-xs text-[#1A1816]/60 max-w-md mx-auto font-mono">
+            Todos os direitos reservados à Fifteen Miles Technologies © 2026. Proibida a reprodução sem atribuição formal de engenharia.
+          </p>
+        </footer>
       </main>
     </div>
   );

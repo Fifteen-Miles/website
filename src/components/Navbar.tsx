@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ChevronDown, ArrowRight, Sparkles } from "lucide-react";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants, cubicBezier } from "framer-motion";
 import Image from "next/image";
 
-const EASE = [0.16, 1, 0.3, 1];
+const EASE = cubicBezier(0.16, 1, 0.3, 1);
 
 const FONT_BLACK = `'UnifrakturMaguntia', serif`;
 const FONT_HEADING = `'Coolvetica', 'Helvetica Neue', sans-serif`;
@@ -103,20 +103,20 @@ const MEGA_MENU_DATA: Record<string, {
           { title: "Soberania de Dados", desc: "Segurança de alto nível corporativo", href: "/security" }
         ]
       },
-      {
-        title: "Recursos",
-        links: [
-          { title: "Documentação", desc: "Manuais e especificações técnicas", href: "/docs" },
-          { title: "Roadmap", desc: "Visão de longo prazo da plataforma", href: "/roadmap" }
-        ]
-      },
-      {
-        title: "Conectividade",
-        links: [
-          { title: "APIs & Integrações", desc: "Conecte sistemas externos", href: "/apis" },
-          { title: "Ambiente Cloud", desc: "Alta disponibilidade global", href: "/cloud" }
-        ]
-      }
+     // {
+      //  title: "Recursos",
+       // links: [
+       //   { title: "Documentação", desc: "Manuais e especificações técnicas", href: "/docs" },
+      //    { title: "Roadmap", desc: "Visão de longo prazo da plataforma", href: "/roadmap" }
+     //   ]
+     // },
+      //{
+       //} title: "Conectividade",
+        //links: [
+          //{ title: "APIs & Integrações", desc: "Conecte sistemas externos", href: "/apis" },
+          //{ title: "Ambiente Cloud", desc: "Alta disponibilidade global", href: "/cloud" }
+        //]
+       //}
     ],
     highlight: {
       tag: "Lançamento MMXXVI",
@@ -149,7 +149,7 @@ const MEGA_MENU_DATA: Record<string, {
         title: "Imprensa & Editorial",
         links: [
           { title: "Acervo Editorial", desc: "Discursos e ensaios técnicos", href: "/blog" },
-          { title: "Notas Oficiais", desc: "Comunicados institucionais", href: "/newsroom" },
+          //{ title: "Notas Oficiais", desc: "Comunicados institucionais", href: "/newsroom" },
           { title: "Clientes", desc: "Eles usaram e permaneceram", href: "/clients" }
         ]
       },
@@ -157,7 +157,7 @@ const MEGA_MENU_DATA: Record<string, {
         title: "Comunicação",
         links: [
           { title: "Contato Direto", desc: "Diálogo executivo e parcerias", href: "/contact" },
-          { title: "Changelog", desc: "Mudanças registradas", href: "/changelog" }
+          //{ title: "Changelog", desc: "Mudanças registradas", href: "/changelog" }
         ]
       }
     ],
@@ -241,7 +241,7 @@ export const Navbar = () => {
 
         <div className="hidden lg:flex items-center">
           <a 
-            href="https://atlas.fifteenmiles.tech" 
+            href="/atlas" 
             className="inline-flex items-center gap-2.5 px-5 py-1.5 bg-[#590C0D] text-white border font-raleway rounded-md text-[11px] tracking-[0.18em] uppercase transition-all duration-200 hover:bg-white hover:text-[#590C0D]"
           >
             <span>Atlas OS</span>

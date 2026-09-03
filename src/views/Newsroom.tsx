@@ -17,14 +17,14 @@ const staggerContainer: Variants = {
 };
 
 // Exemplo de dados (você pode carregar isso via CMS/API)
-const officialNotes = [
- { date: "17 Ago, 2026", type: "Nota Institucional", title: "Fifteen Miles apresenta nova visão para software empresarial", excerpt: "Uma nova geração de sistemas projetados para reduzir a fragmentação operacional e preservar o conhecimento das organizações." },
+//const officialNotes = [
+ //{ date: "17 Ago, 2026", type: "Nota Institucional", title: "Fifteen Miles apresenta nova visão para software empresarial", excerpt: "Uma nova geração de sistemas projetados para reduzir a fragmentação operacional e preservar o conhecimento das organizações." },
 
-{ date: "12 Jul, 2026", type: "Nota Técnica", title: "AtlasOS: evolução da plataforma de operações empresariais", excerpt: "Nova etapa de evolução do Atlas com foco em modularidade, personalização e uma arquitetura preparada para diferentes modelos de negócio." },
+//{ date: "12 Jul, 2026", type: "Nota Técnica", title: "AtlasOS: evolução da plataforma de operações empresariais", excerpt: "Nova etapa de evolução do Atlas com foco em modularidade, personalização e uma arquitetura preparada para diferentes modelos de negócio." },
 
-{ date: "05 Jun, 2026", type: "Nota Institucional", title: "Fifteen Miles inicia nova fase de desenvolvimento de produtos", excerpt: "A empresa amplia sua plataforma de software com uma abordagem centrada em sistemas duradouros, dados organizados e autonomia operacional." },
+//{ date: "05 Jun, 2026", type: "Nota Institucional", title: "Fifteen Miles inicia nova fase de desenvolvimento de produtos", excerpt: "A empresa amplia sua plataforma de software com uma abordagem centrada em sistemas duradouros, dados organizados e autonomia operacional." },
 
-{ date: "14 Mai, 2026", type: "Nota Técnica", title: "Arquitetura modular: construindo sistemas que evoluem com a empresa", excerpt: "Estudo de engenharia sobre modularidade, reutilização de componentes e estruturas capazes de acompanhar o crescimento das organizações." },];
+//{ date: "14 Mai, 2026", type: "Nota Técnica", title: "Arquitetura modular: construindo sistemas que evoluem com a empresa", excerpt: "Estudo de engenharia sobre modularidade, reutilização de componentes e estruturas capazes de acompanhar o crescimento das organizações." },];
 
 export default function OfficialNotesPage() {
   return (
@@ -61,7 +61,7 @@ export default function OfficialNotesPage() {
           </div>
 
           <div className="grid gap-6">
-            {officialNotes.map((note, i) => (
+            {/*{officialNotes.map((note, i) => (
               <motion.div key={i} variants={fadeUp} className="group p-8 sm:p-10 rounded-[24px] bg-[#050505] border border-white/[0.08] hover:border-white/20 transition-all duration-500">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                   <div className="space-y-4">
@@ -80,7 +80,7 @@ export default function OfficialNotesPage() {
                   </Link>
                 </div>
               </motion.div>
-            ))}
+            ))}*/}
           </div>
         </motion.div>
       </section>

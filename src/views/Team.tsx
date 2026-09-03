@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import { Users, Quote, Briefcase, ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import Seo from "@/components/Seo";
 
@@ -54,14 +55,35 @@ export default function TeamPage() {
       <section className="pb-32 px-6 max-w-7xl mx-auto">
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={staggerContainer} className="space-y-24">
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3, 4, 5, 6].map((member) => (
-              <motion.div key={member} variants={fadeUp} className="p-8 rounded-[28px] bg-[#050505] border border-white/[0.08]">
-                <div className="w-16 h-16 rounded-full bg-white/5 mb-6" />
-                <h3 className="text-lg font-medium">Engenheiro de Software {member}</h3>
-                <p className="text-white/40 text-sm font-[JetBrains_Mono] uppercase tracking-widest mt-1">Core Systems</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">  
+              <motion.div variants={fadeUp} className="p-8 rounded-[28px] bg-[#050505] border border-white/[0.08]">
+                <div className="w-26 h-26 rounded-full bg-white/5 mb-6 overflow-hidden">
+                  <Image src="/nathanael.jfif" width={100} height={100} alt="Engenheiro de Software" />
+                </div>
+                <h3 className="text-lg font-medium">Nathanael Secundo Cardoso</h3>
+                <p className="text-white/40 text-sm font-[JetBrains_Mono] uppercase tracking-widest mt-1">Founder & CEO</p>
               </motion.div>
-            ))}
+              <motion.div variants={fadeUp} className="p-8 rounded-[28px] bg-[#050505] border border-white/[0.08]">
+                <div className="w-26 h-26 rounded-full bg-white/5 mb-6 overflow-hidden">
+                  <Image src="/jaciara.jfif" width={100} height={100} alt="Engenheiro de Software" />
+                </div>
+                <h3 className="text-lg font-medium">Jaciara Martins</h3>
+                <p className="text-white/40 text-sm font-[JetBrains_Mono] uppercase tracking-widest mt-1">CLO - Chief Legal Officer</p>
+              </motion.div>
+              <motion.div variants={fadeUp} className="p-8 rounded-[28px] bg-[#050505] border border-white/[0.08]">
+                <div className="w-26 h-26 rounded-full bg-white/5 mb-6 overflow-hidden">
+                  <Image src="/vinicius.jfif" width={100} height={100} alt="Engenheiro de Software" />
+                </div>
+                <h3 className="text-lg font-medium">Vinícius Moreira</h3>
+                <p className="text-white/40 text-sm font-[JetBrains_Mono] uppercase tracking-widest mt-1">Software Engineer</p>
+              </motion.div>
+              <motion.div variants={fadeUp} className="p-8 rounded-[28px] bg-[#050505] border border-white/[0.08]">
+                <div className="w-26 h-26 rounded-full bg-white/5 mb-6 overflow-hidden">
+                  <Image src="/arthur.jfif" width={100} height={100} alt="Engenheiro de Software" />
+                </div>
+                <h3 className="text-lg font-medium">Arthur Bruno</h3>
+                <p className="text-white/40 text-sm font-[JetBrains_Mono] uppercase tracking-widest mt-1">Software Engineer</p>
+              </motion.div>
           </div>
 
           <div className="border-t border-white/[0.08] pt-24">
