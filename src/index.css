@@ -15,10 +15,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-ink: #1C1710;
-  --color-wine: #5C0000;
-  --color-wine-hover: #590C0D;
-  --color-parchment: #FAF7F0;
+  --color-ink: #1C1710; --color-wine: #5C0000; --color-wine-hover: #590C0D; --color-parchment: #FAF7F0;
   --color-parchment-alt: #F6F1EA;
   --color-parchment-dark: #F3EDE3;
   

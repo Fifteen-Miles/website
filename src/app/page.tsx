@@ -159,7 +159,7 @@ export default function Home() {
             <Button href="/company" showArrow>Conheça a Fifteen Miles</Button>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: EASE }} className="relative z-10 max-w-[1500px] mx-auto mt-28 pt-12 border-t border-wine/[0.14]">
+        {/*<motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: EASE }} className="relative z-10 max-w-[1500px] mx-auto mt-28 pt-12 border-t border-wine/[0.14]">
           <h3 className="text-center mb-8 text-[10px] uppercase font-mono tracking-[0.3em] text-ink/[0.45]">
             EMPRESAS QUE UTILIZAM NOSSAS SOLUÇÕES
           </h3>
@@ -168,7 +168,7 @@ export default function Home() {
               <Image src="/eletra.png" alt="Eletra" width={150} height={150} className="pointer-events-none w-28 sm:w-32 h-auto" />
             </span>
           </div>
-        </motion.div>
+        </motion.div>*/}
       </section>
 
       {/* É hora de iluminar */}
