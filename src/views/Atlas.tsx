@@ -271,7 +271,7 @@ const metricsList = [
   { value: "Mais de 200", label: "Casos de uso e fluxos operacionais mapeados" },
 ];
 
-const trustedCompanies = ["Eletra Energy Solutions", "PODS Energy", "Fifteen Miles"];
+{/*const trustedCompanies = ["Eletra Energy Solutions", "PODS Energy", "Fifteen Miles"];*/}
 
 const pageTypes = [
   { name: "Dashboard", desc: "Métricas operacionais, KPIs críticos e telemetria executiva em tempo real.", icon: Layers },

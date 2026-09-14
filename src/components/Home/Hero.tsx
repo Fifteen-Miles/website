@@ -103,7 +103,7 @@ function CheckList() {
 
 function TrustedBy() {
   return (
-    <motion.div
+   {/*} <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1, delay: 0.9, ease: EASE }}
@@ -123,7 +123,7 @@ function TrustedBy() {
           />
         </span>
       </div>
-    </motion.div>
+    </motion.div>*/}
   );
 }
 
