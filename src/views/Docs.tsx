@@ -305,7 +305,7 @@ function Content({ active }: { active: { section: string; item: string } }) {
             Voltar ao Início
           </Link>
           <Link
-            href="https://atlas.fifteenmiles.tech/register"
+            href="/"
             className="inline-flex items-center gap-2 font-[Raleway] text-sm font-semibold tracking-tight text-white px-6 py-3 rounded-md transition-all duration-200 hover:opacity-90 shadow-md"
             style={{ background: WINE }}
           >

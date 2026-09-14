@@ -185,7 +185,7 @@ export default function Hero() {
             className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <button
-              onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")}
+              onClick={() => (window.location.href = "/")}
               className="group w-full sm:w-auto inline-flex h-12 items-center justify-center gap-2 px-8 rounded-full text-sm font-semibold tracking-tight text-black bg-white transition-all duration-200 hover:scale-[0.98] hover:bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.15)]"
             >
               Iniciar implementação

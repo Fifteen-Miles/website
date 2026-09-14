@@ -218,8 +218,8 @@ export default function Home() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.58, ease: EASE }} className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/demo")} showArrow>Solicitar demonstração</Button>
-              <Button onClick={() => (window.location.href = "https://atlas.fifteenmiles.tech/register")} variant="outline">Crie sua conta</Button>
+              <Button onClick={() => (window.location.href = "/")} showArrow>Solicitar demonstração</Button>
+              <Button onClick={() => (window.location.href = "/")} variant="outline">Crie sua conta</Button>
             </motion.div>
           </div>
 

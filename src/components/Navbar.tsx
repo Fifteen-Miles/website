@@ -337,7 +337,7 @@ export const Navbar = () => {
 
             <motion.div variants={mobileItemVariants} className="pt-6 mt-8 border-t" style={{ borderColor: "rgba(92,0,0,0.2)" }}>
               <a 
-                href="https://atlas.fifteenmiles.tech" 
+                href="/" 
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-between w-full p-4 rounded-full text-xs uppercase tracking-widest shadow-lg transition-transform hover:scale-[0.99]"
                 style={{ background: WINE, color: PARCHMENT, fontFamily: FONT_MONO, fontWeight: 600 }}

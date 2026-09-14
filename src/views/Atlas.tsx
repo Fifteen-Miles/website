@@ -428,8 +428,8 @@ export default function AtlasLanding() {
             </motion.span>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.5, ease: EASE }} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4">
-            <Button href="https://atlas.fifteenmiles.tech/demo" variant="primary-dark" showArrow className="w-full sm:w-auto">Solicitar Demonstração</Button>
-            <Button href="https://atlas.fifteenmiles.tech/register" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Crie sua conta</Button>
+            <Button href="/" variant="primary-dark" showArrow className="w-full sm:w-auto">Solicitar Demonstração</Button>
+            <Button href="/" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Crie sua conta</Button>
           </motion.div>
         </motion.div>
       </section>
@@ -826,7 +826,7 @@ export default function AtlasLanding() {
               A verdadeira convergência exige abertura. Adapte o Atlas às necessidades da sua empresa com opções de integração flexíveis, SDKs nativos e webhooks em tempo real.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <a href="https://atlas.fifteenmiles.tech/docs" className="px-6 py-4 text-center rounded text-xs font-mono uppercase tracking-widest text-white transition-all bg-[#3D0000] border border-white/20 hover:bg-[#4D0000]">
+              <a href="/" className="px-6 py-4 text-center rounded text-xs font-mono uppercase tracking-widest text-white transition-all bg-[#3D0000] border border-white/20 hover:bg-[#4D0000]">
                 Explorar Documentação
               </a>
               <a href="https://github.com" target="_blank" rel="noreferrer" className="px-6 py-4 text-center rounded text-xs font-mono uppercase tracking-widest text-white border border-white/20 transition-all hover:bg-white/10">
@@ -906,8 +906,8 @@ export default function AtlasLanding() {
             Memória institucional intacta, execução fluida e inteligência centralizada. Assuma o controle absoluto da sua operação hoje.
           </p>
           <div className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Button href="https://atlas.fifteenmiles.tech/demo" variant="primary-dark" showArrow className="w-full sm:w-auto">Solicitar Demonstração</Button>
-            <Button href="https://atlas.fifteenmiles.tech/contact" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Falar com Consultor</Button>
+            <Button href="/" variant="primary-dark" showArrow className="w-full sm:w-auto">Solicitar Demonstração</Button>
+            <Button href="/" className="w-full sm:w-auto border border-ink/20 text-ink hover:bg-ink/5 bg-transparent">Falar com Consultor</Button>
           </div>
         </div>
       </section>
